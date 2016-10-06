@@ -12,10 +12,10 @@ public class ChocolateController {
 		System.out.println(boiler == boiler2);
 		
 		// Zadanie:
-		//   Czy istnieje mozliwosc by dwa watki wykonujace  
+		//   Czy istnieje możliwość by dwa wątki wykonujące  
 		//        ChocolateBoiler.getInstance()
-		//   otrzymaly dwie rozne instancje klasy ChocolateBoiler ?
-		//   Jezeli tak zaproponuj przeplot instrukcji metody getInstance, ktora 
+		//   otrzymały dwie różne instancje klasy ChocolateBoiler ?
+		//   Jeżeli tak zaproponuj przeplot instrukcji metody getInstance, która 
 		//   do tego doprowadzi.
 	}
 }
