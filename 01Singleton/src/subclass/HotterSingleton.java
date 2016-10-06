@@ -5,6 +5,7 @@ public class HotterSingleton extends Singleton {
  
 	private HotterSingleton() {
 		super();
+		System.out.println("HotterSingleton()");
 	}
  
 	// useful methods here

@@ -7,6 +7,7 @@ public class Singleton {
  
 	private Singleton() {}
  
+	// threadsafe but expensive (while?)
 	public static synchronized Singleton getInstance() {
 		if (uniqueInstance == null) {
 			uniqueInstance = new Singleton();

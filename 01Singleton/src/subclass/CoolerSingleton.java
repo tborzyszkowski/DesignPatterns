@@ -6,6 +6,7 @@ public class CoolerSingleton extends Singleton {
  
 	private CoolerSingleton() {
 		super();
+		System.out.println("CoolerSingleton()");
 	}
  
 	// useful methods here
