@@ -17,7 +17,7 @@ public class Singleton {
 	// other useful methods here
 	
 	// Zadanie: 
-	//    Napisz kod korzystaj¹cy z classic.Singleton oraz threadsafe.Singleton
-	//    demonstruj¹cy problemy w korzystaniu przez niezale¿ne w¹tki z klasycznej
-	//    definicji.
+	//    Napisz kod korzystajacy z classic.Singleton oraz threadsafe.Singleton
+	//    demonstrujacy problemy w korzystaniu przez niezalezne watki z klasycznej
+	//    definicji. gÄ™Å›
 }
