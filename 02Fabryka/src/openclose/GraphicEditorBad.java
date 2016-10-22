@@ -32,3 +32,5 @@ class CircleBad extends ShapeBad {
 		super.m_type=2;
 	}
 } 
+
+// Zadanie: dodaj do programu mo¿liwoœæ rysowania trójk¹ta

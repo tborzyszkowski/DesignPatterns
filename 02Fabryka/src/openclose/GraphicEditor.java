@@ -21,4 +21,6 @@ class Circle extends Shape  {
 	public void draw() {
 		System.out.println("Circle");
 	}
-} 
+}
+
+//Zadanie: dodaj do programu mo¿liwoœæ rysowania trójk¹ta
