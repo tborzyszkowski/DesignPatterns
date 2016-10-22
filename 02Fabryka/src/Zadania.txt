@@ -1,0 +1,9 @@
+Zadania:
+--------
+0. Wymyœleæ w³asn¹ fabrykê ze specyficznymi produktami i sk³adnikami tych produktów
+
+Zaimplementowaæ j¹ jako:
+1. "prost¹ fabrykê" (patrz pakiet pizzas)
+2. fabrykê z metod¹ wytrórcz¹ (patrz pakiet pizzfm)
+3. fabrykê abstrakcyjn¹
+4. prost¹ fabrykê u¿ywaj¹c rejestracji klas z wykorzystaniem refleksji lub bez wykorzystania refleksji
