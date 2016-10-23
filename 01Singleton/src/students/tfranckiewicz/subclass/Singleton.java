@@ -3,7 +3,7 @@
 * Resolved problem with serialization/deserialization the singleton.
 */
 
-package students.tfrankiewicz.subclass;
+package students.tfranckiewicz.subclass;
 
 public class Singleton implements java.io.Serializable {
 	private static final long serialVersionUID = -4404021770659633934L;

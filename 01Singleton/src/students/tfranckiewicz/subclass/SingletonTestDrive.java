@@ -3,7 +3,7 @@
 * Resolved problem with serialization/deserialization the singleton.
 */
 
-package students.tfrankiewicz.subclass;
+package students.tfranckiewicz.subclass;
 import java.io.*;
 
 public class SingletonTestDrive {
