@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _03DeepPrototype {
     [Serializable()]
-    class PrototypeManager : IPrototype<Prototype> {
+    class PrototypeManager : BasePrototype<Prototype> {
         public Dictionary<string, Prototype> prototypes
           = new Dictionary<string, Prototype> {
         {"Germany",

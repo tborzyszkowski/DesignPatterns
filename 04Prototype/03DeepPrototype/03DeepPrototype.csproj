@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeeperData.cs" />
-    <Compile Include="IPrototype.cs" />
+    <Compile Include="BasePrototype.cs" />
     <Compile Include="MainApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prototype.cs" />

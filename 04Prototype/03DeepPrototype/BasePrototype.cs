@@ -9,7 +9,7 @@ using System.IO;
 
 namespace _03DeepPrototype {
     [Serializable()]
-    public abstract class IPrototype<T> {
+    public abstract class BasePrototype<T> {
 
         // Shallow copy
         public T Clone() {

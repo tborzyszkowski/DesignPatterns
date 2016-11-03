@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _03DeepPrototype {
     [Serializable()]
-    class Prototype : IPrototype<Prototype> {
+    class Prototype : BasePrototype<Prototype> {
 
         // Content members
         public string Country { get; set; }
