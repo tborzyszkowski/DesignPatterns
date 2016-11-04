@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01SimplePool", "01SimplePool.csproj", "{200EDAB2-185C-46EF-AFC3-A81DF207A006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02ConcurrentBagImplementation", "..\02ConcurrentBagImplementation\02ConcurrentBagImplementation.csproj", "{534494D9-6075-465D-BD24-63190D0F5569}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{200EDAB2-185C-46EF-AFC3-A81DF207A006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{200EDAB2-185C-46EF-AFC3-A81DF207A006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{200EDAB2-185C-46EF-AFC3-A81DF207A006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{200EDAB2-185C-46EF-AFC3-A81DF207A006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{534494D9-6075-465D-BD24-63190D0F5569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{534494D9-6075-465D-BD24-63190D0F5569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{534494D9-6075-465D-BD24-63190D0F5569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{534494D9-6075-465D-BD24-63190D0F5569}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
