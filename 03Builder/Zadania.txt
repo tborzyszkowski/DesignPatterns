@@ -1,0 +1,7 @@
+Zadanie 1
+Wzoruj¹c siê na projektach 02VehicleBuilder i 03FluentBuilder zbudowaæ w³asne buildery. Buildery powinny posiadaæ w³asnoœæ FluentInterface i wykorzystywaæ rzutowanie konkretnego buildera na produkt (podobnie jak w projekcie 02VehicleBuilder). Jêzyk programowania dowolny.
+
+Zadanie 2
+Zbudowaæ przyk³ad problemu wytwarzania obiektów w aplikacji, dla którego lepszym rozwi¹zaniem (wydajnoœciowo, komplikacja kodu, ...) bêdzie:
+a) wzorzec budowniczy (raczej ni¿ fabryka abstrakcyjna)
+b) odwrotnie (fabryka abstrakcyjna raczej ni¿ budowniczy)
