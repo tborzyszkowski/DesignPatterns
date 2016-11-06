@@ -1,0 +1,10 @@
+/Users/wdenejko/Documents/Kod/cSharp/Fabryka/Fabryka/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/wdenejko/Documents/Kod/cSharp/Fabryka/Fabryka/bin/Debug/Fabryka.exe.mdb
+/Users/wdenejko/Documents/Kod/cSharp/Fabryka/Fabryka/bin/Debug/Fabryka.exe
+/Users/wdenejko/Documents/Kod/cSharp/Fabryka/Fabryka/obj/x86/Debug/Fabryka.exe
+/Users/wdenejko/Documents/Kod/cSharp/Fabryka/Fabryka/obj/x86/Debug/Fabryka.exe.mdb
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/Fabryka/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/Fabryka/bin/Debug/Fabryka.exe.mdb
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/Fabryka/bin/Debug/Fabryka.exe
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/Fabryka/obj/x86/Debug/Fabryka.exe
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/Fabryka/obj/x86/Debug/Fabryka.exe.mdb

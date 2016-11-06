@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{E393C0E0-1291-49C0-829C-ECEB67958405}|Default">
+  <MonoDevelop.Ide.ItemProperties.FabrykaRefleksja PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Fabryka" expanded="True">
+            <Node name="FabrykaAbstrakcyjna" expanded="True">
+              <Node name="Program.cs" selected="True" />
+            </Node>
+            <Node name="FabrykaWytworcza" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.FabrykaAbstrakcyjna PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Fabryka PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.FabrykaWytworcza PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

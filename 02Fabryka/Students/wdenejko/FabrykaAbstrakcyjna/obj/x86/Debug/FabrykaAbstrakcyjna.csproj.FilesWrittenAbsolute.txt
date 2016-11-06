@@ -1,0 +1,5 @@
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/FabrykaAbstrakcyjna/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/FabrykaAbstrakcyjna/bin/Debug/FabrykaAbstrakcyjna.exe.mdb
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/FabrykaAbstrakcyjna/bin/Debug/FabrykaAbstrakcyjna.exe
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/FabrykaAbstrakcyjna/obj/x86/Debug/FabrykaAbstrakcyjna.exe
+/Users/wdenejko/Documents/Repos/DesignPatterns/Fabryka/FabrykaAbstrakcyjna/obj/x86/Debug/FabrykaAbstrakcyjna.exe.mdb
