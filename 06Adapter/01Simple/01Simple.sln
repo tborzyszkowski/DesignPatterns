@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01Simple", "01Simple.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02TwoWayAdapter", "..\02TwoWayAdapter\02TwoWayAdapter.csproj", "{58761C63-B3CC-4592-9947-59D388543E5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03Pluggable Adapter", "03Pluggable Adapter\03Pluggable Adapter.csproj", "{8FAE3B13-936C-444B-B9C4-993F6F90EEC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03Pluggable Adapter", "..\03Pluggable Adapter\03Pluggable Adapter.csproj", "{8FAE3B13-936C-444B-B9C4-993F6F90EEC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
