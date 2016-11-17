@@ -1,0 +1,5 @@
+Zadanie 1
+Wzoruj¹c siê na projekcie ColorPrototype zaimplementowaæ rozwi¹zanie umo¿liwiaj¹ce tworzenie egzemplarzy obiektów na podstawie prototypów wymagaj¹cych glêbokiego kopiowania.  
+
+Zadanie 2
+Wzoruj¹c siê na projekcie DeepPrototype opracowaæ przyk³ad dla obiektów i wiêkszym zag³êbieniu referencyjnym (np.: o zag³êbieniu 3).

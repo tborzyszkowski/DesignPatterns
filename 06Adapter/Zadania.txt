@@ -1,0 +1,8 @@
+Zadanie 1
+Rozwa¿my program Seabird. 
+Czy by³oby mo¿liwe utworzenie instancji obiektu Aircraft zamiast obiektu Seacraft, zmieniaj¹c metody wewn¹trz Seabird odpowiednio? 
+Jeœli tak, nale¿y dokonaæ zmian takich zmian. 
+Jeœli nie, proszê wyjaœniæ, w jaki sposób obecny program bêdzie musia³ zostaæ zmieniony by to osi¹gn¹æ, a nastêpnie dokonaæ zmian takich zmian.
+
+Zadanie 2
+Opracowaæ przyk³ad ilustruj¹cy praktyczne wykorzystanie techniki tworzenia adapterów klas, zaprezentowan¹ w projekcie PluggableAdapter.
