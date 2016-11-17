@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01Simple", "01Simple.csproj", "{A5CF9786-6E72-4E77-9262-31F2FF16970A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02TwoWayAdapter", "..\02TwoWayAdapter\02TwoWayAdapter.csproj", "{58761C63-B3CC-4592-9947-59D388543E5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A5CF9786-6E72-4E77-9262-31F2FF16970A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5CF9786-6E72-4E77-9262-31F2FF16970A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5CF9786-6E72-4E77-9262-31F2FF16970A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58761C63-B3CC-4592-9947-59D388543E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58761C63-B3CC-4592-9947-59D388543E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58761C63-B3CC-4592-9947-59D388543E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58761C63-B3CC-4592-9947-59D388543E5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
