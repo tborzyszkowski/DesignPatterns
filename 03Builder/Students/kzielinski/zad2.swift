@@ -1,7 +1,6 @@
 //  Builders
 //
 //  Created by Kamil Zielinski on 17/11/16.
-//  Copyright © 2016 Kamil Zielinski. All rights reserved.
 //
 // Zadanie 2
 // Zbudować przykład problemu wytwarzania obiektów w aplikacji, dla którego lepszym rozwiązaniem (wydajnościowo, komplikacja kodu, ...) będzie:

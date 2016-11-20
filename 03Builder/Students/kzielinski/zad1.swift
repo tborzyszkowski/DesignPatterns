@@ -1,7 +1,6 @@
 //  Builders
 //
 //  Created by Kamil Zielinski on 17/11/16.
-//  Copyright © 2016 Kamil Zielinski. All rights reserved.
 //
 // Zadanie 1
 // Wzorując się na projektach 02VehicleBuilder i 03FluentBuilder zbudować własne buildery. Buildery powinny posiadać własność FluentInterface i wykorzystywać rzutowanie konkretnego buildera na produkt (podobnie jak w projekcie 02VehicleBuilder). Język programowania dowolny.
