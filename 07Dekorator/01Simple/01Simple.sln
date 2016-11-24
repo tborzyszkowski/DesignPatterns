@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01Simple", "01Simple.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02Library", "..\02Library\02Library.csproj", "{00CEA5BF-4D23-467B-BF34-2FDFF5A6A305}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03Starbuzz", "03Starbuzz\03Starbuzz.csproj", "{289F80E8-8B44-4B73-804F-EE5A6C7DC89E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03Starbuzz", "..\03Starbuzz\03Starbuzz.csproj", "{289F80E8-8B44-4B73-804F-EE5A6C7DC89E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
