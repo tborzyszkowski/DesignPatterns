@@ -1,0 +1,13 @@
+https://inf.ug.edu.pl/~tomek/wzorce/01_Teoria_4.pdf
+
+task1.Singleton1 problemy
+1.Dziedziczenie: chcemy dziedziczyć po klasie task1.Singleton1 w
+taki sposób by metoda getInstance() wywołana z klasy
+potomnej oddawała instancję typu klasy potomnej.
+Zaproponuj implementację
+2.Serializacja: serializujemy singleton1 do pliku, następnie dwa
+niezależne wątki go deserializują , jak zapobiec powstaniu w
+ten sposób dwóch kopii singletona? (w Java ? w innych
+językach ?)
+Zaproponuj implementację
+task1.Singleton1 współbieżność
