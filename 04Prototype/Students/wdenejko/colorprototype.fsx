@@ -10,6 +10,7 @@ type Color(red : int, green : int, blue : int) =
     inherit ColorPrototype()
     override this.Clone() =
         printfn "Cloning color RGB: %i %i %i" red green blue
+// Memberwise(shallow, simple) clone duplicate as little as possible. A memberwise clone of a collection is a copy of the collection structure, not the elements. With a memberwise clone, two collections now share the individual elements.
         this.MemberwiseClone() :?> ColorPrototype   
 
 type ColorManager() =
@@ -22,6 +23,7 @@ type ColorManager() =
         colors.Add(key, value)
     member this.Clear =
         colors.Clear()
+// Deep clones duplicate everything. A deep clone of a collection is two collections with all of the elements in the original collection duplicated.
     member this.SerializeBinary<'a>(x : 'a) =
         printfn "Serializing object" 
         use stream = new MemoryStream()
