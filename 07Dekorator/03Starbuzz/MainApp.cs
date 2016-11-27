@@ -18,7 +18,9 @@ namespace _03Starbuzz {
             
             Beverage darkRoast = new DarkRoast();
             darkRoast = new CoffeeMate(darkRoast);
-            Console.WriteLine(darkRoast.Description + " $" + darkRoast.Cost()); Console.ReadKey();
+            Console.WriteLine(darkRoast.Description + " $" + darkRoast.Cost());
+
+            Console.ReadKey();
         }
     }
 }
