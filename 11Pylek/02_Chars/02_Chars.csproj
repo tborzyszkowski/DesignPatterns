@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1BD3682C-9BDD-4C0F-B52D-E16E3673C541}</ProjectGuid>
+    <ProjectGuid>{2329C2ED-4C57-49C9-94EE-C83499E49AA9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_03PersistenceAPI</RootNamespace>
-    <AssemblyName>03PersistenceAPI</AssemblyName>
+    <RootNamespace>_02_Chars</RootNamespace>
+    <AssemblyName>02_Chars</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,17 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DabatasePersistenceImplementor.cs" />
-    <Compile Include="FileSystemPersistenceImplementor.cs" />
-    <Compile Include="Persistence.cs" />
-    <Compile Include="PersistenceImp.cs" />
-    <Compile Include="PersistenceImplementor.cs" />
+    <Compile Include="Character.cs" />
+    <Compile Include="CharacterA.cs" />
+    <Compile Include="CharacterB.cs" />
+    <Compile Include="CharacterFactory.cs" />
+    <Compile Include="CharacterZ.cs" />
     <Compile Include="MainApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
