@@ -10,21 +10,26 @@ class Factory(object):
 
     @staticmethod
     def get_factory(factory):
-        if factory == 'stolik':
-            return TableFactory()
-        elif factory == 'krzeslo':
-            return ChairFactory()
-        raise TypeError('Nieznany mebel.')
+        if factory == 'Ikea':
+            return IkeaFactory()
+        elif factory == 'BlackRedWhite':
+            return BRWFactory()
+        raise TypeError('Nieznana firma.')
 
 # Obiekty konkretnych fabryk tworzone przez fabrykę abstrakcyjną.
-class TableFactory(object):
-    def get_furniture(self):
-        return Table()
+class IkeaFactory(object):
+    def get_chair(self):
+        return IkeaChair()
 
+    def get_table(self):
+        return IkeaTable()
 
-class ChairFactory(object):
-    def get_furniture(self):
-        return Chair()
+class BRWFactory(object):
+    def get_chair(self):
+        return BRWChair()
+
+    def get_table(self):
+        return BRWTable()
 
 # Klasa abstrakcyjna (substytut interfejsów w Pythonie [wielodziedziczenie]).
 class Furniture(object):
@@ -33,21 +38,30 @@ class Furniture(object):
         pass
 
 # Przykładowe obiekty tworzone przez fabryki.
-class Chair(Furniture):
+class BRWChair(Furniture):
     def stand(self):
-        print("Chair is standing...")
+        print("BlackRedWhite chair is standing...")
 
-
-class Table(Furniture):
+class IkeaChair(Furniture):
     def stand(self):
-        print("Table is standing...")
+        print("Ikea chair is standing...")
+
+class BRWTable(Furniture):
+    def stand(self):
+        print("BlackRedWhite table is standing...")
+
+class IkeaTable(Furniture):
+    def stand(self):
+        print("Ikea table is standing...")
 
 # Przykładowe wywołanie.
 if __name__ == "__main__":
-    factory = Factory.get_factory("stolik")
-    furniture = factory.get_furniture()
-    furniture.stand()
+    krzeslo_ikea = Factory.get_factory("Ikea").get_chair()
+    stol_ikea = Factory.get_factory("Ikea").get_table()
+    krzeslo_ikea.stand()
+    stol_ikea.stand()
 
-    factory = Factory.get_factory("krzeslo")
-    furniture = factory.get_furniture()
-    furniture.stand()
+    krzeslo_brw = Factory.get_factory("BlackRedWhite").get_chair()
+    stol_brw = Factory.get_factory("BlackRedWhite").get_table()
+    krzeslo_brw.stand()
+    stol_brw.stand()
