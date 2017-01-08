@@ -13,6 +13,7 @@ class SamplePrototype(object):
         self._c_list = complex_list
         self._obj = obj
 
+    #region Gettery i settery
     @property
     def obj(self):
         return self._obj
@@ -44,6 +45,8 @@ class SamplePrototype(object):
     @s_list.setter
     def s_list(self, value):
         self._s_list = value
+
+    #endregion
 
     def clone(self, new_int = None, new_s_list = None, new_c_list = None, new_obj = None):
         x = copy.deepcopy(self)
@@ -81,8 +84,8 @@ if __name__ == "__main__":
     prototype2 = prototype1.clone()
     prototype2.pretty_print("PROTOTYPE 2")
 
-    print("\n------ Cloning prototype2 into prototype3 with changes ------")
-    prototype3 = prototype2.clone(5, [1, 2, 3, 4, "five"], [0, 9, 8, [7, 6, 5, [4, 3, 2, 1]]], re.compile(r"(.*)"))
+    print("\n------ Cloning prototype2 into prototype3 with some changes ------")
+    prototype3 = prototype2.clone(5, None, [0, 9, 8, [7, 6, 5, [4, 3, 2, 1]]], re.compile(r"(.*)"))
     prototype3.pretty_print("PROTOTYPE 3")
 
     # Print proto1 and proto2 to see if it has changed anyhow after cloning into proto3:
