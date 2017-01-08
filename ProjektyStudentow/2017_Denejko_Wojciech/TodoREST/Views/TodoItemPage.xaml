@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="TodoREST.TodoItemPage" 
+			 Title="Todo">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Label Grid.Row="0" Grid.Column="0" Text="Name" HeightRequest="25" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+		<Entry Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HeightRequest="25" x:Name="nameEntry" Text="{Binding Path=Name}" Placeholder="task name" />
+		<Label Grid.Row="1" Grid.Column="0" Text="Notes" HeightRequest="25" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+		<Entry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HeightRequest="25" x:Name="notesEntry" Text="{Binding Path=Notes}" />
+		<Label Grid.Row="2" Grid.Column="0" Text="Done" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+		<Switch Grid.Row="2" Grid.Column="3" x:Name="doneSwitch" IsToggled="{Binding Path=Done}" />
+		<Label Grid.Row="3" Grid.Column="0" Text="Color" HeightRequest="25" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+		<Picker Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="colorPicker" SelectedIndexChanged="Handle_SelectedIndexChanged"  Title="Color" VerticalOptions="CenterAndExpand"/>
+		<BoxView Grid.Row="3" Grid.Column="3" x:Name="colorBoxView" Color="{Binding Path=Color}" WidthRequest="25" HeightRequest="25" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+		<Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="Save" Clicked="OnSaveActivated" />
+		<Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Text="Delete" Clicked="OnDeleteActivated" />
+		<Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="Clone" Clicked="OnCloneActivated" />
+		<Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Text="Cancel" Clicked="OnCancelActivated" />
+	</Grid>
+</ContentPage>
