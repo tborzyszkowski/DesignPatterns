@@ -60,7 +60,6 @@ extension ViewController: UITableViewDataSource {
     fileprivate func configure(_ cell: PizzaSummaryTableCell, atIndexPath: IndexPath) {
         let pizzaModel = frc.object(at: atIndexPath)
         cell.name.text = pizzaModel.name
-        print("ciasto \(pizzaModel.ciastoName!) - \(pizzaModel.ciastoName!.initials)")
         cell.shortCakeNameLabel.text = pizzaModel.ciastoName?.initials
         if let pizzaSkladniki = pizzaModel.skladniki {
             let skladniki = pizzaSkladniki.map { skladnik -> String? in

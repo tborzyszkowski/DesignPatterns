@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2sy-Du-bfw" id="iT1-b4-pFE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nazwa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qi-wk-bTy">
@@ -146,7 +146,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xOU-e5-cFt" id="jOK-Ua-svZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -233,18 +233,45 @@
         <scene sceneID="Klr-6b-S7t">
             <objects>
                 <tableViewController id="RPC-0S-Jeu" customClass="CiastoTableViewController" customModule="ProjetWzorce_GithubViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oy0-80-AhR">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oy0-80-AhR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChooseSkladnikCellID" id="5Ni-bq-bxk">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChooseSkladnikCellID" id="5Ni-bq-bxk" customClass="CistoCell" customModule="ProjetWzorce_GithubViewer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Ni-bq-bxk" id="G2r-wQ-UXx">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zJ-2E-gdH">
+                                            <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7d-SO-Ud7">
+                                            <rect key="frame" x="8" y="26" width="359" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="8zJ-2E-gdH" firstAttribute="top" secondItem="G2r-wQ-UXx" secondAttribute="topMargin" id="0mq-1z-1kG"/>
+                                        <constraint firstItem="8zJ-2E-gdH" firstAttribute="leading" secondItem="G2r-wQ-UXx" secondAttribute="leadingMargin" id="49K-fL-UOJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="d7d-SO-Ud7" secondAttribute="bottom" constant="7" id="HcJ-ZB-jte"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="d7d-SO-Ud7" secondAttribute="trailing" id="IkM-cO-giP"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="8zJ-2E-gdH" secondAttribute="trailing" id="XTg-1Q-8MK"/>
+                                        <constraint firstItem="d7d-SO-Ud7" firstAttribute="leading" secondItem="G2r-wQ-UXx" secondAttribute="leadingMargin" id="bt0-DR-mAd"/>
+                                        <constraint firstItem="d7d-SO-Ud7" firstAttribute="top" secondItem="G2r-wQ-UXx" secondAttribute="topMargin" constant="18" id="cP0-DE-BJV"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="ciastoNameLabel" destination="8zJ-2E-gdH" id="O5W-Ui-h99"/>
+                                    <outlet property="ciastoPrzepisLabel" destination="d7d-SO-Ud7" id="fJv-NJ-xuq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

@@ -8,6 +8,11 @@
 
 import UIKit
 
+class CistoCell: UITableViewCell {
+    @IBOutlet var ciastoNameLabel: UILabel!
+    @IBOutlet var ciastoPrzepisLabel: UILabel!
+}
+
 class CiastoTableViewController: UITableViewController {
 
     var ciasto: Ciasto?
@@ -19,15 +24,22 @@ class CiastoTableViewController: UITableViewController {
         CiastoMurzynek.self // <- dzieki adapterowi :)
     ]
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
+    }
+
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return avaiableCakes.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChooseSkladnikCellID", for: indexPath)
-
-        cell.textLabel?.text = avaiableCakes[indexPath.row].init().name
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChooseSkladnikCellID", for: indexPath) as? CistoCell else { fatalError("Cant dequeu cell") }
+        let currentCake = avaiableCakes[indexPath.row].init()
+        cell.ciastoNameLabel?.text = currentCake.name
+        cell.ciastoPrzepisLabel?.text = currentCake.przepis
 
         return cell
     }
