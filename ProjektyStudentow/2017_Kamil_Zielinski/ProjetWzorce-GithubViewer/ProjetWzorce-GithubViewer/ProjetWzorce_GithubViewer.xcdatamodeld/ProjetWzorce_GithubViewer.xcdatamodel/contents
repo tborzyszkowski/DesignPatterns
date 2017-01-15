@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PizzaModel" representedClassName="PizzaModel" syncable="YES" codeGenerationType="class">
+        <attribute name="ciastoName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="skladniki" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SkladnikModel" inverseName="pizza" inverseEntity="SkladnikModel" syncable="YES"/>
+    </entity>
+    <entity name="SkladnikModel" representedClassName="SkladnikModel" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pizza" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PizzaModel" inverseName="skladniki" inverseEntity="PizzaModel" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="PizzaModel" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="SkladnikModel" positionX="-54" positionY="18" width="128" height="75"/>
+    </elements>
+</model>
