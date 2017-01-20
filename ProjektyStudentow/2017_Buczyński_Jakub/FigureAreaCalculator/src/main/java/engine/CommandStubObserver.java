@@ -1,8 +1,8 @@
 package engine;
 
-import engine.commands.ActionCommand;
-import engine.commands.factory.CommandRegistry;
-import engine.commands.stub.CommandStub;
+import commands.ActionCommand;
+import commands.factory.CommandRegistry;
+import commands.stub.CommandStub;
 import lombok.extern.log4j.Log4j;
 import rx.Observer;
 
@@ -24,22 +24,25 @@ public class CommandStubObserver implements Observer<CommandStub> {
 
     @Override
     public void onNext(CommandStub commandStub) {
-        log.info(commandStub);
         doOnNex(commandStub);
     }
 
     private void doOnNex(CommandStub commandStub) {
+        if (commandStub.getCommandName() == null) {
+            log.info("please enter valid command");
+        }
         try {
             Optional<ActionCommand> command = CommandRegistry.INSTANCE.createCommand(commandStub);
 
             if (command.isPresent()) {
                 CommandRegistry.INSTANCE.createCommand(commandStub);
                 command.get().execute();
+            } else {
+                log.error("unknown command");
             }
             return;
         } catch (Exception e) {
-            log.error("failure while creating command " + e);
+            log.error("failure while creating command: " + e.getMessage());
         }
-        log.error("failure while creating command");
     }
 }

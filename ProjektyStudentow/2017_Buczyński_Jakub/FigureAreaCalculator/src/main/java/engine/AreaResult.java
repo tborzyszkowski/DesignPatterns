@@ -15,6 +15,6 @@ public class AreaResult {
 
     @Override
     public String toString() {
-        return "pole " + figure.toString() + " wyniosło " + result;
+        return "pole figury: " + figure.toString() + " wyniosło " + result;
     }
 }

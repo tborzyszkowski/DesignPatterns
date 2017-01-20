@@ -28,25 +28,8 @@ public enum FigureRegistry {
         if(figureFactory.isPresent()) {
             return Optional.ofNullable(figureFactory.get().createFigure(figureStub));
         }
-        factories.values().stream()
-                .filter(factory -> {
-                    try {
-                        return Optional.of(factory.createFigure(figureStub))
-                                .isPresent();
-                    } catch (Exception e) {
-                        log.error(e.getMessage());
-                    }
-                    return false;
-                })
-                .findFirst();
-        return Optional.empty();
-    }
 
-    public Optional<FigureFactory> getFactory(String factoryType) {
-        if (!Optional.ofNullable(factoryType).isPresent()) {
-            return Optional.empty();
-        }
-        return Optional.ofNullable(factories.get(factoryType));
+        return Optional.empty();
     }
 
 }

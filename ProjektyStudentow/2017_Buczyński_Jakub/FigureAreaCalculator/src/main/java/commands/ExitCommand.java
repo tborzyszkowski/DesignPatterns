@@ -1,9 +1,6 @@
-package engine.commands;
+package commands;
 
 import lombok.extern.log4j.Log4j;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by jakub on 1/18/17.

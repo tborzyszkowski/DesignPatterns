@@ -1,4 +1,4 @@
-package engine.commands.stub;
+package commands.stub;
 
 import lombok.Builder;
 import lombok.Getter;

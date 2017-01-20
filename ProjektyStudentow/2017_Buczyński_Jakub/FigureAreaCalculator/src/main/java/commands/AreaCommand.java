@@ -1,4 +1,4 @@
-package engine.commands;
+package commands;
 
 import engine.AreaResult;
 import figure.Figure;
@@ -21,13 +21,12 @@ public class AreaCommand extends ActionCommand {
 
     @Override
     public void execute() {
-        log.info(this + " is being execuded");
         notifySubject(figure.computeArea());
     }
 
     @Override
     public String toString() {
-        return "COMMAND: area, computed area " + figure.computeArea();
+        return "COMMAND: area on figure " + figure + " ";
     }
 
     private void notifySubject(double result) {

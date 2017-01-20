@@ -22,13 +22,13 @@ public enum Registry {
                 .result(result)
                 .build();
         registryEntries.add(entry);
-        log.info("dodano do rejestru " + result);
+        log.debug("entry added to registry");
     }
 
-    public void printRegistry() {
-        log.info("");
-        log.info("ZAWARTOSĆ REJESTRU: ");
-        registryEntries.forEach(entry -> log.info(entry));
-        log.info("");
+    public RegistryPrinter getRegistryPrinter() {
+        List<String> lines = new LinkedList<>();
+        lines.add("ZAWARTOSĆ REJESTRU: ");
+        registryEntries.forEach(entry -> lines.add(entry.toString()));
+        return new DefaultRegistryPrinter(lines);
     }
 }

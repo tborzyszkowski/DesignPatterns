@@ -1,6 +1,6 @@
 package input.marshaller;
 
-import engine.commands.stub.CommandStub;
+import commands.stub.CommandStub;
 import lombok.AllArgsConstructor;
 import rx.subjects.BehaviorSubject;
 

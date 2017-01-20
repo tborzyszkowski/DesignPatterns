@@ -14,4 +14,9 @@ import java.util.Date;
 public class RegistryEntry {
     private Date date;
     private AreaResult result;
+
+    @Override
+    public String toString() {
+        return date.toString() + " " + result;
+    }
 }

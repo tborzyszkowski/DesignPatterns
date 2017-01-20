@@ -1,9 +1,4 @@
-package engine.commands;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-import java.util.List;
+package commands;
 
 /**
  * Created by jakub on 1/16/17.

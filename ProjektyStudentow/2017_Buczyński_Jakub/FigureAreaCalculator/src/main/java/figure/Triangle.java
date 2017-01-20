@@ -25,7 +25,7 @@ public class Triangle extends Figure {
     }
 
     private double computeWhenHeightIsGiven() {
-        return sideA * height;
+        return sideA * height / 2;
     }
 
     @Override

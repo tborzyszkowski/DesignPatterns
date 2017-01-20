@@ -1,7 +1,6 @@
 package input;
 
 import engine.intializer.EngineInitializer;
-import lombok.extern.log4j.Log4j;
 import org.apache.log4j.BasicConfigurator;
 
 /**
