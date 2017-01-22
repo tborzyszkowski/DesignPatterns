@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:c="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:fn="http://www.w3.org/2001/XMLSchema">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="container">
+
+    <!--<p th:text="${lists[0]}"></p>-->
+    <!--<c:if test="${not empty lists}">-->
+        <ul>
+            <c:foreach  var="i" begin="0" end="${fn:length(${lists})}">
+                <p th:text="${lists[${i}]}"></p>
+            </c:foreach>
+        </ul>
+
+    <!--</c:if>-->
+</div>
+</body>
+</html>

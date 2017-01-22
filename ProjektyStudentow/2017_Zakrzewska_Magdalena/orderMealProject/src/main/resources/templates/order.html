@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:spring="http://www.w3.org/1999/html">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form method="post" action="order">
+    <spring:bind id="burger">
+        <spring:label>
+            <input id="beef" name="burger" type="radio" value="beef" checked="checked"/>
+            Beef Burger
+        </spring:label>
+        <spring:label>
+            <input id="chicken" name="burger" type="radio" value="chicken"/>
+            Chicken Burger
+        </spring:label>
+        <spring:label>
+            <input id="pork" name="burger" type="radio" value="pork"/>
+            Pork Burger
+        </spring:label>
+    </spring:bind>
+    <spring:bind id="drink">
+        <spring:label>
+            <input id="coke" name="drink" type="radio" value="coke" checked="checked"/>
+            Coke
+        </spring:label>
+        <spring:label>
+            <input id="pepsi" name="drink" type="radio" value="pepsi"/>
+            Pepsi
+        </spring:label>
+    </spring:bind>
+    <spring:bind>
+        <spring:label>
+                <input id="submit" name="submit" type="submit" value="send"/>
+        </spring:label>
+    </spring:bind>
+</form>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:spring="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+    function yesnoCheck() {
+        if (document.getElementById('creditCard').checked) {
+            document.getElementById('creditCardData').style.display = '';
+        } else {
+            document.getElementById('creditCardData').style.display = 'none';
+        }
+        if (document.getElementById('paypal').checked) {
+            document.getElementById('paypalData').style.display = '';
+        } else {
+            document.getElementById('paypalData').style.display = 'none';
+        }
+    }
+
+</script>
+    <bean id="orderDao" class="com.orderMeal.dao.OrderDaoInterface">
+        <property name="orderDao" ref="orderDao"/>
+    </bean>
+</head>
+<body>
+<div id="container">
+<form method="post"  th:action="@{/payment}"  action="payment" th:object="${delivery}">
+    <div id="data">
+        Name: <input type="text" th:field="*{name}"/><br/>
+        Last name: <input type="text" th:field="*{lastName}" /><br/>
+        City: <input type="text" th:field="*{city}" /><br/>
+        Street: <input type="text" th:field="*{street}" />
+        <input type="text" th:field="*{homeNumber}" />
+        <input type="text" th:field="*{houseNumber}" /><br/>
+    </div>
+    <spring:bind id="payment">
+        <spring:label>
+            <input id="creditCard" name="payment" type="radio" value="CREDIT_CARD" checked="checked" onchange="yesnoCheck()"/>
+            By credit card
+        </spring:label>
+        <spring:label>
+            <input id="paypal" name="payment" type="radio" value="PAYPAL" onchange="yesnoCheck()"/>
+            By Paypal
+        </spring:label>
+        <spring:label>
+            <input id="pork" name="payment" type="radio" value="CASH" onchange="yesnoCheck()"/>
+            Cash
+        </spring:label>
+    </spring:bind>
+<br/>
+<div id="creditCardData">
+        Credit Card Number: <input type="text" id="credit-card-number" name="credit-card-number" /><br/>
+        Expiry Date: <input type="month" id="expiry-date-month" name="expiry-date-month" /><br/>
+        CVV: <input type="text" id="cvv" name="cvv"/>
+</div>
+<spring:bind id="paypalData" style="display:none">
+    <spring:label>
+        Email: <input type="email" id="email" name="email"/><br/>
+    </spring:label>
+    <spring:label>
+        Password: <input type="password" id="password" name="password" /><br/>
+    </spring:label>
+</spring:bind>
+    <spring:bind>
+        <spring:label>
+            <input id="submit" name="submit" type="submit" value="submit"/>
+        </spring:label>
+    </spring:bind>
+</form></div>
+</body>
+</html>
