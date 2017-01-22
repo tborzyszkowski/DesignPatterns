@@ -1,0 +1,37 @@
+------ Creating prototype 1. ------
+
+------- PROTOTYPE 1
+3
+<object object at 0x7fbfcc0a00d0>
+[3, 'strings', <object object at 0x7fbfcc0a00a0>]
+[4, ['more', 'strings'], ['list', ['with', [<object object at 0x7fbfcc0a00b0>, <object object at 0x7fbfcc0a00c0>]]]]
+
+------ Cloning prototype1 into prototype2 without any changes ------
+
+------- PROTOTYPE 2
+3
+<object object at 0x7fbfcc0a00e0>
+[3, 'strings', <object object at 0x7fbfcc0a0110>]
+[4, ['more', 'strings'], ['list', ['with', [<object object at 0x7fbfcc0a00f0>, <object object at 0x7fbfcc0a0100>]]]]
+
+------ Cloning prototype2 into prototype3 with changes ------
+
+------- PROTOTYPE 3
+5
+re.compile('(.*)')
+[1, 2, 3, 4, 'five']
+[0, 9, 8, [7, 6, 5, [4, 3, 2, 1]]]
+
+------- PROTOTYPE 1
+3
+<object object at 0x7fbfcc0a00d0>
+[3, 'strings', <object object at 0x7fbfcc0a00a0>]
+[4, ['more', 'strings'], ['list', ['with', [<object object at 0x7fbfcc0a00b0>, <object object at 0x7fbfcc0a00c0>]]]]
+
+------- PROTOTYPE 2
+3
+<object object at 0x7fbfcc0a00e0>
+[3, 'strings', <object object at 0x7fbfcc0a0110>]
+[4, ['more', 'strings'], ['list', ['with', [<object object at 0x7fbfcc0a00f0>, <object object at 0x7fbfcc0a0100>]]]]
+
+Process finished with exit code 0
