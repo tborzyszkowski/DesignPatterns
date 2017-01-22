@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for weat in weather %}
+        <div class="post">
+            <div class="date">
+                <p>Last update: </p>{{ weat.time }}
+            </div>
+            <h3><span class="glyphicon glyphicon-cloud"></span> Weather for Gdansk <span class="glyphicon glyphicon-cloud"></span></h3>
+            <h4>Temperature: {{ weat.temp }}</h4>
+            <h4>Conditions: {{ weat.status }}</h4>
+            <hr />
+        </div>
+    {% endfor %}
+{% endblock content %}
