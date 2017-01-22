@@ -13,6 +13,7 @@ public class Triangle extends Figure {
     private double sideB;
     private double sideC;
     private Double height;
+    private String figureString;
 
     @Override
     public double computeArea() {
@@ -21,15 +22,17 @@ public class Triangle extends Figure {
 
     private double computeWhenNoHeightGiven() {
         double p = (sideA + sideB + sideC) / 2;
+        figureString = " trójkąt o bokach A " + sideA + " B " + sideB + " C " + sideC;
         return Math.sqrt(p * (p - sideA) * (p - sideB) * (p - sideC));
     }
 
     private double computeWhenHeightIsGiven() {
+        figureString = " trójkąt o boku A i wysokosci " + height;
         return sideA * height / 2;
     }
 
     @Override
     public String toString() {
-        return " trójkąt o bokach A " + sideA + " B " + sideB + " C " + sideC + " i wysokosci " + height;
+        return figureString;
     }
 }

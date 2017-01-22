@@ -1,5 +1,6 @@
 package engine.intializer;
 
+import commands.factory.conrete.HelpCommandFactory;
 import engine.AreaResult;
 import commands.factory.CommandRegistry;
 import commands.factory.conrete.AreaCommandFactory;
@@ -43,12 +44,11 @@ public class EngineInitializer {
 
     private void initializeCommandFactories() {
         log.info("initializing command factories...");
-        BehaviorSubject<AreaResult> areaCommandObserver = BehaviorSubject.create();
-        subscribeToAreaResults(areaCommandObserver);
-        CommandRegistry.INSTANCE.registerCommand("area", new AreaCommandFactory(areaCommandObserver));
 
+        initializeAreaFactory();
         CommandRegistry.INSTANCE.registerCommand("exit", new ExitCommandFactory());
         CommandRegistry.INSTANCE.registerCommand("showall", new ShowAllCommandFactory());
+        CommandRegistry.INSTANCE.registerCommand("help", new HelpCommandFactory());
     }
 
     private void subscribeToAreaResults(BehaviorSubject<AreaResult> areaCommandObserver) {
@@ -56,5 +56,11 @@ public class EngineInitializer {
             System.out.println("pole figury wynosi : " + result.getResult());
             Registry.INSTANCE.addRegistryEntry(result);
         });
+    }
+
+    private void initializeAreaFactory() {
+        BehaviorSubject<AreaResult> areaCommandObserver = BehaviorSubject.create();
+        subscribeToAreaResults(areaCommandObserver);
+        CommandRegistry.INSTANCE.registerCommand("area", new AreaCommandFactory(areaCommandObserver));
     }
 }

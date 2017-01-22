@@ -1,7 +1,8 @@
 package input.marshaller;
 
 import commands.stub.CommandStub;
-import lombok.AllArgsConstructor;
+import rx.Observer;
+import rx.Subscription;
 import rx.subjects.BehaviorSubject;
 
 import java.util.Arrays;
@@ -10,14 +11,19 @@ import java.util.List;
 /**
  * Created by jakub on 1/18/17.
  */
-@AllArgsConstructor
-public class InputMarshaller {
+public class DefaultInputMarshaler implements InputMarshaler {
 
-    BehaviorSubject<CommandStub> subject;
+    BehaviorSubject<CommandStub> subject = BehaviorSubject.create();
 
+    @Override
     public void parseInput(String inputLine) {
         parse(inputLine.split("\\s+"));
 
+    }
+
+    @Override
+    public Subscription subscribeInput(Observer observer) {
+        return subject.subscribe(observer);
     }
 
     private void parse(String[] commandTokens) {
