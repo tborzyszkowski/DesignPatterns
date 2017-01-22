@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <bean id="orderDao" class="com.orderMeal.dao.OrderDaoInterface">
+        <property name="orderDao" ref="orderDao"/>
+    </bean>
+</head>
+<body>
+<p th:text="'You need to pay, ' + ${costs} + ' for :'"></p>
+<br/>
+<p th:text="${items}" ></p>
+<br/>
+<br/>
+<a href="/order"><button id="order">Order another one</button></a>
+<form method="post">
+    <input id="submit" name="submit" type="submit" value="order"/>
+</form>
+</body>
+</html>

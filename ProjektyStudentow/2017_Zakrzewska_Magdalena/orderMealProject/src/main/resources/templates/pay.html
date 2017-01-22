@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <bean id="orderDao" class="com.orderMeal.dao.OrderDaoInterface">
+        <property name="orderDao" ref="orderDao"/>
+    </bean>
+</head>
+<body>
+    <div id="container">
+        <p th:text=" ${name} + ' ' + ${lastName} + '. ' + ${paymentInfo}"></p>
+    </div>
+</body>
+</html>
