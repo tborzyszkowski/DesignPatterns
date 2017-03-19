@@ -3,7 +3,7 @@ Examples to my lectures on Design Patterns
 
 [Slides for the course](https://inf.ug.edu.pl/~tomek/wzorce/) (in Polish)
 
-##References:
+## References:
 1. E. Gamma, R. Helm, R. Johnson, J. Vlissides. Design Patterns. Addison-Wesely, 1995.
 2. E. Freeman, E. Freeman, B. Bates, K. Sierra. Head First Design Patterns, O.Reilly Media Inc., 2004.
 3. M. Flower. Patterns of Enterprise Application Architecture. Addison-Wesely, 2003.
