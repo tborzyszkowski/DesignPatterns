@@ -25,7 +25,7 @@ namespace _02ColorPrototype {
             Color color3 = colormanager["flame"].Clone() as Color;
 
             // Wait for user
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

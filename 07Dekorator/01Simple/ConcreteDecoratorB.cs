@@ -12,6 +12,7 @@ namespace _01Simple {
             Console.WriteLine("ConcreteDecoratorB.Operation()");
         }
         void AddedBehavior() {
+            Console.WriteLine("ConcreteDecoratorB.AddedBehavior()");
         }
     }
 }

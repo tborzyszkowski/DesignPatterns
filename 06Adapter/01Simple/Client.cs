@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    // Adapter Pattern - Simple         Judith Bishop  Oct 2007
     // Simplest adapter using interfaces and inheritance
     class Client {
         static void Main() {
