@@ -10,6 +10,8 @@ namespace SingletonSerialization
         public ConsoleColor BackColor { get; set; }
         public ConsoleColor ForeColor { get; set; }
 
+        private static bool isAccessed = false;
+
         protected static ILogger LoggerInstance;
 
         protected Logger()
@@ -20,18 +22,25 @@ namespace SingletonSerialization
 
         public static ILogger GetLoggerInstance(string fileName = "")
         {
-            lock (LoggerInstance)
+            if (LoggerInstance == null && fileName == "")
             {
-                if (LoggerInstance == null && fileName == "")
-                {
-                    LoggerInstance = new Logger();
-                }
-                else if (fileName != "")
-                {
-                    LoggerInstance = Deserialize(fileName);
-                }
-                return LoggerInstance;
+                LoggerInstance = new Logger();
             }
+            else if (fileName != "")
+            {
+                if (!isAccessed)
+                {
+                    isAccessed = true;
+
+                    if (LoggerInstance == null)
+                    {
+                        LoggerInstance = Deserialize(fileName);
+                    }
+
+                    isAccessed = false;
+                }
+            }
+            return LoggerInstance;
         }
 
         public virtual void Log(string text)
@@ -71,6 +80,11 @@ namespace SingletonSerialization
             }
 
             return result;
+        }
+
+        public static void DropInstance()
+        {
+            LoggerInstance = null;
         }
     }
 }
