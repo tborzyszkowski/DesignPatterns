@@ -1,11 +1,11 @@
-Proszê umieszczaæ swoje rozwi¹zania zadañ w katalogu 2017.
-Proszê utworzyæ swój podkatalog w katalogu 2017 w formacie:
-NazwiskoImiê i do niego kopiowaæ swoje pliki.
+ï»¿ProszÄ™ umieszczaÄ‡ swoje rozwiÄ…zania zadaÅ„ w katalogu 2017.
+ProszÄ™ utworzyÄ‡ swÃ³j podkatalog w katalogu 2017 w formacie:
+NazwiskoImiÄ™ i do niego kopiowaÄ‡ swoje pliki.
 
 --------
 Uwaga:
-W celu przes³ania w³asnego rozwi¹zania do repozytorium nale¿y 
-wykonaæ procedurê podobn¹ do opisanej tu:
+W celu przesÅ‚ania wÅ‚asnego rozwiÄ…zania do repozytorium naleÅ¼y 
+wykonaÄ‡ procedurÄ™ podobnÄ… do opisanej tu:
 https://guides.github.com/activities/forking/
 
-Po mojej akceptacji pliki zostan¹ do³¹czone do repozytorium.
+Po mojej akceptacji pliki zostanÄ… doÅ‚Ä…czone do repozytorium.
