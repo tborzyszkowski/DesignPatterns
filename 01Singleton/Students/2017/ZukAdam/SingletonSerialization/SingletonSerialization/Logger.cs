@@ -10,7 +10,7 @@ namespace SingletonSerialization
         public ConsoleColor BackColor { get; set; }
         public ConsoleColor ForeColor { get; set; }
 
-        private static bool isAccessed = false;
+        private static object locker;
 
         protected static ILogger LoggerInstance;
 
@@ -18,27 +18,14 @@ namespace SingletonSerialization
         {
             this.ForeColor = ConsoleColor.Gray;
             this.BackColor = ConsoleColor.Black;
+            locker = new object();
         }
 
-        public static ILogger GetLoggerInstance(string fileName = "")
+        public static ILogger GetLoggerInstance()
         {
-            if (LoggerInstance == null && fileName == "")
+            if (LoggerInstance == null)
             {
                 LoggerInstance = new Logger();
-            }
-            else if (fileName != "")
-            {
-                if (!isAccessed)
-                {
-                    isAccessed = true;
-
-                    if (LoggerInstance == null)
-                    {
-                        LoggerInstance = Deserialize(fileName);
-                    }
-
-                    isAccessed = false;
-                }
             }
             return LoggerInstance;
         }
@@ -48,6 +35,17 @@ namespace SingletonSerialization
             Console.BackgroundColor = this.BackColor;
             Console.ForegroundColor = this.ForeColor;
             Console.WriteLine(text);
+        }
+
+        public static void Deserialize(string fileName)
+        {
+            lock (locker)
+            {
+                if (LoggerInstance == null)
+                {
+                    LoggerInstance = DeserializeFromFile(fileName);
+                }
+            }
         }
 
         public bool Serialize(string fileName)
@@ -69,7 +67,7 @@ namespace SingletonSerialization
             }
         }
 
-        private static ILogger Deserialize(string fileName)
+        private static ILogger DeserializeFromFile(string fileName)
         {
             ILogger result = null;
 
