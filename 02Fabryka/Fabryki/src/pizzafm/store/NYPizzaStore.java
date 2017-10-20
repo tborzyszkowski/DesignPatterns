@@ -1,4 +1,10 @@
-package pizzafm;
+package pizzafm.store;
+
+import pizzafm.pizza.Pizza;
+import pizzafm.pizza.newyork.NYStyleCheesePizza;
+import pizzafm.pizza.newyork.NYStyleClamPizza;
+import pizzafm.pizza.newyork.NYStylePepperoniPizza;
+import pizzafm.pizza.newyork.NYStyleVeggiePizza;
 
 public class NYPizzaStore extends PizzaStore {
 

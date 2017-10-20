@@ -1,4 +1,10 @@
-package pizzafm;
+package pizzafm.store;
+
+import pizzafm.pizza.Pizza;
+import pizzafm.pizza.chicago.ChicagoStyleCheesePizza;
+import pizzafm.pizza.chicago.ChicagoStyleClamPizza;
+import pizzafm.pizza.chicago.ChicagoStylePepperoniPizza;
+import pizzafm.pizza.chicago.ChicagoStyleVeggiePizza;
 
 public class ChicagoPizzaStore extends PizzaStore {
 

@@ -1,4 +1,6 @@
-package pizzafm;
+package pizzafm.store;
+
+import pizzafm.pizza.Pizza;
 
 public abstract class PizzaStore {
  

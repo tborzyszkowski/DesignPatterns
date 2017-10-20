@@ -1,8 +1,10 @@
-package pizzafm;
+package pizzafm.pizza.chicago;
 
-public class ChicagoStyleVeggiePizza extends Pizza {
-	public ChicagoStyleVeggiePizza() {
-		name = "Chicago Deep Dish Veggie Pizza";
+import pizzafm.pizza.Pizza;
+
+public class ChicagoStylePepperoniPizza extends Pizza {
+	public ChicagoStylePepperoniPizza() {
+		name = "Chicago Style Pepperoni Pizza";
 		dough = "Extra Thick Crust Dough";
 		sauce = "Plum Tomato Sauce";
  
@@ -10,9 +12,10 @@ public class ChicagoStyleVeggiePizza extends Pizza {
 		toppings.add("Black Olives");
 		toppings.add("Spinach");
 		toppings.add("Eggplant");
+		toppings.add("Sliced Pepperoni");
 	}
  
-	void cut() {
+	public void cut() {
 		System.out.println("Cutting the pizza into square slices");
 	}
 }

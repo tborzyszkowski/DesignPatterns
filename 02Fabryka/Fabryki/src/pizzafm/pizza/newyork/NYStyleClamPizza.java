@@ -1,4 +1,6 @@
-package pizzafm;
+package pizzafm.pizza.newyork;
+
+import pizzafm.pizza.Pizza;
 
 public class NYStyleClamPizza extends Pizza {
 

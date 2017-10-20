@@ -1,4 +1,14 @@
-package pizzafm;
+package pizzafm.store;
+
+import pizzafm.pizza.Pizza;
+import pizzafm.pizza.chicago.ChicagoStyleCheesePizza;
+import pizzafm.pizza.chicago.ChicagoStyleClamPizza;
+import pizzafm.pizza.chicago.ChicagoStylePepperoniPizza;
+import pizzafm.pizza.chicago.ChicagoStyleVeggiePizza;
+import pizzafm.pizza.newyork.NYStyleCheesePizza;
+import pizzafm.pizza.newyork.NYStyleClamPizza;
+import pizzafm.pizza.newyork.NYStylePepperoniPizza;
+import pizzafm.pizza.newyork.NYStyleVeggiePizza;
 
 public class DependentPizzaStore {
  
