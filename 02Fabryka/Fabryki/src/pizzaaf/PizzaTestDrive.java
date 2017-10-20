@@ -1,5 +1,10 @@
 package pizzaaf;
 
+import pizzaaf.pizza.Pizza;
+import pizzaaf.store.ChicagoPizzaStore;
+import pizzaaf.store.NYPizzaStore;
+import pizzaaf.store.PizzaStore;
+
 public class PizzaTestDrive {
  
 	public static void main(String[] args) {
