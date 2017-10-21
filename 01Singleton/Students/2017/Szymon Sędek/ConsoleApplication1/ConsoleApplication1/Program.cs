@@ -16,8 +16,6 @@ namespace ConsoleApplication1
             var testing2=new Testing();
             testing2.STH();
             testing2.Draw();
-            int a = 0;
-            int asdsadsadasd = 123;
 
 
             Console.ReadKey();
