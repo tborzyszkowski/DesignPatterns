@@ -45,6 +45,10 @@
     <Compile Include="Enums\CategoryEnum.cs" />
     <Compile Include="Examples\1. SimpleFactory\FurnitureMaker.cs" />
     <Compile Include="Examples\1. SimpleFactory\SimpleFurnitureFactory.cs" />
+    <Compile Include="Examples\2. FactoryMethod\CoffeeTableFactory.cs" />
+    <Compile Include="Examples\2. FactoryMethod\Factory.cs" />
+    <Compile Include="Examples\2. FactoryMethod\LargeDeskFactory.cs" />
+    <Compile Include="Examples\2. FactoryMethod\WideWardrobeFactory.cs" />
     <Compile Include="Interfaces\IPart.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Furniture.cs" />
