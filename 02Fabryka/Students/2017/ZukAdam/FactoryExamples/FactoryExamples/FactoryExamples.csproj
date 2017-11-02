@@ -42,11 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\CategoryEnum.cs" />
+    <Compile Include="Examples\1. SimpleFactory\FurnitureMaker.cs" />
+    <Compile Include="Examples\1. SimpleFactory\SimpleFurnitureFactory.cs" />
+    <Compile Include="Interfaces\IPart.cs" />
+    <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\Furniture.cs" />
+    <Compile Include="Models\Furnitures\CoffeeTable.cs" />
+    <Compile Include="Models\Furnitures\LargeDesk.cs" />
+    <Compile Include="Models\Furnitures\WideWardrobe.cs" />
+    <Compile Include="Models\Skrew.cs" />
+    <Compile Include="Models\Glass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Logger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
