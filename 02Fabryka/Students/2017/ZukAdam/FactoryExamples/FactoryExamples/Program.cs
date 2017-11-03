@@ -1,12 +1,9 @@
 ﻿using FactoryExamples.Examples._1._SimpleFactory;
 using FactoryExamples.Examples._2._FactoryMethod;
+using FactoryExamples.Examples._3._AbstractFactory;
 using FactoryExamples.Models;
 using FactoryExamples.Utilities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FactoryExamples
 {
@@ -16,6 +13,7 @@ namespace FactoryExamples
         {
             SimpleFurnitureFactoryTest();
             FactoryMethodTest();
+            AbstractFactoryTest();
 
             Console.ReadKey();
         }
@@ -45,6 +43,24 @@ namespace FactoryExamples
 
             furniture = factory.CreateWider();
             Console.WriteLine(string.Format("We ordered wider large desk and we've got large desk with width set to: {0}", furniture.Width));
+        }
+
+        private static void AbstractFactoryTest()
+        {
+            Logger.AddTestStep("Testing AbstractFactory");
+
+            AbstractFactory factory = null;
+            Furniture furniture = null;
+
+            factory = new EuropeFactory();
+            furniture = factory.MakeWideWardrobe();
+
+            Console.WriteLine("We've ordered european version of Wide Wardrobe, becouse it is {0} m width.", furniture.Width);
+
+            factory = new AsiaFactory();
+            furniture = factory.MakeWideWardrobe();
+
+            Console.WriteLine("We've ordered asian version of Wide Wardrobe, becouse it is {0} m width.", furniture.Width);
         }
     }
 }

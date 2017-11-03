@@ -49,6 +49,9 @@
     <Compile Include="Examples\2. FactoryMethod\Factory.cs" />
     <Compile Include="Examples\2. FactoryMethod\LargeDeskFactory.cs" />
     <Compile Include="Examples\2. FactoryMethod\WideWardrobeFactory.cs" />
+    <Compile Include="Examples\3. AbstractFactory\AbstractFactory.cs" />
+    <Compile Include="Examples\3. AbstractFactory\EuropeFactory.cs" />
+    <Compile Include="Examples\3. AbstractFactory\AsiaFactory.cs" />
     <Compile Include="Interfaces\IPart.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Furniture.cs" />
