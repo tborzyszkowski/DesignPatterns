@@ -7,6 +7,7 @@ using FactoryExamples.Models.Furnitures;
 using FactoryExamples.Utilities;
 using System;
 using System.Reflection;
+using System.Linq;
 
 namespace FactoryExamples
 {
@@ -75,8 +76,10 @@ namespace FactoryExamples
 
             furniture = ReflectionFactory.GetFurniture<CoffeeTable>();
             Console.WriteLine(string.Format("We ordered coffee table and we've got: {0}", furniture.Name));
-            
-            furniture = ReflectionFactory.GetFurniture("FactoryExamples.Models.Furnitures.LargeDesk");
+
+            var assembly = Assembly.LoadFile(Environment.CurrentDirectory + @"\Library.dll");
+
+            furniture = ReflectionFactory.GetFurniture(assembly.ExportedTypes.First().FullName);
             Console.WriteLine(string.Format("We ordered large desk and we've got: {0}", furniture.Name));
         }
     }
