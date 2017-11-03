@@ -1,9 +1,12 @@
 ﻿using FactoryExamples.Examples._1._SimpleFactory;
 using FactoryExamples.Examples._2._FactoryMethod;
 using FactoryExamples.Examples._3._AbstractFactory;
+using FactoryExamples.Examples._4._ReflectionFactory;
 using FactoryExamples.Models;
+using FactoryExamples.Models.Furnitures;
 using FactoryExamples.Utilities;
 using System;
+using System.Reflection;
 
 namespace FactoryExamples
 {
@@ -14,6 +17,7 @@ namespace FactoryExamples
             SimpleFurnitureFactoryTest();
             FactoryMethodTest();
             AbstractFactoryTest();
+            ReflectionFactoryTest();
 
             Console.ReadKey();
         }
@@ -61,6 +65,19 @@ namespace FactoryExamples
             furniture = factory.MakeWideWardrobe();
 
             Console.WriteLine("We've ordered asian version of Wide Wardrobe, becouse it is {0} m width.", furniture.Width);
+        }
+
+        private static void ReflectionFactoryTest()
+        {
+            Logger.AddTestStep("Testing ReflectionFactory");
+
+            Furniture furniture = null;
+
+            furniture = ReflectionFactory.GetFurniture<CoffeeTable>();
+            Console.WriteLine(string.Format("We ordered coffee table and we've got: {0}", furniture.Name));
+            
+            furniture = ReflectionFactory.GetFurniture("FactoryExamples.Models.Furnitures.LargeDesk");
+            Console.WriteLine(string.Format("We ordered large desk and we've got: {0}", furniture.Name));
         }
     }
 }

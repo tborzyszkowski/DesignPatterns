@@ -52,6 +52,7 @@
     <Compile Include="Examples\3. AbstractFactory\AbstractFactory.cs" />
     <Compile Include="Examples\3. AbstractFactory\EuropeFactory.cs" />
     <Compile Include="Examples\3. AbstractFactory\AsiaFactory.cs" />
+    <Compile Include="Examples\4. ReflectionFactory\ReflectionFactory.cs" />
     <Compile Include="Interfaces\IPart.cs" />
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Furniture.cs" />
