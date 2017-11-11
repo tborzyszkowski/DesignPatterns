@@ -7,6 +7,7 @@ public abstract class BookStore {
 
     public Book order(BookType bookType){
         Book book = createBook(bookType);
+        book.prepare();
         book.collecting();
         book.packing();
         book.send();

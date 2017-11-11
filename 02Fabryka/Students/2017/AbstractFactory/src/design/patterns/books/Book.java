@@ -2,27 +2,21 @@ package design.patterns.books;
 
 import design.patterns.books.enums.Binding;
 import design.patterns.books.enums.BookType;
+import design.patterns.parts.authors.Authors;
+import design.patterns.parts.publisher.Publisher;
 
 public abstract class Book {
 
-    private BookType bookType;
-    private Binding binding;
-    private Integer pages;
-    private String author;
-    private String publisher;
+    protected BookType bookType;
+    protected Integer pages;
+    protected Authors author;
+    protected Publisher publisher;
 
-    public Book(BookType bookType, Binding binding, Integer pages, String author, String publisher) {
-        this.bookType = bookType;
-        this.binding = binding;
-        this.pages = pages;
-        this.author = author;
-        this.publisher = publisher;
-    }
+    public abstract void prepare();
 
     public void collecting(){
         System.out.println("Collecting order");
     }
-
     public void packing(){
         System.out.println("Packing order");
     }
@@ -35,7 +29,6 @@ public abstract class Book {
     public String toString() {
         return "Book{" +
                 "bookType=" + bookType +
-                ", binding=" + binding +
                 ", pages=" + pages +
                 ", author='" + author + '\'' +
                 ", publisher='" + publisher + '\'' +
