@@ -6,13 +6,16 @@ namespace BuilderExample
     {
         static void Main(string[] args)
         {
-            Unit marine = new MarineBuilder().SetName("Marine_1")
-                                             .SetArmorPoints(5)
-                                             .SetAttackPoints(7)
-                                             .SetHealthPoints(10)
-                                             .SetSize(1);
+            Unit marine = UnitsFactory.CreateUnit(new MarineBuilder());
 
             marine.PrintInfo();
+
+            Console.WriteLine("---------------------");
+
+            Unit tank = UnitsFactory.CreateUnit(new TankBuilder());
+
+            tank.PrintInfo();
+
             Console.ReadKey();
         }
     }
