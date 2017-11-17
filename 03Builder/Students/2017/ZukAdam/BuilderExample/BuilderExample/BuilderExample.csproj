@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Builders\TankBuilder.cs" />
     <Compile Include="Builders\MarineBuilder.cs" />
+    <Compile Include="Builders\TestUnitBuilder.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="Builders\UnitBuilder.cs" />
     <Compile Include="Program.cs" />

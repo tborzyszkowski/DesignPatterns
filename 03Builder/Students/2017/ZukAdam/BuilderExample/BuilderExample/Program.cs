@@ -16,6 +16,16 @@ namespace BuilderExample
 
             tank.PrintInfo();
 
+            Console.WriteLine("---------------------");
+
+            Unit testUnit = new TestUnitBuilder().SetName("TestName")
+                                                 .SetAttackPoints(5)
+                                                 .SetHealthPoints(13)
+                                                 .SetArmorPoints(3)
+                                                 .Build();
+
+            testUnit.PrintInfo();
+
             Console.ReadKey();
         }
     }
