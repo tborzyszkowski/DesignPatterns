@@ -29,7 +29,7 @@ namespace _02ConcurrentBagImplementation {
                 Console.CursorLeft = 0;
                 // This is the bottleneck in our application. All threads in this loop
                 // must serialize their access to the static Console class.
-                Console.WriteLine("i = {0}\t Val = {1:####.####}\t", i, mc.GetValue(i%10));
+                // Console.WriteLine("i = {0}\t Val = {1:####.####}\t", i, mc.GetValue(i%10));
 
                 pool.PutObject(mc);
                 if (cts.Token.IsCancellationRequested)

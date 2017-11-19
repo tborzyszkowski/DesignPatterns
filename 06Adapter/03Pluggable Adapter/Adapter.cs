@@ -14,9 +14,8 @@ namespace _03Pluggable_Adapter {
         // Adapter-Adaptee
         public Adapter(Adaptee adaptee) {
             // Set the delegate to the new standard
-            Request = delegate (int i) {
-                return "Estimate based on precision is " + (int)Math.Round(Precise(i, 3));
-            };
+            Request = i =>
+                $"Estimate based on precision is {(int)Math.Round(Precise(i, 3))}";
         }
 
         // Adapter-Target
