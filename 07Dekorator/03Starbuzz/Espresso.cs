@@ -9,11 +9,9 @@ namespace _03Starbuzz {
 
         public override string Description
         {
-            get { return "Expresso"; }
+            get => "Expresso"; 
         }
 
-        public override double Cost() {
-            return 1.99;
-        }
+        public override double Cost()  => 1.99;
     }
 }

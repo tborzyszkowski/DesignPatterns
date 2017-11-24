@@ -14,11 +14,9 @@ namespace _03Starbuzz {
 
         public override string Description
         {
-            get { return beverage.Description + ", Coffee Mate"; }
+            get => $"{beverage.Description}, Coffee Mate"; 
         }
 
-        public override double Cost() {
-            return (.15 + beverage.Cost());
-        }
+        public override double Cost() => (.15 + beverage.Cost());
     }
 }
