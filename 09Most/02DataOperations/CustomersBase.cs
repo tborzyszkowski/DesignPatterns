@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02DataOperations {
-    
+
     // The 'Abstraction' class
     class CustomersBase {
-        private DataObject _dataObject;
         protected string group;
 
         public CustomersBase(string group) {
@@ -16,35 +15,31 @@ namespace _02DataOperations {
         }
 
         // Property
-        public DataObject Data
-        {
-            set { _dataObject = value; }
-            get { return _dataObject; }
-        }
+        public DataObject Data { get; set; }
 
         public virtual void Next() {
-            _dataObject.NextRecord();
+            Data.NextRecord();
         }
 
         public virtual void Prior() {
-            _dataObject.PriorRecord();
+            Data.PriorRecord();
         }
 
         public virtual void Add(string customer) {
-            _dataObject.AddRecord(customer);
+            Data.AddRecord(customer);
         }
 
         public virtual void Delete(string customer) {
-            _dataObject.DeleteRecord(customer);
+            Data.DeleteRecord(customer);
         }
 
         public virtual void Show() {
-            _dataObject.ShowRecord();
+            Data.ShowRecord();
         }
 
         public virtual void ShowAll() {
             Console.WriteLine("Customer Group: " + group);
-            _dataObject.ShowAllRecords();
+            Data.ShowAllRecords();
         }
     }
 }

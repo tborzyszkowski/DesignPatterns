@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace _03Pluggable_Adapter {
     // New standard for requests
     class Target {
-        public string Estimate(int i) {
-            return "Estimate is " + (int)Math.Round(i / 3.0);
-        }
+        public string Estimate(int i) =>
+            $"Estimate is {(int)Math.Round(i / 3.0)}";
     }
 }
