@@ -12,12 +12,6 @@ class Email
             throw new \Exception('Incorrect email addres');
         }
 
-        $splitEmail = explode('@', $email);
-
-        if(!checkdnsrr($splitEmail[1], 'MX')) {
-            throw new \Exception('There is no domain like '.$splitEmail[1]);
-        }
-
         $this->email = $email;
     }
 
