@@ -12,7 +12,7 @@ namespace _03Starbuzz {
 
         public virtual string Description
         {
-            get { return description; }
+            get => description;
         }
     }
 }

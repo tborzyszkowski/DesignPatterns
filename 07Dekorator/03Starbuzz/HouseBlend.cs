@@ -8,11 +8,9 @@ namespace _03Starbuzz {
     public class HouseBlend : Beverage {
         public override string Description
         {
-            get { return "House Blend Coffee"; }
+            get => "House Blend Coffee"; 
         }
 
-        public override double Cost() {
-            return .89;
-        }
+        public override double Cost() => .89;
     }
 }
