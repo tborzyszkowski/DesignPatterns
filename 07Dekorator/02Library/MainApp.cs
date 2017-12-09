@@ -24,8 +24,6 @@ namespace _02Library {
 
             borrowvideo.Display();
 
-            // Wait for user
-            Console.ReadKey();
         }
     }
 }

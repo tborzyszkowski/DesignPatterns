@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace _02Library {
     abstract class LibraryItem {
-        private int _numCopies;
-
         // Property
-        public int NumCopies
-        {
-            get { return _numCopies; }
-            set { _numCopies = value; }
-        }
+        public int NumCopies { get; set; }
 
         public abstract void Display();
     }

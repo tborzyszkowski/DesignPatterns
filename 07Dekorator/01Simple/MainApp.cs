@@ -17,9 +17,7 @@ namespace _01Simple {
             d2.SetComponent(d1);
 
             d2.Operation();
-
-            // Wait for user
-            Console.ReadKey();
+            
         }
     }
 }
