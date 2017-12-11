@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BinaryFormatter;
+using System;
 
 namespace PrototypeExample.Models
 {
@@ -19,6 +20,16 @@ namespace PrototypeExample.Models
         public Tank ShallowClone()
         {
             return (Tank)this.MemberwiseClone();
+        }
+
+        public Tank DeepClone()
+        {
+            var converter = new BinaryConverter();
+            byte[] byteArray = converter.Serialize(this);
+
+            var copy = converter.Deserialize<Tank>(byteArray);
+
+            return copy;
         }
 
         public void PrintInfo()

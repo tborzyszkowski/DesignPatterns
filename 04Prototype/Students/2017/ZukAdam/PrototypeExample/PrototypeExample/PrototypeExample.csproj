@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BinaryFormatter" Version="2.1.0" />
+  </ItemGroup>
+
 </Project>

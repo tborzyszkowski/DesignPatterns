@@ -37,7 +37,10 @@ namespace PrototypeExample
 
             Logger.Log("Deep copy test");
 
+            tank.PrintInfo();
 
+            var deepClone = tank.DeepClone();
+            deepClone.PrintInfo();
 
             Console.ReadKey();
         }

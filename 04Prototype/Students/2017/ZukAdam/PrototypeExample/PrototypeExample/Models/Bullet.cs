@@ -4,6 +4,8 @@
     {
         public int BulletSize { get; set; }
 
+        public Bullet() { } // For serialization purposes
+
         public Bullet(int bulletSize)
         {
             this.BulletSize = bulletSize;
