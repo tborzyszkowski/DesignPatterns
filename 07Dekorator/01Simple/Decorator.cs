@@ -13,9 +13,10 @@ namespace _01Simple {
         }
 
         public override void Operation() {
-            if (component != null) {
-                component.Operation();
-            }
+            component?.Operation();
+            //if (component != null) {
+            //    component.Operation();
+            //}
         }
     }
 }

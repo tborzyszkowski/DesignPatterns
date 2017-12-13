@@ -16,6 +16,9 @@ namespace _03Pluggable_Adapter {
 
             Adapter adapter2 = new Adapter(new Target());
             Console.WriteLine(adapter2.Request(5));
+
+            adapter2.ChangeRequest(i => $"{2*i} -- nowy wynik");
+            Console.WriteLine(adapter2.Request(5));
         }
     }
 }

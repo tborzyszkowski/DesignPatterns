@@ -14,13 +14,10 @@ namespace _03Starbuzz {
 
         public override string Description
         {
-            get
-            { return beverage.Description + ", Whip"; }
+            get => $"{beverage.Description}, Whip";
         }
 
-        public override double Cost() {
-            return .10 + beverage.Cost();
-        }
+        public override double Cost() => .10 + beverage.Cost();
     }
 }
  

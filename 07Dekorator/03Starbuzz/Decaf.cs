@@ -9,11 +9,9 @@ namespace _03Starbuzz {
 
         public override string Description
         {
-            get { return "Decaf Coffee"; }
+            get => "Decaf Coffee"; 
         }
 
-        public override double Cost() {
-            return 1.05;
-        }
+        public override double Cost() => 1.05;
     }
 }

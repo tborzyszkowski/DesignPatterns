@@ -13,8 +13,9 @@ namespace _03Starbuzz {
             
             Beverage houseBlend = new HouseBlend();
             houseBlend = new Mocha(houseBlend);
+            houseBlend = new Whip(houseBlend);
             houseBlend = new Soy(houseBlend);
-            Console.WriteLine(houseBlend.Description + " $" + houseBlend.Cost());
+            Console.WriteLine(houseBlend.Description + " $" + houseBlend.Cost() + " " + houseBlend.GetType());
             
             Beverage darkRoast = new DarkRoast();
             darkRoast = new CoffeeMate(darkRoast);

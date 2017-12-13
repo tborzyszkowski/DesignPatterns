@@ -9,11 +9,9 @@ namespace _03Starbuzz {
 
         public override string Description
         {
-            get { return "Dark Roast Coffee"; }
+            get => "Dark Roast Coffee"; 
         }
 
-        public override double Cost() {
-            return .99;
-        }
+        public override double Cost() => .99;
     }
 }
