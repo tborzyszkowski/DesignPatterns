@@ -10,6 +10,9 @@ namespace _01Simple {
             // Create proxy and request a service
             Proxy proxy = new Proxy();
             proxy.Request();
+            Console.WriteLine("=================");
+            proxy.Request();
+            Console.WriteLine("=================");
         }
     }
 }

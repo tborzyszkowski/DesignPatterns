@@ -23,5 +23,9 @@ namespace _03Pluggable_Adapter {
             // Set the delegate to the existing standard
             Request = target.Estimate;
         }
+
+        public void ChangeRequest(Func<int, string> ff) {
+            Request = ff;
+        }
     }
 }
