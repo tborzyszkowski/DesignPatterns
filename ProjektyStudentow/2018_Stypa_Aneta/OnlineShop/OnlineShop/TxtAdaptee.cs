@@ -10,7 +10,7 @@ namespace OnlineShop
 {
     public class TxtAdaptee
     {
-        string path = @"C:\Users\AnetaS\Desktop\myOutput.txt";
+        string path = @"C:\myOutput.txt";
 
         public void ToTxt(List<Product> p)
         {

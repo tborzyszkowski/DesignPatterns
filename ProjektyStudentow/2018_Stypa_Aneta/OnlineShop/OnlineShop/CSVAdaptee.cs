@@ -13,7 +13,7 @@ namespace OnlineShop
 
         public string ToCSV(List<Product> p, bool toTxt = false)
         {
-            var file = @"C:\Users\AnetaS\Desktop\myOutput.csv";
+            var file = @"C:\myOutput.csv";
 
             var csv = new StringBuilder();
 
