@@ -1,0 +1,77 @@
+﻿@model CarsCms.ViewModels.VMCars
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CarEntity</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @if (Model.ShowIfAuth)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Car.DateCreate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Car.DateCreate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Car.DateMod)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Car.DateMod)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Car.IsActive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Car.IsActive)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.ModPerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.ModPerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.RegistrationNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.RegistrationNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Car.Id }) |
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Clone", "Clone", new { id = Model.Car.Id }) 
+</p>

@@ -1,0 +1,80 @@
+﻿@model CarsCms.ViewModels.VMCars
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CarEntity</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.DateCreate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.DateCreate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.DateMod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.DateMod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.ModPerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.ModPerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car.RegistrationNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car.RegistrationNumber)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

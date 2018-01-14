@@ -1,0 +1,6 @@
+-builder abstract
+-adapter
+-DI
+-Generic repo
+-prototype
+-factory
