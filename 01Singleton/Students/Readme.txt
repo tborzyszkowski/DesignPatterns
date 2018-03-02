@@ -1,5 +1,5 @@
-﻿Proszę umieszczać swoje rozwiązania zadań w katalogu 2017.
-Proszę utworzyć swój podkatalog w katalogu 2017 w formacie:
+﻿Proszę umieszczać swoje rozwiązania zadań w katalogu 2018.
+Proszę utworzyć swój podkatalog w katalogu 2018 w formacie:
 NazwiskoImię i do niego kopiować swoje pliki.
 
 --------
