@@ -1,9 +1,14 @@
 Zadania:
 --------
-0. Wymyœleæ w³asn¹ fabrykê ze specyficznymi produktami i sk³adnikami tych produktów
+0. Klient potrzebuje obiekty nale¿¹ce do kilku (3-4) rodzajów produktów. 
+	Ka¿dy rodzaj posiada kilka (5-6) konkretnych realizacji.
+	Wymyœliæ i wytworzyæ kod opisuj¹cy produkty i ich rodzaje.
 
-Zaimplementowaæ j¹ jako:
-1. "prost¹ fabrykê" (patrz pakiet pizzas)
-2. fabrykê z metod¹ wytrórcz¹ (patrz pakiet pizzfm)
-3. fabrykê abstrakcyjn¹
-4. prost¹ fabrykê u¿ywaj¹c rejestracji klas z wykorzystaniem refleksji lub bez wykorzystania refleksji
+1. Dla rozdzielenia procesu wytwarzania obiektów od klas klienta zastosowaæ fabrykê zaimplementowan¹ jako singleton. 
+	Zaprezentowaæ pozytywne i negatywne skutki zastosowania:
+	a) fabryki prostej
+	b) fabryki z metod¹ wytwórcz¹
+	c) fabryki abstrakcyjnej
+	
+2. Porównaæ z³o¿onoœæ i efektywnoœæ dzia³ania fabryk z punktu 1. 
+	z fabryk¹ u¿ywaj¹c¹ rejestracji klas z wykorzystaniem refleksji oraz bez wykorzystania refleksji
