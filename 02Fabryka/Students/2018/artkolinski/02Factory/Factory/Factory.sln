@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factory", "Factory.csproj", "{7B2F5E4A-3B90-4BF6-84AE-ED005B54EFA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryTests", "..\FactoryTests\FactoryTests.csproj", "{CF22E542-0529-4E65-8516-8FC14D96CBEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B2F5E4A-3B90-4BF6-84AE-ED005B54EFA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B2F5E4A-3B90-4BF6-84AE-ED005B54EFA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B2F5E4A-3B90-4BF6-84AE-ED005B54EFA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B2F5E4A-3B90-4BF6-84AE-ED005B54EFA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF22E542-0529-4E65-8516-8FC14D96CBEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF22E542-0529-4E65-8516-8FC14D96CBEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF22E542-0529-4E65-8516-8FC14D96CBEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF22E542-0529-4E65-8516-8FC14D96CBEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
