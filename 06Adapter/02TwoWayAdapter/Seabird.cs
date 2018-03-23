@@ -17,8 +17,7 @@ namespace _02TwoWayAdapter {
         }
 
         // Routes this straight back to the Aircraft
-        public int Height
-        {
+        public int Height {
             get { return height; }
         }
 
@@ -29,8 +28,7 @@ namespace _02TwoWayAdapter {
                 height += 100;
         }
 
-        public bool Airborne
-        {
+        public bool Airborne {
             get { return height > 50; }
         }
     }
