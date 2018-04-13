@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0BA3DA82-8109-43A8-9DFD-9FE782522D82}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>FactoryMethod</RootNamespace>
+    <AssemblyName>FactoryMethod</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Books\Balladyna.cs" />
+    <Compile Include="Books\Book.cs" />
+    <Compile Include="Books\BookStore.cs" />
+    <Compile Include="Books\MickiewiczStore.cs" />
+    <Compile Include="Books\Kordian.cs" />
+    <Compile Include="Books\Sonety.cs" />
+    <Compile Include="Books\Tadeusz.cs" />
+    <Compile Include="Books\SlowackiStore.cs" />
+    <Compile Include="Books\Zmija.cs" />
+    <Compile Include="Cars\Auris.cs" />
+    <Compile Include="Cars\Car.cs" />
+    <Compile Include="Cars\CarStore.cs" />
+    <Compile Include="Cars\Escort.cs" />
+    <Compile Include="Cars\Fiesta.cs" />
+    <Compile Include="Cars\Focus.cs" />
+    <Compile Include="Cars\FordStore.cs" />
+    <Compile Include="Cars\ToyotaStore.cs" />
+    <Compile Include="Cars\Yaris.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Tanks\Abrams.cs" />
+    <Compile Include="Tanks\TankStore.cs" />
+    <Compile Include="Tanks\GermanStore.cs" />
+    <Compile Include="Tanks\Maus.cs" />
+    <Compile Include="Tanks\Panther.cs" />
+    <Compile Include="Tanks\Pershing.cs" />
+    <Compile Include="Tanks\Tank.cs" />
+    <Compile Include="Tanks\Tiger.cs" />
+    <Compile Include="Tanks\USAStore.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
