@@ -1,5 +1,5 @@
 <?php
-	interface CoffinBuilder 
+	interface ICoffinBuilder 
 	{
 		public function ornamentation();
 		public function wreath();
@@ -60,7 +60,7 @@
 		}
 	}
 
-	class WoodenCoffinBuilder implements CoffinBuilder
+	class WoodenCoffinBuilder implements ICoffinBuilder
 	{
 		private $coffin = NULL;
 		
@@ -98,7 +98,7 @@
 		}
 	}
 
-	class StoneCoffinBuilder implements CoffinBuilder
+	class StoneCoffinBuilder implements ICoffinBuilder
 	{
 		private $coffin = NULL;
 		
@@ -136,7 +136,7 @@
 		}
 	}
 
-	class GlassCoffinBuilder implements CoffinBuilder
+	class GlassCoffinBuilder implements ICoffinBuilder
 	{
 		private $coffin = NULL;
 		
