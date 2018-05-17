@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+ruby '2.5.0'
+
+gem 'benchmark-memory'
+gem 'json'
+gem 'rspec'
+gem 'rubocop'
+gem 'ruby-prof'
