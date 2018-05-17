@@ -1,0 +1,60 @@
+AllCops:
+  Exclude:
+    - site-cookbooks/**/*
+  TargetRubyVersion: 2.4.2
+
+Metrics/AbcSize:
+  Severity: warning
+  Max: 10
+
+Metrics/BlockLength:
+  Severity: warning
+  Max: 50
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/MethodLength:
+  Max: 25
+
+Metrics/ModuleLength:
+  Max: 120
+
+Metrics/LineLength:
+  Max: 120
+
+Security/MarshalLoad:
+  Enabled: false
+
+Style/AccessorMethodName:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/MethodMissing:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+Lint/ScriptPermission:
+  Enabled: false
