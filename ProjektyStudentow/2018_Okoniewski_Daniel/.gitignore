@@ -1,0 +1,4 @@
+.bundle/*
+vendor/*
+logger.json
+log.txt
