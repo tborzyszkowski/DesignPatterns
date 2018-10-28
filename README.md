@@ -6,7 +6,7 @@ Examples to my lectures on Design Patterns
 ## References:
 1. E. Gamma, R. Helm, R. Johnson, J. Vlissides. Design Patterns. Addison-Wesely, 1995.
 2. E. Freeman, E. Freeman, B. Bates, K. Sierra. Head First Design Patterns, O.Reilly Media Inc., 2004.
-3. M. Flower. Patterns of Enterprise Application Architecture. Addison-Wesely, 2003.
+3. M. Fowler. Patterns of Enterprise Application Architecture. Addison-Wesely, 2003.
 4. Web page: [Object Oriented Design](http://www.oodesign.com/).
 5. Web page: [martinfowler.com](http://www.martinfowler.com/).
 6. Web page: [design patterns @ dofactory.com](http://www.dofactory.com/net/design-patterns).
