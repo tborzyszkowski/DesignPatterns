@@ -1,0 +1,1 @@
+O:16:"App\SingletonSer":2:{s:5:"hello";s:5:"Hello";s:5:"world";s:5:"World";}
