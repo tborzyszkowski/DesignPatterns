@@ -25,6 +25,7 @@ public class SerializationSingleton {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
         SingletonClass serialization = SingletonClass.getInstance();
+        serialization.testColor = "blue";
         ObjectOutput out = new ObjectOutputStream(new FileOutputStream(
                 "filename.txt"));
         out.writeObject(serialization);
@@ -36,6 +37,8 @@ public class SerializationSingleton {
         in.close();
         
         System.out.println("first launching hashCode: "+serialization.hashCode());
+        System.out.println("\n color: " + serialization.testColor);
         System.out.println("second launching hashCode: "+serializationTwo.hashCode());
+        System.out.println("\n color: " + serializationTwo.testColor);
     }
 }

@@ -15,6 +15,7 @@ import java.io.Serializable;
 public class SingletonClass implements Serializable{
     
     private static final long serialVersionUID = -6859166972099747327L;
+    public  String testColor = "red";
 
     private SingletonClass(){}
     
