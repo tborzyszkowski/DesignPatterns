@@ -1,4 +1,5 @@
-"""1. Dla rozdzielenia procesu wytwarzania obiektów od klas klienta zastosować fabrykę zaimplementowaną jako singleton. 
+"""
+	Dla rozdzielenia procesu wytwarzania obiektów od klas klienta zastosować fabrykę zaimplementowaną jako singleton. 
 	Zaprezentować pozytywne i negatywne skutki zastosowania:
 	a) fabryki prostej
 	b) fabryki z metodą wytwórczą
@@ -10,47 +11,67 @@
 from abc import ABC, abstractmethod
 from random import randint
 
-'''
-class eKontoFactory(ABC):
-	
-	@abstractmethod
-	def sprawdzStan(self, konto):
-		pass
-		
-	@abstractmethod
-	def wyplac(self, konto, kwota)
-		pass
 
-	@abstractmethod
-	def wplac(self, konto, kwota)
-		pass
-'''
-
-class KontoFactory(object):
+class KontoBankowe(ABC):
 	def __init__(self):
 		self.numerKonta = {}
+		self.kwota = 0
 
-	def utworz(self, typ):
-		print()
-		if typ == 'D':
-			return Depozytowe()
-		if typ == 'O':
-			return Oszczednosciowe()
-		assert 0, "Nieznany typ konta %%".format(typ)
-	utworz = staticmethod(utworz)	
+	def __getitem__(self,index):
+		return self.KontoBankowe[index]
 
-
-class Depozytowe(KontoFactory):
+	@abstractmethod
+	def wplac(self, numer, kwota):
+		pass
+	
+	@abstractmethod
+	def otworzKonto(self):
+		pass
+	
+class Osobiste(KontoBankowe):
 	def __init__(self):
 		pass
 	
-	def utworzDepozytowe(self, nazwa, kwota):
-		self.numerKonta = randint(10000, 99999)
-		self.Depozytowe[self.numerKonta] = [nazwa, kwota]
-		print("Stworzono konto depozytowe o nazwie %%. Numer konta to %%".format(nazwa, self.numerKonta))
-		print()
-		
-class Oszczednosciowe(KontoFactory):
+	def __getitem__(self,index):
+		return self.Osobiste[index]
+
+
+	def otworzKonto(self):
+		numerKonta = randint(10000, 99999)
+		setattr(Osobiste, str(numerKonta),0)
+		return numerKonta
+
+	def wplac(self, numerKonta, kwota):
+		kwota += getattr(Osobiste,str(numerKonta))
+		setattr(Osobiste, str(numerKonta),kwota)
+
+
+	def balans(self, numerKonta):
+		print("Dla konta o numerze {} dostepna kwota: {}".format(numerKonta,getattr(Osobiste,str(numerKonta))))
+
+class Biznes(KontoBankowe):
 	def __init__(self):
 		raise Error("Not implemented yet")
 
+
+class KontoFactory(object):
+	def __init__(self):
+		pass
+
+	def utworz(typ):
+		if typ == 'O':
+			return Osobiste()
+		if typ == 'B':
+			return Biznes()
+		assert 0, "Nieznany typ konta {}".format(typ)
+	utworz = staticmethod(utworz)
+
+
+if __name__ == '__main__':
+
+	konto = KontoFactory()
+	n_konto = konto.utworz('O')
+
+	n_numerKonta = n_konto.otworzKonto()
+	n_konto.wplac(n_numerKonta, 123)
+	n_konto.balans(n_numerKonta)
