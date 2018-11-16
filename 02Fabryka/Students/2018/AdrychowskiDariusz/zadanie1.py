@@ -13,6 +13,13 @@ from random import randint
 
 
 class KontoBankowe(ABC):
+	_instances = {}
+
+	def __call__(cls, *args, **kwargs):
+		if cls not in cls._instances:
+			cls._instances[cls] = super(KontoFactory, cls).__call__(*args, **kwargs)
+		return cls._instances[cls]
+
 	def __init__(self):
 		self.numerKonta = {}
 		self.kwota = 0
@@ -45,16 +52,20 @@ class Osobiste(KontoBankowe):
 		kwota += getattr(Osobiste,str(numerKonta))
 		setattr(Osobiste, str(numerKonta),kwota)
 
-
 	def balans(self, numerKonta):
 		print("Dla konta o numerze {} dostepna kwota: {}".format(numerKonta,getattr(Osobiste,str(numerKonta))))
 
+
 class Biznes(KontoBankowe):
+
 	def __init__(self):
 		raise Error("Not implemented yet")
 
 
 class KontoFactory(object):
+
+
+
 	def __init__(self):
 		pass
 
@@ -75,3 +86,11 @@ if __name__ == '__main__':
 	n_numerKonta = n_konto.otworzKonto()
 	n_konto.wplac(n_numerKonta, 123)
 	n_konto.balans(n_numerKonta)
+
+	n_konto2 = konto.utworz('O')
+
+	n_numerKonta2 = n_konto2.otworzKonto()
+	n_konto2.wplac(n_numerKonta, 123)
+	n_konto2.balans(n_numerKonta2)
+	n_konto2.balans(n_numerKonta)
+	print(konto,n_konto, n_konto2)
