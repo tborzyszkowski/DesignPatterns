@@ -2,21 +2,6 @@
 	Każdy rodzaj posiada kilka (5-6) konkretnych realizacji.
 	Wymyślić i wytworzyć kod opisujący produkty i ich rodzaje.
 
-Dealer samochodowy - Autohause
-
-Wybor samochodu
-SUV
-Estate -Hatchback
-Cross Country
-Sedan
-
-Kolor nadwozia
-Rozmiar opon
-Rodzaj silnika (Benzyna, Diesel, Elektryczny, Hybrid)
-Wyposazenie
-Finansowanie
-
-
 """
 
 

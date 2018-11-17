@@ -65,7 +65,6 @@ class Biznes(KontoBankowe):
 class KontoFactory(object):
 
 
-
 	def __init__(self):
 		pass
 
