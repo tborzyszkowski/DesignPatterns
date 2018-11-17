@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AFABE690-74BE-4DBB-8757-6C689D72CC3A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SimpleFactory</RootNamespace>
+    <AssemblyName>SimpleFactory</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Books\Balladyna.cs" />
+    <Compile Include="Books\Book.cs" />
+    <Compile Include="Books\Kordian.cs" />
+    <Compile Include="Books\Sonety.cs" />
+    <Compile Include="Books\Tadeusz.cs" />
+    <Compile Include="Books\Zmija.cs" />
+    <Compile Include="Cars\Escort.cs" />
+    <Compile Include="Cars\Focus.cs" />
+    <Compile Include="Cars\Fiesta.cs" />
+    <Compile Include="Cars\Auris.cs" />
+    <Compile Include="Cars\Car.cs" />
+    <Compile Include="Cars\Yaris.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Tanks\Maus.cs" />
+    <Compile Include="Tanks\Panther.cs" />
+    <Compile Include="Tanks\Pershing.cs" />
+    <Compile Include="Tanks\Abrams.cs" />
+    <Compile Include="Tanks\Tank.cs" />
+    <Compile Include="Tanks\Tiger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
