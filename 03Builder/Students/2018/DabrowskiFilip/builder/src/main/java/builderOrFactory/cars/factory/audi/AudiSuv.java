@@ -9,14 +9,4 @@ public class AudiSuv extends Car {
         this.productionYear = 2015;
         this.gearBoxType = "automatic";
     }
-
-    @Override
-    public String toString() {
-        return "AudiSuv{" +
-                "name='" + name + '\'' +
-                ", productionYear=" + productionYear +
-                ", model='" + model + '\'' +
-                ", gearBoxType='" + gearBoxType + '\'' +
-                '}';
-    }
 }

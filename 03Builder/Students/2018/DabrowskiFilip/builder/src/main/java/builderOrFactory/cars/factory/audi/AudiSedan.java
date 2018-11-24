@@ -9,14 +9,4 @@ public class AudiSedan extends Car {
         this.productionYear = 2017;
         this.gearBoxType = "automatic";
     }
-
-    @Override
-    public String toString() {
-        return "AudiSedan{" +
-                "name='" + name + '\'' +
-                ", productionYear=" + productionYear +
-                ", model='" + model + '\'' +
-                ", gearBoxType='" + gearBoxType + '\'' +
-                '}';
-    }
 }

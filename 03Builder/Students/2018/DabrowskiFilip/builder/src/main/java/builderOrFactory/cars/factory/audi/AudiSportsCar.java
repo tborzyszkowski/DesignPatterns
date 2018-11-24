@@ -9,14 +9,4 @@ public class AudiSportsCar extends Car {
         this.productionYear = 2016;
         this.gearBoxType = "manual";
     }
-
-    @Override
-    public String toString() {
-        return "AudiSportsCar{" +
-                "name='" + name + '\'' +
-                ", productionYear=" + productionYear +
-                ", model='" + model + '\'' +
-                ", gearBoxType='" + gearBoxType + '\'' +
-                '}';
-    }
 }
