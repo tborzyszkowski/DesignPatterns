@@ -4,7 +4,7 @@ public class AudiCarBuilder {
 
     private AudiCar audiCar;
 
-    AudiCarBuilder() {
+    public AudiCarBuilder() {
         this.audiCar = new AudiCar();
     }
 
