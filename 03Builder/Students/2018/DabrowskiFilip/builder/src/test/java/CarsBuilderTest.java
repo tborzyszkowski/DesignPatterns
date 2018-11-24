@@ -1,50 +1,57 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import simpleBuilder.*;
 
 public class CarsBuilderTest {
 
+    BuildingCompany buildingCompany;
+
+    @Before
+    public void prepare_car_park() {
+        this.buildingCompany = new BuildingCompany();
+    }
+
+
     @Test
-    public void should_build_sports_car() {
-        CarBuilder sportsCarBuilder = new SportsCarBuilder();
+    public void should_build_bridge() {
+        ConstructionBuilder bridgeBuilder = new BridgeBuilder();
+        buildingCompany.buildConstruction(bridgeBuilder);
+        Construction bridge = bridgeBuilder.getConstruction();
 
-        sportsCarBuilder.buildWheels();
-        sportsCarBuilder.buildEngine();
-        sportsCarBuilder.buildBody();
-        Car sportsCar = sportsCarBuilder.getCar();
+        System.out.println(bridge.toString());
 
-        Assert.assertEquals(sportsCar.wheels, "Sports 21' wheels");
-        Assert.assertEquals(sportsCar.bodyType, "sport body");
-        Assert.assertEquals(sportsCar.engineCapacity, "4.0");
+        Assert.assertEquals(bridge.foundations, "Bridge foundations");
+        Assert.assertEquals(bridge.roof, "Bridge roof");
+        Assert.assertEquals(bridge.mainConstruction, "Bridge construction");
 
     }
 
     @Test
-    public void should_build_jeep_car() {
-        CarBuilder jeepCarBuilder = new JeepCarBuilder();
+    public void should_build_monument() {
+        ConstructionBuilder monumentBuilder = new MonumentBuilder();
+        buildingCompany.buildConstruction(monumentBuilder);
+        Construction monument = monumentBuilder.getConstruction();
 
-        jeepCarBuilder.buildWheels();
-        jeepCarBuilder.buildEngine();
-        jeepCarBuilder.buildBody();
-        Car jeepCar = jeepCarBuilder.getCar();
+        System.out.println(monument.toString());
 
-        Assert.assertEquals(jeepCar.wheels, "23' off-road wheels");
-        Assert.assertEquals(jeepCar.bodyType, "off-road body");
-        Assert.assertEquals(jeepCar.engineCapacity, "2.0");
+        Assert.assertEquals(monument.foundations, "Monument foundations");
+        Assert.assertEquals(monument.roof, "Monument roof");
+        Assert.assertEquals(monument.mainConstruction, "Monument construction");
 
     }
 
     @Test
-    public void should_build_city_car() {
-        CarBuilder cityCarBuilder = new CityCarBuilder();
+    public void should_build_house() {
+        ConstructionBuilder houseBuilder = new HouseBuilder();
+        buildingCompany.buildConstruction(houseBuilder);
+        Construction house = houseBuilder.getConstruction();
 
-        cityCarBuilder.buildWheels();
-        cityCarBuilder.buildEngine();
-        cityCarBuilder.buildBody();
-        Car cityCar = cityCarBuilder.getCar();
+        System.out.println(house.toString());
 
-        Assert.assertEquals(cityCar.wheels, "14' city wheels");
-        Assert.assertEquals(cityCar.bodyType, "14' city wheels");
-        Assert.assertEquals(cityCar.engineCapacity, "1.3");
+        Assert.assertEquals(house.foundations, "House foundations");
+        Assert.assertEquals(house.roof, "House roof");
+        Assert.assertEquals(house.mainConstruction, "House construction");
 
     }
 
