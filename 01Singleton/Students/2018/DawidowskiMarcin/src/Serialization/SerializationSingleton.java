@@ -16,5 +16,5 @@ public class SerializationSingleton  implements Serializable {
     public Object readResolve() {
         return getInstance( );
     }
-    }
+}
 
