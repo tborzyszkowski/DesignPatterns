@@ -9,30 +9,30 @@ import org.junit.Test;
 
 public class BuilderOrFactoryCars {
 
-        private SimpleAudiFactory simpleAudiFactory;
-        private AudiCarBuilder audiCarBuilder;
+    private SimpleAudiFactory simpleAudiFactory;
+    private AudiCarBuilder audiCarBuilder;
 
-        @Before
-        public void prepare_factory_and_builder() {
-            this.simpleAudiFactory = SimpleAudiFactory.getInstance();
-            this.audiCarBuilder = new AudiCarBuilder();
-        }
-
-        @Test
-        public void create_sports_car_with_simple_factory(){
-
-            Car sportsAudiCar = simpleAudiFactory.createCar(CarType.SPORTS_CAR);
-
-            System.out.println(sportsAudiCar.toString());
-
-            Assert.assertEquals("audi", sportsAudiCar.name);
-            Assert.assertEquals("RS7", sportsAudiCar.model);
-            Assert.assertEquals(2016, sportsAudiCar.productionYear);
-            Assert.assertEquals("manual", sportsAudiCar.gearBoxType);
-        }
+    @Before
+    public void prepare_factory_and_builder() {
+        this.simpleAudiFactory = SimpleAudiFactory.getInstance();
+        this.audiCarBuilder = new AudiCarBuilder();
+    }
 
     @Test
-    public void create_sedan_car_with_simple_factory(){
+    public void create_sports_car_with_simple_factory() {
+
+        Car sportsAudiCar = simpleAudiFactory.createCar(CarType.SPORTS_CAR);
+
+        System.out.println(sportsAudiCar.toString());
+
+        Assert.assertEquals("audi", sportsAudiCar.name);
+        Assert.assertEquals("RS7", sportsAudiCar.model);
+        Assert.assertEquals(2016, sportsAudiCar.productionYear);
+        Assert.assertEquals("manual", sportsAudiCar.gearBoxType);
+    }
+
+    @Test
+    public void create_sedan_car_with_simple_factory() {
 
         Car sedanAudiCar = simpleAudiFactory.createCar(CarType.SEDAN);
 
@@ -45,7 +45,7 @@ public class BuilderOrFactoryCars {
     }
 
     @Test
-    public void create_suv_car_with_simple_factory(){
+    public void create_suv_car_with_simple_factory() {
 
         Car suvAudiCar = simpleAudiFactory.createCar(CarType.SUV);
 
@@ -57,23 +57,23 @@ public class BuilderOrFactoryCars {
         Assert.assertEquals("automatic", suvAudiCar.gearBoxType);
     }
 
-        @Test
-        public void build_sports_car_with_builder() {
-            AudiCar sportsAudiCar = audiCarBuilder
-                    .withName("audi")
-                    .withModel("RS7")
-                    .withProductionYear(2016)
-                    .withGearboxType("manual")
-                    .buildAudiCar();
+    @Test
+    public void build_sports_car_with_builder() {
+        AudiCar sportsAudiCar = audiCarBuilder
+                .withName("audi")
+                .withModel("RS7")
+                .withProductionYear(2016)
+                .withGearboxType("manual")
+                .buildAudiCar();
 
-            System.out.println(sportsAudiCar.toString());
+        System.out.println(sportsAudiCar.toString());
 
-            Assert.assertEquals("audi", sportsAudiCar.name);
-            Assert.assertEquals("RS7", sportsAudiCar.model);
-            Assert.assertEquals(2016, sportsAudiCar.productionYear);
-            Assert.assertEquals("manual", sportsAudiCar.gearBoxType);
+        Assert.assertEquals("audi", sportsAudiCar.name);
+        Assert.assertEquals("RS7", sportsAudiCar.model);
+        Assert.assertEquals(2016, sportsAudiCar.productionYear);
+        Assert.assertEquals("manual", sportsAudiCar.gearBoxType);
 
-        }
+    }
 
     @Test
     public void build_sedan_car_with_builder() {
