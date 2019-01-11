@@ -26,7 +26,7 @@ namespace SolarSystem.Utils
 
         public void Move()
         {
-            (int x, int y) = this.State.GetLocation();
+            (int x, int y) = this.State.GetNextLocation();
             this.Planet.Picture.Location = new Point(x, y);
         }
 
@@ -35,6 +35,9 @@ namespace SolarSystem.Utils
             this.ContainerHeght = containerHeigh;
             this.ContainerWidth = containerWidth;
             this.Angle = angle;
+
+            (int x, int y) = this.State.CalculateLocation();
+            this.Planet.Picture.Location = new Point(x, y);
         }
 
         public void StateChanged(Type newState)

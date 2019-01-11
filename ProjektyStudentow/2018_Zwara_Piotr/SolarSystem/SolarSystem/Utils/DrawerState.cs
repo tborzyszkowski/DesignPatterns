@@ -18,7 +18,7 @@ namespace SolarSystem.Utils
             this.DrawStep = state.DrawStep;
         }
 
-        public override (int, int) GetLocation()
+        public override (int, int) GetNextLocation()
         {
             this.NextStep();
             return this.CalculateLocation();
@@ -39,7 +39,7 @@ namespace SolarSystem.Utils
             this.DrawStep = state.DrawStep;
         }
 
-        public override (int, int) GetLocation()
+        public override (int, int) GetNextLocation()
         {
             if (this.DrawStep == 0)
                 return (this.Drawer.Planet.Picture.Location.X, this.Drawer.Planet.Picture.Location.Y);
@@ -63,7 +63,7 @@ namespace SolarSystem.Utils
             this.DrawStep = state.DrawStep;
         }
 
-        public override (int, int) GetLocation()
+        public override (int, int) GetNextLocation()
         {
             return (this.Drawer.Planet.Picture.Location.X, this.Drawer.Planet.Picture.Location.Y);
         }
@@ -74,7 +74,7 @@ namespace SolarSystem.Utils
         public PlanetDrawer Drawer { get; protected set; }
         public double DrawStep { get; protected set; }
 
-        public abstract (int, int) GetLocation();
+        public abstract (int, int) GetNextLocation();
 
         #region Methods
 

@@ -31,9 +31,9 @@
             this.trackBar = new System.Windows.Forms.TrackBar();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.buttonsPanel = new System.Windows.Forms.Panel();
+            this.pause = new System.Windows.Forms.Button();
             this.stop = new System.Windows.Forms.Button();
             this.play = new System.Windows.Forms.Button();
-            this.pause = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.buttonsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +72,15 @@
             this.buttonsPanel.Size = new System.Drawing.Size(707, 40);
             this.buttonsPanel.TabIndex = 2;
             // 
+            // pause
+            // 
+            this.pause.Location = new System.Drawing.Point(84, 5);
+            this.pause.Name = "pause";
+            this.pause.Size = new System.Drawing.Size(75, 23);
+            this.pause.TabIndex = 2;
+            this.pause.Text = "Pause";
+            this.pause.UseVisualStyleBackColor = true;
+            // 
             // stop
             // 
             this.stop.Location = new System.Drawing.Point(3, 5);
@@ -84,21 +93,12 @@
             // play
             // 
             this.play.Enabled = false;
-            this.play.Location = new System.Drawing.Point(166, 3);
+            this.play.Location = new System.Drawing.Point(165, 5);
             this.play.Name = "play";
             this.play.Size = new System.Drawing.Size(75, 23);
             this.play.TabIndex = 0;
             this.play.Text = "Play";
             this.play.UseVisualStyleBackColor = true;
-            // 
-            // pause
-            // 
-            this.pause.Location = new System.Drawing.Point(85, 4);
-            this.pause.Name = "pause";
-            this.pause.Size = new System.Drawing.Size(75, 23);
-            this.pause.TabIndex = 2;
-            this.pause.Text = "Pause";
-            this.pause.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
