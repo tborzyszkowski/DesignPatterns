@@ -8,7 +8,8 @@
   },
   "scripts": {
     "testSimple": "mocha test/simple/vehicleFactoryTest.js",
-    "testMethod": "mocha test/factoryMethod/vehicleFactoryTest.js"
+    "testMethod": "mocha test/factoryMethod/vehicleFactoryTest.js",
+    "testAbstract": "mocha test/abstractMethod/vehicleFactoryTest.js"
   },
   "author": "",
   "license": "ISC",
