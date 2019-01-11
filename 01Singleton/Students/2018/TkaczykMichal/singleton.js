@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const rxjs = require('rxjs');
 
 function Singleton() {
   var instance;
@@ -63,5 +64,13 @@ describe('sprawdzanie', () => {
     it('czy obie instancje są rowne', () => {
       expect(singleton1).to.deep.equal(singleton2);
     })
-  })
+  });
+
+  rxjs.forkJoin(rxjs.of([new Singleton(), new Singleton()])).subscribe(([singletonsArr]) => {
+    singletonsArr[0].superField = 'SUPER FIELD';
+
+    it('czy utworzone na raz instancje są rowne', () => {
+      expect(singletonsArr[0]).to.deep.equal(singletonsArr[1]);
+    });
+  });
 });
