@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import org.apache.commons.lang3.SerializationUtils;
 
-import com.rits.cloning.Cloner;
-
 import builder.simple.common.BodyType;
 import builder.simple.common.ChassisType;
 import builder.simple.common.DriveType;
