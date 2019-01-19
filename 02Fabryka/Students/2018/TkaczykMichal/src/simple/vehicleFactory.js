@@ -4,7 +4,7 @@ let vehicleFactoryInstance = null;
 
 class VehicleFactory {
   constructor() {
-    if(!vehicleFactoryInstance) {
+    if (!vehicleFactoryInstance) {
       vehicleFactoryInstance = this;
     }
 
