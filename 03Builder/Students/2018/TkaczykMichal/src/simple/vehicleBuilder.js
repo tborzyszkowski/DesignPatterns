@@ -1,114 +1,93 @@
-class Vehicle {
+const classes = require('../classes');
+
+class Builder {
   constructor() {
-    this.type = "";
-    this.color = "";
-    this.engine = "";
-  }
+    this.buildType = () => {
+    }
 
-  setType(type) {
-    this.type = type;
-  }
+    this.buildColor = () => {
+    }
 
-  setColor(color) {
-    this.color = color;
-  }
-
-  setEngine(engine) {
-    this.engine = engine;
+    this.buildEngine = () => {
+    }
   }
 }
 
-class VehicleBuilder {
-  constructor() {
-    this.vehicle = "";
-  }
-
-  getVehicle() { 
-    return this.vehicle;
-  };
-  createNewVehicle() {
-    this.vehicle = new Vehicle();
-  };
-
-  designVehicle() {};
-  paintVehicle() {};
-  createEngine() {};
-}
-
-class RedMitsubishiBuilder extends VehicleBuilder {
+class ConcreteBuilder extends Builder {
   constructor() {
     super();
-  }
+    this.vehicle = '';
 
-  designVehicle() {
-    this.vehicle.setType('car');
-  };
-  paintVehicle() {
-    this.vehicle.setColor('red');
-  };
-  createEngine() {
-    this.vehicle.setEngine('mitsubishi engine');
-  };
+    this.construct = (type) => {
+      switch(type) {
+        case 'car':
+          this.vehicle = new classes.Car();
+          console.log(this.vehicle);
+          break;
+        case 'plane':
+          this.vehicle = new classes.Plane();
+          break;
+      }
+
+      return this;
+    }
+
+    this.buildType = (type) => {
+      this.vehicle.setType(type);
+      return this;
+    }
+
+    this.buildColor = (color) => {
+      this.vehicle.setColor(color);
+      return this;
+    }
+
+    this.buildEngine = (engine) => {
+      this.vehicle.setEngine(engine);
+      return this;
+    }
+
+    this.getVehicle = () => {
+      return this.vehicle;
+    }
+  }
 }
 
-class BlueBoeingBuilder extends VehicleBuilder {
+class Director {
   constructor() {
-    super();
-  }
+    this.builder = new ConcreteBuilder();
 
-  designVehicle() {
-    this.vehicle.setType('plane');
-  };
-  paintVehicle() {
-    this.vehicle.setColor('blue');
-  };
-  createEngine() {
-    this.vehicle.setEngine('boeing 707 engine');
-  };
-}
+    this.construct = (type, color, engine) => {
+      this.builder
+      .construct(type)
+      .buildColor(color)
+      .buildEngine(engine);
+    }
 
-class Engineer {
-  constructor() {
-    this.vehicleBuilder;
-  }
-
-  setVehicleBuilder(builder) {
-    this.vehicleBuilder = builder;
-  }
-  getVehicle() {
-    return this.vehicleBuilder.getVehicle();
-  }
-
-  constructVehicle() {
-    this.vehicleBuilder.createNewVehicle();
-    this.vehicleBuilder.designVehicle();
-    this.vehicleBuilder.paintVehicle();
-    this.vehicleBuilder.createEngine();
+    this.getResult = () => {
+      return this.builder.getVehicle();
+    }
   }
 }
 
-class Client {
-  constructor() {
-    this.engineer = new Engineer();
-    this.redMitsubishiBuilder = new RedMitsubishiBuilder();
-    this.blueBoeingBuilder = new BlueBoeingBuilder();
-  }
+const director = new Director();
+director.construct('plane', 'blue', 'turbo super');
 
-  orderRedMitsubishi() {
-    this.engineer.setVehicleBuilder(this.redMitsubishiBuilder);
-    this.engineer.constructVehicle();
-    return this.engineer.getVehicle();
-  }
+const newPlane = director.getResult();
 
-  orderBlueBoeing() {
-    this.engineer.setVehicleBuilder(this.blueBoeingBuilder);
-    this.engineer.constructVehicle();
-    return this.engineer.getVehicle();
-  }
-}
 
-const client = new Client();
+console.log(newPlane);
 
-console.log(client.orderRedMitsubishi());
+/* 
+  Zad 2
 
-console.log(client.orderBlueBoeing());
+  Lepszym (pod względem komplikacji kodu) rozwiązaniem będzie:
+    1. Budowniczy w przypadku, gdy nie chcemy tworzyc calego obiektu w jednej chwili,
+    a potrzebujemy tylko kilku metod, ktore utworza nam podstawowe pola potrzebne 
+    do standardowego działania obiektu, a pozniej bedziemy mogli utworzyc dodatkowe pola
+    za pomoca istniejacych metod
+
+    2. Fabryka abstrakcyjna w przypadku, gdy do utworzenia mamy więcej prostszych obiektow
+    bez duzego zaglebienia i wymagajacych wypelnienia wszystkich pol do poprawnego dzialania
+
+*/
