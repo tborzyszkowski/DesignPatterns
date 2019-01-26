@@ -58,11 +58,11 @@ base.trainTenSoldiers();
 console.log(base);
 console.log(base.soldiers.map(soldier => soldier.shaved));
 
+base.commander.notify('shave');
 setTimeout(() => {
-  base.commander.notify('shave');
 
   console.log(base.soldiers.map(soldier => soldier.shaved));
 
   base.processOrderForAmmunition();
-}, 50);
+}, 500);
 

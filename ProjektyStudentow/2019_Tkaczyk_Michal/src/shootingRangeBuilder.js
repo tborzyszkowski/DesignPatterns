@@ -45,9 +45,8 @@ class ShootingRange extends Field {
   }
   
   endTraining() {
-    const returnSoldier = {...this.soldier};
-    this.soldier = '';
-    return returnSoldier;
+    
+    return this.soldier;
   }
 }
 
