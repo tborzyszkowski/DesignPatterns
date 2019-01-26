@@ -1,9 +1,0 @@
-Zadania:
---------
-Zaproponowaæ przyk³adowe rozwi¹zania dwóch problemów zwi¹zanych ze wzorcem Singleton:
-a) odpornoœæ na wspó³bie¿ne wykorzystanie kodu z jednoczesnym zachowaniem maksymalnej wydajnoœci
-b) problem rozszerzania klasy Singleton przez dziedziczenie
-c) problem serializacji i deserializacji obiektów klasy Singleton
-
-Do zaproponowanych rozwi¹zañ za³¹czyæ odpowiednie testy wydajnoœciowe / funkcjonalne.
-
