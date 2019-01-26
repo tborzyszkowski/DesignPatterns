@@ -1,0 +1,15 @@
+Wzorce konstrukcyjne:
+
+Singleton
+Builder
+
+Wzorce czynnosciowe:
+
+Dependency Injection
+Strategia
+
+
+Wzorce strukturalne:
+
+Proxy
+Fasada
