@@ -52,6 +52,7 @@ namespace Composite {
 
             // Output edward's children.
             edward.LogChildren();
+            Console.ReadKey();
         }
     }
 }

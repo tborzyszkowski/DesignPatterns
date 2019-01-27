@@ -11,15 +11,13 @@ namespace _02VehicleBuilder {
           new Dictionary<string, string>();
 
         // Constructor
-        public Vehicle(string vehicleType) {
+        public Vehicle(string vehicleType) =>
             this._vehicleType = vehicleType;
-        }
 
         // Indexer
-        public string this[string key]
-        {
-            get { return _parts[key]; }
-            set { _parts[key] = value; }
+        public string this[string key] {
+            get => _parts[key];
+            set => _parts[key] = value;
         }
 
         public void Show() {

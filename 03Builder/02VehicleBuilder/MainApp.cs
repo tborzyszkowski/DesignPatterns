@@ -15,15 +15,15 @@ namespace _02VehicleBuilder {
             // Construct and display vehicles
             builder = new ScooterBuilder();
             shop.Construct(builder);
-            builder.Vehicle.Show();
+            builder.GetVehicle().Show();
 
             builder = new CarBuilder();
             shop.Construct(builder);
-            builder.Vehicle.Show();
+            builder.GetVehicle().Show();
 
             builder = new MotorCycleBuilder();
             shop.Construct(builder);
-            builder.Vehicle.Show();
+            builder.GetVehicle().Show();
 
             // Wait for user
             Console.ReadKey();

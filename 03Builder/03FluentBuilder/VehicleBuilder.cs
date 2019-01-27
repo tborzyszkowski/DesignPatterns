@@ -21,7 +21,8 @@ namespace _03FluentBuilder {
         public abstract VehicleBuilder BuildDoors();
 
         public static implicit operator Vehicle(VehicleBuilder vb) {
-            return vb.BuildFrame()
+            return vb
+                .BuildFrame()
                 .BuildEngine()
                 .BuildWheels()
                 .BuildDoors()

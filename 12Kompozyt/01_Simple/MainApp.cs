@@ -17,7 +17,7 @@ namespace _01_Simple {
             comp.Add(new Leaf("Leaf XB"));
 
             root.Add(comp);
-            root.Add(new Leaf("Leaf C"));
+            comp.Add(new Leaf("Leaf C"));
 
             // Add and remove a leaf
             Leaf leaf = new Leaf("Leaf D");

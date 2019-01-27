@@ -9,10 +9,7 @@ namespace _02VehicleBuilder {
         protected Vehicle vehicle;
 
         // Gets vehicle instance
-        public Vehicle Vehicle
-        {
-            get { return vehicle; }
-        }
+        public Vehicle GetVehicle() { return vehicle; }
 
         // Abstract build methods
         public abstract void BuildFrame();

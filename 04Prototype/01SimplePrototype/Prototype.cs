@@ -17,6 +17,7 @@ namespace _01SimplePrototype {
         public string Id
         {
             get { return _id; }
+            set { _id = value; }
         }
 
         public abstract Prototype Clone();
