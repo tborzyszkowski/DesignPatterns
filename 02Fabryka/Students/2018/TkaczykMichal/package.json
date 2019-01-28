@@ -1,0 +1,21 @@
+{
+  "name": "tkaczykmichal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "testSimple": "mocha test/simple/vehicleFactoryTest.js",
+    "testMethod": "mocha test/factoryMethod/vehicleFactoryTest.js",
+    "testAbstract": "mocha test/abstractMethod/vehicleFactoryTest.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}
