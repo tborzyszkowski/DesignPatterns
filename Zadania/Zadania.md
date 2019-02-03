@@ -1,4 +1,4 @@
-##Zadanie.
+## Zadanie
 
 Mamy do dyspozycji planszę 10x10.
 Każdy z organizmów posiada siłę życiową.
