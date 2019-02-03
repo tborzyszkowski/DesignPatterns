@@ -1,0 +1,615 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		260379B821C53F8700B97B03 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379B721C53F8700B97B03 /* main.swift */; };
+		260379C521C5408B00B97B03 /* FactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379C421C5408B00B97B03 /* FactoryTest.swift */; };
+		260379CB21C5482C00B97B03 /* SimpleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379CA21C5482C00B97B03 /* SimpleFactory.swift */; };
+		260379D121C54B4100B97B03 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D021C54B4100B97B03 /* Movie.swift */; };
+		260379D321C54CAE00B97B03 /* IntouchablesMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D221C54CAE00B97B03 /* IntouchablesMovie.swift */; };
+		260379DB21C54FFD00B97B03 /* KilerMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D721C54FFD00B97B03 /* KilerMovie.swift */; };
+		260379DC21C54FFD00B97B03 /* ForestGumpMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D821C54FFD00B97B03 /* ForestGumpMovie.swift */; };
+		260379DD21C54FFD00B97B03 /* HolyGrailMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D921C54FFD00B97B03 /* HolyGrailMovie.swift */; };
+		260379DE21C54FFD00B97B03 /* TheBucketListMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379DA21C54FFD00B97B03 /* TheBucketListMovie.swift */; };
+		260379E021C5514C00B97B03 /* TheExorcistMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379DF21C5514B00B97B03 /* TheExorcistMovie.swift */; };
+		260379E521C5515A00B97B03 /* RosemarysBabyMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E121C5515900B97B03 /* RosemarysBabyMovie.swift */; };
+		260379E621C5515A00B97B03 /* TheShiningMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E221C5515A00B97B03 /* TheShiningMovie.swift */; };
+		260379E721C5515A00B97B03 /* AlienMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E321C5515A00B97B03 /* AlienMovie.swift */; };
+		260379E821C5515A00B97B03 /* DraculaMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E421C5515A00B97B03 /* DraculaMovie.swift */; };
+		260379EE21C5526300B97B03 /* LovingVincentMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E921C5526300B97B03 /* LovingVincentMovie.swift */; };
+		260379EF21C5526300B97B03 /* AmericanGangsterMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379EA21C5526300B97B03 /* AmericanGangsterMovie.swift */; };
+		260379F021C5526300B97B03 /* SevenMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379EB21C5526300B97B03 /* SevenMovie.swift */; };
+		260379F121C5526300B97B03 /* DirtyHarryMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379EC21C5526300B97B03 /* DirtyHarryMovie.swift */; };
+		260379F221C5526300B97B03 /* LeonMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379ED21C5526300B97B03 /* LeonMovie.swift */; };
+		260379F321C5576E00B97B03 /* SimpleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379CA21C5482C00B97B03 /* SimpleFactory.swift */; };
+		260379F621C5586400B97B03 /* SevenMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379EB21C5526300B97B03 /* SevenMovie.swift */; };
+		260379F721C5586400B97B03 /* LeonMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379ED21C5526300B97B03 /* LeonMovie.swift */; };
+		260379F821C5586400B97B03 /* LovingVincentMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E921C5526300B97B03 /* LovingVincentMovie.swift */; };
+		260379F921C5586400B97B03 /* AmericanGangsterMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379EA21C5526300B97B03 /* AmericanGangsterMovie.swift */; };
+		260379FA21C5586400B97B03 /* DirtyHarryMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379EC21C5526300B97B03 /* DirtyHarryMovie.swift */; };
+		260379FB21C5586400B97B03 /* AlienMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E321C5515A00B97B03 /* AlienMovie.swift */; };
+		260379FC21C5586400B97B03 /* DraculaMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E421C5515A00B97B03 /* DraculaMovie.swift */; };
+		260379FD21C5586400B97B03 /* RosemarysBabyMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E121C5515900B97B03 /* RosemarysBabyMovie.swift */; };
+		260379FE21C5586400B97B03 /* TheShiningMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379E221C5515A00B97B03 /* TheShiningMovie.swift */; };
+		260379FF21C5586400B97B03 /* TheExorcistMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379DF21C5514B00B97B03 /* TheExorcistMovie.swift */; };
+		26037A0021C5586400B97B03 /* ForestGumpMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D821C54FFD00B97B03 /* ForestGumpMovie.swift */; };
+		26037A0121C5586400B97B03 /* HolyGrailMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D921C54FFD00B97B03 /* HolyGrailMovie.swift */; };
+		26037A0221C5586400B97B03 /* KilerMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D721C54FFD00B97B03 /* KilerMovie.swift */; };
+		26037A0321C5586400B97B03 /* TheBucketListMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379DA21C54FFD00B97B03 /* TheBucketListMovie.swift */; };
+		26037A0421C5586400B97B03 /* IntouchablesMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D221C54CAE00B97B03 /* IntouchablesMovie.swift */; };
+		26037A0521C5586400B97B03 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379D021C54B4100B97B03 /* Movie.swift */; };
+		26037A0721C563D100B97B03 /* FMComedyMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26037A0621C563D100B97B03 /* FMComedyMovieFactory.swift */; };
+		26037A0A21C56B0200B97B03 /* FMMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26037A0921C56B0200B97B03 /* FMMovieFactory.swift */; };
+		26037A0C21C56F3900B97B03 /* FMCriminalMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26037A0B21C56F3900B97B03 /* FMCriminalMovieFactory.swift */; };
+		26037A0E21C56FDB00B97B03 /* FMHorrorMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26037A0D21C56FDB00B97B03 /* FMHorrorMovieFactory.swift */; };
+		26037A0F21C5713F00B97B03 /* FMComedyMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26037A0621C563D100B97B03 /* FMComedyMovieFactory.swift */; };
+		26037A1021C5713F00B97B03 /* FMMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26037A0921C56B0200B97B03 /* FMMovieFactory.swift */; };
+		26037A1121C5713F00B97B03 /* FMCriminalMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26037A0B21C56F3900B97B03 /* FMCriminalMovieFactory.swift */; };
+		26037A1221C5713F00B97B03 /* FMHorrorMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26037A0D21C56FDB00B97B03 /* FMHorrorMovieFactory.swift */; };
+		26037A1321C5713F00B97B03 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260379B721C53F8700B97B03 /* main.swift */; };
+		26037A1421C5713F00B97B03 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 260379C621C5408B00B97B03 /* Info.plist */; };
+		26037A1521C5713F00B97B03 /* Factory in Sources */ = {isa = PBXBuildFile; fileRef = 260379B421C53F8700B97B03 /* Factory */; };
+		26037A1621C5713F00B97B03 /* FactoryTest.xctest in Sources */ = {isa = PBXBuildFile; fileRef = 260379C221C5408B00B97B03 /* FactoryTest.xctest */; };
+		26A4D27F21E6C102003792A4 /* AbstractMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4D27E21E6C102003792A4 /* AbstractMovieFactory.swift */; };
+		26A4D28121E6C274003792A4 /* ComedyMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4D28021E6C274003792A4 /* ComedyMovieFactory.swift */; };
+		26A4D28321E6C48A003792A4 /* HorrorMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4D28221E6C489003792A4 /* HorrorMovieFactory.swift */; };
+		26A4D28521E6C507003792A4 /* CriminalMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4D28421E6C507003792A4 /* CriminalMovieFactory.swift */; };
+		26A4D28621E6C617003792A4 /* AbstractMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4D27E21E6C102003792A4 /* AbstractMovieFactory.swift */; };
+		26A4D28721E6C617003792A4 /* ComedyMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4D28021E6C274003792A4 /* ComedyMovieFactory.swift */; };
+		26A4D28821E6C617003792A4 /* HorrorMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4D28221E6C489003792A4 /* HorrorMovieFactory.swift */; };
+		26A4D28921E6C617003792A4 /* CriminalMovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A4D28421E6C507003792A4 /* CriminalMovieFactory.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		260379F421C5583300B97B03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 260379AC21C53F8700B97B03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 260379B321C53F8700B97B03;
+			remoteInfo = Factory;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		260379B221C53F8700B97B03 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		260379B421C53F8700B97B03 /* Factory */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Factory; sourceTree = BUILT_PRODUCTS_DIR; };
+		260379B721C53F8700B97B03 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		260379C221C5408B00B97B03 /* FactoryTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FactoryTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		260379C421C5408B00B97B03 /* FactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTest.swift; sourceTree = "<group>"; };
+		260379C621C5408B00B97B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		260379CA21C5482C00B97B03 /* SimpleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleFactory.swift; sourceTree = "<group>"; };
+		260379D021C54B4100B97B03 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		260379D221C54CAE00B97B03 /* IntouchablesMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntouchablesMovie.swift; sourceTree = "<group>"; };
+		260379D721C54FFD00B97B03 /* KilerMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KilerMovie.swift; sourceTree = "<group>"; };
+		260379D821C54FFD00B97B03 /* ForestGumpMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForestGumpMovie.swift; sourceTree = "<group>"; };
+		260379D921C54FFD00B97B03 /* HolyGrailMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HolyGrailMovie.swift; sourceTree = "<group>"; };
+		260379DA21C54FFD00B97B03 /* TheBucketListMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheBucketListMovie.swift; sourceTree = "<group>"; };
+		260379DF21C5514B00B97B03 /* TheExorcistMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheExorcistMovie.swift; sourceTree = "<group>"; };
+		260379E121C5515900B97B03 /* RosemarysBabyMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RosemarysBabyMovie.swift; sourceTree = "<group>"; };
+		260379E221C5515A00B97B03 /* TheShiningMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheShiningMovie.swift; sourceTree = "<group>"; };
+		260379E321C5515A00B97B03 /* AlienMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlienMovie.swift; sourceTree = "<group>"; };
+		260379E421C5515A00B97B03 /* DraculaMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraculaMovie.swift; sourceTree = "<group>"; };
+		260379E921C5526300B97B03 /* LovingVincentMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LovingVincentMovie.swift; sourceTree = "<group>"; };
+		260379EA21C5526300B97B03 /* AmericanGangsterMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmericanGangsterMovie.swift; sourceTree = "<group>"; };
+		260379EB21C5526300B97B03 /* SevenMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SevenMovie.swift; sourceTree = "<group>"; };
+		260379EC21C5526300B97B03 /* DirtyHarryMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirtyHarryMovie.swift; sourceTree = "<group>"; };
+		260379ED21C5526300B97B03 /* LeonMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeonMovie.swift; sourceTree = "<group>"; };
+		26037A0621C563D100B97B03 /* FMComedyMovieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMComedyMovieFactory.swift; sourceTree = "<group>"; };
+		26037A0921C56B0200B97B03 /* FMMovieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMMovieFactory.swift; sourceTree = "<group>"; };
+		26037A0B21C56F3900B97B03 /* FMCriminalMovieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMCriminalMovieFactory.swift; sourceTree = "<group>"; };
+		26037A0D21C56FDB00B97B03 /* FMHorrorMovieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMHorrorMovieFactory.swift; sourceTree = "<group>"; };
+		26A4D27E21E6C102003792A4 /* AbstractMovieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractMovieFactory.swift; sourceTree = "<group>"; };
+		26A4D28021E6C274003792A4 /* ComedyMovieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComedyMovieFactory.swift; sourceTree = "<group>"; };
+		26A4D28221E6C489003792A4 /* HorrorMovieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorrorMovieFactory.swift; sourceTree = "<group>"; };
+		26A4D28421E6C507003792A4 /* CriminalMovieFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriminalMovieFactory.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		260379B121C53F8700B97B03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		260379BF21C5408B00B97B03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		260379AB21C53F8700B97B03 = {
+			isa = PBXGroup;
+			children = (
+				260379B621C53F8700B97B03 /* Factory */,
+				260379C321C5408B00B97B03 /* FactoryTest */,
+				260379B521C53F8700B97B03 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		260379B521C53F8700B97B03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				260379B421C53F8700B97B03 /* Factory */,
+				260379C221C5408B00B97B03 /* FactoryTest.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		260379B621C53F8700B97B03 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				26A4D27D21E6B6E9003792A4 /* AbstractFactory */,
+				26037A0821C56ACF00B97B03 /* FactoryMethods */,
+				260379CC21C54A7000B97B03 /* Movies */,
+				260379B721C53F8700B97B03 /* main.swift */,
+				260379CA21C5482C00B97B03 /* SimpleFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		260379C321C5408B00B97B03 /* FactoryTest */ = {
+			isa = PBXGroup;
+			children = (
+				260379C421C5408B00B97B03 /* FactoryTest.swift */,
+				260379C621C5408B00B97B03 /* Info.plist */,
+			);
+			path = FactoryTest;
+			sourceTree = "<group>";
+		};
+		260379CC21C54A7000B97B03 /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				260379CF21C54A9F00B97B03 /* Criminals */,
+				260379CE21C54A9100B97B03 /* Horrors */,
+				260379CD21C54A7E00B97B03 /* Comedies */,
+				260379D021C54B4100B97B03 /* Movie.swift */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		260379CD21C54A7E00B97B03 /* Comedies */ = {
+			isa = PBXGroup;
+			children = (
+				260379D821C54FFD00B97B03 /* ForestGumpMovie.swift */,
+				260379D921C54FFD00B97B03 /* HolyGrailMovie.swift */,
+				260379D721C54FFD00B97B03 /* KilerMovie.swift */,
+				260379DA21C54FFD00B97B03 /* TheBucketListMovie.swift */,
+				260379D221C54CAE00B97B03 /* IntouchablesMovie.swift */,
+			);
+			path = Comedies;
+			sourceTree = "<group>";
+		};
+		260379CE21C54A9100B97B03 /* Horrors */ = {
+			isa = PBXGroup;
+			children = (
+				260379E321C5515A00B97B03 /* AlienMovie.swift */,
+				260379E421C5515A00B97B03 /* DraculaMovie.swift */,
+				260379E121C5515900B97B03 /* RosemarysBabyMovie.swift */,
+				260379E221C5515A00B97B03 /* TheShiningMovie.swift */,
+				260379DF21C5514B00B97B03 /* TheExorcistMovie.swift */,
+			);
+			path = Horrors;
+			sourceTree = "<group>";
+		};
+		260379CF21C54A9F00B97B03 /* Criminals */ = {
+			isa = PBXGroup;
+			children = (
+				260379EB21C5526300B97B03 /* SevenMovie.swift */,
+				260379ED21C5526300B97B03 /* LeonMovie.swift */,
+				260379E921C5526300B97B03 /* LovingVincentMovie.swift */,
+				260379EA21C5526300B97B03 /* AmericanGangsterMovie.swift */,
+				260379EC21C5526300B97B03 /* DirtyHarryMovie.swift */,
+			);
+			path = Criminals;
+			sourceTree = "<group>";
+		};
+		26037A0821C56ACF00B97B03 /* FactoryMethods */ = {
+			isa = PBXGroup;
+			children = (
+				26037A0621C563D100B97B03 /* FMComedyMovieFactory.swift */,
+				26037A0921C56B0200B97B03 /* FMMovieFactory.swift */,
+				26037A0B21C56F3900B97B03 /* FMCriminalMovieFactory.swift */,
+				26037A0D21C56FDB00B97B03 /* FMHorrorMovieFactory.swift */,
+			);
+			path = FactoryMethods;
+			sourceTree = "<group>";
+		};
+		26A4D27D21E6B6E9003792A4 /* AbstractFactory */ = {
+			isa = PBXGroup;
+			children = (
+				26A4D27E21E6C102003792A4 /* AbstractMovieFactory.swift */,
+				26A4D28021E6C274003792A4 /* ComedyMovieFactory.swift */,
+				26A4D28221E6C489003792A4 /* HorrorMovieFactory.swift */,
+				26A4D28421E6C507003792A4 /* CriminalMovieFactory.swift */,
+			);
+			path = AbstractFactory;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		260379B321C53F8700B97B03 /* Factory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 260379BB21C53F8700B97B03 /* Build configuration list for PBXNativeTarget "Factory" */;
+			buildPhases = (
+				260379B021C53F8700B97B03 /* Sources */,
+				260379B121C53F8700B97B03 /* Frameworks */,
+				260379B221C53F8700B97B03 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Factory;
+			productName = Factory;
+			productReference = 260379B421C53F8700B97B03 /* Factory */;
+			productType = "com.apple.product-type.tool";
+		};
+		260379C121C5408B00B97B03 /* FactoryTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 260379C721C5408B00B97B03 /* Build configuration list for PBXNativeTarget "FactoryTest" */;
+			buildPhases = (
+				260379BE21C5408B00B97B03 /* Sources */,
+				260379BF21C5408B00B97B03 /* Frameworks */,
+				260379C021C5408B00B97B03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				260379F521C5583300B97B03 /* PBXTargetDependency */,
+			);
+			name = FactoryTest;
+			productName = FactoryTest;
+			productReference = 260379C221C5408B00B97B03 /* FactoryTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		260379AC21C53F8700B97B03 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Coding Skies";
+				TargetAttributes = {
+					260379B321C53F8700B97B03 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					260379C121C5408B00B97B03 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 260379AF21C53F8700B97B03 /* Build configuration list for PBXProject "Factory" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 260379AB21C53F8700B97B03;
+			productRefGroup = 260379B521C53F8700B97B03 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				260379B321C53F8700B97B03 /* Factory */,
+				260379C121C5408B00B97B03 /* FactoryTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		260379C021C5408B00B97B03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		260379B021C53F8700B97B03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26A4D28521E6C507003792A4 /* CriminalMovieFactory.swift in Sources */,
+				260379E721C5515A00B97B03 /* AlienMovie.swift in Sources */,
+				260379F121C5526300B97B03 /* DirtyHarryMovie.swift in Sources */,
+				260379CB21C5482C00B97B03 /* SimpleFactory.swift in Sources */,
+				26A4D28321E6C48A003792A4 /* HorrorMovieFactory.swift in Sources */,
+				260379E621C5515A00B97B03 /* TheShiningMovie.swift in Sources */,
+				26A4D28121E6C274003792A4 /* ComedyMovieFactory.swift in Sources */,
+				260379EF21C5526300B97B03 /* AmericanGangsterMovie.swift in Sources */,
+				260379EE21C5526300B97B03 /* LovingVincentMovie.swift in Sources */,
+				260379B821C53F8700B97B03 /* main.swift in Sources */,
+				260379D121C54B4100B97B03 /* Movie.swift in Sources */,
+				260379DB21C54FFD00B97B03 /* KilerMovie.swift in Sources */,
+				260379DC21C54FFD00B97B03 /* ForestGumpMovie.swift in Sources */,
+				260379E821C5515A00B97B03 /* DraculaMovie.swift in Sources */,
+				260379D321C54CAE00B97B03 /* IntouchablesMovie.swift in Sources */,
+				260379F221C5526300B97B03 /* LeonMovie.swift in Sources */,
+				26037A0721C563D100B97B03 /* FMComedyMovieFactory.swift in Sources */,
+				260379E521C5515A00B97B03 /* RosemarysBabyMovie.swift in Sources */,
+				26037A0C21C56F3900B97B03 /* FMCriminalMovieFactory.swift in Sources */,
+				260379F021C5526300B97B03 /* SevenMovie.swift in Sources */,
+				260379E021C5514C00B97B03 /* TheExorcistMovie.swift in Sources */,
+				26037A0E21C56FDB00B97B03 /* FMHorrorMovieFactory.swift in Sources */,
+				260379DE21C54FFD00B97B03 /* TheBucketListMovie.swift in Sources */,
+				26037A0A21C56B0200B97B03 /* FMMovieFactory.swift in Sources */,
+				260379DD21C54FFD00B97B03 /* HolyGrailMovie.swift in Sources */,
+				26A4D27F21E6C102003792A4 /* AbstractMovieFactory.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		260379BE21C5408B00B97B03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26A4D28621E6C617003792A4 /* AbstractMovieFactory.swift in Sources */,
+				26A4D28721E6C617003792A4 /* ComedyMovieFactory.swift in Sources */,
+				26A4D28821E6C617003792A4 /* HorrorMovieFactory.swift in Sources */,
+				26A4D28921E6C617003792A4 /* CriminalMovieFactory.swift in Sources */,
+				26037A0F21C5713F00B97B03 /* FMComedyMovieFactory.swift in Sources */,
+				26037A1021C5713F00B97B03 /* FMMovieFactory.swift in Sources */,
+				26037A1121C5713F00B97B03 /* FMCriminalMovieFactory.swift in Sources */,
+				26037A1221C5713F00B97B03 /* FMHorrorMovieFactory.swift in Sources */,
+				26037A1321C5713F00B97B03 /* main.swift in Sources */,
+				26037A1421C5713F00B97B03 /* Info.plist in Sources */,
+				26037A1521C5713F00B97B03 /* Factory in Sources */,
+				26037A1621C5713F00B97B03 /* FactoryTest.xctest in Sources */,
+				260379F621C5586400B97B03 /* SevenMovie.swift in Sources */,
+				260379F721C5586400B97B03 /* LeonMovie.swift in Sources */,
+				260379F821C5586400B97B03 /* LovingVincentMovie.swift in Sources */,
+				260379F921C5586400B97B03 /* AmericanGangsterMovie.swift in Sources */,
+				260379FA21C5586400B97B03 /* DirtyHarryMovie.swift in Sources */,
+				260379FB21C5586400B97B03 /* AlienMovie.swift in Sources */,
+				260379FC21C5586400B97B03 /* DraculaMovie.swift in Sources */,
+				260379FD21C5586400B97B03 /* RosemarysBabyMovie.swift in Sources */,
+				260379FE21C5586400B97B03 /* TheShiningMovie.swift in Sources */,
+				260379FF21C5586400B97B03 /* TheExorcistMovie.swift in Sources */,
+				26037A0021C5586400B97B03 /* ForestGumpMovie.swift in Sources */,
+				26037A0121C5586400B97B03 /* HolyGrailMovie.swift in Sources */,
+				26037A0221C5586400B97B03 /* KilerMovie.swift in Sources */,
+				26037A0321C5586400B97B03 /* TheBucketListMovie.swift in Sources */,
+				26037A0421C5586400B97B03 /* IntouchablesMovie.swift in Sources */,
+				26037A0521C5586400B97B03 /* Movie.swift in Sources */,
+				260379F321C5576E00B97B03 /* SimpleFactory.swift in Sources */,
+				260379C521C5408B00B97B03 /* FactoryTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		260379F521C5583300B97B03 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 260379B321C53F8700B97B03 /* Factory */;
+			targetProxy = 260379F421C5583300B97B03 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		260379B921C53F8700B97B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		260379BA21C53F8700B97B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		260379BC21C53F8700B97B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		260379BD21C53F8700B97B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		260379C821C5408B00B97B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FactoryTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.codingskies.wzorce.FactoryTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		260379C921C5408B00B97B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FactoryTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.codingskies.wzorce.FactoryTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		260379AF21C53F8700B97B03 /* Build configuration list for PBXProject "Factory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				260379B921C53F8700B97B03 /* Debug */,
+				260379BA21C53F8700B97B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		260379BB21C53F8700B97B03 /* Build configuration list for PBXNativeTarget "Factory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				260379BC21C53F8700B97B03 /* Debug */,
+				260379BD21C53F8700B97B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		260379C721C5408B00B97B03 /* Build configuration list for PBXNativeTarget "FactoryTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				260379C821C5408B00B97B03 /* Debug */,
+				260379C921C5408B00B97B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 260379AC21C53F8700B97B03 /* Project object */;
+}
