@@ -1,0 +1,13 @@
+package com.godziuk.app;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        
+    }
+}
