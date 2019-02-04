@@ -29,7 +29,7 @@ class MovieCatalog: MovieIterator {
     }
     
     func hasMore() -> Bool {
-        return currentPosition < collection.count - 1
+        return currentPosition < collection.count
     }
     
     func reset() {
