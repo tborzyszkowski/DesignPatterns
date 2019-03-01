@@ -44,6 +44,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+# Gradle build folder
+out/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -281,7 +283,6 @@ paket-files/
 .fake/
 
 # JetBrains Rider
-.idea/
 *.sln.iml
 
 # CodeRush
@@ -293,11 +294,6 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
-
-# Eclipse
-.classpath
-.project
-.settings/
 
 # Intellij
 .idea/
@@ -312,3 +308,8 @@ log/
 target/
 ~       
 
+01Singleton/Students/2019/PiotrKawa/.gradle/4.10/vcsMetadata-1/
+01Singleton/Students/2019/PiotrKawa/src/main/java/
+01Singleton/Students/2019/PiotrKawa/src/main/resources/
+01Singleton/Students/2019/PiotrKawa/src/test/java/
+01Singleton/Students/2019/PiotrKawa/src/test/resources/
