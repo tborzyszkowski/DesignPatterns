@@ -19,6 +19,6 @@ public class Singleton {
  
 	// other useful methods here
 	public String toString(){
-		return "" + this.getClass().getName();
+		return "" + this.getClass().getName() + "  " + this.hashCode();
 	}
 }
