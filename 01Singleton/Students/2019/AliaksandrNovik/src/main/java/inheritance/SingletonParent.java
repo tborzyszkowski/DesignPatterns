@@ -12,12 +12,12 @@ public class SingletonParent implements ISingleton {
 			if (instance == null) {
 				instance = new SingletonParent();
 			}
-		} else if(SingletonChildA.instance != null){
+		} else if (SingletonChildA.instance != null) {
 			instance = SingletonChildA.instance;
-		}else {
+		} else if (SingletonChildB.instance != null) {
 			instance = SingletonChildB.instance;
 		}
 		return instance;
 	}
-	
+
 }

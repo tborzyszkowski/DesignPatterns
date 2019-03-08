@@ -11,6 +11,14 @@ public class SingletonChildA extends SingletonParent implements ISingleton{
 			if (instance == null) {
 				instance = new SingletonChildA();
 			}			
+		}else if(SingletonChildB.instance != null && SingletonParent.instance == null){
+			if (instance == null) {
+				instance = new SingletonChildA();
+			}			
+		}else if(SingletonChildB.instance != null && SingletonParent.instance != null){
+			if (instance == null) {
+				instance = new SingletonChildA();
+			}
 		}else {
 			instance = SingletonParent.instance;
 		}
