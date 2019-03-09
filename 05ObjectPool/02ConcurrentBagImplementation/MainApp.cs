@@ -20,7 +20,7 @@ namespace _02ConcurrentBagImplementation {
             ObjectPool<MyClass> pool = new ObjectPool<MyClass>(() => new MyClass());
 
             // Create a high demand for MyClass objects.
-            Parallel.For(0, 1000000, (i, loopState) =>
+            Parallel.For(0, 100000, (i, loopState) =>
             {
                 Console.WriteLine("i = {0}\t count = {1}", i, pool.GetCount());
 
