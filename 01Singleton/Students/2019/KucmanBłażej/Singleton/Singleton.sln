@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.438
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Singleton", "Singleton\Singleton.csproj", "{B14D01E2-D0FE-41ED-8A1E-C7A4A4E38253}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestSingleton", "UnitTestSingleton\UnitTestSingleton.csproj", "{08CC2DC1-3284-4D1F-992E-8AB4F6EEB95D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B14D01E2-D0FE-41ED-8A1E-C7A4A4E38253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B14D01E2-D0FE-41ED-8A1E-C7A4A4E38253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B14D01E2-D0FE-41ED-8A1E-C7A4A4E38253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B14D01E2-D0FE-41ED-8A1E-C7A4A4E38253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08CC2DC1-3284-4D1F-992E-8AB4F6EEB95D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08CC2DC1-3284-4D1F-992E-8AB4F6EEB95D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08CC2DC1-3284-4D1F-992E-8AB4F6EEB95D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08CC2DC1-3284-4D1F-992E-8AB4F6EEB95D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05CAA189-DFFB-46A7-A845-4ACB57A68D3C}
+	EndGlobalSection
+EndGlobal
