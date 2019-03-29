@@ -18,7 +18,7 @@ public class XiaomiPhoneFactory extends PhoneFactory{
 	}
 	
 	@Override
-	Smartphone createSmartphone(PhoneType phoneType) {
+	public Smartphone createSmartphone(PhoneType phoneType) {
 		if (phoneType.equals(PhoneType.GAMING)) {
 			return new XiaomiGaming();
 		} else if (phoneType.equals(PhoneType.BUDGETARY)) {

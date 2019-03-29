@@ -9,7 +9,7 @@ import smartphones.huawei.HuaweiGaming;
 public class SimpleHuaweiFactory{
     private static SimpleHuaweiFactory INSTANCE;
     
-    public SimpleHuaweiFactory getInstance(){
+    public static SimpleHuaweiFactory getInstance(){
         if(INSTANCE == null){
             INSTANCE = new SimpleHuaweiFactory();
         }

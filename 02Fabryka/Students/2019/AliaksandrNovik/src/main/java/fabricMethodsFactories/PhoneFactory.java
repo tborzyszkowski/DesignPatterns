@@ -5,7 +5,7 @@ import smartphones.Smartphone;
 
 public abstract class PhoneFactory {
 
-	abstract Smartphone createSmartphone(PhoneType phoneType);
+	public abstract Smartphone createSmartphone(PhoneType phoneType);
 	
 	public void orderSmartphone(PhoneType phoneType) {
 		Smartphone phone = createSmartphone(phoneType);
