@@ -15,11 +15,15 @@ public abstract class Smartphone{
     }
     
     public void crashTest(){
-        System.out.println("Crash test is done");
+        System.out.println("Crash test is complited");
     }
     
     public void batteryLifeTest(){
-        System.out.println("Battery life test is done");
+        System.out.println("Battery life test is complited");
+    }
+    
+    public void stressTest() {
+    	System.out.println("Stress test is complited");
     }
     
     public void pack(){
