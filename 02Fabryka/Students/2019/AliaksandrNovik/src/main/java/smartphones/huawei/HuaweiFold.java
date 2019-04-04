@@ -15,4 +15,5 @@ public class HuaweiFold extends Smartphone {
 	public String toString() {
 		return "HuaweiFold [model=" + model + ", display=" + display + ", proc=" + proc + ", battery=" + battery + "]";
 	}
+
 }

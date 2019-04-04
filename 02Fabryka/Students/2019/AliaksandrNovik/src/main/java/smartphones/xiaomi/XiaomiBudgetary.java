@@ -16,4 +16,5 @@ public class XiaomiBudgetary extends Smartphone {
 		return "XiaomiBudgetary [model=" + model + ", display=" + display + ", proc=" + proc + ", battery=" + battery
 				+ "]";
 	}
+
 }

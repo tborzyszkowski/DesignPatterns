@@ -15,4 +15,5 @@ public class XiaomiFold extends Smartphone {
 	public String toString() {
 		return "XiaomiFold [model=" + model + ", display=" + display + ", proc=" + proc + ", battery=" + battery + "]";
 	}
+
 }

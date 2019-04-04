@@ -1,7 +1,6 @@
-package smartphones;
+package registration.noReflection;
 
-public abstract class Smartphone {
-
+public abstract class RSmartphone {
 	protected String model;
 	protected double display;
 	protected String proc;
@@ -29,4 +28,6 @@ public abstract class Smartphone {
 	public void pack() {
 		System.out.println("Pack smartphone");
 	}
+
+	public abstract RSmartphone createPhone();
 }

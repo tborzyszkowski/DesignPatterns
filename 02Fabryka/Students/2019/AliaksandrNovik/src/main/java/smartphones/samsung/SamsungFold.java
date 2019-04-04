@@ -15,4 +15,5 @@ public class SamsungFold extends Smartphone {
 	public String toString() {
 		return "SamsungFold [model=" + model + ", display=" + display + ", proc=" + proc + ", battery=" + battery + "]";
 	}
+
 }

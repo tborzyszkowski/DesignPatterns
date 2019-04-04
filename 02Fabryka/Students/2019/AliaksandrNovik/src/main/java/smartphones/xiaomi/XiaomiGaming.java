@@ -16,4 +16,5 @@ public class XiaomiGaming extends Smartphone {
 		return "XiaomiGaming [model=" + model + ", display=" + display + ", proc=" + proc + ", battery=" + battery
 				+ "]";
 	}
+
 }
