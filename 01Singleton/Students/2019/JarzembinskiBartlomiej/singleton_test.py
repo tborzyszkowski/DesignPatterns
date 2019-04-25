@@ -66,8 +66,7 @@ class SingletonTest(unittest.TestCase):
     instances = pool.map(deserializable, range(2))
 
     self.assertTrue(instances[0] is instances[1])
-    self.assertTrue(instances[0].variable == None)
-    self.assertTrue(instances[1].variable == None)
+    self.assertTrue(singleton.variable == None)
 
 if __name__ == '__main__':
     unittest.main()
