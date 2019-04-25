@@ -15,42 +15,55 @@ public class Phone {
 	RAM ram;
 	ChargeSocket socket;
 	Camera camera;
+
 	public CPU getCpu() {
 		return cpu;
 	}
+
 	public void setCpu(CPU cpu) {
 		this.cpu = cpu;
 	}
+
 	public Screen getScreen() {
 		return screen;
 	}
+
 	public void setScreen(Screen screen) {
 		this.screen = screen;
 	}
+
 	public Battery getBattery() {
 		return battery;
 	}
+
 	public void setBattery(Battery battery) {
 		this.battery = battery;
 	}
+
 	public RAM getRam() {
 		return ram;
 	}
+
 	public void setRam(RAM ram) {
 		this.ram = ram;
 	}
+
 	public ChargeSocket getSocket() {
 		return socket;
 	}
+
 	public void setSocket(ChargeSocket socket) {
 		this.socket = socket;
 	}
+
 	public Camera getCamera() {
 		return camera;
 	}
+
 	public void setCamera(Camera camera) {
 		this.camera = camera;
 	}
+
 	@Override
 	public String toString() {
 		return "Phone [cpu=" + cpu + ", screen=" + screen + ", battery=" + battery + ", ram=" + ram + ", socket="
