@@ -16,13 +16,13 @@ public class SimplePhoneFactory {
 		}
 		return INSTANCE;
 	}
-	
+
 	public Phone buildPhone(PhoneType type) {
-		if(type.equals(PhoneType.GAMING)) {
+		if (type.equals(PhoneType.GAMING)) {
 			return new HuaweiGaming();
-		}else if(type.equals(PhoneType.BUDGETARY)) {
+		} else if (type.equals(PhoneType.BUDGETARY)) {
 			return new HuaweiBudgetary();
-		}else if(type.equals(PhoneType.FOLD)) {
+		} else if (type.equals(PhoneType.FOLD)) {
 			return new HuaweiFold();
 		}
 		return null;

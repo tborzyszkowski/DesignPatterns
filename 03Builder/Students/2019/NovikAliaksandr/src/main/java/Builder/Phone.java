@@ -9,12 +9,12 @@ import ug.anovik.NovikAliaksandr.FluentBuilder.Screen;
 
 public class Phone {
 
-	CPU cpu;
-	Screen screen;
-	Battery battery;
-	RAM ram;
-	ChargeSocket socket;
-	Camera camera;
+	private CPU cpu;
+	private Screen screen;
+	private Battery battery;
+	private RAM ram;
+	private ChargeSocket socket;
+	private Camera camera;
 
 	public CPU getCpu() {
 		return cpu;
