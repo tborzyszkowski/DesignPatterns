@@ -27,9 +27,9 @@ public class Main {
 		
 		groupManager.addGroup("1", new Group(1, Arrays.asList(new Student("Jan", "Kowalski", 231432, Arrays.asList(new Subject("MATH")))), new Subject("MATH")));
 		
-		Group group = (Group)groupManager.getGroup("1").swallowCopy();
+		Group group = (Group)groupManager.getGroup("1").shallowCopy();
 		
-		Student s1 = (Student)studentManager.getStudent("2").swallowCopy();
+		Student s1 = (Student)studentManager.getStudent("2").shallowCopy();
 		Student s2 = (Student)studentManager.getStudent("2");
 		System.out.println(s1.getFirsName());
 		System.out.println(s1.getSubjectList());
