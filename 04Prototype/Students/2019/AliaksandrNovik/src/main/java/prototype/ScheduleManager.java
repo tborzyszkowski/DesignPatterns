@@ -10,7 +10,7 @@ public class ScheduleManager {
 		this.schedules = new HashMap<>();
 	}
 	
-	public SchedulePrototype getGroup(String key) {
+	public SchedulePrototype getSchedule(String key) {
 		return schedules.get(key);
 	}
 	

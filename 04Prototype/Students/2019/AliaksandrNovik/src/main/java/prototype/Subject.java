@@ -1,6 +1,10 @@
 package prototype;
 
-public class Subject {
+import java.io.Serializable;
+
+public class Subject implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String title;
 	
