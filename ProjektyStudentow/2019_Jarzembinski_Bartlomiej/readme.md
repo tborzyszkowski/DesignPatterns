@@ -9,7 +9,7 @@
     - [Facade](#fasada)
 - Behavioral
     - [State](#state)
-    - [Behavioral2](#behavioral2)
+    - [Observer](#observer)
 
 ### Singleton
 - jego celem jest ograniczenie możliwości tworzenia obiektów danej klasy do jednej instancji oraz zapewnienie globalnego dostępu do stworzonego obiektu.
