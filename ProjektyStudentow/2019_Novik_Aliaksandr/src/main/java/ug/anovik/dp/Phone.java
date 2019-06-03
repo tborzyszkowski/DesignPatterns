@@ -2,8 +2,8 @@ package ug.anovik.dp;
 
 import java.util.List;
 
-public class Phone implements MobileDevice{
-	
+public class Phone implements MobileDevice {
+
 	private String cpu;
 	private double screenSize;
 	private int batteryCapacity;
@@ -37,6 +37,12 @@ public class Phone implements MobileDevice{
 
 	public List<Camera> getCameras() {
 		return cameras;
+	}
+
+	@Override
+	public String toString() {
+		return "Phone [cpu=" + cpu + ", screenSize=" + screenSize + ", batteryCapacity=" + batteryCapacity + ", memory="
+				+ memory + ", cameras=" + cameras + "]";
 	}
 
 }

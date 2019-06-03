@@ -39,4 +39,9 @@ public class Tablet implements MobileDevice {
 		return cameras;
 	}
 
+	@Override
+	public String toString() {
+		return "Tablet [cpu=" + cpu + ", screenSize=" + screenSize + ", batteryCapacity=" + batteryCapacity
+				+ ", memory=" + memory + ", cameras=" + cameras + "]";
+	}
 }
