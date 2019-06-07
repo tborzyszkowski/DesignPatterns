@@ -20,14 +20,12 @@ namespace _02Kalkulator {
         }
 
         // Gets operator
-        public char Operator
-        {
+        public char Operator {
             set { _operator = value; }
         }
 
         // Get operand
-        public int Operand
-        {
+        public int Operand {
             set { _operand = value; }
         }
 
@@ -43,7 +41,8 @@ namespace _02Kalkulator {
 
         // Returns opposite operator for given operator
         private char Undo(char @operator) {
-            switch (@operator) {
+            switch (@operator)
+            {
                 case '+': return '-';
                 case '-': return '+';
                 case '*': return '/';
