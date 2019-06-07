@@ -1,11 +1,14 @@
 package ug.anovik.dp;
 
-public class Memory {
-	
+import java.io.Serializable;
+
+public class Memory implements Cloneable, Serializable {
+
+	private static final long serialVersionUID = 27L;
 	private int rom;
 	private int ram;
 	private boolean memoryCard;
-	
+
 	public Memory(int rom, int ram, boolean memoryCard) {
 		super();
 		this.rom = rom;
@@ -41,6 +44,5 @@ public class Memory {
 	public String toString() {
 		return "Memory [rom=" + rom + ", ram=" + ram + ", memoryCard=" + memoryCard + "]";
 	}
-	
-	
+
 }

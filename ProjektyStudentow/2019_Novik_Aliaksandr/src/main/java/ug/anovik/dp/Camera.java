@@ -1,16 +1,23 @@
 package ug.anovik.dp;
 
-public class Camera {
-	
+import java.io.Serializable;
+
+public class Camera implements Cloneable, Serializable {
+
+	private static final long serialVersionUID = 13L;
 	private double mp;
 	private double fNumber;
 	private PhotoType photoType;
-	
+
 	public Camera(double mp, double fNumber, PhotoType photoType) {
 		super();
 		this.mp = mp;
 		this.fNumber = fNumber;
 		this.photoType = photoType;
+	}
+
+	public Camera(Camera c) throws CloneNotSupportedException {
+		this(c.getMp(), c.getfNumber(), c.getPhotoType());
 	}
 
 	public double getMp() {
@@ -41,5 +48,5 @@ public class Camera {
 	public String toString() {
 		return "Camera [mp=" + mp + ", fNumber=" + fNumber + ", photoType=" + photoType + "]";
 	}
-	
+
 }
