@@ -45,6 +45,10 @@
   <ItemGroup>
     <Compile Include="ComputerManager.cs" />
     <Compile Include="ComputerPrototype.cs" />
+    <Compile Include="Deep\BasePrototype.cs" />
+    <Compile Include="Deep\Casing.cs" />
+    <Compile Include="Deep\Fan.cs" />
+    <Compile Include="Deep\PowerSupply.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
