@@ -9,15 +9,11 @@ namespace ComputerShop
     {
         static void Main(string[] args)
         {
-            Manager manager = new Manager();
-            WarehouseWorker warehouseWorker = new WarehouseWorker();
-            warehouseWorker.SetSuccessor(manager);
-            ShopWorker shopWorker = new ShopWorker();
-            shopWorker.SetSuccessor(warehouseWorker);
+            Shop shop = new Shop();
 
-            Console.WriteLine(shopWorker.ProcessOrder(new Order(OrderType.BuyComputer, ComputerType.Home)));
-            Console.WriteLine(shopWorker.ProcessOrder(new Order(OrderType.Warranty)));
-            Console.WriteLine(shopWorker.ProcessOrder(new Order(OrderType.Complaint)));
+            Console.WriteLine(shop.TakeOrder(new Order(OrderType.BuyComputer, ComputerType.Home)));
+            Console.WriteLine(shop.TakeOrder(new Order(OrderType.Warranty)));
+            Console.WriteLine(shop.TakeOrder(new Order(OrderType.Complaint)));
 
             Console.ReadKey();
         }
