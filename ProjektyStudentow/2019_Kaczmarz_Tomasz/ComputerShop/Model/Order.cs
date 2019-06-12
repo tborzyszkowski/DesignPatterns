@@ -9,7 +9,8 @@ namespace ComputerShop.Model
     class Order
     {
         public OrderType Type { get; private set; }
-        public ComputerType ComputerType { get; private set; }
+        public ComputerType ComputerType { get; private set; } = ComputerType.Unknown;
+        public int Budget { get; private set; } = 0;
 
         public Order(OrderType type)
         {
@@ -20,6 +21,12 @@ namespace ComputerShop.Model
         {
             Type = type;
             ComputerType = computerType;
+        }
+
+        public Order(OrderType type, int budget)
+        {
+            Type = type;
+            Budget = budget;
         }
     }
 }

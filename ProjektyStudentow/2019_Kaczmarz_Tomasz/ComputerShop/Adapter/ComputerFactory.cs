@@ -27,6 +27,8 @@ namespace ComputerShop.Adapter
             }
         }
 
+        private ComputerFactory() { }
+
         public Computer CreateComputer(ComputerType type)
         {
             switch (type)

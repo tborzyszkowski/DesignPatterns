@@ -2,6 +2,7 @@
 using ComputerShop.Model.Employees;
 using ComputerShop.Adapter;
 using ComputerShop.Model;
+using ComputerShop.Strategy;
 
 namespace ComputerShop
 {
@@ -9,11 +10,14 @@ namespace ComputerShop
     {
         static void Main(string[] args)
         {
-            Shop shop = new Shop();
-
-            Console.WriteLine(shop.TakeOrder(new Order(OrderType.BuyComputer, ComputerType.Home)));
-            Console.WriteLine(shop.TakeOrder(new Order(OrderType.Warranty)));
-            Console.WriteLine(shop.TakeOrder(new Order(OrderType.Complaint)));
+            Order order = new Order(OrderType.BuyComputer, 3500);
+            Shop shop = new Shop(new BudgetStrategy());
+            Console.WriteLine(shop.TakeOrder(order));
+            order = new Order(OrderType.Warranty);
+            shop = new Shop(new TypeStrategy());
+            Console.WriteLine(shop.TakeOrder(order));
+            order = new Order(OrderType.Complaint);
+            Console.WriteLine(shop.TakeOrder(order));
 
             Console.ReadKey();
         }

@@ -72,6 +72,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shop.cs" />
+    <Compile Include="Strategy\BudgetStrategy.cs" />
+    <Compile Include="Strategy\OrderStrategy.cs" />
+    <Compile Include="Strategy\TypeStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

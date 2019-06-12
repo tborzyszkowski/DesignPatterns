@@ -1,3 +1,10 @@
-Sklep koputerowy:
-- Fabryka abstrakcyjna w postaci singletona tworząca instancje komputerów.
-- Łańcuch zobowiązań (chain of responsibility) do obsługiwania zleceń (różne zlecenia obsługują różne osoby, np. Kasjer sprzedaje, a kierownik odpowiada na skargi).
+Sklep koputerowy umożliwiający składanie i obsługiwanie zamówień.
+Wzorce konstrukcyjne:
+- Singleton (AbstractFactory)
+- Fabryka abstrakcyjna
+Wzorce strukturalne:
+- Adapter
+- Fasada (Shop)
+Wzorce czynnościowe:
+- Łańcuch zobowiązań (Employee)
+- Strategia
