@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactoryPattern.Model.GPU
+namespace ComputerShop.Model.GPU
 {
     public class RTX2080 : GPU
     {

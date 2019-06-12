@@ -1,4 +1,4 @@
-﻿namespace FactoryPattern.Model.Monitors
+﻿namespace ComputerShop.Model.Monitors
 {
     public abstract class Monitor : IGear
     {

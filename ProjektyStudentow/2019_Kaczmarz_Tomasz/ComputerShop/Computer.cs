@@ -1,27 +1,22 @@
-﻿using FactoryPattern.Factories;
-using FactoryPattern.Model.CPU;
-using FactoryPattern.Model.GPU;
-using FactoryPattern.Model.Monitors;
+﻿using ComputerShop.Model.CPU;
+using ComputerShop.Model.GPU;
+using ComputerShop.Model.Monitors;
 using System;
 using System.Diagnostics;
 
-namespace FactoryPattern
+namespace ComputerShop
 {
-    class Computer
+    public class Computer
     {
         public CPU Processor { get; private set; }
         public GPU GraphicsCard { get; private set; }
         public Monitor Monitor { get; private set; }
 
-        public Computer(IAbstractFactory factory)
+        public Computer(CPU cpu, GPU gpu, Monitor monitor)
         {
-            Stopwatch watch = Stopwatch.StartNew();
-            Processor = factory.CreateCPU();
-            GraphicsCard = factory.CreateGPU();
-            Monitor = factory.CreateMonitor();
-            watch.Stop();
-            Console.WriteLine($"ELAPSED {watch.ElapsedMilliseconds}ms ({watch.ElapsedTicks} ticks)");
-            ShowSpecs();
+            Processor = cpu;
+            GraphicsCard = gpu;
+            Monitor = monitor;
         }
 
         public string ShowSpecs()

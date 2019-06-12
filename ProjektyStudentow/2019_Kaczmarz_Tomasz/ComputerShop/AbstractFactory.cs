@@ -1,22 +1,23 @@
-﻿using FactoryPattern.Model.CPU;
-using FactoryPattern.Model.GPU;
-using FactoryPattern.Model.Monitors;
+﻿using ComputerShop.Model;
+using ComputerShop.Model.CPU;
+using ComputerShop.Model.GPU;
+using ComputerShop.Model.Monitors;
 
-namespace FactoryPattern.Factories
+namespace ComputerShop
 {
     public interface IAbstractFactory
     {
-        CPU CreateCPU();
-        GPU CreateGPU();
-        Monitor CreateMonitor();
+        CPU CreateCPU(CPUType type);
+        GPU CreateGPU(GPUType type);
+        Monitor CreateMonitor(MonitorType type);
     }
 
-    public class GamingPCFactory : IAbstractFactory
+    public class PCPartsFactory : IAbstractFactory
     {
-        private static GamingPCFactory instance = null;
+        private static PCPartsFactory instance = null;
         private static readonly object padlock = new object();
 
-        public static GamingPCFactory Instance
+        public static PCPartsFactory Instance
         {
             get
             {
@@ -26,7 +27,7 @@ namespace FactoryPattern.Factories
                     {
                         if (instance == null)
                         {
-                            instance = new GamingPCFactory();
+                            instance = new PCPartsFactory();
                         }
                     }
                 }
@@ -35,105 +36,57 @@ namespace FactoryPattern.Factories
             }
         }
 
-        private GamingPCFactory() { }
+        protected PCPartsFactory() { }
 
-        public CPU CreateCPU()
+        public GPU CreateGPU(GPUType type)
         {
-            return new Core_i7();
-        }
-
-        public GPU CreateGPU()
-        {
-            return new RTX2080();
-        }
-
-        public Monitor CreateMonitor()
-        {
-            return new Asus();
-        }
-    }
-
-    public class OfficePCFactory : IAbstractFactory
-    {
-        private static OfficePCFactory instance = null;
-        private static readonly object padlock = new object();
-
-        public static OfficePCFactory Instance
-        {
-            get
+            switch (type)
             {
-                if (instance == null)
-                {
-                    lock (padlock)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new OfficePCFactory();
-                        }
-                    }
-                }
-
-                return instance;
+                case GPUType.GTX1060:
+                    return new GTX1060();
+                case GPUType.RadeonVII:
+                    return new RadeonVII();
+                case GPUType.RTX2080:
+                    return new RTX2080();
+                case GPUType.RX580:
+                    return new RX580();
+                default:
+                    return null;
             }
         }
 
-        private OfficePCFactory() { }
-
-        public CPU CreateCPU()
+        public CPU CreateCPU(CPUType type)
         {
-            return new Ryzen3();
-        }
-
-        public GPU CreateGPU()
-        {
-            return new RX580();
-        }
-
-        public Monitor CreateMonitor()
-        {
-            return new Acer();
-        }
-    }
-
-    public class HomePCFactory : IAbstractFactory
-    {
-        private static HomePCFactory instance = null;
-        private static readonly object padlock = new object();
-
-        public static HomePCFactory Instance
-        {
-            get
+            switch (type)
             {
-                if (instance == null)
-                {
-                    lock (padlock)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new HomePCFactory();
-                        }
-                    }
-                }
-
-                return instance;
+                case CPUType.Core_i5:
+                    return new Core_i5();
+                case CPUType.Core_i7:
+                    return new Core_i7();
+                case CPUType.Ryzen3:
+                    return new Ryzen3();
+                case CPUType.Ryzen7:
+                    return new Ryzen7();
+                default:
+                    return null;
             }
         }
 
-        private HomePCFactory() { }
-
-        public CPU CreateCPU()
+        public Monitor CreateMonitor(MonitorType type)
         {
-            return new Core_i5();
-        }
-
-        public GPU CreateGPU()
-        {
-            return new GTX1060();
-        }
-
-        public Monitor CreateMonitor()
-        {
-            return new AOC();
+            switch (type)
+            {
+                case MonitorType.Acer:
+                    return new Acer();
+                case MonitorType.AOC:
+                    return new AOC();
+                case MonitorType.Asus:
+                    return new Asus();
+                case MonitorType.Dell:
+                    return new Dell();
+                default:
+                    return null;
+            }
         }
     }
 }

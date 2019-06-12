@@ -1,4 +1,4 @@
-﻿namespace FactoryPattern.Model.CPU
+﻿namespace ComputerShop.Model.CPU
 {
     public abstract class CPU : IGear
     {

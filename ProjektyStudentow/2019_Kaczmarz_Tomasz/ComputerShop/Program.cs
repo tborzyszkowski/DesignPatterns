@@ -1,6 +1,6 @@
 ﻿using System;
 using ComputerShop.Model.Employees;
-using ComputerShop;
+using ComputerShop.Adapter;
 using ComputerShop.Model;
 
 namespace ComputerShop
@@ -15,7 +15,7 @@ namespace ComputerShop
             ShopWorker shopWorker = new ShopWorker();
             shopWorker.SetSuccessor(warehouseWorker);
 
-            Console.WriteLine(shopWorker.ProcessOrder(new Order(OrderType.BuyComputer, ComputerType.Gaming)));
+            Console.WriteLine(shopWorker.ProcessOrder(new Order(OrderType.BuyComputer, ComputerType.Home)));
             Console.WriteLine(shopWorker.ProcessOrder(new Order(OrderType.Warranty)));
             Console.WriteLine(shopWorker.ProcessOrder(new Order(OrderType.Complaint)));
 

@@ -1,4 +1,4 @@
-﻿namespace FactoryPattern.Model.CPU
+﻿namespace ComputerShop.Model.CPU
 {
     class Ryzen7 : CPU
     {

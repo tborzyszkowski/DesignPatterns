@@ -1,10 +1,4 @@
-﻿using FactoryPattern;
-using FactoryPattern.Factories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ComputerShop.Adapter;
 
 namespace ComputerShop.Model.Employees
 {
@@ -14,20 +8,7 @@ namespace ComputerShop.Model.Employees
         {
             if (order.Type == OrderType.BuyComputer)
             {
-                Computer computer = null;
-                switch (order.ComputerType)
-                {
-                    case ComputerType.Gaming:
-                        computer = new Computer(GamingPCFactory.Instance);
-                        break;
-                    case ComputerType.Home:
-                        computer = new Computer(HomePCFactory.Instance);
-                        break;
-                    case ComputerType.Office:
-                        computer = new Computer(OfficePCFactory.Instance);
-                        break;
-                }
-                return computer.ShowSpecs();
+                return ComputerFactory.Instance.CreateComputer(order.ComputerType).ShowSpecs();
             }
             else
                 return successor.ProcessOrder(order);

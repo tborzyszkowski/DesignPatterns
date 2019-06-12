@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ComputerShop.Model.Employees
 {
+    /// <summary>
+    /// Łańcuch zobowiązań (Chain of Responsibility) - czynnościowy
+    /// </summary>
     abstract class Employee
     {
         protected Employee successor;

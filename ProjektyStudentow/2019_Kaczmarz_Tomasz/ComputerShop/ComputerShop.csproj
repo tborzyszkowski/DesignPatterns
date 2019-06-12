@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractFactory.cs" />
+    <Compile Include="Adapter\ComputerFactory.cs" />
+    <Compile Include="Adapter\IPCFactory.cs" />
     <Compile Include="Computer.cs" />
     <Compile Include="Model\CPU\Core-i5.cs" />
     <Compile Include="Model\CPU\Core-i7.cs" />

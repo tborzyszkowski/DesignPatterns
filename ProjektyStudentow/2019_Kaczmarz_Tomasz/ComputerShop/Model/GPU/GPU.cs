@@ -1,4 +1,4 @@
-﻿namespace FactoryPattern.Model.GPU
+﻿namespace ComputerShop.Model.GPU
 {
     public abstract class GPU : IGear
     {
