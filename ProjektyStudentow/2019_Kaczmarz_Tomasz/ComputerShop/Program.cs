@@ -1,8 +1,6 @@
-﻿using System;
-using ComputerShop.Model.Employees;
-using ComputerShop.Adapter;
-using ComputerShop.Model;
+﻿using ComputerShop.Model;
 using ComputerShop.Strategy;
+using System;
 
 namespace ComputerShop
 {
@@ -13,8 +11,12 @@ namespace ComputerShop
             Order order = new Order(OrderType.BuyComputer, 3500);
             Shop shop = new Shop(new BudgetStrategy());
             Console.WriteLine(shop.TakeOrder(order));
-            order = new Order(OrderType.Warranty);
+
+            order = new Order(OrderType.BuyComputer, ComputerType.Gaming);
             shop = new Shop(new TypeStrategy());
+            Console.WriteLine(shop.TakeOrder(order));
+
+            order = new Order(OrderType.Warranty);
             Console.WriteLine(shop.TakeOrder(order));
             order = new Order(OrderType.Complaint);
             Console.WriteLine(shop.TakeOrder(order));
