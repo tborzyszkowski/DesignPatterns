@@ -45,4 +45,34 @@ public class Memory implements Cloneable, Serializable {
 		return "Memory [rom=" + rom + ", ram=" + ram + ", memoryCard=" + memoryCard + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (memoryCard ? 1231 : 1237);
+		result = prime * result + ram;
+		result = prime * result + rom;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Memory other = (Memory) obj;
+		if (memoryCard != other.memoryCard)
+			return false;
+		if (ram != other.ram)
+			return false;
+		if (rom != other.rom)
+			return false;
+		return true;
+	}
+
+	
+	
 }
