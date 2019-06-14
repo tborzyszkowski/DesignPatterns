@@ -22,11 +22,11 @@ fun main() {
     println("Experiments successful; the Seabird flies!")
 
 
-    println("\nExperiment 4: Seabird NextGen as an Aircraft object:")
-    val seabirdNextGen: Aircraft = SeabirdNextGen()
-    seabirdNextGen.takeOff()
+    println("\nExperiment 4: Seabird NextGen:")
+    val seabirdNextGen: ISeacraft = SeabirdNextGen()
+    (seabirdNextGen as IAircraft).takeOff()
     println("The Seabird NextGen took off")
-    (seabirdNextGen as SeabirdNextGen).increaseRevs()
+    (seabirdNextGen as ISeacraft).increaseRevs()
     seabirdNextGen.increaseRevs()
 
     if (seabird.airborne) println("Seabird NextGen flying at height ${seabird.height} meters and speed ${seabird.speed} knots")
