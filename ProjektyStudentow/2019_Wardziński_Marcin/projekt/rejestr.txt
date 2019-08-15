@@ -1,0 +1,4 @@
+﻿
+Wpis nr 1: 2019-06-12 11:03:19 - W magazynie jest za mało części by wykonać wszystkie zamówienia
+Wpis nr 2: 2019-06-12 11:04:04 - Za mało cześci w magazynie by wykonać żądaną pracę
+Wpis nr 3: 2019-06-12 11:05:12 - W magazynie jest za mało części by wykonać wszystkie zamówienia
