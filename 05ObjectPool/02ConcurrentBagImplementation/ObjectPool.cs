@@ -6,29 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02ConcurrentBagImplementation {
-    public class ObjectPool<T> {
-        private ConcurrentBag<T> _objects;
-        private Func<T> _objectGenerator;
+	public class ObjectPool<T> {
+		private ConcurrentBag<T> _objects;
+		private Func<T> _objectGenerator;
 
-        public ObjectPool(Func<T> objectGenerator) {
-            if (objectGenerator == null) throw new ArgumentNullException("objectGenerator");
-            _objects = new ConcurrentBag<T>();
-            _objectGenerator = objectGenerator;
-        }
+		public ObjectPool(Func<T> objectGenerator) {
+			if (objectGenerator == null) throw new ArgumentNullException("objectGenerator");
+			_objects = new ConcurrentBag<T>();
+			_objectGenerator = objectGenerator;
+		}
 
-        public T GetObject() {
-            T item;
-            if (_objects.TryTake(out item)) return item;
-            return _objectGenerator();
-        }
+		public T GetObject() {
+			T item;
+			if (_objects.TryTake(out item)) return item;
+			return _objectGenerator();
+		}
 
-        public void PutObject(T item) {
-            _objects.Add(item);
-        }
+		public void PutObject(T item) {
+			_objects.Add(item);
+		}
 
-        public long GetCount() {
-            return _objects.Count;
-        }
-    }
+		public long GetCount() {
+			return _objects.Count;
+		}
+	}
 
 }
