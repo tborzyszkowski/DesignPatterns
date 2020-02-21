@@ -1,9 +1,0 @@
-*.class
-*.classpath
-.settings
-.project
-targer
-*.jar
-*.war
-
-MainTest.java
