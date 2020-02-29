@@ -1,10 +1,13 @@
 ## Zadania
 
-Zaproponować przykładowe rozwiązania dwó￳ch problem￳w związanych ze wzorcem Singleton:
+Zaproponować przykładowe rozwiązania dwóch problemów związanych ze wzorcem Singleton:
 
-1. odporność na wsp￳óbieżne wykorzystanie kodu z jednoczesnym zachowaniem maksymalnej wydajnoci
-2. problem rozszerzania klasy Singleton przez dziedziczenie
-3. problem serializacji i deserializacji obiekt￳ów klasy Singleton
+1. Odporność na współbieżne wykorzystanie kodu z jednoczesnym zachowaniem maksymalnej wydajności
+2. Problem rozszerzania klasy Singleton przez dziedziczenie
+3. Problem serializacji i deserializacji obiektów klasy Singleton
 
-Do zaproponowanych rozwiąza￱ załączyć odpowiednie testy wydajnościowe / funkcjonalne.
+Do zaproponowanych rozwiązań załączyć odpowiednie testy wydajnościowe / funkcjonalne.
 
+---
+Zobacz:
+- [Prevent Breaking a Singleton Class Pattern](https://dzone.com/articles/prevent-breaking-a-singleton-class-pattern)
