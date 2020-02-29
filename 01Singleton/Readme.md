@@ -11,3 +11,5 @@ Do zaproponowanych rozwiązań załączyć odpowiednie testy wydajnościowe / fu
 ---
 Zobacz:
 - [Prevent Breaking a Singleton Class Pattern](https://dzone.com/articles/prevent-breaking-a-singleton-class-pattern)
+
+[Nasz Classroom](https://classroom.github.com/a/xmD1lnpe)
