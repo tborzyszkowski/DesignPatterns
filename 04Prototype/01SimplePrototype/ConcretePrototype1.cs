@@ -5,15 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01SimplePrototype {
-    class ConcretePrototype1 : Prototype {
-        // Constructor
-        public ConcretePrototype1(string id)
-          : base(id) {
-        }
+	class ConcretePrototype1 : Prototype {
+		public ConcretePrototype1(string id)
+		  : base(id) {
+		}
 
-        // Returns a shallow copy
-        public override Prototype Clone() {
-            return (Prototype)this.MemberwiseClone();
-        }
-    }
+		public override Prototype Clone() => (Prototype)this.MemberwiseClone();
+	}
 }

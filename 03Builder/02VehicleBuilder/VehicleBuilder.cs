@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02VehicleBuilder {
-    abstract class VehicleBuilder {
-        protected Vehicle vehicle;
+	abstract class VehicleBuilder {
+		protected Vehicle vehicle;
 
-        // Gets vehicle instance
-        public Vehicle GetVehicle() { return vehicle; }
+		public Vehicle GetVehicle() => vehicle;
 
-        // Abstract build methods
-        public abstract void BuildFrame();
-        public abstract void BuildEngine();
-        public abstract void BuildWheels();
-        public abstract void BuildDoors();
-    }
+		public abstract void BuildFrame();
+		public abstract void BuildEngine();
+		public abstract void BuildWheels();
+		public abstract void BuildDoors();
+	}
 }

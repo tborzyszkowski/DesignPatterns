@@ -5,21 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01SimplePrototype {
-    abstract class Prototype {
-        private string _id;
+	abstract class Prototype {
+		public Prototype(string id) {
+			this.Id = id;
+		}
+		public string Id { get; set; }
 
-        // Constructor
-        public Prototype(string id) {
-            this._id = id;
-        }
-
-        // Gets id
-        public string Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-
-        public abstract Prototype Clone();
-    }
+		public abstract Prototype Clone();
+	}
 }

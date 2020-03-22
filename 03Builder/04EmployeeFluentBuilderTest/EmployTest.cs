@@ -2,39 +2,35 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _04EmployeeFluentBuilder;
 
-namespace _04EmployeeFluentBuilderTest
-{
-    [TestClass]
-    public class EmployTest
-    {
-        [TestMethod]
-        public void GetFullNameReturnsCombination()
-        {
-            // Arrange
-            Employee emp = new Employee(1, "Kenneth", "Truyers", new DateTime(1970, 1, 1), "My Street");
-            // Bad is:
-            // - to construct the employee, apart from the relevant data (firstname and lastname) 
-            //   we also need to pass in an ID, a birth date and a street
-            //   this data is completely irrelevant for this test
-            
-            // Act
-            string fullname = emp.getFullName();
+namespace _04EmployeeFluentBuilderTest {
+	[TestClass]
+	public class EmployTest {
+		[TestMethod]
+		public void GetFullNameReturnsCombination() {
+			// Arrange
+			var emp = new Employee(1, "Kenneth", "Truyers", new DateTime(1970, 1, 1), "My Street");
+			// Bad is:
+			// - to construct the employee, apart from the relevant data (firstname and lastname) 
+			//   we also need to pass in an ID, a birth date and a street
+			//   this data is completely irrelevant for this test
 
-            // Assert
-            Assert.AreEqual(fullname, "Kenneth Truyers");
-        }
+			// Act
+			var fullname = emp.GetFullName();
 
-        [TestMethod]
-        public void GetAgeReturnsCorrectValueFulentBuilder()
-        {
-            // Arrange
-            Employee emp = new EmployeeBuilder().WithBirthDate(new DateTime(1983, 1, 1));
+			// Assert
+			Assert.AreEqual(fullname, "Kenneth Truyers");
+		}
 
-            // Act
-            int age = emp.getAge();
+		[TestMethod]
+		public void GetAgeReturnsCorrectValueFulentBuilder() {
+			// Arrange
+			Employee emp = new EmployeeBuilder().WithBirthDate(new DateTime(1983, 1, 1));
 
-            // Assert
-            Assert.AreEqual(age, DateTime.Today.Year - 1983);
-        }
-    }
+			// Act
+			var age = emp.GetAge();
+
+			// Assert
+			Assert.AreEqual(age, DateTime.Today.Year - 1983);
+		}
+	}
 }

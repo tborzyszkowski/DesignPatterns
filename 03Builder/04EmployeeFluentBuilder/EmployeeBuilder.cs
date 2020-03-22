@@ -2,48 +2,32 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace _04EmployeeFluentBuilder
-{
-	public class EmployeeBuilder
-	{
-		private int id = 1;
-		private string firstname = "first";
-		private string lastname = "last";
-		private DateTime birthdate = DateTime.Today;
-		private string street = "street";
+namespace _04EmployeeFluentBuilder {
+	public class EmployeeBuilder {
+		private int _id = 1;
+		private string _firstName = "first";
+		private string _lastName = "last";
+		private DateTime _birthDate = DateTime.Today;
+		private string _street = "street";
 
-		public Employee Build()
-		{
-			return new Employee(id, firstname, lastname, birthdate, street);
-		}
+		public Employee Build() => new Employee(_id, _firstName, _lastName, _birthDate, _street);
 
-		public EmployeeBuilder WithFirstName(string firstname)
-		{
-			this.firstname = firstname;
+		public EmployeeBuilder WithFirstName(string firstName) {
+			this._firstName = firstName;
 			return this;
 		}
-
-		public EmployeeBuilder WithLastName(string lastname)
-		{
-			this.lastname = lastname;
+		public EmployeeBuilder WithLastName(string lastName) {
+			this._lastName = lastName;
 			return this;
 		}
-
-		public EmployeeBuilder WithBirthDate(DateTime birthdate)
-		{
-			this.birthdate = birthdate;
+		public EmployeeBuilder WithBirthDate(DateTime birthDate) {
+			this._birthDate = birthDate;
 			return this;
 		}
-
-		public EmployeeBuilder WithStreet(string street)
-		{
-			this.street = street;
+		public EmployeeBuilder WithStreet(string street) {
+			this._street = street;
 			return this;
 		}
-
-		public static implicit operator Employee(EmployeeBuilder instance)
-		{
-			return instance.Build();
-		}
+		public static implicit operator Employee(EmployeeBuilder instance) => instance.Build();
 	}
 }

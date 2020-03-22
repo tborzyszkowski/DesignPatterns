@@ -8,25 +8,23 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 namespace _03DeepPrototype {
-    [Serializable()]
-    public abstract class BasePrototype<T> {
+	[Serializable()]
+	public abstract class BasePrototype<T> {
 
-        // Shallow copy
-        public T Clone() {
-            return (T)this.MemberwiseClone();
-        }
+		public T Clone() {
+			return (T)this.MemberwiseClone();
+		}
 
-        // Deep Copy
-        public T DeepCopy() {
-            T copy;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, this);
-                stream.Seek(0, SeekOrigin.Begin);
-                copy = (T)formatter.Deserialize(stream);
-            }
-            return copy;
-        }
-    }
+		public T DeepCopy() {
+			T copy;
+			using (MemoryStream stream = new MemoryStream())
+			{
+				BinaryFormatter formatter = new BinaryFormatter();
+				formatter.Serialize(stream, this);
+				stream.Seek(0, SeekOrigin.Begin);
+				copy = (T)formatter.Deserialize(stream);
+			}
+			return copy;
+		}
+	}
 }

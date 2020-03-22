@@ -1,11 +1,8 @@
 ﻿using System;
 
-namespace _04EmployeeFluentBuilder
-{
-	public class Employee
-	{
-		public Employee(int id, string firstname, string lastname, DateTime birthdate, string street)
-		{
+namespace _04EmployeeFluentBuilder {
+	public class Employee {
+		public Employee(int id, string firstname, string lastname, DateTime birthdate, string street) {
 			this.ID = id;
 			this.FirstName = firstname;
 			this.LastName = lastname;
@@ -23,15 +20,11 @@ namespace _04EmployeeFluentBuilder
 
 		public string Street { get; private set; }
 
-		public string getFullName()
-		{
-			return this.FirstName + " " + this.LastName;
-		}
+		public string GetFullName() => this.FirstName + " " + this.LastName;
 
-		public int getAge()
-		{
-			DateTime today = DateTime.Today;
-			int age = today.Year - BirthDate.Year;
+		public int GetAge() {
+			var today = DateTime.Today;
+			var age = today.Year - BirthDate.Year;
 			if (BirthDate > today.AddYears(-age)) age--;
 			return age;
 		}
