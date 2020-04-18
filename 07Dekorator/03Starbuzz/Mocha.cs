@@ -5,18 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _03Starbuzz {
-    public class Mocha : CondimentDecorator {
-        Beverage beverage;
+	public class Mocha : CondimentDecorator {
+		public Mocha(Beverage beverage) : base(beverage){
+		}
 
-        public Mocha(Beverage beverage) {
-            this.beverage = beverage;
-        }
+		public override string Description {
+			get => $"{beverage.Description}, Mocha";
+		}
 
-        public override string Description
-        {
-            get => $"{beverage.Description}, Mocha";
-        }
-
-        public override double Cost() => .20 + beverage.Cost();
-    }
+		public override double Cost() => .20 + beverage.Cost();
+	}
 }

@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02TwoWayAdapter {
-    // ITarget interface
-    public interface IAircraft {
-        bool Airborne { get; }
-        void TakeOff();
-        int Height { get; }
-    }
+	// ITarget interface
+	public interface IAircraft {
+		bool Airborne { get; }
+		void TakeOff();
+		int Height { get; }
+	}
 }

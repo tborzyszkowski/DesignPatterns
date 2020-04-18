@@ -5,9 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    // Required standard for requests
-    interface ITarget {
-        // Rough estimate required
-        string Request(int i);
-    }
+	interface ITarget {
+		string Request(int i);
+	}
 }

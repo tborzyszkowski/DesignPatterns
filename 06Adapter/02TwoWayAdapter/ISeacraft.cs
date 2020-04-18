@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02TwoWayAdapter {
-    // Adaptee interface
-    public interface ISeacraft {
-        int Speed { get; }
-        void IncreaseRevs();
-    }
+	// Adaptee interface
+	public interface ISeacraft {
+		int Speed { get; }
+		void IncreaseRevs();
+	}
 }

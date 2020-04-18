@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    abstract class Decorator : Component {
-        protected Component component;
+	abstract class Decorator : Component {
+		protected Component component;
 
-        public void SetComponent(Component component) {
-            this.component = component;
-        }
+		public void SetComponent(Component component) {
+			this.component = component;
+		}
 
-        public override void Operation() {
-            component?.Operation();
-            //if (component != null) {
-            //    component.Operation();
-            //}
-        }
-    }
+		public override void Operation() {
+			component?.Operation();
+			//if (component != null) {
+			//    component.Operation();
+			//}
+		}
+	}
 }

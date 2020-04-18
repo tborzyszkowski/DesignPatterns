@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02Library {
-    abstract class LibraryItem {
-        // Property
-        public int NumCopies { get; set; }
+	abstract class LibraryItem {
+		public int NumCopies { get; set; }
 
-        public abstract void Display();
-    }
+		public abstract void Display();
+	}
 }

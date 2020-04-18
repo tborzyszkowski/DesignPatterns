@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _03Pluggable_Adapter {
-    // New standard for requests
-    class Target {
-        public string Estimate(int i) =>
-            $"Estimate is {(int)Math.Round(i / 3.0)}";
-    }
+	// New standard for requests
+	class Target {
+		public string Estimate(int i) =>
+			$"Estimate is {(int)Math.Round(i / 3.0)}";
+	}
 }

@@ -15,7 +15,7 @@ namespace _02ConcurrentBagImplementation {
 		}
 		public MyClass() {
 			Console.WriteLine("new MyClass()");
-			Nums = new double[100];
+			Nums = new double[200];
 			//Random rand = new Random();
 			for (int i = 0; i < Nums.Length; i++)
 				Nums[i] = Math.Sqrt(i);

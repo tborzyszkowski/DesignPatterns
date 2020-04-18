@@ -10,7 +10,6 @@ namespace _02ConcurrentBagImplementation {
 		static void Main(string[] args) {
 			CancellationTokenSource cts = new CancellationTokenSource();
 
-			// Create an opportunity for the user to cancel.
 			Task.Run(() =>
 			{
 				if (Console.ReadKey().KeyChar == 'c' || Console.ReadKey().KeyChar == 'C')
@@ -19,8 +18,7 @@ namespace _02ConcurrentBagImplementation {
 
 			ObjectPool<MyClass> pool = new ObjectPool<MyClass>(() => new MyClass());
 
-			// Create a high demand for MyClass objects.
-			Parallel.For(0, 100000, (i, loopState) =>
+			Parallel.For(0, 500000, (i, loopState) =>
 			{
 				Console.WriteLine($"i = {i}\t count = {pool.GetCount()}");
 
