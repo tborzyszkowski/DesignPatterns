@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    abstract class Implementor {
-        public abstract void Operation();
-    }
+	abstract class Implementor {
+		public abstract void Operation();
+	}
 }

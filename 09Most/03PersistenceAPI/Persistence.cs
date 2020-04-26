@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _03PersistenceAPI {
-    // Abstraction Interface
-    public interface Persistence {
+	// Abstraction Interface
+	public interface Persistence {
 
-        String persist(Object objectToPesist);
+		String persist(Object objectToPesist);
 
-        Object findById(String objectId);
+		Object findById(String objectId);
 
-        void deleteById(String id);
-    }
+		void deleteById(String id);
+	}
 }

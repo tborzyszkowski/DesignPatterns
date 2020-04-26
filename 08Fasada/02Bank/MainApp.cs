@@ -5,20 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02Bank {
-    class MainApp {
-        static void Main() {
-            // Facade
-            Mortgage mortgage = new Mortgage();
+	class MainApp {
+		static void Main() {
 
-            // Evaluate mortgage eligibility for customer
-            Customer customer = new Customer("Ann McKinsey");
-            bool eligible = mortgage.IsEligible(customer, 125000);
+			Mortgage mortgage = new Mortgage();
 
-            Console.WriteLine("\n" + customer.Name +
-                " has been " + (eligible ? "Approved" : "Rejected"));
+			Customer customer = new Customer("Ann McKinsey");
+			bool eligible = mortgage.IsEligible(customer, 125000);
 
-            // Wait for user
-            Console.ReadKey();
-        }
-    }
+			Console.WriteLine("\n" + customer.Name +
+				" has been " + (eligible ? "Approved" : "Rejected"));
+		}
+	}
 }

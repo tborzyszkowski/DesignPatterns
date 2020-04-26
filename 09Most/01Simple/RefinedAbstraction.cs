@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    class RefinedAbstraction : Abstraction {
-        public override void Operation() {
-            implementor.Operation();
-        }
-    }
+	class RefinedAbstraction : Abstraction {
+		public override void Operation() {
+			implementor.Operation();
+		}
+	}
 }

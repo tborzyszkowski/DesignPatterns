@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    class RealSubject : Subject {
-        public override void Request() {
-            Console.WriteLine("RealSubject: Called RealSubject.Request()");
-        }
-    }
+	class RealSubject : Subject {
+		public override void Request() {
+			Console.WriteLine("RealSubject: Called RealSubject.Request()");
+		}
+	}
 }

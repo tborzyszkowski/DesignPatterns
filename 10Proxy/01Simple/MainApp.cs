@@ -5,15 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    class MainApp {
-        static void Main(string[] args) {
-            // Create proxy and request a service
-            Proxy proxy = new Proxy();
-            proxy.Request();
-            Console.WriteLine("=================");
-            proxy.Request();
-            Console.WriteLine("=================");
-        }
-    }
+	class MainApp {
+		static void Main(string[] args) {
+			Proxy proxy = new Proxy();
+			proxy.Request();
+			Console.WriteLine("=================");
+			proxy.Request();
+			Console.WriteLine("=================");
+		}
+	}
 }
 

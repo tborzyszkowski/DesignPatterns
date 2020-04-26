@@ -3,13 +3,13 @@ public class GumballMachineTestDrive {
 	public static void main(String[] args) {
 		int count = 0;
 
-        if (args.length < 2) {
-            System.out.println("GumballMachine <name> <inventory>");
-            System.exit(1);
-        }
+		if (args.length < 2) {
+			System.out.println("GumballMachine <name> <inventory>");
+			System.exit(1);
+		}
 
-        try {
-        	count = Integer.parseInt(args[1]);
+		try {
+			count = Integer.parseInt(args[1]);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -18,7 +18,7 @@ public class GumballMachineTestDrive {
 
 		GumballMonitor monitor = new GumballMonitor(gumballMachine);
 
- 
+
 		System.out.println(gumballMachine);
 
 		gumballMachine.insertQuarter();

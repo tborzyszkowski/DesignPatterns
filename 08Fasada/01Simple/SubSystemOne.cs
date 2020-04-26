@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    class SubSystemOne {
-        public void MethodOne() {
-            Console.WriteLine(" SubSystemOne Method");
-        }
-    }
+	class SubSystemOne {
+		public void MethodOne() {
+			Console.WriteLine(" SubSystemOne Method");
+		}
+	}
 }

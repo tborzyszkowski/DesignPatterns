@@ -5,17 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    class Abstraction {
-        protected Implementor implementor;
+	class Abstraction {
+		protected Implementor implementor;
 
-        // Property
-        public Implementor Implementor
-        {
-            set { implementor = value; }
-        }
+		public Implementor Implementor {
+			set { implementor = value; }
+		}
 
-        public virtual void Operation() {
-            implementor.Operation();
-        }
-    }
+		public virtual void Operation() {
+			implementor.Operation();
+		}
+	}
 }

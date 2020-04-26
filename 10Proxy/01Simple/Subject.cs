@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01Simple {
-    abstract class Subject {
-        public abstract void Request();
-    }
+	abstract class Subject {
+		public abstract void Request();
+	}
 }

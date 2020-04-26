@@ -6,20 +6,18 @@ using System.Threading.Tasks;
 
 namespace _02DataOperations {
 
-    // The 'RefinedAbstraction' class
+	// The 'RefinedAbstraction' class
 
-    class Customers : CustomersBase {
-        // Constructor
-        public Customers(string group)
-          : base(group) {
-        }
+	class Customers : CustomersBase {
+		public Customers(string group)
+		  : base(group) {
+		}
 
-        public override void ShowAll() {
-            // Add separator lines
-            Console.WriteLine();
-            Console.WriteLine("------------------------");
-            base.ShowAll();
-            Console.WriteLine("------------------------");
-        }
-    }
+		public override void ShowAll() {
+			Console.WriteLine();
+			Console.WriteLine("------------------------");
+			base.ShowAll();
+			Console.WriteLine("------------------------");
+		}
+	}
 }

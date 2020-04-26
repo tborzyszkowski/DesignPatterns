@@ -5,18 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02Bank {
-    class Customer {
-        private string _name;
+	class Customer {
+		private string _name;
 
-        // Constructor
-        public Customer(string name) {
-            this._name = name;
-        }
+		public Customer(string name) {
+			this._name = name;
+		}
 
-        // Gets the name
-        public string Name
-        {
-            get { return _name; }
-        }
-    }
+		public string Name {
+			get { return _name; }
+		}
+	}
 }
