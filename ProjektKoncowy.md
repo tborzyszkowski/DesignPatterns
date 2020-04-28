@@ -4,9 +4,10 @@ projektowe z następujących grup:
 * kreacyjne
 * strukturalne
 * operacyjne.
+
 Łącznie trzeba zaprezentować sześć wzorców, które współpracują w jednym projekcie.
 
-Oceniane będzie:
+Oceniane będą:
 * trafność doboru wzorców
 * jakość implementacji
 * nietrywialność informatyczna wybranego problemu rozwiązywanego przez projekt.
