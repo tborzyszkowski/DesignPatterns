@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02Sort {
-    abstract class SortStrategy {
-        public abstract void Sort(List<string> list);
-    }
+	abstract class SortStrategy {
+		public abstract void Sort(List<string> list);
+	}
 }

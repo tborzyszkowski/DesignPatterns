@@ -5,14 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Composite {
-    /// <summary>
-    /// Leaf class to act as Uncle.
-    /// </summary>
-    public class Uncle : IFamilyMember {
-        public string Name { get; set; }
+	public class Uncle : IFamilyMember {
+		public string Name { get; set; }
 
-        public Uncle(string name) {
-            Name = name;
-        }
-    }
+		public Uncle(string name) {
+			Name = name;
+		}
+	}
 }

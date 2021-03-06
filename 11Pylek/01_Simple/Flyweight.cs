@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01_Simple {
-    abstract class Flyweight {
-        public abstract void Operation(int extrinsicstate);
-    }
+	abstract class Flyweight {
+		public abstract void Operation(int extrinsicstate);
+	}
 }

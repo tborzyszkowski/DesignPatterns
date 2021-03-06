@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _01_Simple {
-    abstract class Observer {
-        public abstract void Update();
-    }
+	abstract class Observer {
+		public abstract void Update();
+	}
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Composite {
-    public interface IFamilyMember {
-        string Name { get; set; }
-    }
+	public interface IFamilyMember {
+		string Name { get; set; }
+	}
 }

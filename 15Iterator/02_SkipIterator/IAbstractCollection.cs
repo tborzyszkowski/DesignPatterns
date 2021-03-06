@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02_SkipIterator {
-    interface IAbstractCollection {
-        Iterator CreateIterator();
-    }
+	interface IAbstractCollection {
+		Iterator CreateIterator();
+	}
 }

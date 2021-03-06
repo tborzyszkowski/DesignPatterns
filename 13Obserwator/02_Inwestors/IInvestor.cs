@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02_Inwestors {
-    interface IInvestor {
-        void Update(Stock stock);
-    }
+	interface IInvestor {
+		void Update(Stock stock);
+	}
 }

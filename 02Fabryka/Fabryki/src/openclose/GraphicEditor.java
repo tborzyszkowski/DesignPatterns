@@ -23,4 +23,8 @@ class Circle extends Shape  {
 	}
 }
 
-//Zadanie: dodaj do programu mo¿liwoœæ rysowania trójk¹ta
+class Triangle extends Shape  {
+	public void draw() {
+		System.out.println("Triangle");
+	}
+}

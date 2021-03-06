@@ -37,12 +37,12 @@ public class Passive {
 		System.out.println("\nu.age > 50");
 		users
 			.stream()
-			//.filter(u -> u.age > 50)
+			.filter(u -> u.age > 50)
 			.forEach(u -> System.out.println(u));
 		System.out.println();
 		users
 			.parallelStream()
-			//.filter(u -> u.age > 50)
+			.filter(u -> u.age > 50)
 			.forEach(u -> System.out.println(u));
 
 //		System.out.println("\nCount: " + 

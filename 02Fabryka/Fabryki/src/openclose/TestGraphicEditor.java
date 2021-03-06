@@ -13,6 +13,9 @@ public class TestGraphicEditor {
 		sh = new Circle();
 		geb.drawShape(sh);
 
+		sh = new Triangle();
+		geb.drawShape(sh);
+
 	}
 
 }
