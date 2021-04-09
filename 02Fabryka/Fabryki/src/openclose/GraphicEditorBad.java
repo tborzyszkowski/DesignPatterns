@@ -1,6 +1,5 @@
 package openclose;
 
-//Open-Close Principle - Bad example
 class GraphicEditorBad {
 
 	public void drawShape(ShapeBad s) {

@@ -18,7 +18,7 @@ namespace _02ConcurrentBagImplementation {
 
 			ObjectPool<MyClass> pool = new ObjectPool<MyClass>(() => new MyClass());
 
-			Parallel.For(0, 500000, (i, loopState) =>
+			Parallel.For(0, 500 * 1000, (i, loopState) =>
 			{
 				Console.WriteLine($"i = {i}\t count = {pool.GetCount()}");
 

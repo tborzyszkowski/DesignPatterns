@@ -22,6 +22,6 @@ namespace _02ColorPrototype {
 		public override ColorPrototype Clone() => this.MemberwiseClone() as ColorPrototype;
 		public override string ToString() =>
 			$"Cloning color RGB: {_red,3},{_green,3},{_blue,3}";
-		}
 	}
 }
+

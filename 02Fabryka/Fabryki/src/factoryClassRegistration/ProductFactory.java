@@ -4,14 +4,14 @@ import java.util.HashMap;
 
 class ProductFactory
 {
-	private HashMap m_RegisteredProducts = new HashMap();
+	private HashMap<String, Class> m_RegisteredProducts = new HashMap();
 
 	public void registerProduct (String productID, Class productClass)
 	{
 		m_RegisteredProducts.put(productID, productClass);
 	}
 	public void registerProduct(String productID, Product p)    {
-		m_RegisteredProducts.put(productID, p);
+		m_RegisteredProducts.put(productID, p.getClass());
 	}
 
 	public Product createProduct(String productID){

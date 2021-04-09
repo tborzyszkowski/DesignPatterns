@@ -1,6 +1,5 @@
 package openclose;
 
-//Open-Close Principle - Good example
 class GraphicEditor {
 	public void drawShape(Shape s) {
 		s.draw();
