@@ -8,7 +8,7 @@ namespace _02Library {
 	abstract class Decorator : LibraryItem {
 		protected LibraryItem libraryItem;
 
-		public Decorator(LibraryItem libraryItem) {
+		protected Decorator(LibraryItem libraryItem) {
 			this.libraryItem = libraryItem;
 		}
 

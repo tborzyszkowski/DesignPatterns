@@ -8,7 +8,7 @@ namespace _03Starbuzz {
 	class MainApp {
 		static void Main(string[] args) {
 			Beverage expresso = new Espresso();
-			Console.WriteLine(expresso.Description + " $" + expresso.Cost());
+			Console.WriteLine(expresso.Description + " $" + expresso.Cost() + " " + expresso.GetType());
 
 			Beverage houseBlend = new HouseBlend();
 			houseBlend = new Mocha(houseBlend);
@@ -18,7 +18,7 @@ namespace _03Starbuzz {
 
 			Beverage darkRoast = new DarkRoast();
 			darkRoast = new CoffeeMate(darkRoast);
-			Console.WriteLine(darkRoast.Description + " $" + darkRoast.Cost());
+			Console.WriteLine(darkRoast.Description + " $" + darkRoast.Cost() + " " + darkRoast.GetType());
 		}
 	}
 }

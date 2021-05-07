@@ -17,7 +17,8 @@ namespace _01_Simple {
 		}
 
 		public Flyweight GetFlyweight(string key) {
-			return ((Flyweight)flyweights[key]);
+			Flyweight flyweight = (Flyweight)flyweights[key];
+			return flyweight;
 		}
 	}
 }

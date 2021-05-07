@@ -51,6 +51,10 @@ namespace Composite {
 			edward.AddChild(david);
 
 			edward.LogChildren();
+
+			john.AddChild(edward);
+			john.LogChildren();
+
 		}
 	}
 }
