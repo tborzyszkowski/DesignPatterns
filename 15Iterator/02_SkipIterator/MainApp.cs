@@ -20,7 +20,7 @@ namespace _02_SkipIterator {
 
 			Iterator iterator = collection.CreateIterator();
 
-			iterator.Step = 3;
+			iterator.Step = 2;
 
 			Console.WriteLine("Iterating over collection:");
 

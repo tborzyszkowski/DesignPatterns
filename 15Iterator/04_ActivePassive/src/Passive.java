@@ -38,7 +38,7 @@ public class Passive {
 		users
 			.stream()
 			.filter(u -> u.age > 50)
-			.forEach(u -> System.out.println(u));
+			.forEach(System.out::println);
 		System.out.println();
 		users
 			.parallelStream()

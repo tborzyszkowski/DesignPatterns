@@ -43,7 +43,7 @@ namespace _02_Inwestors {
 				investor.Update(this);
 			}
 
-			Console.WriteLine("");
+			Console.WriteLine("Notify");
 		}
 	}
 }

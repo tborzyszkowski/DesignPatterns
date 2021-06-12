@@ -8,7 +8,8 @@ namespace _02_Inwestors {
 	class MainApp {
 		static void Main(string[] args) {
 			IBM ibm = new IBM("IBM", 120.00);
-			ibm.Attach(new Investor("Sorros"));
+			var investor = new Investor("Sorros");
+			ibm.Attach(investor);
 			var kowalski = new Investor("Kowalski");
 			ibm.Attach(kowalski);
 
@@ -18,7 +19,9 @@ namespace _02_Inwestors {
 			ibm.Detach(kowalski);
 			ibm.Price = 120.50;
 			ibm.Price = 120.75;
-
+			ibm.Detach(investor);
+			ibm.Price = 130.50;
+			ibm.Price = 130.75;
 		}
 	}
 }
