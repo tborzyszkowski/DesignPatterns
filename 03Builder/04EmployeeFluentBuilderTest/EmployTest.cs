@@ -24,8 +24,9 @@ namespace _04EmployeeFluentBuilderTest {
 		[TestMethod]
 		public void GetAgeReturnsCorrectValueFulentBuilder() {
 			// Arrange
-			Employee emp = new EmployeeBuilder().WithBirthDate(new DateTime(1983, 1, 1));
-
+			Employee emp = new EmployeeBuilder()
+				.WithBirthDate(new DateTime(1983, 1, 1))
+				.WithFirstName("Zenek");
 			// Act
 			var age = emp.GetAge();
 

@@ -14,7 +14,7 @@ class ProductFactory
 		m_RegisteredProducts.put(productID, p.getClass());
 	}
 
-	public Product createProduct(String productID){
-		return ((Product)m_RegisteredProducts.get(productID)).createProduct();
-	}
+//	public Product createProduct(String productID){
+//		return ((Product)m_RegisteredProducts.get(productID)).createProduct();
+//	}
 }

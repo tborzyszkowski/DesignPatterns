@@ -12,7 +12,8 @@ namespace _03FluentBuilder {
 		static void Main(string[] args) {
 			Shop shop = new Shop();
 
-			Vehicle scooter = shop.Construct(new ScooterBuilder());
+			//Vehicle scooter = shop.Construct(new ScooterBuilder());
+			Vehicle scooter = new ScooterBuilder();
 			scooter.Show();
 
 			shop.Construct(new CarBuilder()).Show();
