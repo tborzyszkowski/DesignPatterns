@@ -1,8 +1,8 @@
 # DesignPatterns
-Examples to my lectures on Design Patterns
+<!-- Examples to my lectures on Design Patterns
 
 [Slides for the course](https://inf.ug.edu.pl/~tomek/wzorce/) (in Polish)
-
+-->
 ## References:
 1. E. Gamma, R. Helm, R. Johnson, J. Vlissides. Design Patterns. Addison-Wesely, 1995.
 2. E. Freeman, E. Freeman, B. Bates, K. Sierra. Head First Design Patterns, O.Reilly Media Inc., 2004.
