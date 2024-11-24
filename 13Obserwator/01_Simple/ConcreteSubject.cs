@@ -9,7 +9,7 @@ namespace _01_Simple {
 		private string _subjectState;
 
 		public string SubjectState {
-			get { return _subjectState; }
+			get => _subjectState;
 			set {
 				_subjectState = value;
 				Notify();

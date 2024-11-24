@@ -17,7 +17,7 @@ namespace _01Simple {
 
         public void Notify(string message) {
             Console.WriteLine("Colleague1 gets message: "
-              + message);
+              + message + " | " + this.GetHashCode());
         }
     }
 }

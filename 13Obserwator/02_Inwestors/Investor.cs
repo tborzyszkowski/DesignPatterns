@@ -10,8 +10,8 @@ namespace _02_Inwestors {
 		private Stock _stock;
 
 		public Stock Stock {
-			get { return _stock; }
-			set { _stock = value; }
+			get => _stock;
+			set => _stock = value;
 		}
 
 		public Investor(string name) {

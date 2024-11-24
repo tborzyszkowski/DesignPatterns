@@ -10,7 +10,7 @@ namespace _02_Inwestors {
 		private double _price;
 		private List<IInvestor> _investors = new List<IInvestor>();
 		public double Price {
-			get { return _price; }
+			get => _price;
 			set {
 				if (_price != value)
 				{

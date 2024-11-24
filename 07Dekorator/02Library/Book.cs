@@ -9,10 +9,10 @@ namespace _02Library {
 		private string _author;
 		private string _title;
 
-		public Book(string author, string title, int numCopies) {
+		public Book(string author, string title, int numCopies): base(numCopies)
+		{
 			this._author = author;
 			this._title = title;
-			this.NumCopies = numCopies;
 		}
 
 		public override void Display() {

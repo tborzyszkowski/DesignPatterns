@@ -17,7 +17,7 @@ namespace _01_Simple {
 		}
 
 		public void Notify() {
-			foreach (Observer o in _observers)
+			foreach (var o in _observers)
 			{
 				o.Update();
 			}

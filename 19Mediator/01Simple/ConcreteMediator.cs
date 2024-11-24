@@ -21,6 +21,7 @@ namespace _01Simple {
 
         public override void Send(string message,
           Colleague colleague) {
+            Console.WriteLine("Send: " + message + " | " + this.GetHashCode());
             if (colleague == _colleague1) {
                 _colleague2.Notify(message);
             }

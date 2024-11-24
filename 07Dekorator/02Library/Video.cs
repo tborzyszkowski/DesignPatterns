@@ -10,11 +10,9 @@ namespace _02Library {
 		private string _title;
 		private int _playTime;
 
-		public Video(string director, string title,
-		  int numCopies, int playTime) {
+		public Video(string director, string title, int numCopies, int playTime) : base(numCopies) {
 			this._director = director;
 			this._title = title;
-			this.NumCopies = numCopies;
 			this._playTime = playTime;
 		}
 

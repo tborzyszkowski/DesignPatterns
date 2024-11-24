@@ -14,7 +14,7 @@ namespace _01_Simple {
 
 			// Work with different flyweight instances
 			Flyweight fx = factory.GetFlyweight("X");
-			fx.Operation(--extrinsicstate);
+				fx.Operation(--extrinsicstate);
 
 			Flyweight fy = factory.GetFlyweight("Y");
 			fy.Operation(--extrinsicstate);
@@ -22,8 +22,7 @@ namespace _01_Simple {
 			Flyweight fz = factory.GetFlyweight("Z");
 			fz.Operation(--extrinsicstate);
 
-			UnsharedConcreteFlyweight fu = new
-			  UnsharedConcreteFlyweight();
+			UnsharedConcreteFlyweight fu = new UnsharedConcreteFlyweight();
 
 			fu.Operation(--extrinsicstate);
 		}

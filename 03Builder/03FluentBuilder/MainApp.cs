@@ -16,7 +16,10 @@ namespace _03FluentBuilder {
 			Vehicle scooter = new ScooterBuilder();
 			scooter.Show();
 
-			shop.Construct(new CarBuilder()).Show();
+			//shop.Construct(new CarBuilder()).Show();
+			Vehicle car = new CarBuilder();
+			car.Show();
+			//(new CarBuilder()).show();
 		}
 	}
 }

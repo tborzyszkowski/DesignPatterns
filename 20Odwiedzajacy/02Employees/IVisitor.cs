@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02Employees {
-    interface IVisitor {
-        void Visit(Element element);
-    }
+	interface IVisitor {
+		void Visit(Element element);
+	}
 }

@@ -35,8 +35,7 @@ namespace _02Chatroom {
         // Receives message from given participant
         public virtual void Receive(
           string from, string message) {
-            Console.WriteLine("{0} to {1}: '{2}'",
-              from, Name, message);
+            Console.WriteLine($"{from} to {Name}: '{message}'");
         }
     }
 }

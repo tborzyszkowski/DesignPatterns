@@ -27,7 +27,7 @@ namespace Composite {
 			return _children[index];
 		}
 		public IFamilyMember GetChild(string name) {
-			return _children.Where(c => c.Name == name).First();
+			return _children.Where(c => c.Name == name).FirstOrDefault();
 		}
 
 		public IEnumerable<IFamilyMember> GetChildren() {

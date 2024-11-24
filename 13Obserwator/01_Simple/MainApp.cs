@@ -9,13 +9,20 @@ namespace _01_Simple {
 		static void Main(string[] args) {
 			ConcreteSubject s = new ConcreteSubject();
 
-			s.Attach(new ConcreteObserver(s, "X"));
-			s.Attach(new ConcreteObserver(s, "Y"));
-			s.Attach(new ConcreteObserver(s, "Z"));
+			var observerX = new ConcreteObserver(s, "X");
+			s.Attach(observerX);
+			var observerY = new ConcreteObserver(s, "Y");
+			s.Attach(observerY);
+			var observerZ = new ConcreteObserver(s, "Z");
+			s.Attach(observerZ);
 
 			s.SubjectState = "ABC";
 			//s.Notify();
+			s.Detach(observerX);
 			s.SubjectState = "XYZ";
+			s.Detach(observerY);
+			s.Detach(observerZ);
+			s.SubjectState = "qwerty";
 		}
 	}
 }

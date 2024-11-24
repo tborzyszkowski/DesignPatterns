@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02Employees {
-    class Director : Employee {
-        // Constructor
-        public Director()
-          : base("Elly", 35000.0, 16) {
-        }
-    }
+	class Director : Employee {
+		public Director()
+		  : base("Elly", 35000.0, 16) {
+		}
+	}
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02Library {
-	abstract class Decorator : LibraryItem {
+	abstract class Decorator : Item {
 		protected LibraryItem libraryItem;
 
 		protected Decorator(LibraryItem libraryItem) {

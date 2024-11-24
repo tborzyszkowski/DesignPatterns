@@ -46,6 +46,7 @@
     <Compile Include="Book.cs" />
     <Compile Include="Borrowable.cs" />
     <Compile Include="Decorator.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="LibraryItem.cs" />
     <Compile Include="MainApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

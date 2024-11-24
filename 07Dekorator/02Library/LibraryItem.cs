@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _02Library {
-	abstract class LibraryItem {
+	abstract class LibraryItem : Item {
 		public int NumCopies { get; set; }
 
-		public abstract void Display();
+		public LibraryItem() { }
+		public LibraryItem(int numCopies) => this.NumCopies = numCopies;
+
+		
 	}
 }

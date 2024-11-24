@@ -45,38 +45,38 @@ public class Passive {
 			.filter(u -> u.age > 50)
 			.forEach(u -> System.out.println(u));
 
-//		System.out.println("\nCount: " + 
-//					users
-//						.stream()
-//						.filter(u -> u.name.startsWith("S"))
-//						.count()
-//						);
-//
-//		System.out.println("\ntoUpperCase:");
-//		users
-//			.stream()
-//			.filter(u -> u.age > 40)
-//			.map(u -> u.name.toUpperCase())
-//			.forEach( u -> System.out.println(u) );
-//
-//		System.out.println("\nmin:");
-//		User uMin = users
-//						.stream()
-//						.min(Comparator.comparing(u -> u.lastName.length()))
-//						.get();
-//		System.out.println(uMin);
-//
-//		System.out.println("\nreduced:");
-//		String reduced = users
-//							.stream()
-//							.map(u -> u.name)
-//							.reduce("", (acc, n) -> acc + " " + n);
-//		System.out.println(reduced);
-//
-//		System.out.println("\naverage age:" + 
-//						users
-//							.stream()
-//							.mapToInt(u -> u.age)
-//							.average());
+		System.out.println("\nCount: " +
+					users
+						.stream()
+						.filter(u -> u.name.startsWith("S"))
+						.count()
+						);
+
+		System.out.println("\ntoUpperCase:");
+		users
+			.stream()
+			.filter(u -> u.age > 40)
+			.map(u -> u.name.toUpperCase())
+			.forEach( u -> System.out.println(u) );
+
+		System.out.println("\nmin:");
+		User uMin = users
+						.stream()
+						.min(Comparator.comparing(u -> u.lastName.length()))
+						.get();
+		System.out.println(uMin);
+
+		System.out.println("\nreduced:");
+		String reduced = users
+							.stream()
+							.map(u -> u.name)
+							.reduce("", (acc, n) -> acc + " " + n);
+		System.out.println(reduced);
+
+		System.out.println("\naverage age:" +
+						users
+							.stream()
+							.mapToInt(u -> u.age)
+							.average());
 	}
 }
