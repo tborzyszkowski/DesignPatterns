@@ -24,7 +24,7 @@ namespace _02ConcurrentBagImplementation {
 
 				MyClass mc = pool.GetObject();
 
-				Console.CursorLeft = 0;
+				//Console.CursorLeft = 0;
 				// This is the bottleneck in our application. All threads in this loop
 				// must serialize their access to the static Console class.
 				// Console.WriteLine("i = {0}\t Val = {1:####.####}\t", i, mc.GetValue(i%10));
@@ -34,6 +34,7 @@ namespace _02ConcurrentBagImplementation {
 					loopState.Stop();
 
 			});
+			Console.WriteLine($"\nCount = {pool.GetCount()}");
 			Console.WriteLine("Press the Enter key to exit.");
 			Console.ReadLine();
 			cts.Dispose();

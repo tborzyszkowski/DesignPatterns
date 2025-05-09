@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace _02ConcurrentBagImplementation {
 	// A toy class that requires some resources to create.
@@ -6,8 +7,10 @@ namespace _02ConcurrentBagImplementation {
 	// object pool vs. ordinary instantiation.
 	class MyClass {
 		public double[] Nums { get; set; }
-		public double GetValue(long i) {
-			return Math.Sqrt(Math.Abs(Nums[i]));
+		public double GetValue(long i)
+        {
+            Thread.Sleep(1000);
+            return Math.Sqrt(Math.Abs(Nums[1]));
 		}
 		public MyClass() {
 			Console.WriteLine("new MyClass()");

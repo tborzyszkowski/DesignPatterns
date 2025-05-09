@@ -4,7 +4,7 @@ using System.IO.Compression;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
-using System.Text;
+using System.Text;w
 using System.Threading;
 
 namespace _04IODekoratorUsage {
