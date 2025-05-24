@@ -17,6 +17,16 @@ namespace _01Simple {
 
             context = new Context(new ConcreteStrategyC());
             context.ContextInterface();
+
+            Console.WriteLine("==========");
+
+            // 2nd way
+            context = new Context(new ConcreteStrategyA());
+            context.ContextInterface();
+            context.strategy = new ConcreteStrategyB();
+            context.ContextInterface();
+            context.strategy = new ConcreteStrategyC();
+            context.ContextInterface();
         }
     }
 }

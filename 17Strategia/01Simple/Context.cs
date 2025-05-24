@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace _01Simple {
     class Context {
-        private Strategy _strategy;
+        public Strategy strategy { get; set; }
 
         // Constructor
         public Context(Strategy strategy) {
-            this._strategy = strategy;
+            this.strategy = strategy;
         }
 
         public void ContextInterface() {
-            _strategy.AlgorithmInterface();
+            strategy.AlgorithmInterface();
         }
     }
 }

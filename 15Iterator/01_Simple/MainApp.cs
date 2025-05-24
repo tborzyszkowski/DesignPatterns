@@ -12,6 +12,8 @@ namespace _01_Simple {
 			a[1] = "Item B";
 			a[2] = "Item C";
 			a[3] = "Item D";
+            a[4] = 4.5;
+            a[5] = a;
 
 			Iterator i = a.CreateIterator();
 
