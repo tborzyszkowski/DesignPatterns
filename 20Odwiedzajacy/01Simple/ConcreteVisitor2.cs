@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace _01Simple {
     class ConcreteVisitor2 : Visitor {
-        public override void VisitConcreteElementA(
-          ConcreteElementA concreteElementA) {
-            Console.WriteLine("A: {0} visited by {1}",
-              concreteElementA.GetType().Name, this.GetType().Name);
+        public override void Visit(ConcreteElementA concreteElementA) {
+            Console.WriteLine($"A: {concreteElementA.GetType().Name} visited by {this.GetType().Name}");
         }
 
-        public override void VisitConcreteElementB(
-          ConcreteElementB concreteElementB) {
-            Console.WriteLine("B: {0} visited by {1}",
-              concreteElementB.GetType().Name, this.GetType().Name);
+        public override void Visit(ConcreteElementB concreteElementB) {
+            Console.WriteLine($"B: {concreteElementB.GetType().Name} visited by {this.GetType().Name}");
         }
     }
 }

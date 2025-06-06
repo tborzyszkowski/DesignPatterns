@@ -11,11 +11,11 @@ namespace _01Simple {
           : base(mediator) {
         }
 
-        public void Send(string message) {
+        public override void Send(string message) {
             mediator.Send(message, this);
         }
 
-        public void Notify(string message) {
+        public override void Notify(string message) {
             Console.WriteLine("Colleague1 gets message: "
               + message + " | " + this.GetHashCode());
         }

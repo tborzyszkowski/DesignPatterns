@@ -12,5 +12,9 @@ namespace _01Simple {
         public Colleague(Mediator mediator) {
             this.mediator = mediator;
         }
+
+        public abstract void Send(string message);
+        public abstract void Notify(string message);
+
     }
 }

@@ -11,9 +11,7 @@ namespace _02Employees {
 
 			// Provide 3 extra vacation days
 			employee.VacationDays += 3;
-			Console.WriteLine("{0} {1}'s new vacation days: {2}",
-			  employee.GetType().Name, employee.Name,
-			  employee.VacationDays);
+			Console.WriteLine($"{employee.GetType().Name} {employee.Name}'s new vacation days: {employee.VacationDays}");
 		}
 	}
 }

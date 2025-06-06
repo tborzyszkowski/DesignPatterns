@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace _01Simple {
     class ConcreteElementB : Element {
         public override void Accept(Visitor visitor) {
-            visitor.VisitConcreteElementB(this);
+            visitor.Visit(this);
         }
 
         public void OperationB() {

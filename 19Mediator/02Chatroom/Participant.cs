@@ -29,7 +29,7 @@ namespace _02Chatroom {
 
         // Sends message to given participant
         public void Send(string to, string message) {
-            _chatroom.Send(_name, to, message);
+            Chatroom.Send(_name, to, message);
         }
 
         // Receives message from given participant
