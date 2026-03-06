@@ -1,0 +1,31 @@
+@startuml singleton_lifecycle
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+
+title Cykl życia obiektu Singleton
+
+[*] --> Niezainicjowany : start aplikacji
+
+state Niezainicjowany {
+  note : _instance == null\nKonstruktor jeszcze\nnie był wywołany
+}
+
+Niezainicjowany --> Inicjalizacja : pierwsze GetInstance()
+
+state Inicjalizacja {
+  note : new Singleton()\nJedyne wywołanie\nkonstruktora
+}
+
+Inicjalizacja --> Aktywny : instancja gotowa
+
+state Aktywny {
+  note : _instance != null\nWszyscy klienci używają\ntego samego obiektu
+}
+
+Aktywny --> Aktywny : kolejne wywołania GetInstance()\nzwracają tę samą instancję
+
+Aktywny --> Zniszczony : AppDomain.Unload()\nlub zakończenie procesu
+
+Zniszczony --> [*]
+
+@enduml

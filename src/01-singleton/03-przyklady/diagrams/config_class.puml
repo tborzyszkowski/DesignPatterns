@@ -1,0 +1,44 @@
+@startuml config_class
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+}
+
+title Klasa konfiguracji jako Singleton
+
+class AppConfiguration {
+  - {static} _lazy : Lazy<AppConfiguration>
+  - _settings : Dictionary<string, string>
+  --
+  - AppConfiguration()
+  - LoadFromFile(path: string) : Dictionary<string, string>
+  ==
+  + {static} Instance : AppConfiguration
+  + Get(key: string) : string
+  + Get<T>(key: string, default: T) : T
+}
+
+note right of AppConfiguration
+  Plik konfiguracyjny wczytany
+  dokładnie raz przy pierwszym
+  dostępie do Instance
+end note
+
+class DatabaseSettings {
+  + ConnectionString : string
+  + Timeout : int
+  + MaxPoolSize : int
+}
+
+class AppSettings {
+  + Environment : string
+  + LogLevel : string
+  + MaxRetries : int
+}
+
+AppConfiguration ..> DatabaseSettings : <<creates>>
+AppConfiguration ..> AppSettings : <<creates>>
+
+@enduml

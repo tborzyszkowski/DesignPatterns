@@ -1,0 +1,49 @@
+@startuml singleton_sequence
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+
+title Cykl życia Singletona — Wywołania GetInstance()
+
+actor "Klient 1" as C1
+actor "Klient 2" as C2
+participant "Singleton\n(klasa)" as S <<Singleton>>
+participant "_instance\n(pole statyczne)" as I
+
+== Pierwsze wywołanie ==
+
+C1 -> S : GetInstance()
+activate S
+S -> I : odczyt _instance
+I --> S : null
+note right of S
+  _instance == null
+  → tworzę nowy obiekt
+end note
+S -> S : new Singleton()
+S -> I : zapis nowej instancji (A)
+S --> C1 : zwraca instancję (A)
+deactivate S
+
+== Drugie wywołanie ==
+
+C2 -> S : GetInstance()
+activate S
+S -> I : odczyt _instance
+I --> S : instancja (A)
+note right of S
+  _instance != null
+  → zwracam istniejący obiekt
+end note
+S --> C2 : zwraca tę samą instancję (A)
+deactivate S
+
+== Wynik ==
+
+note over C1, C2
+  Zarówno Klient 1, jak i Klient 2
+  trzymają referencję do <b>tego samego</b> obiektu (A)
+  C1.GetInstance() == C2.GetInstance() → true
+end note
+
+@enduml

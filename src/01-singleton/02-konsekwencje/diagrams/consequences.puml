@@ -1,0 +1,30 @@
+@startuml consequences
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+
+title Kontrolowany dostęp do instancji Singletona
+
+actor "Klient A" as A
+actor "Klient B" as B
+participant "Singleton\n(punkt dostępu)" as S <<Singleton>>
+participant "Jedyna\nInstancja" as I
+
+A -> S : Instance (właściwość)
+S --> A : ref do instancji
+
+B -> S : Instance (właściwość)
+S --> B : ta sama ref
+
+note over A, B
+  Obaj klienci mają dostęp
+  wyłącznie przez kontrolowany
+  punkt: Singleton.Instance
+end note
+
+note over I
+  Konstruktor prywatny
+  new Singleton() → błąd kompilacji
+  poza klasą Singleton
+end note
+
+@enduml

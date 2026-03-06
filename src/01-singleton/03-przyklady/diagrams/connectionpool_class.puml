@@ -1,0 +1,43 @@
+@startuml connectionpool_class
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+}
+
+title Pula połączeń jako Singleton
+
+class DbConnectionPool {
+  - {static} _lazy : Lazy<DbConnectionPool>
+  - _semaphore : SemaphoreSlim
+  - _available : Queue<DbConnection>
+  - {static} PoolSize : int = 5
+  --
+  - DbConnectionPool()
+  ==
+  + {static} Instance : DbConnectionPool
+  + AcquireAsync(ct: CancellationToken) : Task<DbConnection>
+  + Release(connection: DbConnection) : void
+  + AvailableCount : int
+}
+
+class DbConnection {
+  + Id : int
+  + IsOpen : bool
+  + Open() : void
+  + Close() : void
+  + ExecuteQuery(sql: string) : DataTable
+}
+
+DbConnectionPool "1" *--> "0..5" DbConnection : zarządza >
+
+note bottom of DbConnectionPool
+  Singleton gwarantuje,
+  że cała aplikacja używa
+  jednej puli połączeń.
+  SemaphoreSlim ogranicza
+  równoczesny dostęp do PoolSize.
+end note
+
+@enduml

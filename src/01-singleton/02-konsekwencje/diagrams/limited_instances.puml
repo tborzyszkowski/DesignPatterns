@@ -1,0 +1,40 @@
+@startuml limited_instances
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+}
+
+title Multiton — uogólnienie Singletona na N instancji
+
+class Multiton {
+  - {static} _instances : List<Multiton>
+  - {static} _maxInstances : int = 3
+  - _id : int
+  --
+  - Multiton(id: int)
+  + {static} GetInstance() : Multiton
+  + Id : int
+}
+
+note right of Multiton
+  GetInstance() może zwrócić
+  jedną z N instancji (round-robin).
+  Singleton to specjalny przypadek
+  gdy N = 1.
+end note
+
+object instance1 <<Multiton>> {
+  Id = 1
+}
+object instance2 <<Multiton>> {
+  Id = 2
+}
+object instance3 <<Multiton>> {
+  Id = 3
+}
+
+Multiton "1" *-- "3" Multiton : zarządza >
+
+@enduml

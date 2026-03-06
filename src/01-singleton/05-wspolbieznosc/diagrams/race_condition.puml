@@ -1,0 +1,38 @@
+@startuml race_condition
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+
+title Race Condition — Klasyczny Singleton bez synchronizacji
+
+participant "Wątek A" as A #LightBlue
+participant "_instance\n(pole statyczne)" as I
+participant "Wątek B" as B #LightGreen
+
+note over I : _instance = null
+
+A -> I : odczyt: _instance == null?
+note right of A
+  Wątek A: true
+  → zamierzam tworzyć nową instancję
+end note
+
+B -> I : odczyt: _instance == null? (JEDNOCZEŚNIE!)
+note left of B
+  Wątek B: true
+  → zamierzam tworzyć nową instancję
+end note
+
+A -> A : new Singleton() → obiekt X (HashCode: 100)
+B -> B : new Singleton() → obiekt Y (HashCode: 200)
+
+A -> I : zapis: _instance = X
+B -> I : zapis: _instance = Y (nadpisuje X!)
+
+note over A, B #Pink
+  PROBLEM: Wątek A pracuje na X (100),
+  ale _instance == Y (200).
+  GetInstance() teraz zwróci Y, nie X!
+  Naruszono gwarancję jednej instancji.
+end note
+
+@enduml

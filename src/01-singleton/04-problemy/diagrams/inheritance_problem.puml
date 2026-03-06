@@ -1,0 +1,62 @@
+@startuml inheritance_problem
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+}
+
+title Problem dziedziczenia Singletona
+
+package "Problem (złe)" #Pink {
+  class Logger_BAD {
+    # {static} _instance : Logger_BAD
+    # Logger_BAD()
+    + {static} GetInstance() : Logger_BAD
+    + Log(msg: string) : void
+  }
+
+  class FileLogger_BAD {
+    # FileLogger_BAD()
+    note: brak własnego GetInstance()!
+  }
+
+  class DatabaseLogger_BAD {
+    # DatabaseLogger_BAD()
+  }
+
+  Logger_BAD <|-- FileLogger_BAD
+  Logger_BAD <|-- DatabaseLogger_BAD
+
+  note bottom of Logger_BAD
+    FileLogger_BAD.GetInstance()
+    zwraca Logger_BAD, nie FileLogger_BAD!
+    Wspólne pole _instance jest dziedziczone.
+  end note
+}
+
+package "Rozwiązanie (dobre)" #PaleGreen {
+  class Logger_OK {
+    # Logger_OK()
+    + {abstract} Log(msg: string) : void
+    + {static} GetInstance(type: string) : Logger_OK
+    - {static} _registry : Dictionary<string, Logger_OK>
+  }
+
+  class FileLogger_OK {
+    + {static} Instance : FileLogger_OK
+    - FileLogger_OK()
+    + Log(msg: string) : void
+  }
+
+  class DatabaseLogger_OK {
+    + {static} Instance : DatabaseLogger_OK
+    - DatabaseLogger_OK()
+    + Log(msg: string) : void
+  }
+
+  Logger_OK <|-- FileLogger_OK
+  Logger_OK <|-- DatabaseLogger_OK
+}
+
+@enduml

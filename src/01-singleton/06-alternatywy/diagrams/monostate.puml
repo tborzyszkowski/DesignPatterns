@@ -1,0 +1,56 @@
+@startuml monostate
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+}
+
+title Wzorzec Monostate vs Singleton
+
+package "Singleton" #LightCyan {
+  class Singleton {
+    - {static} _instance : Singleton
+    - {instance} _state : string
+    --
+    - Singleton()
+    + {static} Instance : Singleton
+    + State : string
+  }
+
+  note right of Singleton
+    Jedna instancja,
+    jeden stan.
+  end note
+}
+
+package "Monostate" #LightGreen {
+  class Monostate {
+    - {static} _sharedState : string
+    --
+    + Monostate()   ← publiczny!
+    + State : string  ← wraps static field
+  }
+
+  object ms1 <<Monostate>> {
+    (instancja 1)
+  }
+  object ms2 <<Monostate>> {
+    (instancja 2)
+  }
+  object ms3 <<Monostate>> {
+    (instancja 3)
+  }
+
+  Monostate <.. ms1
+  Monostate <.. ms2
+  Monostate <.. ms3
+
+  note bottom of Monostate
+    Wiele instancji,
+    ale jeden wspólny stan
+    (pola statyczne).
+  end note
+}
+
+@enduml

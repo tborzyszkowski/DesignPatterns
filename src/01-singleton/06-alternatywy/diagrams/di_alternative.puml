@@ -1,0 +1,48 @@
+@startuml di_alternative
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+}
+
+title Dependency Injection jako alternatywa dla Singletona
+
+interface IEmailSender {
+  + Send(to: string, subject: string, body: string) : void
+}
+
+class SmtpEmailSender {
+  + Send(to: string, subject: string, body: string) : void
+}
+
+class MockEmailSender {
+  + SentMessages : List<string>
+  + Send(to: string, subject: string, body: string) : void
+}
+
+class OrderService {
+  - _emailSender : IEmailSender
+  + OrderService(sender: IEmailSender)
+  + PlaceOrder(email: string) : void
+}
+
+class "DI Container\n(ASP.NET Core)" as DI {
+  + AddSingleton<IEmailSender, SmtpEmailSender>()
+}
+
+IEmailSender <|.. SmtpEmailSender
+IEmailSender <|.. MockEmailSender
+
+OrderService --> IEmailSender : uses (injected)
+DI ..> SmtpEmailSender : <<creates>> singleton
+DI ..> OrderService : <<injects>> IEmailSender
+
+note bottom of OrderService
+  <b>Zaleta DI vs Singleton:</b>
+  W testach można wstrzyknąć MockEmailSender.
+  OrderService nie zna konkretnego typu —
+  zależy tylko od interfejsu.
+end note
+
+@enduml

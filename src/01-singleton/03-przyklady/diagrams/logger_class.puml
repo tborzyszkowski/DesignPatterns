@@ -1,0 +1,56 @@
+@startuml logger_class
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+}
+
+title Logger jako Singleton
+
+interface IAppLogger {
+  + Log(level: LogLevel, msg: string) : void
+  + LogInfo(msg: string) : void
+  + LogWarning(msg: string) : void
+  + LogError(msg: string) : void
+}
+
+class AppLogger {
+  - {static} _lazy : Lazy<AppLogger>
+  - _writer : StreamWriter
+  --
+  - AppLogger()
+  ==
+  + {static} Instance : AppLogger
+  + Log(level: LogLevel, msg: string) : void
+  + LogInfo(msg: string) : void
+  + LogWarning(msg: string) : void
+  + LogError(msg: string) : void
+  + Dispose() : void
+}
+
+enum LogLevel {
+  Debug
+  Info
+  Warning
+  Error
+  Critical
+}
+
+AppLogger ..|> IAppLogger
+AppLogger --> LogLevel
+
+class OrderService {
+  - _logger : IAppLogger
+  + PlaceOrder(order: Order) : void
+}
+
+class PaymentService {
+  - _logger : IAppLogger
+  + ProcessPayment(payment: Payment) : void
+}
+
+OrderService --> IAppLogger : uses
+PaymentService --> IAppLogger : uses
+
+@enduml

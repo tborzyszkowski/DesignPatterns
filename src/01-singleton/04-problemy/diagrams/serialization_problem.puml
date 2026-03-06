@@ -1,0 +1,39 @@
+@startuml serialization_problem
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+
+title Problem serializacji Singletona
+
+actor Developer as Dev
+
+participant "Config.Instance\n(oryginalna instancja)" as S
+participant "JsonSerializer" as J
+participant "Nowy obiekt\n(deserializowany)" as N
+
+Dev -> S : JsonSerializer.Serialize(Config.Instance)
+S -> J : przekazuje dane JSON
+J --> Dev : json = "{\"Value\":\"X\"}"
+
+Dev -> J : JsonSerializer.Deserialize<Config>(json)
+J -> N : new Config() ← UWAGA: tworzy NOWY obiekt!
+J --> Dev : deserialized (nowy obiekt)
+
+note over S, N
+  S != N → naruszona gwarancja singletona!
+  Teraz w pamięci są DWA obiekty Config.
+end note
+
+== Rozwiązanie: Custom JsonConverter ==
+
+Dev -> J : Serialize(Config.Instance) z SingletonConverter
+J --> Dev : json = "{\"Value\":\"X\"}"
+
+Dev -> J : Deserialize<Config>(json) z SingletonConverter
+J -> S : GetRealObject() → zwróć istniejącą instancję
+J --> Dev : Config.Instance (ORYGINALNY obiekt)
+
+note over S
+  S == zwrócony obiekt → singleton zachowany!
+end note
+
+@enduml

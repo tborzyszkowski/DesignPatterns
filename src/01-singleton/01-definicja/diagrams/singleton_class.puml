@@ -1,0 +1,33 @@
+@startuml singleton_class
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+    ArrowColor DarkGray
+}
+
+class Singleton {
+  - {static} _instance : Singleton
+  --
+  - Singleton()
+  ==
+  + {static} GetInstance() : Singleton
+  + Operation() : void
+  + GetData() : string
+}
+
+note right of Singleton
+  <b>Kluczowe elementy:</b>
+  1. Pole statyczne przechowuje
+     jedyną instancję
+  2. Konstruktor prywatny blokuje
+     tworzenie spoza klasy
+  3. Statyczna metoda/właściwość
+     udostępnia instancję
+end note
+
+Singleton ..> Singleton : <<creates>>
+
+@enduml

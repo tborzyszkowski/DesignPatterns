@@ -1,0 +1,43 @@
+@startuml threadsafe_solutions
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+
+title Double-Checked Locking (DCL) — Thread-Safe Singleton
+
+participant "Wątek A" as A #LightBlue
+participant "_instance\n(volatile)" as I
+participant "lock (_lock)" as L
+participant "Wątek B" as B #LightGreen
+
+note over I : _instance = null
+
+== Inicjalizacja (pierwsze wywołanie) ==
+
+A -> I : 1. sprawdza: _instance == null?
+note right of A : true
+A -> L : 2. lock(_lock) — blokuje mutex
+note right of L : mutex zajęty przez A
+
+B -> I : 1. sprawdza: _instance == null?
+note left of B : true → czeka na mutex
+B -> L : czeka na zwolnienie locka...
+
+A -> I : 3. sprawdza ponownie: _instance == null?
+note right of A : true → tworzę instancję
+A -> A : 4. new Singleton() → instancja X
+A -> I : 5. zapis: _instance = X (volatile write)
+A -> L : 6. zwalnia lock
+
+B -> L : przejmuje mutex
+B -> I : 3. sprawdza PONOWNIE: _instance == null?
+note left of B : false → instancja już istnieje!
+B -> L : zwalnia lock
+B --> B : zwraca istniejącą instancję X
+
+== Po inicjalizacji (każde kolejne wywołanie) ==
+
+A -> I : sprawdza: _instance == null?
+note right of A : false → NIE blokuje mutexu!\nZwraca od razu.
+A --> A : zwraca X (szybko, bez locka)
+
+@enduml
