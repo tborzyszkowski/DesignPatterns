@@ -42,66 +42,13 @@ Pełna implementacja: [`ChocolateBoiler.cs`](code/SingletonDefinition/ChocolateB
 
 ## Struktura UML
 
-```plantuml
-@startuml singleton_class
-skinparam classAttributeIconSize 0
-skinparam backgroundColor #FFFFF0
-skinparam shadowing false
-
-class Singleton {
-  - {static} _instance : Singleton
-  - Singleton()
-  + {static} GetInstance() : Singleton
-  + Operation() : void
-  + GetData() : string
-}
-
-note right of Singleton
-  Konstruktor prywatny:
-  nikt poza klasą nie może
-  wywołać new Singleton()
-end note
-
-Singleton --> Singleton : tworzy i zwraca\njedyny egzemplarz
-
-@enduml
-```
-
 ![Diagram klasy Singleton](diagrams/singleton_class.png)
 
 ---
 
 ## Cykl życia Singletona
 
-```plantuml
-@startuml singleton_sequence
-skinparam backgroundColor #FFFFF0
-
-actor Klient1
-actor Klient2
-participant "Singleton" as S
-
-Klient1 -> S : GetInstance()
-activate S
-note right of S: _instance == null\n→ tworzę nowy obiekt
-S --> Klient1 : zwraca nową instancję (A)
-deactivate S
-
-Klient2 -> S : GetInstance()
-activate S
-note right of S: _instance != null\n→ zwracam istniejący obiekt
-S --> Klient2 : zwraca tę samą instancję (A)
-deactivate S
-
-note over Klient1, Klient2
-  Klient1 i Klient2 trzymają
-  referencję do TEGO SAMEGO obiektu
-end note
-
-@enduml
-```
-
-Plik diagramu: [`diagrams/singleton_sequence.puml`](diagrams/singleton_sequence.puml)
+![Diagram sekwencji Singleton](diagrams/singleton_sequence.png)
 
 ---
 

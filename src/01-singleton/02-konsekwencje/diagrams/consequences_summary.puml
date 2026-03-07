@@ -1,0 +1,15 @@
+@startuml consequences_summary
+skinparam backgroundColor #FFFFF0
+
+rectangle "Singleton" as S #LightYellow {
+  card "<b>+</b> Kontrola dostępu\n   do instancji" as C1 #PaleGreen
+  card "<b>+</b> Mniejsza\n   przestrzeń nazw" as C2 #PaleGreen
+  card "<b>+</b> Możliwość\n   podklas" as C3 #PaleGreen
+  card "<b>+</b> Limit\n   instancji" as C4 #PaleGreen
+  card "<b>+</b> Elastyczność\n   vs static" as C5 #PaleGreen
+  card "<b>-</b> Ukryte\n   zależności" as D1 #Pink
+  card "<b>-</b> Problemy\n   z testami" as D2 #Pink
+  card "<b>-</b> Naruszenie\n   SRP" as D3 #Pink
+}
+
+@enduml

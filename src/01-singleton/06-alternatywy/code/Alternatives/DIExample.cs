@@ -1,4 +1,4 @@
-namespace Alternatives;
+ namespace Alternatives;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Dependency Injection jako alternatywa dla Singletona

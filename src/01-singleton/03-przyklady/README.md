@@ -184,24 +184,7 @@ Pełna implementacja: [`code/Factory/VehicleFactory.cs`](code/Factory/VehicleFac
 
 ## Diagram: Porównanie przypadków użycia
 
-```plantuml
-@startuml use_cases
-skinparam backgroundColor #FFFFF0
-
-package "Singleton w praktyce" {
-  [Logger] as L
-  [AppConfiguration] as C
-  [DbConnectionPool] as P
-  [VehicleFactory] as F
-}
-
-note right of L : Jeden plik logu\ndla całej aplikacji
-note right of C : Konfiguracja wczytana\ndokładnie raz
-note right of P : Zarządzanie\npulą połączeń
-note right of F : Centralny rejestr\nfabryk obiektów
-
-@enduml
-```
+![Diagram przypadków użycia Singletona](diagrams/use_cases.png)
 
 ---
 

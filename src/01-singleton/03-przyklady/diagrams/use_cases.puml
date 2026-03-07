@@ -1,0 +1,16 @@
+@startuml use_cases
+skinparam backgroundColor #FFFFF0
+
+package "Singleton w praktyce" {
+  [Logger] as L
+  [AppConfiguration] as C
+  [DbConnectionPool] as P
+  [VehicleFactory] as F
+}
+
+note right of L : Jeden plik logu\ndla całej aplikacji
+note right of C : Konfiguracja wczytana\ndokładnie raz
+note right of P : Zarządzanie\npulą połączeń
+note right of F : Centralny rejestr\nfabryk obiektów
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml race_condition_timeline
+skinparam backgroundColor #FFFFF0
+
+title Race Condition w Singletonie
+
+participant "Wątek A" as A
+participant "_instance\n(null początkowo)" as I
+participant "Wątek B" as B
+
+A -> I : sprawdza: _instance == null?
+note right of A : true → zamierza tworzyć
+B -> I : sprawdza: _instance == null? (JEDNOCZEŚNIE!)
+note left of B : true → zamierza tworzyć
+A -> A : new Singleton() → instancja X
+B -> B : new Singleton() → instancja Y
+A -> I : _instance = X
+B -> I : _instance = Y (nadpisuje X!)
+note over I : Wątek A pracuje na X,\nwątek B na Y → PROBLEM!
+@enduml

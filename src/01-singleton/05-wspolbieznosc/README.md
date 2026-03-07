@@ -40,27 +40,7 @@ public class NonThreadSafeSingleton
 
 Poniższa sekwencja demonstruje, jak może dojść do wyścigu:
 
-```plantuml
-@startuml race_condition_timeline
-skinparam backgroundColor #FFFFF0
-
-title Race Condition w Singletonie
-
-participant "Wątek A" as A
-participant "_instance\n(null początkowo)" as I
-participant "Wątek B" as B
-
-A -> I : sprawdza: _instance == null?
-note right of A : true → zamierza tworzyć
-B -> I : sprawdza: _instance == null? (JEDNOCZEŚNIE!)
-note left of B : true → zamierza tworzyć
-A -> A : new Singleton() → instancja X
-B -> B : new Singleton() → instancja Y
-A -> I : _instance = X
-B -> I : _instance = Y (nadpisuje X!)
-note over I : Wątek A pracuje na X,\nwątek B na Y → PROBLEM!
-@enduml
-```
+![Diagram race condition w Singletonie](diagrams/race_condition_timeline.png)
 
 ---
 
@@ -157,18 +137,48 @@ wykonywane są trzy kroki:
    W przeciwnym razie: wywołuje fabrykę, zapisuje wynik przez `Volatile.Write`, oznacza stan
    jako ukończony i zwalnia blokadę.
 
-```
-Wątek A                                  Wątek B
-  │                                         │
-  ├── Volatile.Read(_state) → null          │
-  ├── Monitor.Enter(_lock) ─────────────────┤── Monitor.Enter(_lock) → CZEKA
-  ├── Sprawdza stan → null (DCL)            │
-  ├── Wywołuje fabrykę ()                   │
-  ├── _value = nowy obiekt                  │
-  ├── Volatile.Write(_state = done)         │
-  └── Monitor.Exit ─────────────────────── ─┤── dostaje blokadę
-                                            ├── Sprawdza stan → done (DCL)
-                                            └── Zwraca _value (gotowe, bez tworzenia)
+```plantuml
+@startuml lazy_t_internals
+skinparam backgroundColor #FFFFF0
+skinparam sequenceMessageAlign left
+
+title Lazy<T>.Value — mechanizm wewnętrzny
+
+participant "Wątek A" as A
+participant "Lazy<T>" as L
+participant "Wątek B" as B
+
+group Pierwsze wywołanie (inicjalizacja)
+  A -> L : .Value
+  activate L
+  L -> L : Volatile.Read(_state) → null
+  L -> L : Monitor.Enter(_lock)
+  B -> L : .Value
+  note right of B : CZEKA na Monitor.Enter
+  L -> L : Sprawdza stan → null (DCL wewnętrzny)
+  L -> L : Wywołuje fabrykę ()
+  L -> L : _value = nowy obiekt
+  L -> L : Volatile.Write(_state = done)
+  L -> L : Monitor.Exit
+  L --> A : zwraca _value
+  deactivate L
+  B -> L : dostaje Monitor.Enter
+  activate L
+  L -> L : Volatile.Read(_state) → done (DCL)
+  L -> L : Monitor.Exit
+  L --> B : zwraca _value (bez tworzenia)
+  deactivate L
+end
+
+group Każde kolejne wywołanie (tani odczyt)
+  A -> L : .Value
+  activate L
+  L -> L : Volatile.Read(_state) → done
+  L --> A : zwraca _value (zero blokady)
+  deactivate L
+end
+
+@enduml
 ```
 
 Po pierwszej inicjalizacji każde kolejne wywołanie `.Value` to wyłącznie tani `Volatile.Read` —

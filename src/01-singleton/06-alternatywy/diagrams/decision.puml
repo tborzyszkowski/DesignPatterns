@@ -1,0 +1,29 @@
+@startuml decision
+skinparam backgroundColor #FFFFF0
+
+start
+:Potrzebujesz jednego\nwspólnego obiektu?;
+if (Czy potrzebujesz\npolimorfizmu/mocków?) then (TAK)
+  :Użyj DI Container\nz Singleton lifetime;
+  stop
+else (NIE)
+  if (Czy potrzebujesz\nstanu?) then (NIE)
+    :Użyj klasy statycznej;
+    stop
+  else (TAK)
+    if (Czy stan jest\nniezmutowalny?) then (TAK)
+      :Singleton\n(Eager lub Lazy<T>);
+      stop
+    else (NIE)
+      if (Czy testy\nsą ważne?) then (TAK)
+        :Ambient Context\nlub DI;
+        stop
+      else (NIE)
+        :Singleton z ostrożnością\n(udokumentuj powód!);
+        stop
+      endif
+    endif
+  endif
+endif
+
+@enduml

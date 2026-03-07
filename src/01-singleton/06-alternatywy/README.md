@@ -65,6 +65,25 @@ var service = new OrderService(mockSender);
 
 ![Diagram alternatywy Dependency Injection](diagrams/di_alternative.png)
 
+**Kiedy DI jest lepsze od Singletona?**
+
+| Kryterium | Singleton | DI z `AddSingleton` |
+|-----------|-----------|---------------------|
+| Testowalność | ❌ trudna (ukryta zależność) | ✅ prosta (podmiana interfejsu) |
+| Jawność zależności | ❌ ukryte przez `Instance` | ✅ jawne w konstruktorze |
+| Zmiana implementacji | ❌ wymaga edycji klasy | ✅ zmiana jednej linii rejestracji |
+| Wiele środowisk (dev/prod/test) | ❌ wymaga if-ów w kodzie | ✅ oddzielna rejestracja per środowisko |
+| Multitenant / scope per request | ❌ jeden globalny stan | ✅ `AddScoped` daje instancję per request |
+
+DI **nie eliminuje** singletonu — `AddSingleton<T>` to wciąż jeden obiekt w całym procesie.
+Różnica polega na tym, że zależność jest **jawna**, **wymienialna** i **zarządzana przez kontener**,
+a nie ukryta wewnątrz klasy. Wybierz DI zawsze, gdy piszesz kod produkcyjny w .NET
+(ASP.NET Core, Worker Service, Blazor) — kontenery są tam natywne i bezpłatne.
+
+**Kiedy DI może być przesadą:**
+- Prosta aplikacja konsolowa lub skrypt bez frameworka
+- Biblioteka, która nie powinna narzucać kontenera DI klientowi
+
 Pełna implementacja: [`code/Alternatives/DIExample.cs`](code/Alternatives/DIExample.cs)
 
 ---
@@ -108,6 +127,23 @@ Console.WriteLine(logger2.LogFile); // "new.log" ← wspólny stan!
 ```
 
 ![Diagram wzorca Monostate](diagrams/monostate.png)
+
+**Kiedy Monostate jest lepszy od Singletona?**
+
+Monostate nie jest zalecany dla nowego kodu — wciąż ma wszystkie wady globalnego stanu
+(nietesowalność, ukryte zależności). Jego jedyna przewaga nad Singletonem pojawia się w wąskich sytuacjach:
+
+- **Refaktoryzacja istniejącej klasy** — kod zewnętrzny już tworzy instancje przez `new`,
+  a ty nie możesz zmienić tego kodu; Monostate pozwala wtedy zachować semantykę singletona
+  bez zmiany interfejsu publicznego.
+- **Frameworki wymagające bezargumentowego konstruktora** — niektóre ORM-y (np. Entity Framework)
+  lub frameworki serializacji muszą tworzyć obiekty przez `new T()`. Prywatny konstruktor
+  singletona jest wtedy przeszkodą; Monostate ją usuwa.
+- **Wielokrotna inicjalizacja z identycznym zachowaniem** — gdy semantycznie obiekt jest „jeden",
+  ale kod klienta tworzy go wielokrotnie w krótkich odcinkach (np. DTO-like use case).
+
+**Przestroga:** Stan statyczny Monostate jest równie globalny i równie trudny do testowania
+co stan w Singletonie — po prostu lepiej ukryty. Preferuj DI lub Ambient Context.
 
 Pełna implementacja: [`code/Alternatives/MonostatePattern.cs`](code/Alternatives/MonostatePattern.cs)
 
@@ -160,6 +196,23 @@ AppTimeProvider.Current = new FixedAppTimeProvider(new DateTime(2024, 1, 1));
 Console.WriteLine(AppTimeProvider.Current.Now); // zawsze "2024-01-01"
 ```
 
+**Kiedy Ambient Context jest lepszy od Singletona?**
+
+Ambient Context rozwiązuje konkretny problem: potrzebujesz globalnej wartości służącej jako
+„kontekst środowiska" (czas, kultura, tożsamość, logger korelacji), ale testy muszą działać
+niezależnie — każdy test z inną wartością.
+
+| Cecha | Singleton | Ambient Context |
+|-------|-----------|----------------|
+| Izolacja testów | ❌ globalna zmiana wpływa na wszystkie wątki | ✅ `AsyncLocal` izoluje na poziomie wątku/flow |
+| Czytelność dla wywołującego | ❌ ukryta zależność | ⚠️ widoczna przez `Current`, ale nie w sygnaturze |
+| Obsługa async/await | ❌ TLS bez `AsyncLocal` zgubi kontekst | ✅ `AsyncLocal` propaguje przez async |
+| Adekwatne użycie | Zbyt szeroki zakres, np. rejestr serwisów | Przekrojowe cechy: czas, kultura, log-scope |
+
+Dobra zasada: używaj Ambient Context dla wartości, które są **niezmienne w ramach jednej operacji**
+logicznej (request, polecenie, test case), ale **mogą się różnić między operacjami**.
+Dla stanu, który zmienia się wewnątrz operacji — DI jest lepsze.
+
 ---
 
 ## Alternatywa 4: Klasa statyczna
@@ -184,6 +237,15 @@ var area = MathHelper.CircleArea(5.0);
 - Nie potrzebujesz polimorfizmu.
 - Nie planujesz zastępować w testach.
 
+**Kiedy klasa statyczna jest złym wyborem (mimo braku instancji):**
+- Funkcja ma efekt uboczny (I/O, zapis do bazy) — nie możesz jej mockować w testach.
+- Potrzebujesz wstrzyknąć ją jako zależność — klasa statyczna nie może implementować interfejsu.
+- Klasa statyczna ma mutowalny stan (np. cache, licznik) — to w istocie ukryty singleton
+  ze wszystkimi jego wadami, ale bez żadnych kontroli nad cyklem życia.
+
+Podsumowując: klasa statyczna jest lepszą opcją niż singleton **wyłącznie** wtedy, gdy
+nie ma żadnego stanu. Gdy tylko pojawia się pole statyczne — rozważ DI lub Lazy\<T\>.
+
 ---
 
 ## Kiedy NIE zastępować Singletona
@@ -203,12 +265,26 @@ Mimo złej sławy, Singleton jest **uzasadniony** gdy:
 
 ### ✅ Dobra praktyka
 
+**1. Używaj interfejsów — zawsze można podmienić**
+
+Rejestruj singletonowy serwis pod interfejsem, a nie konkretną klasą. Dzięki temu w testach
+możesz wstrzyknąć mock, a w produkcji — prawdziwą implementację, bez żadnej zmiany
+w kodzie korzystającym z serwisu.
+
 ```csharp
 // 1. Używaj interfejsów — zawsze można podmienić
 public interface IQueue { void Enqueue(object item); object Dequeue(); }
 public sealed class MessageQueue : IQueue { ... }
 builder.Services.AddSingleton<IQueue, MessageQueue>();
+```
 
+**2. Singleton readonly — bezpieczny, niezmutowalny**
+
+Jeśli singleton musi istnieć bez DI (np. w bibliotece), ogranicz jego stan do wartości
+ustawionych raz w konstruktorze. Niezmutowalny singleton jest bezpieczny wątkowo bez
+jakichkolwiek blokad i nie „wycieka" między testami.
+
+```csharp
 // 2. Singleton readonly — bezpieczny, niezmutowalny
 public sealed class AppMetadata
 {
@@ -217,13 +293,27 @@ public sealed class AppMetadata
     public string Version { get; } = "1.0.0";  // niezmutowalny
     public string BuildDate { get; } = DateTime.UtcNow.ToString("yyyy-MM-dd");
 }
+```
 
+**3. Jeśli musisz — używaj Lazy\<T\>**
+
+Jeśli jesteś zmuszony do ręcznego singletona (bez DI), `Lazy<T>` jest
+najbezpieczniejszą opcją: leniwa inicjalizacja + thread safety w 2 liniach.
+
+```csharp
 // 3. Jeśli musisz — używaj Lazy<T>
 private static readonly Lazy<ExpensiveService> _lazy =
     new Lazy<ExpensiveService>(() => new ExpensiveService());
 ```
 
 ### ❌ Zła praktyka
+
+**1. NIE ukrywaj zależności w konstruktorze**
+
+Kiedy klasa pobiera singletonowe zależności przez `Instance` w ciele konstruktora lub
+metody, osoba czytająca kod nie widzi tych zależności w sygnaturze. Każdy refaktoring,
+test jednostkowy i analiza statyczna są utrudnione. Sygnatury metod powinny mówić
+wszystko o tym, czego funkcja potrzebuje.
 
 ```csharp
 // 1. NIE ukrywaj zależności w konstruktorze
@@ -232,14 +322,30 @@ public class OrderService
     private readonly ILogger _logger = Logger.Instance;  // ← ukryta zależność!
     private readonly IDb _db = Database.Instance;         // ← ukryta zależność!
 }
+```
 
+**2. NIE przechowuj zmiennego stanu między testami w Singletonie**
+
+Stan statyczny przeżywa między testami w tej samej sesji xUnit/NUnit. Test A może
+zmienić stan singletona, co spowoduje błąd w teście B — i oba będą przeżyć lub upaść
+w zależności od kolejności uruchomienia (flaky tests).
+
+```csharp
 // 2. NIE przechowuj zależności między testami w Singletonie
 public class TestState
 {
     public static TestState Instance { get; } = new TestState();
     public List<string> Results { get; } = new();  // ← stan "wycieka" między testami!
 }
+```
 
+**3. NIE używaj singletona tylko po to, żeby uniknąć przekazywania parametrów**
+
+Globalny dostęp do `Database.Instance` jest kuszący, bo oszczędza pisanie parametrów.
+W rzeczywistości utrudnia to testowanie każdej metody, która z tego korzysta — nie możesz
+podmienić bazy na in-memory bez modyfikacji klasy Singletona.
+
+```csharp
 // 3. NIE używaj singletona tylko po to, żeby uniknąć przekazywania parametrów
 // ŹLE:
 void ProcessOrder() => Database.Instance.Save(/* ... */);
@@ -251,37 +357,7 @@ void ProcessOrder(IDatabase db) => db.Save(/* ... */);
 
 ## Podsumowanie: Kiedy co wybrać?
 
-```plantuml
-@startuml decision
-skinparam backgroundColor #FFFFF0
-
-start
-:Potrzebujesz jednego\nwspólnego obiektu?;
-if (Czy potrzebujesz\npolimorfizmu/mocków?) then (TAK)
-  :Użyj DI Container\nz Singleton lifetime;
-  stop
-else (NIE)
-  if (Czy potrzebujesz\nstanu?) then (NIE)
-    :Użyj klasy statycznej;
-    stop
-  else (TAK)
-    if (Czy stan jest\nniezmutowalny?) then (TAK)
-      :Singleton\n(Eager lub Lazy<T>);
-      stop
-    else (NIE)
-      if (Czy testy\nsą ważne?) then (TAK)
-        :Ambient Context\nlub DI;
-        stop
-      else (NIE)
-        :Singleton z ostrożnością\n(udokumentuj powód!);
-        stop
-      endif
-    endif
-  endif
-endif
-
-@enduml
-```
+![Diagram wyboru alternatywy dla Singletona](diagrams/decision.png)
 
 ---
 
