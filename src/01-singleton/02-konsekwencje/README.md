@@ -222,4 +222,4 @@ dotnet run
 - Gamma et al. (1994). *Design Patterns*. Addison-Wesley. **s. 135–136** — konsekwencje GoF.
 - Martin, R. C. (2007). *Agile Software Development*. Prentice Hall. **Single Responsibility Principle**.
 - [Singleton as an Anti-Pattern — Stack Overflow](https://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons)
-- [Global State and Singletons — Google Testing Blog](https://testing.googleblog.com/2008/11/clean-code-talks-global-state-and.html)
+- [Global State and Singletons — Clean Code Talks (YouTube)](https://www.youtube.com/watch?v=-FRm3VPhseI)

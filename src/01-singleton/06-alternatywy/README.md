@@ -381,7 +381,7 @@ dotnet run
 
 - Seemann, M. (2011). *Dependency Injection in .NET*. Manning. — rozdział o testowaniu.
 - [Inversion of Control Containers — Martin Fowler](https://martinfowler.com/articles/injection.html)
-- [Monostate Pattern — Robert C. Martin](http://staff.cs.utu.fi/staff/jouni.smed/doos_06/material/DesignPatternsCh3.pdf)
+- [Monostate Pattern — C2 Wiki](http://wiki.c2.com/?MonostatePattern)
 - [Ambient Context — Mark Seemann's Blog](https://blog.ploeh.dk/2010/04/07/DependencyInjectionisLooseCoupling/)
-- [Why Singletons Are Controversial — Google Testing Blog](https://testing.googleblog.com/2008/08/root-cause-of-singletons.html)
+- [Why Singletons Are Problematic — Stack Overflow Discussion](https://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons)
 - [Microsoft DI Lifetime — Microsoft Docs](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#service-lifetimes)

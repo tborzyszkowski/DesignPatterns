@@ -263,6 +263,5 @@ dotnet run
 ## Literatura i źródła
 
 - Gamma et al. (1994). *Design Patterns*. Addison-Wesley. **s. 133–134** — rejestr singletonów.
-- [Prevent Breaking a Singleton Class Pattern — DZone](https://dzone.com/articles/prevent-breaking-a-singleton-class-pattern)
-- [Singleton and Serialization — Stack Overflow](https://stackoverflow.com/questions/2855741/why-is-the-singleton-pattern-not-thread-safe-and-how-to-make-it-thread-safe)
+- [Prevent Breaking a Singleton Class Pattern — DZone](https://web.archive.org/web/20200101000000/https://dzone.com/articles/prevent-breaking-a-singleton-class-pattern)
 - [IObjectReference Interface — Microsoft Docs](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iobjectreference)

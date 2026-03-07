@@ -69,4 +69,4 @@ plantuml **/*.puml
 | Seemann, M. (2011). *Dependency Injection in .NET*. Manning. | Książka |
 | Fowler, M. (2004). *Inversion of Control Containers and the Dependency Injection pattern*. martinfowler.com | Web |
 | [Singleton Pattern - Refactoring.Guru](https://refactoring.guru/design-patterns/singleton) | Web |
-| [Why Singletons Are Evil - Eric Lippert](https://docs.microsoft.com/archive/blogs/ericlippert/fabulous-adventures-in-coding) | Web |
+| [Fabulous Adventures in Coding — Eric Lippert](https://ericlippert.com/) | Web |
