@@ -1,0 +1,76 @@
+@startuml builder_gof_class
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Budowniczy (Builder) — Struktura GoF
+
+' Director
+class Director {
+  - _builder : IBuilder
+  + Director(builder : IBuilder)
+  + Construct()
+}
+
+' Abstract Builder
+interface IBuilder {
+  + BuildPartA()
+  + BuildPartB()
+  + BuildPartC()
+  + GetResult() : Product
+}
+
+' Concrete Builders
+class ConcreteBuilder1 {
+  - _product : Product
+  + BuildPartA()
+  + BuildPartB()
+  + BuildPartC()
+  + GetResult() : Product
+}
+
+class ConcreteBuilder2 {
+  - _product : Product
+  + BuildPartA()
+  + BuildPartB()
+  + BuildPartC()
+  + GetResult() : Product
+}
+
+' Product
+class Product {
+  + Parts : List<string>
+  + Show()
+}
+
+Director o--> IBuilder : używa >
+IBuilder <|.. ConcreteBuilder1
+IBuilder <|.. ConcreteBuilder2
+ConcreteBuilder1 ..> Product : tworzy
+ConcreteBuilder2 ..> Product : tworzy
+
+note right of Director
+  Dyrektor (Director) definiuje
+  kolejność kroków budowania.
+  Nie zna konkretnego produktu.
+end note
+
+note bottom of IBuilder
+  Builder definiuje interfejs
+  budowania — poszczególne kroki.
+  Każdy krok może być niezależny.
+end note
+
+note bottom of Product
+  Produkt (Product) — wynik budowania.
+  Różne ConcreteBuilder tworzą
+  różne produkty tym samym algorytmem.
+end note
+
+@enduml

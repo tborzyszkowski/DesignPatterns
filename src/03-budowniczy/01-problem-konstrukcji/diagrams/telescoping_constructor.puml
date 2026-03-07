@@ -1,0 +1,40 @@
+@startuml telescoping_constructor
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Problem: Telescoping Constructor Anti-Pattern
+
+class Pizza {
+  + Pizza(size: string)
+  + Pizza(size: string, cheese: bool)
+  + Pizza(size: string, cheese: bool, pepperoni: bool)
+  + Pizza(size: string, cheese: bool, pepperoni: bool, bacon: bool)
+  + Pizza(size: string, cheese: bool, pepperoni: bool, bacon: bool, mushrooms: bool)
+  + Pizza(size: string, cheese: bool, pepperoni: bool, bacon: bool, mushrooms: bool, onions: bool)
+  --
+  - Size : string
+  - Cheese : bool
+  - Pepperoni : bool
+  - Bacon : bool
+  - Mushrooms : bool
+  - Onions : bool
+}
+
+note right of Pizza
+  ❌ Problem:
+  Które pola są ustawione?
+  Co oznaczają kolejne true/false?
+  Jak unikać dziur w kombinacjach?
+  
+  new Pizza("large", true, false, true)
+  — co to jest trzecie pole?
+end note
+
+@enduml

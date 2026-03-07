@@ -1,0 +1,58 @@
+@startuml builder_gof_sequence
+skinparam backgroundColor #FFFFF0
+skinparam sequence {
+  ArrowColor DarkSlateGray
+  ActorBorderColor DarkSlateGray
+  ParticipantBackgroundColor LightYellow
+  ParticipantBorderColor DarkSlateGray
+  NoteBackgroundColor #FFF8DC
+}
+
+title Budowniczy (Builder) — Sekwencja budowania
+
+participant "Klient" as Client
+participant "Director\n(Shop)" as Director
+participant "IBuilder\n(ConcreteBuilder)" as Builder
+participant "Product\n(Vehicle)" as Product
+
+Client -> Director : new Director(builder)
+activate Director
+
+Client -> Director : Construct()
+
+Director -> Builder : BuildFrame()
+activate Builder
+Builder -> Product : vehicle["frame"] = "..."
+Builder --> Director
+deactivate Builder
+
+Director -> Builder : BuildEngine()
+activate Builder
+Builder -> Product : vehicle["engine"] = "..."
+Builder --> Director
+deactivate Builder
+
+Director -> Builder : BuildWheels()
+activate Builder
+Builder -> Product : vehicle["wheels"] = "..."
+Builder --> Director
+deactivate Builder
+
+Director -> Builder : BuildDoors()
+activate Builder
+Builder -> Product : vehicle["doors"] = "..."
+Builder --> Director
+deactivate Builder
+
+deactivate Director
+
+Client -> Builder : GetVehicle()
+Builder --> Client : vehicle (gotowy produkt)
+
+note over Client
+  Director definiuje PROCEDURĘ.
+  Builder definiuje REPREZENTACJĘ.
+  Klient łączy te dwie role.
+end note
+
+@enduml

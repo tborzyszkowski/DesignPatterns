@@ -1,0 +1,80 @@
+@startuml fluent_builder_class
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Fluent Builder — Method Chaining
+
+class EmployeeBuilder {
+  - _id : int
+  - _firstName : string
+  - _lastName : string
+  - _birthDate : DateTime
+  - _department : string
+  - _salary : decimal
+  --
+  + WithFirstName(v) : EmployeeBuilder
+  + WithLastName(v) : EmployeeBuilder
+  + WithBirthDate(v) : EmployeeBuilder
+  + WithDepartment(v) : EmployeeBuilder
+  + WithSalary(v) : EmployeeBuilder
+  + Build() : Employee
+  + {static} implicit operator Employee(b)
+}
+
+class Employee {
+  + Id : int
+  + FirstName : string
+  + LastName : string
+  + BirthDate : DateTime
+  + Department : string
+  + Salary : decimal
+  --
+  + GetFullName() : string
+  + GetAge() : int
+}
+
+class EmailBuilder {
+  - _from : string
+  - _to : List<string>
+  - _subject : string
+  - _body : string
+  - _attachments : List<string>
+  --
+  + From(addr) : EmailBuilder
+  + To(addr) : EmailBuilder
+  + WithSubject(s) : EmailBuilder
+  + WithBody(b) : EmailBuilder
+  + WithAttachment(path) : EmailBuilder
+  + Build() : Email
+}
+
+class Email {
+  + From : string
+  + To : IReadOnlyList<string>
+  + Subject : string
+  + Body : string
+  + Attachments : IReadOnlyList<string>
+}
+
+EmployeeBuilder ..> Employee : tworzy
+EmailBuilder ..> Email : tworzy
+
+note right of EmployeeBuilder
+  Każda metoda zwraca **this**
+  → można łączyć wywołania:
+  
+  new EmployeeBuilder()
+    .WithFirstName("Anna")
+    .WithLastName("Nowak")
+    .WithSalary(9500m)
+    .Build()
+end note
+
+@enduml

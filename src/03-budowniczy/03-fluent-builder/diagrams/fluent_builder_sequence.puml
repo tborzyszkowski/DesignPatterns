@@ -1,0 +1,50 @@
+@startuml fluent_builder_sequence
+skinparam backgroundColor #FFFFF0
+skinparam sequence {
+  ArrowColor DarkSlateGray
+  ActorBorderColor DarkSlateGray
+  ParticipantBackgroundColor LightYellow
+  ParticipantBorderColor DarkSlateGray
+  NoteBackgroundColor #FFF8DC
+}
+
+title Fluent Builder — Method Chaining (sekwencja)
+
+participant "Klient" as Client
+participant "EmployeeBuilder" as Builder
+participant "Employee" as Product
+
+Client -> Builder : new EmployeeBuilder()
+activate Builder
+
+Client -> Builder : .WithFirstName("Anna")
+Builder --> Client : this (EmployeeBuilder)
+
+Client -> Builder : .WithLastName("Nowak")
+Builder --> Client : this (EmployeeBuilder)
+
+Client -> Builder : .WithDepartment("IT")
+Builder --> Client : this (EmployeeBuilder)
+
+Client -> Builder : .WithSalary(9500m)
+Builder --> Client : this (EmployeeBuilder)
+
+Client -> Builder : .Build()
+Builder -> Product : new Employee(...)
+activate Product
+Product --> Builder : employee
+deactivate Product
+Builder --> Client : employee
+deactivate Builder
+
+note over Client
+  Wszystkie wywołania można łączyć
+  w jeden "łańcuch":
+  
+  var e = new EmployeeBuilder()
+    .WithFirstName("Anna")
+    .WithLastName("Nowak")
+    .Build();
+end note
+
+@enduml

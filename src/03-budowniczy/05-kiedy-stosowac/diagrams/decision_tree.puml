@@ -1,0 +1,50 @@
+@startuml decision_tree
+skinparam backgroundColor #FFFFF0
+skinparam rectangle {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+skinparam diamond {
+  BackgroundColor #FFF8DC
+  BorderColor DarkSlateGray
+}
+
+title Kiedy używać Buildera — drzewo decyzyjne
+
+start
+
+:Tworzysz obiekt;
+
+if (Obiekt ma > 4 pola\nlub wiele opcjonalnych?) then (TAK)
+  if (Kolejność budowania\nma znaczenie?) then (TAK)
+    :Step Builder;
+    stop
+  else (NIE)
+    if (Tworzysz rodziny\npowiązanych obiektów?) then (TAK)
+      :Abstract Factory\n(+ opcjonalnie Builder);
+      stop
+    else (NIE)
+      :Fluent Builder;
+      stop
+    endif
+  endif
+else (NIE)
+  if (Różne reprezentacje\ntego samego obiektu?") then (TAK)
+    :GoF Builder\n(Director + Builder);
+    stop
+  else (NIE)
+    if (Prosty obiekt\n(1-3 pola, wszystkie wymagane)?) then (TAK)
+      :Zwykły konstruktor\n— nie komplikuj!;
+      stop
+    else (NIE)
+      :Object Initializer\n(jeśli mutowalność jest OK);
+      stop
+    endif
+  endif
+endif
+
+@enduml

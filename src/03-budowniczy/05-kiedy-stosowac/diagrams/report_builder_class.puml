@@ -1,0 +1,90 @@
+@startuml report_builder_class
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Większy przykład — ReportBuilder
+
+class Report {
+  + Title : string
+  + Author : string
+  + CreatedAt : DateTime
+  + Sections : IReadOnlyList<ReportSection>
+  + Footer : string
+  + PageNumbers : bool
+  + Format : ReportFormat
+  + Render() : string
+}
+
+class ReportSection {
+  + Heading : string
+  + Body : string
+  + Charts : IReadOnlyList<ChartConfig>
+}
+
+class ChartConfig {
+  + Type : ChartType
+  + DataSource : string
+  + Title : string
+}
+
+enum ReportFormat {
+  Pdf
+  Html
+  Markdown
+}
+
+enum ChartType {
+  Bar
+  Line
+  Pie
+}
+
+class ReportBuilder {
+  - _title : string
+  - _author : string
+  - _sections : List<ReportSection>
+  - _footer : string
+  - _pageNumbers : bool
+  - _format : ReportFormat
+  --
+  + WithTitle(title) : ReportBuilder
+  + WithAuthor(author) : ReportBuilder
+  + AddSection(heading, body) : SectionBuilder
+  + WithFooter(footer) : ReportBuilder
+  + WithPageNumbers() : ReportBuilder
+  + AsFormat(format) : ReportBuilder
+  + Build() : Report
+}
+
+class SectionBuilder {
+  - _parent : ReportBuilder
+  - _heading : string
+  - _body : string
+  - _charts : List<ChartConfig>
+  --
+  + WithChart(type, source, title) : SectionBuilder
+  + EndSection() : ReportBuilder
+}
+
+ReportBuilder ..> Report : tworzy
+ReportBuilder "1" *-- "0..*" SectionBuilder : zarządza
+Report "1" *-- "0..*" ReportSection
+ReportSection "1" *-- "0..*" ChartConfig
+Report --> ReportFormat
+ChartConfig --> ChartType
+
+note right of SectionBuilder
+  Zagnieżdżony builder —
+  klient może przełączać się
+  pomiędzy ReportBuilder
+  a SectionBuilder
+end note
+
+@enduml

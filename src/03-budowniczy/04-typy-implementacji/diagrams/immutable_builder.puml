@@ -1,0 +1,60 @@
+@startuml immutable_builder
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Immutable Builder — C# record + with-expression
+
+class "Person (record)" as Person {
+  + {field} Id : Guid
+  + {field} FirstName : string
+  + {field} LastName : string
+  + {field} Age : int
+  + {field} Email : string
+}
+
+note right of Person
+  record Person(
+    Guid Id,
+    string FirstName,
+    string LastName,
+    int Age,
+    string Email
+  );
+  
+  // Kopiowanie z modyfikacją:
+  var p2 = p1 with { Age = 31 };
+  
+  Każde "with" tworzy nowy obiekt —
+  oryginał jest nienaruszony.
+end note
+
+class PersonBuilder {
+  - _firstName : string
+  - _lastName : string
+  - _age : int
+  - _email : string
+  --
+  + WithFirstName(v) : PersonBuilder
+  + WithLastName(v) : PersonBuilder
+  + WithAge(v) : PersonBuilder
+  + WithEmail(v) : PersonBuilder
+  + Build() : Person
+}
+
+PersonBuilder ..> Person : tworzy (new)
+
+note bottom of PersonBuilder
+  Builder przydatny gdy:
+  - mamy wiele opcjonalnych pól
+  - chcemy walidować w Build()
+  - record sam w sobie nie waliduje
+end note
+
+@enduml

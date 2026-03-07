@@ -1,0 +1,67 @@
+@startuml builder_vehicle_class
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Budowniczy — Przykład: Fabryka pojazdów
+
+class Shop {
+  + Construct(builder : VehicleBuilder)
+}
+
+abstract class VehicleBuilder {
+  # vehicle : Vehicle
+  + GetVehicle() : Vehicle
+  + {abstract} BuildFrame()
+  + {abstract} BuildEngine()
+  + {abstract} BuildWheels()
+  + {abstract} BuildDoors()
+}
+
+class CarBuilder {
+  + BuildFrame()
+  + BuildEngine()
+  + BuildWheels()
+  + BuildDoors()
+}
+
+class ScooterBuilder {
+  + BuildFrame()
+  + BuildEngine()
+  + BuildWheels()
+  + BuildDoors()
+}
+
+class MotorCycleBuilder {
+  + BuildFrame()
+  + BuildEngine()
+  + BuildWheels()
+  + BuildDoors()
+}
+
+class Vehicle {
+  - vehicleType : string
+  - parts : Dictionary<string,string>
+  + this[key] : string
+  + Show()
+}
+
+Shop ..> VehicleBuilder : używa
+VehicleBuilder <|-- CarBuilder
+VehicleBuilder <|-- ScooterBuilder
+VehicleBuilder <|-- MotorCycleBuilder
+VehicleBuilder o--> Vehicle : buduje >
+
+note right of Shop
+  Shop = Director
+  Wie jak złożyć pojazd,
+  nie wie JAKIEGO rodzaju.
+end note
+
+@enduml

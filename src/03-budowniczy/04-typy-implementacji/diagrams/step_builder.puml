@@ -1,0 +1,77 @@
+@startuml step_builder
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Step Builder — wymuszanie kolejności kroków
+
+interface ISelectTable {
+  + From(table : string) : ISelectColumns
+}
+
+interface ISelectColumns {
+  + Select(columns : string[]) : IWhereStep
+  + SelectAll() : IWhereStep
+}
+
+interface IWhereStep {
+  + Where(condition : string) : IBuildStep
+  + Build() : SqlQuery
+}
+
+interface IBuildStep {
+  + OrderBy(column : string) : IBuildStep
+  + Limit(n : int) : IBuildStep
+  + Build() : SqlQuery
+}
+
+class SqlQueryBuilder {
+  - _table : string
+  - _columns : string[]
+  - _where : string
+  - _orderBy : string
+  - _limit : int?
+  --
+  + From(table) : ISelectColumns
+  + Select(cols) : IWhereStep
+  + SelectAll() : IWhereStep
+  + Where(cond) : IBuildStep
+  + OrderBy(col) : IBuildStep
+  + Limit(n) : IBuildStep
+  + Build() : SqlQuery
+}
+
+class SqlQuery {
+  + Table : string
+  + Columns : string[]
+  + WhereClause : string
+  + OrderBy : string
+  + Limit : int?
+  + ToSql() : string
+}
+
+ISelectTable <|.. SqlQueryBuilder
+ISelectColumns <|.. SqlQueryBuilder
+IWhereStep <|.. SqlQueryBuilder
+IBuildStep <|.. SqlQueryBuilder
+SqlQueryBuilder ..> SqlQuery : tworzy
+
+note right of ISelectTable
+  Kompilator wymusza kolejność:
+  1. From(table)       → ISelectColumns
+  2. Select/SelectAll  → IWhereStep
+  3. Where/Build       → IBuildStep
+  4. OrderBy/Limit     → IBuildStep
+  5. Build()           → SqlQuery
+  
+  Nie można wywołać Build()
+  przed podaniem tabeli!
+end note
+
+@enduml

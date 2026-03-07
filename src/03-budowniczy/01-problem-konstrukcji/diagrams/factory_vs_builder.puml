@@ -1,0 +1,46 @@
+@startuml factory_vs_builder
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Factory vs Builder — kiedy co stosować
+
+rectangle "Factory Method / Abstract Factory" #LightBlue {
+  rectangle "Odpowiada na: KTÓRY obiekt?" as FM #CCE0FF {
+  }
+  rectangle "Produkt jest prosty (1-3 pola)" as FM2 #CCE0FF {
+  }
+  rectangle "Klient nie musi znać konkretnej klasy" as FM3 #CCE0FF {
+  }
+}
+
+rectangle "Builder" #LightGreen {
+  rectangle "Odpowiada na: JAK zbudować obiekt?" as B #CCFFCC {
+  }
+  rectangle "Produkt jest złożony (wiele opcjonalnych pól)" as B2 #CCFFCC {
+  }
+  rectangle "Budowanie odbywa się krok po kroku" as B3 #CCFFCC {
+  }
+}
+
+note bottom of FM
+  new NYPizzaStore().OrderPizza("cheese")
+  → NIE wiem jak, wiem KTÓRĄ
+end note
+
+note bottom of B
+  new PizzaBuilder()
+    .WithSize("large")
+    .WithCheese()
+    .WithPepperoni()
+    .Build()
+  → NIE wiem którą, wiem JAK
+end note
+
+@enduml
