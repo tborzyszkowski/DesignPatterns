@@ -32,7 +32,7 @@ public class NonThreadSafeSingleton
 }
 ```
 
-**Diagram wyścigu wątków:** [`diagrams/race_condition.puml`](diagrams/race_condition.puml)
+![Diagram wyścigu wątków](diagrams/race_condition.png)
 
 ---
 
@@ -123,7 +123,7 @@ public class DCLSingleton
 **Kluczowe:** słowo kluczowe `volatile` zapobiega reorderingowi instrukcji przez kompilator/CPU.  
 Bez `volatile` DCL nie jest bezpieczne nawet w C# poniżej .NET 2.0.
 
-**Diagram DCL:** [`diagrams/threadsafe_solutions.puml`](diagrams/threadsafe_solutions.puml)
+![Diagram rozwiązań thread-safe](diagrams/threadsafe_solutions.png)
 
 ---
 
@@ -143,8 +143,96 @@ public sealed class LazyTSingleton
 }
 ```
 
-`Lazy<T>` wewnętrznie używa mechanizmu podobnego do DCL, ale jest to obsługiwane przez .NET  
-w sposób gwarantowany i bezpieczny w każdej wersji środowiska uruchomieniowego.
+### Jak działa `Lazy<T>` pod spodem?
+
+`System.Lazy<T>` to generyczna klasa dostępna od .NET 4.0. Przy każdym dostępie do `.Value`
+wykonywane są trzy kroki:
+
+1. **Volatile read stanu** — CLR odczytuje wewnętrzne pole `_state` przez `Volatile.Read`.
+   Jeśli wartość jest już zainicjalizowana → zwraca ją **natychmiast, bez żadnej blokady**.
+2. **Monitor.Enter** — jeśli jeszcze nie zainicjalizowana, wchodzi do sekcji krytycznej
+   (identycznie jak `lock(_lock)`).
+3. **Drugie sprawdzenie (DCL wewnętrznie)** — wewnątrz blokady ponownie sprawdza stan.
+   Jeśli inny wątek zdążył zakończyć inicjalizację → wraca z jego wynikiem.
+   W przeciwnym razie: wywołuje fabrykę, zapisuje wynik przez `Volatile.Write`, oznacza stan
+   jako ukończony i zwalnia blokadę.
+
+```
+Wątek A                                  Wątek B
+  │                                         │
+  ├── Volatile.Read(_state) → null          │
+  ├── Monitor.Enter(_lock) ─────────────────┤── Monitor.Enter(_lock) → CZEKA
+  ├── Sprawdza stan → null (DCL)            │
+  ├── Wywołuje fabrykę ()                   │
+  ├── _value = nowy obiekt                  │
+  ├── Volatile.Write(_state = done)         │
+  └── Monitor.Exit ─────────────────────── ─┤── dostaje blokadę
+                                            ├── Sprawdza stan → done (DCL)
+                                            └── Zwraca _value (gotowe, bez tworzenia)
+```
+
+Po pierwszej inicjalizacji każde kolejne wywołanie `.Value` to wyłącznie tani `Volatile.Read` —
+porównywalne wydajnościowo z dostępem do zwykłego pola statycznego.
+
+### Tryby bezpieczeństwa wątkowego (`LazyThreadSafetyMode`)
+
+`Lazy<T>` obsługuje trzy tryby, wybierane przez konstruktor:
+
+| Tryb | Zachowanie | Kiedy użyć |
+|------|-----------|-----------|
+| `ExecutionAndPublication` *(domyślny)* | Blokada: tylko **jeden** wątek wywołuje fabrykę; pozostałe czekają | Fabryka ma efekty uboczne lub jest kosztowna |
+| `PublicationOnly` | Wiele wątków może **równolegle** wywołać fabrykę; tylko pierwszy opublikowany wynik „wygrywa" | Fabryka jest tania i idempotentna |
+| `None` | Brak synchronizacji — odpowiednik klasycznego singletona | Kod jednowątkowy |
+
+```csharp
+// Domyślny tryb — najczęstszy w Singletonie
+var lazy1 = new Lazy<MyClass>(() => new MyClass());
+
+// Explicit tryb ExecutionAndPublication — to samo co powyżej
+var lazy2 = new Lazy<MyClass>(() => new MyClass(),
+    LazyThreadSafetyMode.ExecutionAndPublication);
+
+// PublicationOnly — równoległe tworzenie, wygrywa pierwszy opublikowany
+var lazy3 = new Lazy<MyClass>(() => new MyClass(),
+    LazyThreadSafetyMode.PublicationOnly);
+```
+
+### Dlaczego `Lazy<T>` jest zalecany zamiast ręcznego DCL?
+
+**1. Oficjalnie przetestowana implementacja**  
+Ręczny DCL ma kilka miejsc, w których można popełnić błąd:
+pole `_instance` musi być `volatile`, kolejność operacji musi być precyzyjna.
+`Lazy<T>` jest zaimplementowany i przetestowany przez team .NET — nie ma tu miejsca na błąd ludzki.
+
+**2. `volatile` — łatwo zapomnieć**  
+W ręcznym DCL pominięcie `volatile` na polu `_instance` powoduje, że kompilator lub CPU
+może dokonać reorderingu instrukcji i zwrócić **częściowo skonstruowany obiekt** (widoczne
+szczególnie na słabszych modelach pamięci, np. ARM). `Lazy<T>` używa `Volatile.Read`/`Volatile.Write`
+w odpowiednich miejscach wewnętrznie — nie ma możliwości przypadkowego pominięcia.
+
+**3. Obsługa wyjątków z fabryki**  
+Gdy fabryka rzuci wyjątek, `Lazy<T>` zachowuje się inaczej zależnie od trybu:
+- `ExecutionAndPublication`: wyjątek jest **zapamiętywany** i rzucany przy każdym kolejnym
+  wywołaniu `.Value` — fabryka nie jest wywoływana ponownie.
+- `PublicationOnly`: nieudane wywołanie jest porzucane — inny wątek może spróbować jeszcze raz.
+
+```csharp
+var lazy = new Lazy<string>(() => throw new InvalidOperationException("błąd fabryki"));
+try { _ = lazy.Value; } catch { }
+try { _ = lazy.Value; } catch { }  // ← ten sam wyjątek, fabryka NIE jest wywoływana drugi raz
+```
+
+**4. Dodatkowe możliwości**  
+- `_lazy.IsValueCreated` — sprawdza bez inicjalizacji, czy wartość jest już gotowa.
+- Jedno miejsce w kodzie wyraźnie komunikuje intencję: „inicjalizuj leniwie i bezpiecznie".
+
+```csharp
+// DCL ręczny — ~15 linii + ryzyko błędu w volatile/lock
+// Lazy<T>:
+private static readonly Lazy<T> _lazy = new(() => new T());
+public static T Instance => _lazy.Value;
+// 2 linie, zero ryzyka, jasna intencja
+```
 
 ---
 

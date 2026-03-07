@@ -20,7 +20,7 @@ Wymaga jednej, spójnej instancji, żeby:
 - wszystkie wpisy trafiały do tego samego pliku/strumienia,
 - nie było kolizji przy zapisie z różnych modułów.
 
-**Diagram klas:** [`diagrams/logger_class.puml`](diagrams/logger_class.puml)
+![Diagram klas Logger](diagrams/logger_class.png)
 
 ```csharp
 public sealed class AppLogger
@@ -57,7 +57,7 @@ Pełna implementacja: [`code/Logger/AppLogger.cs`](code/Logger/AppLogger.cs)
 Ustawienia aplikacji powinny być wczytane raz i dostępne globalnie.  
 Singleton gwarantuje, że plik konfiguracyjny jest odczytany dokładnie raz.
 
-**Diagram klas:** [`diagrams/config_class.puml`](diagrams/config_class.puml)
+![Diagram klas AppConfiguration](diagrams/config_class.png)
 
 ```csharp
 public sealed class AppConfiguration
@@ -100,7 +100,7 @@ Pełna implementacja: [`code/Configuration/AppConfiguration.cs`](code/Configurat
 Pula połączeń zarządza ograniczoną liczbą połączeń z bazą danych.  
 Singleton zapewnia, że istnieje jeden menedżer puli w całej aplikacji.
 
-**Diagram klas:** [`diagrams/connectionpool_class.puml`](diagrams/connectionpool_class.puml)
+![Diagram klas DbConnectionPool](diagrams/connectionpool_class.png)
 
 ```csharp
 public sealed class DbConnectionPool

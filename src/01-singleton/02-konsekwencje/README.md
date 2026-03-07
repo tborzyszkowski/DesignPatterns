@@ -23,7 +23,7 @@ W przeciwieństwie do zmiennej globalnej — kod klienta nie może ominąć kont
 var conn = DatabaseConnection.Instance;   // przez kontrolowany punkt dostępu
 ```
 
-**Diagram:** [`diagrams/consequences.puml`](diagrams/consequences.puml)
+![Diagram konsekwencji Singletona](diagrams/consequences.png)
 
 ---
 

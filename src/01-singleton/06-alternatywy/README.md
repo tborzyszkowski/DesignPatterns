@@ -63,7 +63,7 @@ var mockSender = new MockEmailSender();
 var service = new OrderService(mockSender);
 ```
 
-**Diagram:** [`diagrams/di_alternative.puml`](diagrams/di_alternative.puml)
+![Diagram alternatywy Dependency Injection](diagrams/di_alternative.png)
 
 Pełna implementacja: [`code/Alternatives/DIExample.cs`](code/Alternatives/DIExample.cs)
 
@@ -107,7 +107,7 @@ logger1.LogFile = "new.log";
 Console.WriteLine(logger2.LogFile); // "new.log" ← wspólny stan!
 ```
 
-**Diagram:** [`diagrams/monostate.puml`](diagrams/monostate.puml)
+![Diagram wzorca Monostate](diagrams/monostate.png)
 
 Pełna implementacja: [`code/Alternatives/MonostatePattern.cs`](code/Alternatives/MonostatePattern.cs)
 

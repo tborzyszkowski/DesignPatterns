@@ -67,7 +67,7 @@ Singleton --> Singleton : tworzy i zwraca\njedyny egzemplarz
 @enduml
 ```
 
-Plik diagramu: [`diagrams/singleton_class.puml`](diagrams/singleton_class.puml)
+![Diagram klasy Singleton](diagrams/singleton_class.png)
 
 ---
 
@@ -194,8 +194,21 @@ public class LazySingleton
 }
 ```
 
-**Zalety:** leniwa inicjalizacja, bezpieczna wątkowo, wbudowana w .NET, czytelna.  
-**Wady:** lekka nadmiarowość obiektu `Lazy<T>`.
+**Jak działa:** `Lazy<T>` (przestrzeń nazw `System`, dostępny od .NET 4.0) przechowuje wynik
+fabryki i śledzi stan inicjalizacji przez wewnętrzne pole `_state`. Przy pierwszym dostępie
+do `.Value` tylko jeden wątek wchodzi do sekcji krytycznej (`Monitor.Enter`) i wywołuje lambdę
+`() => new LazySingleton()`; pozostałe wątki blokują się i czekają. Po zakończeniu inicjalizacji
+wewnętrzny stan jest oznaczany jako ukończony — kolejne wywołania `.Value` wykonują wyłącznie
+tani odczyt (`Volatile.Read`), bez żadnej blokady. To oficjalnie przetestowany DCL zarządzany
+przez runtime .NET — o wiele bezpieczniejszy niż pisanie DCL ręcznie (gdzie łatwo zapomnieć
+o `volatile` lub napotkać subtelne problemy z reorderingiem instrukcji na CPU).
+
+Szczegóły mechanizmu, tryby `LazyThreadSafetyMode` i porównanie z ręcznym DCL:
+[05-wspolbieznosc → Rozwiązanie 3](../05-wspolbieznosc/README.md).
+
+**Zalety:** leniwa inicjalizacja, bezpieczna wątkowo, wbudowana w .NET, czytelna,
+udostępnia `IsValueCreated` (sprawdzenie stanu bez uruchamiania inicjalizacji).  
+**Wady:** lekka nadmiarowość — obiekt `Lazy<T>` zajmuje kilka bajtów więcej niż gołe pole statyczne.
 
 Pełna wersja: [`LazySingleton.cs`](code/SingletonDefinition/LazySingleton.cs)
 

@@ -52,7 +52,7 @@ var b = DatabaseLogger.GetInstance();  // zwraca ten sam Logger co powyżej
 Console.WriteLine(a.GetType().Name);   // "Logger" !
 ```
 
-**Diagram:** [`diagrams/inheritance_problem.puml`](diagrams/inheritance_problem.puml)
+![Diagram problemu dziedziczenia](diagrams/inheritance_problem.png)
 
 ---
 
@@ -138,7 +138,7 @@ var deserialized = JsonSerializer.Deserialize<Config>(json);
 // deserialized != Config.Instance  ← DWIE INSTANCJE!
 ```
 
-**Diagram:** [`diagrams/serialization_problem.puml`](diagrams/serialization_problem.puml)
+![Diagram problemu serializacji](diagrams/serialization_problem.png)
 
 ---
 
