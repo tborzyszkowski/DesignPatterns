@@ -1,0 +1,52 @@
+@startuml prototype_decision_tree
+skinparam backgroundColor #FFFFF0
+skinparam activity {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Kiedy wybrać wzorzec Prototyp?
+
+start
+
+:Potrzebuję nowych instancji obiektu;
+
+if (Tworzenie jednej instancji\njest drogie (>kilka ms,\nDB, sieć, złożone obliczenia)?) then (TAK)
+  :Rozważ Prototyp;
+  if (Kopiujesz wiele razy\nten sam "szablon"?) then (TAK)
+    :Użyj Prototypu\n+ Prototype Registry;
+    stop
+  else (rzadko)
+    :Rozważ cache lub\nfactory z memoizacją;
+    stop
+  endif
+else (NIE)
+  if (Nie znasz dokładnego\ntypu obiektu do skopiowania\n(typ dynamiczny, runtime)?) then (TAK)
+    :Prototyp rozwiązuje ten problem\n(polimorficzne Clone());
+    stop
+  else (NIE)
+    if (Obiekt jest prosty\n(≤5 pól, tylko typy wartościowe)?) then (TAK)
+      :Użyj zwykłego konstruktora\nlub konstruktora kopiującego;
+      note right
+        Prototyp byłby over-engineeringiem.
+        Dodaj Clone() tylko gdy naprawdę
+        potrzebujesz polimorfizmu.
+      end note
+      stop
+    else (NIE, złożony)
+      if (Obiekt jest w zasadzie\nnową instancją od zera?) then (TAK)
+        :Builder lub Factory\nbardziej odpowiedni;
+        stop
+      else (NIE, similar to istniejącego)
+        :Konstruktor kopiujący\nlub Prototyp;
+        stop
+      endif
+    endif
+  endif
+endif
+
+@enduml

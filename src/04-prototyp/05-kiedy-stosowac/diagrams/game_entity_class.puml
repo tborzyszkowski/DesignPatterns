@@ -1,0 +1,67 @@
+@startuml game_entity_class
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Prototype w grze — registry wzorców wrogów
+
+interface IEnemy {
+  + Clone() : IEnemy
+  + Spawn(x: int, y: int) : IEnemy
+  + Name : string
+}
+
+abstract class EnemyTemplate {
+  # Name        : string
+  # MaxHp       : int
+  # AttackPower : int
+  # Speed       : float
+  # Abilities   : List<string>
+  # DropTable   : Dictionary<string,float>
+  + {abstract} Clone() : IEnemy
+  + Spawn(x, y) : IEnemy
+}
+
+class Goblin extends EnemyTemplate {
+  + Clone() : IEnemy
+}
+
+class Orc extends EnemyTemplate {
+  + Clone() : IEnemy
+}
+
+class Dragon extends EnemyTemplate {
+  + Clone() : IEnemy
+}
+
+class EnemyRegistry {
+  - _prototypes : Dictionary<string,IEnemy>
+  + Register(key, prototype)
+  + Unregister(key)
+  + Spawn(key, x, y) : IEnemy
+  + Keys : IEnumerable<string>
+}
+
+IEnemy <|.. EnemyTemplate
+EnemyRegistry o-- IEnemy : przechowuje >
+
+note bottom of EnemyRegistry
+  Rejestr ładuje szablony raz
+  (np. z pliku JSON).
+  Spawn() = Clone() + ustawienie pozycji.
+  Koszt spawn: O(1) bez deserializacji.
+end note
+
+note right of Dragon
+  Dragon ma zagnieżdżoną listę Abilities
+  i słownik DropTable — oba są
+  głęboko kopiowane przy Clone().
+end note
+
+@enduml

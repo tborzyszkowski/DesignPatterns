@@ -1,0 +1,80 @@
+@startuml prototype_gof_class
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Wzorzec Prototype — Struktura GoF
+
+interface IPrototype<T> {
+  + Clone() : T
+}
+
+abstract class Shape {
+  + X : int
+  + Y : int
+  + Color : string
+  --
+  # Shape(source: Shape)
+  + Clone() : Shape
+  + MoveTo(x: int, y: int) : void
+  + {abstract} Draw() : string
+}
+
+class Circle {
+  + Radius : double
+  --
+  + Circle(source: Circle)
+  + Clone() : Shape
+  + Draw() : string
+}
+
+class Rectangle {
+  + Width : double
+  + Height : double
+  --
+  + Rectangle(source: Rectangle)
+  + Clone() : Shape
+  + Draw() : string
+}
+
+class Polygon {
+  + Points : List<Point>
+  --
+  + Polygon(source: Polygon)
+  + Clone() : Shape
+  + Draw() : string
+}
+
+class Client {
+  - _shapes : List<Shape>
+  --
+  + AddShape(s: Shape) : void
+  + CloneAll() : List<Shape>
+}
+
+Shape ..|> IPrototype
+Circle --|> Shape
+Rectangle --|> Shape
+Polygon --|> Shape
+Client --> Shape : klonuje
+
+note right of Shape
+  Kluczowy mechanizm:
+  konstruktor kopiujący
+  # Shape(source)
+  kopiuje pola z oryginału
+end note
+
+note right of IPrototype
+  GoF: Prototype deklaruje
+  Clone() jako kontrakt.
+  Klient nie zna konkretnej klasy.
+end note
+
+@enduml

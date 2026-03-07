@@ -1,0 +1,58 @@
+@startuml prototype_motivation
+skinparam backgroundColor #FFFFF0
+skinparam sequence {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+  ArrowColor DarkSlateGray
+  ActorBackgroundColor LightYellow
+  ParticipantBackgroundColor LightYellow
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+
+title Motywacja — koszt tworzenia obiektów
+
+== Bez Prototypu: każde tworzenie jest kosztowne ==
+
+actor Klient
+participant "new ServerConfig()" as C1
+database "Serwer / Baza danych" as DB
+
+Klient -> C1 : request config #1
+C1 -> DB : pobierz dane (500 ms)
+DB --> C1 : dane
+C1 --> Klient : config #1
+
+Klient -> C1 : request config #2 (te same dane!)
+C1 -> DB : pobierz dane ponownie (500 ms)
+DB --> C1 : dane
+C1 --> Klient : config #2
+
+note right
+  2 × 500 ms = 1000 ms
+  Na 100 kopii = 50 000 ms
+end note
+
+== Z Prototypem: klonujemy gotowy obiekt ==
+
+actor Klient2 as "Klient"
+participant "ServerConfig\n(prototyp)" as Proto
+participant "clone()" as Clone
+
+Klient2 -> Proto : new ServerConfig() — raz
+Proto -> DB : pobierz dane (500 ms)
+DB --> Proto : dane
+
+Klient2 -> Clone : clone prototypu (< 1 ms)
+Clone --> Klient2 : config #2 (kopia)
+
+Klient2 -> Clone : clone prototypu (< 1 ms)
+Clone --> Klient2 : config #3 (kopia)
+
+note right
+  1 × 500 ms + n × ~0 ms
+  Na 100 kopii ≈ 500 ms
+end note
+
+@enduml

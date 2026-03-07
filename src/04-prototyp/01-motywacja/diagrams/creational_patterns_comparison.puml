@@ -1,0 +1,30 @@
+@startuml creational_patterns_comparison
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+skinparam rectangle {
+  BackgroundColor #E8F4E8
+  BorderColor DarkSlateGray
+}
+
+title Wzorce kreacyjne — kiedy co stosować?
+
+rectangle "**Singleton**\n──────────────\nGdy potrzebujesz\ndokładnie jednej\ninstancji" as S
+rectangle "**Factory Method**\n──────────────\nGdy nie wiesz jaką\nklasę utworzyć\n(wybór w runtime)" as FM
+rectangle "**Abstract Factory**\n──────────────\nGdy tworzysz\nrodziny powiązanych\nobjectów" as AF
+rectangle "**Builder**\n──────────────\nGdy tworzenie\nwymaga wielu kroków\nlub złożonej konfiguracji" as B
+rectangle "**Prototype**\n──────────────\nGdy:\n1. Tworzenie jest kosztowne\n2. Potrzebujesz kopii\n   z małymi zmianami\n3. Klasa nieznana do runtime" as P
+
+note bottom of P
+  Kluczowa różnica:
+  Prototype kopiuje istniejący obiekt.
+  Pozostałe wzorce tworzą nowy.
+end note
+
+@enduml

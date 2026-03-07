@@ -1,0 +1,30 @@
+@startuml deep_copy_strategies
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Strategie głębokiego kopiowania
+
+rectangle "**1. Konstruktor kopiujący**\n(Copy Constructor)\n─────────────────────\nKażda klasa implementuje\nwłasny konstruktor:\n  Document(Document src)\nWywołuje rekurencyjnie\nkopię zagnieżdżonych obiektów.\n\n✅ Pełna kontrola\n✅ Najlepsza wydajność\n✅ Bezpieczeństwo typów\n❌ Kod dla każdej klasy" as CC #E8F4E8
+
+rectangle "**2. Serializacja JSON**\n(System.Text.Json)\n─────────────────────\nobj → JSON-string → nowy obj\n\nvar json = JsonSerializer.Serialize(obj);\nvar copy = JsonSerializer.Deserialize(json);\n\n✅ Automatyczne\n✅ Działa dla obiektów[JsonSerializable]\n❌ Tylko publiczne właściwości\n❌ Wydajność (alokacja stringa)" as JSON #E8F4E8
+
+rectangle "**3. MemberwiseClone()**\n(Shallow + ręczna głęboka kopia)\n─────────────────────\nvar s = (T)MemberwiseClone();\ns.Tags = new List<string>(Tags);\n\n✅ Wygodne dla płytkich struktur\n✅ Szybkie\n❌ Ręcznie dla każdego pola ref.\n❌ Łatwo przeoczyć pole" as MWC #E8F4E8
+
+rectangle "**4. ICloneable (przestarzałe)**\n─────────────────────\nNiejasna semantyka:\nco to znaczy Clone()?\nShallow? Deep?\nGoF: nie jest zalecane.\n\n❌ Niejasna semantyka\n❌ Zwraca object (bez typów)\n⚠️ Unikaj w nowym kodzie" as IC #FFE4E1
+
+note bottom of CC
+  Zalecane w kodzie produkcyjnym
+end note
+note bottom of JSON
+  Popularne w prostych domenach
+  i przy transfer objects
+end note
+
+@enduml

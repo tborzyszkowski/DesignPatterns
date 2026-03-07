@@ -1,0 +1,50 @@
+@startuml prototype_gof_sequence
+skinparam backgroundColor #FFFFF0
+skinparam sequence {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+  ArrowColor DarkSlateGray
+  ParticipantBackgroundColor LightYellow
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+
+title Prototype — Diagram sekwencji (tworzenie i klonowanie)
+
+actor Klient
+participant "shapeRegistry" as Reg
+participant "circle: Circle" as Circle
+participant "clone: Circle" as Clone
+
+== Rejestracja prototypu ==
+Klient -> Circle : new Circle(50, "red")
+Circle --> Klient : circle (prototyp)
+Klient -> Reg : register("red-circle", circle)
+
+== Klonowanie — klient nie zna konkretnego typu ==
+Klient -> Reg : get("red-circle")
+Reg --> Klient : shape: IShape
+
+Klient -> Circle : Clone()
+note right
+  Clone() wywołuje konstruktor kopiujący:
+  new Circle(this)
+end note
+Circle -> Clone : new Circle(this)
+Clone --> Circle : clone gotowy
+Circle --> Klient : clone: Circle
+
+Klient -> Clone : MoveTo(100, 200)
+Clone --> Klient : (OK)
+
+Klient -> Clone : Draw()
+Clone --> Klient : "Koło r=50 w punkcie (100,200)"
+
+note right of Clone
+  Klon jest w pełni niezależny.
+  Zmiana pozycji klonu nie
+  wpływa na prototyp.
+end note
+
+@enduml

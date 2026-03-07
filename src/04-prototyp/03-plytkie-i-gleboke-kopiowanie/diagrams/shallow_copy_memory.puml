@@ -1,0 +1,57 @@
+@startuml shallow_copy_memory
+skinparam backgroundColor #FFFFF0
+skinparam object {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Płytkie kopiowanie — problem ze współdzielonymi referencjami
+
+package "Sterta (Heap)" {
+
+  object "**document** (oryginał)" as doc {
+    Title = "Umowa"
+    Author → 
+    Tags →
+  }
+
+  object "**clone** (kopia płytka)" as clone {
+    Title = "Umowa"
+    Author →
+    Tags →
+  }
+
+  object "Author: Person" as author {
+    Name = "Jan Kowalski"
+  }
+
+  object "Tags: List<string>" as tags {
+    [0] = "prawny"
+    [1] = "2024"
+  }
+}
+
+doc --> author : (ta sama referencja!)
+clone --> author : (ta sama referencja!)
+
+doc --> tags : (ta sama referencja!)
+clone --> tags : (ta sama referencja!)
+
+note bottom of author
+  ⚠️ Modyfikacja clone.Author.Name
+  zmieni też document.Author.Name!
+  
+  Oba obiekty wskazują na TEN SAM
+  obiekt Person w pamięci.
+end note
+
+note bottom of tags
+  ⚠️ clone.Tags.Add("nowy") doda
+  element też do document.Tags!
+end note
+
+@enduml

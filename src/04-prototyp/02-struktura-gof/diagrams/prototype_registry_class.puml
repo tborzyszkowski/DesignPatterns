@@ -1,0 +1,48 @@
+@startuml prototype_registry_class
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Prototype Registry — Rejestr Prototypów
+
+class ShapeRegistry {
+  - _registry : Dictionary<string, Shape>
+  --
+  + Register(key: string, prototype: Shape) : void
+  + Get(key: string) : Shape
+  + Clone(key: string) : Shape
+  + Keys : IReadOnlyCollection<string>
+}
+
+abstract class Shape {
+  + X : int
+  + Y : int
+  + Color : string
+  + Clone() : Shape
+}
+
+class Circle { + Radius : double }
+class Rectangle { + Width : double\n+ Height : double }
+
+ShapeRegistry "1" o-- "0..*" Shape : przechowuje prototypy
+Shape <|-- Circle
+Shape <|-- Rectangle
+
+note bottom of ShapeRegistry
+  Wzorzec "Prototype Manager" (GoF):
+  rejestr gotowych prototypów.
+  Klient pyta po kluczu (nazwie),
+  dostaje sklonowany egzemplarz.
+  
+  Przykładowe klucze:
+  "mały-czerwony-okrąg"
+  "duży-niebieski-prostokąt"
+end note
+
+@enduml

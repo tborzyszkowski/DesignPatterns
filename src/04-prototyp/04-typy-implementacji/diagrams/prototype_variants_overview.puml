@@ -1,0 +1,63 @@
+@startuml prototype_variants_overview
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Warianty implementacji Prototypu
+
+package "Wariant 1: Interfejs IPrototype<T>" {
+  interface "IPrototype<T>" as IP {
+    + Clone() : T
+  }
+  class "Product : IPrototype<Product>" as P1 {
+    + Clone() : Product
+  }
+  IP <|.. P1
+}
+
+package "Wariant 2: Abstrakcyjna klasa bazowa" {
+  abstract "PrototypeBase<T>" as PB {
+    + Clone() : T
+    # CopyTo(target: T) : void
+  }
+  class "ConcreteType : PrototypeBase<ConcreteType>" as CT {
+    + Clone() : ConcreteType
+  }
+  PB <|-- CT
+}
+
+package "Wariant 3: Konstruktor kopiujący (zalecany)" {
+  class "Product" as P3 {
+    + Product(source: Product)
+    + Clone() : Product
+  }
+  note right of P3
+    Brak bazowej klasy/interfejsu GoF.
+    Clone() wywołuje kopię konstruktora.
+    Zalecane przez Effective Java/C#.
+  end note
+}
+
+package "Wariant 4: Record + with-expression (C# 9+)" {
+  class "Product : record" as P4 {
+    + Title : string
+    + Count : int
+    + <<with>>Clone() : Product
+  }
+  note right of P4
+    record automatycznie generuje
+    niemutowalność i value equality.
+    with-expression = shallow clone
+    z wybranymi zmianami.
+    
+    Tylko dla niemutowalnych VO.
+  end note
+}
+
+@enduml

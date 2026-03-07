@@ -1,0 +1,53 @@
+@startuml icloneable_controversy
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title ICloneable – interfejs i jego ograniczenia
+
+interface ICloneable <<.NET 1.0>> {
+  + Clone() : **object**
+}
+
+class "MyDocument : ICloneable" as MD {
+  + Title : string
+  + Author : Person
+  + Tags : List<string>
+  + Clone() : object
+}
+
+ICloneable <|.. MD
+
+note on link
+  <>Wymaga rzutowania na właściwy typ\n
+  <b>object</b> clone = doc.Clone();\n
+  MyDocument copy = (MyDocument) clone; // runtime cast
+end note
+
+note right of ICloneable
+  <b>Problem 1 – niejednoznaczność:</b>
+  Kontakt NIE precyzuje, czy Clone()
+  zwraca kopię płytką czy głęboką.
+  Implementacje w .NET są niespójne:
+    Array.Clone()        → płytka
+    DataTable.Clone()    → płytka
+    DataSet.Clone()      → płytka (ale Copy() głęboka)
+    
+  <b>Problem 2 – typ zwracany:</b>
+  Clone() zwraca <b>object</b>, więc klient
+  musi rzutować → brak bezpieczeństwa typów.
+  
+  <b>Problem 3 – wycofanie z praktyki:</b>
+  Microsoft przestało zalecać ICloneable
+  już w .NET Framework 2.0 dokumentacji.
+  W .NET 5+ nie jest używane przez BCL
+  w żadnym nowym API.
+end note
+
+@enduml
