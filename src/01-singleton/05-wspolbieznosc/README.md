@@ -72,7 +72,48 @@ W aplikacjach z intensywnym wywołaniem singletona: istotny spadek wydajności.
 
 ## Rozwiązanie 2: Double-Checked Locking (DCL)
 
-Podwójne sprawdzenie pozwala uniknąć blokady po inicjalizacji:
+### Na czym polega technika?
+
+Double-Checked Locking to wzorzec synchronizacji, który eliminuje koszt blokowania (lock)
+przez **dwa sprawdzenia warunku** — jedno bez blokady i jedno wewnątrz blokady:
+
+1. **Pierwsze sprawdzenie** (bez blokady, koszt: jeden odczyt) — optymistyczna fastpath.
+   Jeśli instancja istnieje → powróci natychmiast, bez żadnego `lock`.
+   Dzięki temu po inicjalizacji każde kolejne wywołanie jest niemal darmowe.
+2. **Wejście do blokady** — tylko wątki, które zobaczyły `null`, trafiają tu.
+   Po `lock` dostęp jest serializowany — tylko jeden wątek na raz.
+3. **Drugie sprawdzenie** (wewnątrz blokady) — niezbędne, bo między pierwszym sprawdzeniem
+   a wejściem do blokady inny wątek mógł już stworzyć instancję. Bez tego sprawdzenia
+   drugi wątek nadpisałby świeżo stworzoną instancję nową.
+
+```
+GetInstance():
+  ┌─ if (_instance is null)          ← [1] Pierwsze sprawdzenie (bez lock)
+  │    lock (_lock)                  ← [2] Blokada — tylko dla wątków z null
+  │      if (_instance is null)      ← [3] Drugie sprawdzenie (z lock)
+  │        _instance = new T()
+  └─ return _instance
+```
+
+### Dlaczego potrzebujemy `volatile`?
+
+Problem leży w modelu pamięci CPU. Procesor i kompilator mogą zmienić kolejność operacji
+(instruction reordering) dla optymalizacji. Instrukcja `_instance = new T()` to nie jedna,
+ale **trzy operacje**:
+
+```
+1. Alokuj pamięć dla obiektu → uzyskaj adres
+2. Wywołaj konstruktor T() na tej pamięci
+3. Przypisz adres do _instance
+```
+
+CPU lub JIT może wykonać je w kolejności **1 → 3 → 2** — co oznacza, że `_instance` ma
+niedwuznaczny adres (nie jest `null`), ale obiekt pod tym adresem **nie jest jeszcze gotowy**.
+Wątek B widzi `_instance != null` i zwraca **częściowo skonstruowany obiekt**.
+
+`volatile` dodaje **memory barrier** — barierę pamięci, która wymusza:
+- wszystkie zapisy przed bariery są ukończone i widziane przez inne rdzenie
+- żadna instrukcja nie może przekroczyć bariery w ramach reorderingu
 
 ```csharp
 public class DCLSingleton
@@ -100,8 +141,9 @@ public class DCLSingleton
 }
 ```
 
-**Kluczowe:** słowo kluczowe `volatile` zapobiega reorderingowi instrukcji przez kompilator/CPU.  
-Bez `volatile` DCL nie jest bezpieczne nawet w C# poniżej .NET 2.0.
+**Ważne:** `volatile` gwarantuje poprawność DCL w .NET 2.0+. W starszych wersjach CLR (1.0/1.1)
+model pamięci był słabszy i nawet `volatile` nie wystarczał — stąd historyczna kontrowersja
+wokół DCL w Javie; w C#/.NET 2.0+ jest to bezpieczne.
 
 ![Diagram rozwiązań thread-safe](diagrams/threadsafe_solutions.png)
 
@@ -137,49 +179,7 @@ wykonywane są trzy kroki:
    W przeciwnym razie: wywołuje fabrykę, zapisuje wynik przez `Volatile.Write`, oznacza stan
    jako ukończony i zwalnia blokadę.
 
-```plantuml
-@startuml lazy_t_internals
-skinparam backgroundColor #FFFFF0
-skinparam sequenceMessageAlign left
-
-title Lazy<T>.Value — mechanizm wewnętrzny
-
-participant "Wątek A" as A
-participant "Lazy<T>" as L
-participant "Wątek B" as B
-
-group Pierwsze wywołanie (inicjalizacja)
-  A -> L : .Value
-  activate L
-  L -> L : Volatile.Read(_state) → null
-  L -> L : Monitor.Enter(_lock)
-  B -> L : .Value
-  note right of B : CZEKA na Monitor.Enter
-  L -> L : Sprawdza stan → null (DCL wewnętrzny)
-  L -> L : Wywołuje fabrykę ()
-  L -> L : _value = nowy obiekt
-  L -> L : Volatile.Write(_state = done)
-  L -> L : Monitor.Exit
-  L --> A : zwraca _value
-  deactivate L
-  B -> L : dostaje Monitor.Enter
-  activate L
-  L -> L : Volatile.Read(_state) → done (DCL)
-  L -> L : Monitor.Exit
-  L --> B : zwraca _value (bez tworzenia)
-  deactivate L
-end
-
-group Każde kolejne wywołanie (tani odczyt)
-  A -> L : .Value
-  activate L
-  L -> L : Volatile.Read(_state) → done
-  L --> A : zwraca _value (zero blokady)
-  deactivate L
-end
-
-@enduml
-```
+![Diagram mechanizmu Lazy\<T\>](diagrams/lazy_t_internals.png)
 
 Po pierwszej inicjalizacji każde kolejne wywołanie `.Value` to wyłącznie tani `Volatile.Read` —
 porównywalne wydajnościowo z dostępem do zwykłego pola statycznego.
