@@ -159,13 +159,104 @@ SqlQuery IBuildStep.Build()  => BuildQuery();   // Build() z IBuildStep
 
 ## Typ 2: Immutable Builder + C# record
 
-### Czym jest niemutowalny obiekt wartościowy?
+### Czym jest Value Object?
 
-**Value Object (VO)** to obiekt, którego tożsamość wynika z wartości jego pól,
-a nie z referencji. Dwa obiekty wartościowe z identycznymi polami są *równe*.
-Są **niezmienne** — raz stworzony VO nie można zmienić (można stworzyć nowy).
+**Value Object (VO)** to wzorzec z dziedziny **Domain-Driven Design** (Evans, 2003).
+Jego kluczowa cecha: **tożsamość obiektu wynika wyłącznie z wartości jego pól**,
+nie z referencji w pamięci ani ID bazy danych.
 
-Klasyczne przykłady: `DateTime`, `Money`, `Color`, adres pocztowy, współrzędne GPS.
+#### Entity vs Value Object — kluczowa różnica
+
+W modelowaniu domeny obiekty dzielimy na dwie kategorie:
+
+| Cecha | **Entity** | **Value Object** |
+|-------|-----------|-----------------|
+| Tożsamość | Unikalny identyfikator (ID, GUID) | Wartości pól |
+| Dwa obiekty z tymi samymi polami | Mogą być *różnymi* bytami | *Zawsze* są równe |
+| Czas życia | Śledzone przez system (DB, repozytorium) | Tworzone i porzucane |
+| Mutowalność | Często mutowalne | **Zawsze niemutowalne** |
+| Przykład | `Klient`, `Zamówienie`, `Pracownik` | `Pieniądze`, `Adres`, `Kolor`, `Data` |
+
+**Przykład z życia:** Dwa banknoty 50 zł to dla rachunkowości *ten sam obiekt wartościowy*
+(liczy się kwota i waluta, nie numer seryjny banknotu). Ale Jan Kowalski i Jan Kowalski
+to *dwie różne encje*, nawet jeśli mają identyczne imię i nazwisko.
+
+#### Trzy cechy definiujące Value Object
+
+**1. Równość przez wartość (`value equality`)**
+
+```csharp
+// BEZ VO (zwykła klasa):
+var a1 = new Address("Kwiatowa 5", "Warszawa");
+var a2 = new Address("Kwiatowa 5", "Warszawa");
+Console.WriteLine(a1 == a2);   // False — porównanie referencji!
+
+// Z VO (record):
+var a3 = new Address("Kwiatowa 5", "Warszawa");
+var a4 = new Address("Kwiatowa 5", "Warszawa");
+Console.WriteLine(a3 == a4);   // True — porównanie wartości pól ✔
+```
+
+**2. Niemutowalność (`immutability`)**
+
+VO nie można zmienić po stworzeniu. Zamiast mutacji tworzymy nowy obiekt:
+
+```csharp
+// ŹLE — mutacja zmienia semantykę obiektu:
+address.City = "Kraków";   // ten sam obiekt, ale już inna tożsamość?
+
+// DOBRZE — nowy VO:
+var moved = address with { City = "Kraków" };   // nowy obiekt, stary nienaruszony
+```
+
+**3. Brak efektów ubocznych**
+
+Metody VO zwracają nowe obiekty zamiast modyfikować stan:
+
+```csharp
+// Money VO — dodawanie tworzy nowy obiekt:
+public Money Add(Money other)
+{
+    if (Currency != other.Currency)
+        throw new InvalidOperationException("Różne waluty");
+    return new Money(Amount + other.Amount, Currency);
+}
+
+var price   = new Money(99.00m, "PLN");
+var tax     = new Money(22.78m, "PLN");
+var total   = price.Add(tax);   // nowy obiekt: 121,78 PLN
+// price i tax są niezmienione
+```
+
+#### Klasyczne przykłady Value Object
+
+| VO | Dlaczego to VO, nie Entity? |
+|----|----------------------------|
+| `DateTime` | Dwie daty `2026-03-07` to ten sam punkt w czasie — tożsamość = wartość |
+| `Money(100m, "PLN")` | Dwa obiekty z kwotą 100 PLN są zawsze równe |
+| `Color(255, 0, 0)` | Dwa identyczne kolory RGB są nie do odróżnienia |
+| `Address("Kwiatowa 5", "Warszawa")` | Adres to opis miejsca, nie byt |
+| `GpsCoordinates(52.23, 21.01)` | Współrzędne to czyste wartości |
+| `EmailAddress("jan@firma.pl")` | E-mail to string z walidacją, nie encja |
+
+#### Jak `record` w C# implementuje VO
+
+`record` (C# 9+) to typ specjalnie zaprojektowany pod Value Objects — kompilator
+generuje całą infrastrukturę VO automatycznie:
+
+```csharp
+public record Money(decimal Amount, string Currency);
+// Kompilator generuje:
+//   ✔ Konstruktor pozycyjny: new Money(100m, "PLN")
+//   ✔ == i != oparte o wartości pól (value equality)
+//   ✔ GetHashCode() spójny z ==
+//   ✔ ToString(): "Money { Amount = 100, Currency = PLN }"
+//   ✔ Dekonstrukcję: var (amount, currency) = money
+//   ✔ with-expression: money with { Amount = 200 }
+//   ✔ Niemutowalność: właściwości są init-only
+```
+
+**Builder dodaje to, czego `record` nie ma: walidację podczas konstrukcji.**
 
 `record` w C# 9+ implementuje VO automatycznie: konstruktor pozycyjny,
 `==` oparty o content, `ToString()`, dekonstrukcja. Builder dodaje walidację.
