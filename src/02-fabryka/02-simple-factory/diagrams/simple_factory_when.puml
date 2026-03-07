@@ -1,0 +1,33 @@
+@startuml simple_factory_when_acceptable
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam rectangle {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+}
+
+title <b>Simple Factory — kiedy stosować, kiedy nie</b>
+
+rectangle "✅ STOSUJ Simple Factory gdy:" #E0FFE0 {
+    rectangle "Hierarchia produktów\nje jest STABILNA" as S1 #CCFFCC
+    rectangle "Logika tworzenia\njest ZŁOŻONA\n(walidacja, parametry)" as S2 #CCFFCC
+    rectangle "Chcesz ukryć konkretne\ntypy przed klientem" as S3 #CCFFCC
+    rectangle "Kod jest MAŁY i rzadko\nsię zmienia" as S4 #CCFFCC
+}
+
+rectangle "❌ NIE STOSUJ gdy:" #FFE0E0 {
+    rectangle "Często dodajesz\nNOWE typy produktów" as N1 #FFCCCC
+    rectangle "Różni klienci potrzebują\nRÓŻNYCH wariantów\ntych samych produktów" as N2 #FFCCCC
+    rectangle "Produkt ma KILKA\nwymiarów zmienności" as N3 #FFCCCC
+}
+
+rectangle "➜ W tych przypadkach użyj:" #E0E8FF {
+    rectangle "Factory Method" as FM #CCE0FF
+    rectangle "Abstract Factory" as AF #CCE0FF
+}
+
+N1 -down-> FM
+N2 -down-> AF
+N3 -down-> AF
+
+@enduml

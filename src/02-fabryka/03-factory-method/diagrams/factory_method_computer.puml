@@ -1,0 +1,57 @@
+@startuml factory_method_computer
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+    ArrowColor DarkGray
+}
+skinparam note {
+    BackgroundColor #FFF8DC
+    BorderColor DarkGray
+}
+
+title <b>Factory Method — przykład z komputerami (C#)</b>
+
+abstract class ComputerFactory {
+    + {abstract} CreateGamingPC() : IGamingPC
+    + {abstract} CreateWorkStation() : IWorkStation
+    + SellComputer(type : ComputerType) : IComputer
+}
+
+class DellComputerFactory extends ComputerFactory {
+    + CreateGamingPC() : IGamingPC
+    + CreateWorkStation() : IWorkStation
+}
+
+class HpComputerFactory extends ComputerFactory {
+    + CreateGamingPC() : IGamingPC
+    + CreateWorkStation() : IWorkStation
+}
+
+interface IComputer {
+    + Producer : ComputerProducer
+    + CPUFrequency : double
+    + RAM : int
+}
+
+interface IGamingPC extends IComputer {
+    + DedicatedGraphicsCard : string
+}
+
+interface IWorkStation extends IComputer {
+    + RaidConfiguration : RaidConfiguration
+}
+
+class DellGamingPC implements IGamingPC
+class DellWorkStation implements IWorkStation
+class HpGamingPC implements IGamingPC
+class HpWorkStation implements IWorkStation
+
+DellComputerFactory ..> DellGamingPC : <<creates>>
+DellComputerFactory ..> DellWorkStation : <<creates>>
+HpComputerFactory ..> HpGamingPC : <<creates>>
+HpComputerFactory ..> HpWorkStation : <<creates>>
+
+@enduml

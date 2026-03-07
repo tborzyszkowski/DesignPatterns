@@ -1,0 +1,80 @@
+@startuml factory_method_class
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+    ArrowColor DarkGray
+}
+skinparam note {
+    BackgroundColor #FFF8DC
+    BorderColor DarkGray
+}
+
+title <b>Factory Method — Diagram klas (pizzeria)</b>
+
+abstract class PizzaStore {
+    + OrderPizza(type : string) : Pizza
+    # {abstract} CreatePizza(type : string) : Pizza
+}
+
+note right of PizzaStore
+  <b>Metoda wytwórcza (factory method):</b>
+  CreatePizza() jest abstrakcyjna —
+  podklasy decydują, co zostanie stworzone.
+  
+  OrderPizza():
+    pizza = CreatePizza(type)  ← wywołanie hookа
+    pizza.Prepare()
+    pizza.Bake()
+    pizza.Cut()
+    pizza.Box()
+    return pizza
+end note
+
+class NYPizzaStore extends PizzaStore {
+    # CreatePizza(type : string) : Pizza
+}
+
+class ChicagoPizzaStore extends PizzaStore {
+    # CreatePizza(type : string) : Pizza
+}
+
+abstract class Pizza {
+    + Name : string
+    + {abstract} Prepare() : void
+    + Bake() : void
+    + Cut() : void
+    + Box() : void
+}
+
+class NYStyleCheesePizza extends Pizza {
+    + NYStyleCheesePizza()
+}
+class NYStylePepperoniPizza extends Pizza {
+    + NYStylePepperoniPizza()
+}
+class ChicagoStyleCheesePizza extends Pizza {
+    + ChicagoStyleCheesePizza()
+}
+class ChicagoStylePepperoniPizza extends Pizza {
+    + ChicagoStylePepperoniPizza()
+}
+
+NYPizzaStore ..> NYStyleCheesePizza : <<creates>>
+NYPizzaStore ..> NYStylePepperoniPizza : <<creates>>
+ChicagoPizzaStore ..> ChicagoStyleCheesePizza : <<creates>>
+ChicagoPizzaStore ..> ChicagoStylePepperoniPizza : <<creates>>
+
+note bottom of NYPizzaStore
+  Decyduje o stylu nowojorskim.
+  CreatePizza() tworzy lokalne warianty.
+end note
+
+note bottom of ChicagoPizzaStore
+  Decyduje o stylu chicagowskim.
+  CreatePizza() tworzy grubsze warianty.
+end note
+
+@enduml

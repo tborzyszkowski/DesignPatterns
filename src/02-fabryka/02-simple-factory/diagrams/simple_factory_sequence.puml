@@ -1,0 +1,63 @@
+@startuml simple_factory_sequence
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam sequence {
+    ArrowColor DarkGray
+    ActorBorderColor DarkGray
+    LifeLineBorderColor DarkGray
+    ParticipantBackgroundColor LightYellow
+    ParticipantBorderColor DarkGray
+}
+
+title <b>Simple Factory — Diagram sekwencji</b>
+
+actor Klient
+participant "PizzaStore" as Store
+participant "SimplePizzaFactory" as Factory
+participant "CheesePizza\n<<concrete>>" as Pizza
+
+Klient -> Store : OrderPizza("cheese")
+activate Store
+
+Store -> Factory : CreatePizza("cheese")
+activate Factory
+
+Factory -> Pizza : new CheesePizza()
+activate Pizza
+Pizza --> Factory : pizza
+deactivate Pizza
+
+Factory --> Store : pizza : Pizza
+deactivate Factory
+
+Store -> Pizza : Prepare()
+activate Pizza
+Pizza --> Store
+deactivate Pizza
+
+Store -> Pizza : Bake()
+activate Pizza
+Pizza --> Store
+deactivate Pizza
+
+Store -> Pizza : Cut()
+activate Pizza
+Pizza --> Store
+deactivate Pizza
+
+Store -> Pizza : Box()
+activate Pizza
+Pizza --> Store
+deactivate Pizza
+
+Store --> Klient : pizza
+deactivate Store
+
+note over Factory
+  Fabryka tworzy odpowiedni
+  obiekt na podstawie parametru.
+  Klient nie wie, jaką konkretną
+  klasę dostaje.
+end note
+
+@enduml

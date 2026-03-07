@@ -1,0 +1,63 @@
+@startuml factory_method_gof
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+    ArrowColor DarkGray
+}
+skinparam note {
+    BackgroundColor #FFF8DC
+    BorderColor DarkGray
+}
+
+title <b>Factory Method — struktura GoF (ogólna)</b>
+
+abstract class Creator {
+    + AnOperation() : void
+    # {abstract} FactoryMethod() : Product
+}
+
+note right of Creator
+  <b>AnOperation():</b>
+  product = FactoryMethod()  ← hook
+  product.DoStuff()
+  // Creator nie wie, jakie
+  // konkretne Product powstanie
+end note
+
+class ConcreteCreator1 extends Creator {
+    # FactoryMethod() : Product
+}
+
+class ConcreteCreator2 extends Creator {
+    # FactoryMethod() : Product
+}
+
+interface Product {
+    + {abstract} DoStuff() : void
+}
+
+class ConcreteProduct1 implements Product {
+    + DoStuff() : void
+}
+
+class ConcreteProduct2 implements Product {
+    + DoStuff() : void
+}
+
+ConcreteCreator1 ..> ConcreteProduct1 : <<creates>>
+ConcreteCreator2 ..> ConcreteProduct2 : <<creates>>
+
+Creator ..> Product : uses >
+
+note as GoFNote
+  <b>Uczestnicy (GoF):</b>
+  • Creator — definiuje FactoryMethod()
+  • ConcreteCreator — implementuje FactoryMethod()
+  • Product — interfejs produktu
+  • ConcreteProduct — konkretny produkt
+end note
+
+@enduml

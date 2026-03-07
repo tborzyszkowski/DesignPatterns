@@ -1,0 +1,74 @@
+@startuml ocp_solution
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+    ArrowColor DarkGray
+}
+skinparam interface {
+    BackgroundColor #E0FFE0
+    BorderColor DarkGreen
+}
+skinparam note {
+    BackgroundColor #FFF8DC
+    BorderColor DarkGray
+}
+
+interface IShippingCalculator {
+    + {abstract} Calculate(order : Order) : decimal
+    + {abstract} ShippingType : string
+}
+
+class StandardShipping implements IShippingCalculator {
+    + ShippingType : string = "Standard"
+    + Calculate(order) : decimal
+}
+
+class ExpressShipping implements IShippingCalculator {
+    + ShippingType : string = "Express"
+    + Calculate(order) : decimal
+}
+
+class OvernightShipping implements IShippingCalculator {
+    + ShippingType : string = "Overnight"
+    + Calculate(order) : decimal
+}
+
+class FreeShipping implements IShippingCalculator {
+    + ShippingType : string = "Free"
+    + Calculate(order) : decimal
+}
+
+class InternationalShipping implements IShippingCalculator {
+    + ShippingType : string = "International"
+    + Calculate(order) : decimal
+}
+
+class OrderProcessor {
+    - _calculators : IEnumerable<IShippingCalculator>
+    + OrderProcessor(calculators)
+    + CalculateShipping(order, type) : decimal
+}
+
+OrderProcessor o--> IShippingCalculator : uses >
+
+note right of OrderProcessor
+  <b>Klasa OrderProcessor:</b>
+  var calc = _calculators
+    .FirstOrDefault(c =>
+       c.ShippingType == type);
+  return calc?.Calculate(order) ?? 0;
+  
+  <color:green>NIGDY nie musi być modyfikowana!</color>
+end note
+
+note bottom of InternationalShipping
+  <color:green><b>Rozszerzenie OCP:</b></color>
+  Nowy rodzaj przesyłki = NOWA klasa.
+  Żaden istniejący kod nie jest
+  modyfikowany.
+end note
+
+@enduml

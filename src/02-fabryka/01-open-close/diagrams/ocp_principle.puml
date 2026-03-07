@@ -1,0 +1,51 @@
+@startuml ocp_principle
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam rectangle {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+}
+skinparam note {
+    BackgroundColor #FFF8DC
+    BorderColor DarkGray
+}
+skinparam arrow {
+    Color DarkGray
+}
+
+title <b>Zasada Otwarte-Zamknięte (OCP)\nBertrand Meyer, 1988 / Robert C. Martin, 2000</b>
+
+together {
+    rectangle "ZAMKNIĘTE\nna modyfikacje" as CLOSED #FFE0E0 {
+        card "Stabilny\nrdzeń systemu" as CORE #FFCCCC
+    }
+    
+    rectangle "OTWARTE\nna rozszerzenia" as OPEN #E0FFE0 {
+        card "Nowy\nbehawior A" as A #CCFFCC
+        card "Nowy\nbehawior B" as B #CCFFCC
+        card "Nowy\nbehawior C" as C #CCFFCC
+    }
+}
+
+CLOSED -right-> OPEN  : "extends / implements"
+
+note top of CLOSED
+  Istniejące klasy i metody
+  <b>nie powinny być modyfikowane</b>
+  po wdrożeniu na produkcję
+end note
+
+note top of OPEN
+  Nowe typy realizują
+  ten sam interfejs/klasę bazową
+  <b>bez zmiany istniejącego kodu</b>
+end note
+
+legend bottom
+  |= Techniki realizacji OCP |
+  | Dziedziczenie + metody wirtualne/abstrakcyjne |
+  | Interfejsy + polimorfizm |
+  | Wzorce projektowe: Strategy, Decorator, Factory Method, Abstract Factory |
+end legend
+
+@enduml

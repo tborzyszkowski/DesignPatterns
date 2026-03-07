@@ -1,0 +1,61 @@
+@startuml ocp_violation
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor #FFE0E0
+    BorderColor DarkRed
+    ArrowColor DarkRed
+}
+skinparam note {
+    BackgroundColor #FFF8DC
+    BorderColor DarkGray
+}
+
+class OrderProcessor {
+    + CalculateShipping(order : Order,\n  type : ShippingType) : decimal
+}
+
+note right of OrderProcessor
+  <b>Metoda CalculateShipping:</b>
+  if (type == Standard)
+      return 10.00m;
+  else if (type == Express)
+      return 25.00m;
+  else if (type == Overnight)
+      return 50.00m;
+  else if (type == <b>FreeShipping</b>)  ← dodano
+      return 0.00m;
+  else if (type == <b>International</b>) ← dodano
+      return 80.00m;
+  ...
+  <color:red>Każdy nowy typ wysyłki
+  wymaga modyfikacji tej klasy!</color>
+end note
+
+enum ShippingType {
+    Standard
+    Express
+    Overnight
+    <<new>> FreeShipping
+    <<new>> International
+}
+
+class Order {
+    + CustomerId : string
+    + TotalAmount : decimal
+    + Items : List<OrderItem>
+}
+
+OrderProcessor ..> ShippingType : uses
+OrderProcessor ..> Order : uses
+
+note bottom of OrderProcessor
+  <color:red><b>Naruszenie OCP:</b></color>
+  Klasa jest OTWARTA na modyfikacje
+  zamiast OTWARTA na rozszerzenia.
+  Dodanie nowego rodzaju przesyłki
+  = modyfikacja istniejącego kodu.
+end note
+
+@enduml

@@ -1,0 +1,79 @@
+@startuml factory_method_sequence
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam sequence {
+    ArrowColor DarkGray
+    ActorBorderColor DarkGray
+    LifeLineBorderColor DarkGray
+    ParticipantBackgroundColor LightYellow
+    ParticipantBorderColor DarkGray
+    ActorBackgroundColor LightYellow
+}
+
+title <b>Factory Method — Diagram sekwencji</b>
+
+actor Klient
+participant "NYPizzaStore\n<<ConcreteCreator>>" as NYStore
+participant "PizzaStore\n<<Creator>>" as Store  #LightBlue
+participant "NYStyleCheesePizza\n<<ConcreteProduct>>" as Pizza
+
+Klient -> NYStore : OrderPizza("cheese")
+activate NYStore
+
+NYStore -> Store : [dziedziczenie] OrderPizza("cheese")
+activate Store
+
+note right of Store
+  Metoda szablonowa (Template Method):
+  pizza = CreatePizza(type)  ← hook
+  pizza.Prepare()
+  pizza.Bake()
+  pizza.Cut()
+  pizza.Box()
+end note
+
+Store -> NYStore : CreatePizza("cheese")
+activate NYStore #DarkSalmon
+
+NYStore -> Pizza : new NYStyleCheesePizza()
+activate Pizza
+Pizza --> NYStore : pizza
+deactivate Pizza
+
+NYStore --> Store : pizza
+deactivate NYStore
+
+Store -> Pizza : Prepare()
+activate Pizza
+Pizza --> Store
+deactivate Pizza
+
+Store -> Pizza : Bake()
+activate Pizza
+Pizza --> Store
+deactivate Pizza
+
+Store -> Pizza : Cut()
+activate Pizza
+Pizza --> Store
+deactivate Pizza
+
+Store -> Pizza : Box()
+activate Pizza
+Pizza --> Store
+deactivate Pizza
+
+Store --> NYStore : pizza
+deactivate Store
+
+NYStore --> Klient : pizza
+deactivate NYStore
+
+note over Store, NYStore
+  Kluczowe: Creator (PizzaStore) zarządza
+  cyklem życia produktu, ale NIE wie,
+  jakie konkretne Pizza zostanie stworzone.
+  To decyduje ConcreteCreator.
+end note
+
+@enduml

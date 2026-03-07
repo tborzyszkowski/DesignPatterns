@@ -1,0 +1,65 @@
+@startuml ocp_shapes_comparison
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+    ArrowColor DarkGray
+}
+skinparam note {
+    BackgroundColor #FFF8DC
+    BorderColor DarkGray
+}
+
+package "BEZ OCP (naruszenie)" #FFE0E0 {
+    class ShapeRenderer_BAD as "ShapeRenderer" #FFD0D0 {
+        + Draw(shape: string) : void
+    }
+    note right of ShapeRenderer_BAD
+      switch (shape) {
+        case "Circle":   DrawCircle(); break;
+        case "Rectangle":DrawRectangle(); break;
+        case "Triangle": DrawTriangle(); break;
+        <color:red>case "Hexagon":   // nowy kształt</color>
+        <color:red>  DrawHexagon(); // MODYFIKACJA!</color>
+      }
+    end note
+}
+
+package "Z OCP (poprawnie)" #E0FFE0 {
+    interface IShape #D0FFD0 {
+        + {abstract} Draw() : void
+    }
+
+    class Circle implements IShape {
+        + Draw() : void
+    }
+    class Rectangle implements IShape {
+        + Draw() : void
+    }
+    class Triangle implements IShape {
+        + Draw() : void
+    }
+    class Hexagon implements IShape {
+        + Draw() : void
+    }
+
+    class ShapeRenderer_GOOD as "ShapeRenderer" #D0FFD0 {
+        + Draw(shape: IShape) : void
+    }
+
+    ShapeRenderer_GOOD ..> IShape : uses
+    note right of ShapeRenderer_GOOD
+      <color:green>// <<- NIGDY się nie zmienia</color>
+      shape.Draw();
+    end note
+
+    note bottom of Hexagon
+      <color:green>Nowy kształt = NOWA klasa.
+      ShapeRenderer bez zmian!</color>
+    end note
+}
+
+@enduml

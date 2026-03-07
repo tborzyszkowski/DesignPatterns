@@ -1,0 +1,103 @@
+@startuml abstract_factory_class
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Fabryka Abstrakcyjna — Pizzeria (struktura klas)
+
+' ---------- Fabryki składników (AbstractFactory) ----------
+interface IPizzaIngredientFactory {
+  + CreateDough() : IDough
+  + CreateSauce() : ISauce
+  + CreateCheese() : ICheese
+  + CreateClams() : IClams
+}
+
+class NYPizzaIngredientFactory implements IPizzaIngredientFactory {
+  + CreateDough() : ThinCrustDough
+  + CreateSauce() : MarinaraSauce
+  + CreateCheese() : ReggianoCheese
+  + CreateClams() : FreshClams
+}
+
+class ChicagoPizzaIngredientFactory implements IPizzaIngredientFactory {
+  + CreateDough() : ThickCrustDough
+  + CreateSauce() : PlumTomatoSauce
+  + CreateCheese() : MozzarellaCheese
+  + CreateClams() : FrozenClams
+}
+
+' ---------- Produkty (składniki) ----------
+interface IDough {
+  + Description : string
+}
+interface ISauce {
+  + Description : string
+}
+interface ICheese {
+  + Description : string
+}
+interface IClams {
+  + Description : string
+}
+
+class ThinCrustDough   implements IDough
+class ThickCrustDough  implements IDough
+class MarinaraSauce    implements ISauce
+class PlumTomatoSauce  implements ISauce
+class ReggianoCheese   implements ICheese
+class MozzarellaCheese implements ICheese
+class FreshClams       implements IClams
+class FrozenClams      implements IClams
+
+' ---------- Klient / Pizza ----------
+abstract class Pizza {
+  # Name : string
+  # Dough : IDough
+  # Sauce : ISauce
+  # Cheese  : ICheese
+  + {abstract} Prepare()
+  + Bake()
+  + Cut()
+  + Box()
+}
+
+class CheesePizza {
+  - _factory : IPizzaIngredientFactory
+  + Prepare()
+}
+
+class ClamPizza {
+  - _factory : IPizzaIngredientFactory
+  + Prepare()
+}
+
+Pizza <|-- CheesePizza
+Pizza <|-- ClamPizza
+
+CheesePizza --> IPizzaIngredientFactory : używa >
+ClamPizza   --> IPizzaIngredientFactory : używa >
+
+NYPizzaIngredientFactory ..> ThinCrustDough   : tworzy
+NYPizzaIngredientFactory ..> MarinaraSauce    : tworzy
+NYPizzaIngredientFactory ..> ReggianoCheese   : tworzy
+NYPizzaIngredientFactory ..> FreshClams       : tworzy
+
+ChicagoPizzaIngredientFactory ..> ThickCrustDough  : tworzy
+ChicagoPizzaIngredientFactory ..> PlumTomatoSauce  : tworzy
+ChicagoPizzaIngredientFactory ..> MozzarellaCheese : tworzy
+ChicagoPizzaIngredientFactory ..> FrozenClams      : tworzy
+
+note bottom of IPizzaIngredientFactory
+  AbstractFactory — interfejs tworzenia
+  całych **rodzin** powiązanych obiektów.
+  Klient (Pizza) zna tylko ten interfejs.
+end note
+
+@enduml

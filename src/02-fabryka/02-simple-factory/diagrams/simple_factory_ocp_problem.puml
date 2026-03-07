@@ -1,0 +1,42 @@
+@startuml simple_factory_ocp_problem
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor #FFE0E0
+    BorderColor DarkRed
+    ArrowColor DarkRed
+}
+skinparam note {
+    BackgroundColor #FFF8DC
+    BorderColor DarkGray
+}
+
+title <b>Simple Factory — Problem z OCP</b>
+
+class SimplePizzaFactory #FFD0D0 {
+    + CreatePizza(type : string) : Pizza
+}
+
+note right of SimplePizzaFactory
+  <color:red><b>Konieczna modyfikacja</b>
+  przy każdym nowym typie pizzy:</color>
+  
+  if (type == "cheese")
+      return new CheesePizza();
+  else if (type == "pepperoni")
+      return new PepperoniPizza();
+  ❌ else if (type == "buffalo")     ← MODYFIKACJA
+      return new BuffaloPizza();
+  ❌ else if (type == "truffle")     ← MODYFIKACJA
+      return new TrufflePizza();
+  ...
+end note
+
+legend bottom
+  |<#FFD0D0>  | <b>Simple Factory narusza OCP</b> — każde nowe pizza = zmiana w fabryce |
+  | | Akceptowalne: mała aplikacja, rzadkie zmiany, fabryka jako "util" |
+  | | Nieakceptowalne: dynamicznie rosnąca hierarchia produktów |
+end legend
+
+@enduml

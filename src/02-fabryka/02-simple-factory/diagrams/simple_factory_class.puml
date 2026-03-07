@@ -1,0 +1,83 @@
+@startuml simple_factory_class
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFF0
+skinparam shadowing false
+skinparam class {
+    BackgroundColor LightYellow
+    BorderColor DarkGray
+    ArrowColor DarkGray
+}
+skinparam interface {
+    BackgroundColor #E0F0FF
+    BorderColor #3060A0
+}
+skinparam note {
+    BackgroundColor #FFF8DC
+    BorderColor DarkGray
+}
+
+title <b>Simple Factory — Diagram klas</b>
+
+interface IPizza {
+    + Name : string
+    + Prepare() : void
+    + Bake() : void
+    + Cut() : void
+    + Box() : void
+}
+
+abstract class Pizza implements IPizza {
+    + Name : string
+    + Prepare() : void
+    + Bake() : void
+    + Cut() : void
+    + Box() : void
+}
+
+class CheesePizza extends Pizza {
+    + CheesePizza()
+}
+class PepperoniPizza extends Pizza {
+    + PepperoniPizza()
+}
+class VeggiePizza extends Pizza {
+    + VeggiePizza()
+}
+class ClamPizza extends Pizza {
+    + ClamPizza()
+}
+
+class SimplePizzaFactory {
+    + CreatePizza(type : string) : Pizza
+}
+
+class PizzaStore {
+    - _factory : SimplePizzaFactory
+    + PizzaStore(factory)
+    + OrderPizza(type : string) : Pizza
+}
+
+PizzaStore --> SimplePizzaFactory : uses >
+SimplePizzaFactory ..> CheesePizza   : <<creates>>
+SimplePizzaFactory ..> PepperoniPizza : <<creates>>
+SimplePizzaFactory ..> VeggiePizza   : <<creates>>
+SimplePizzaFactory ..> ClamPizza     : <<creates>>
+
+note right of SimplePizzaFactory
+  <b>Tutaj skupiają się wszystkie
+  instrukcje new</b>
+  
+  if (type == "cheese")
+      return new CheesePizza();
+  else if (type == "pepperoni")
+      return new PepperoniPizza();
+  ...
+end note
+
+note bottom of PizzaStore
+  Klient zna tylko interfejs Pizza.
+  Nie musi wiedzieć, które konkretne
+  klasy istnieją.
+end note
+
+@enduml

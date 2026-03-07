@@ -1,0 +1,81 @@
+@startuml abstract_factory_families
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Fabryka Abstrakcyjna — rodziny produktów (Dell vs HP)
+
+interface IComputerFactory {
+  + CreateGamingPC() : IGamingPC
+  + CreateWorkStation() : IWorkStation
+  + CreateLaptop() : ILaptop
+}
+
+class DellComputerFactory implements IComputerFactory {
+  + CreateGamingPC() : DellGamingPC
+  + CreateWorkStation() : DellWorkStation
+  + CreateLaptop() : DellLaptop
+}
+
+class HpComputerFactory implements IComputerFactory {
+  + CreateGamingPC() : HpGamingPC
+  + CreateWorkStation() : HpWorkStation
+  + CreateLaptop() : HpLaptop
+}
+
+interface IGamingPC {
+  + GPU : string
+  + Render()
+}
+
+interface IWorkStation {
+  + CPU : string
+  + Compute()
+}
+
+interface ILaptop {
+  + Screen : string
+  + PowerOn()
+}
+
+class DellGamingPC  implements IGamingPC
+class DellWorkStation implements IWorkStation
+class DellLaptop    implements ILaptop
+
+class HpGamingPC    implements IGamingPC
+class HpWorkStation implements IWorkStation
+class HpLaptop      implements ILaptop
+
+DellComputerFactory ..> DellGamingPC    : tworzy
+DellComputerFactory ..> DellWorkStation : tworzy
+DellComputerFactory ..> DellLaptop      : tworzy
+
+HpComputerFactory ..> HpGamingPC    : tworzy
+HpComputerFactory ..> HpWorkStation : tworzy
+HpComputerFactory ..> HpLaptop      : tworzy
+
+rectangle "Rodzina Dell" #LightBlue {
+  class DellGamingPC
+  class DellWorkStation
+  class DellLaptop
+}
+
+rectangle "Rodzina HP" #LightGreen {
+  class HpGamingPC
+  class HpWorkStation
+  class HpLaptop
+}
+
+note top of IComputerFactory
+  Jedna fabryka = jeden producent.
+  Wszystkie produkty tej samej marki
+  są **gwarantowanie kompatybilne**.
+end note
+
+@enduml

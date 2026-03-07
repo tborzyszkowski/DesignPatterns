@@ -1,0 +1,53 @@
+@startuml abstract_factory_sequence
+skinparam backgroundColor #FFFFF0
+skinparam sequence {
+  ArrowColor DarkSlateGray
+  ActorBorderColor DarkSlateGray
+  ParticipantBackgroundColor LightYellow
+  ParticipantBorderColor DarkSlateGray
+  NoteBackgroundColor #FFF8DC
+}
+
+title Fabryka Abstrakcyjna — sekwencja tworzenia pizzy
+
+participant "Klient\n(NYPizzaStore)" as Client
+participant "CheesePizza" as Pizza
+participant "IPizzaIngredientFactory" as Factory
+participant "NYPizzaIngredientFactory" as NYFactory
+
+note over Client : fabryka = new NYPizzaIngredientFactory()
+
+Client -> Pizza : new CheesePizza(factory)
+activate Pizza
+
+Client -> Pizza : Prepare()
+Pizza -> Factory : CreateDough()
+activate Factory
+Factory -> NYFactory : CreateDough()
+NYFactory --> Factory : ThinCrustDough
+Factory --> Pizza : IDough
+deactivate Factory
+
+Pizza -> Factory : CreateSauce()
+activate Factory
+Factory -> NYFactory : CreateSauce()
+NYFactory --> Factory : MarinaraSauce
+Factory --> Pizza : ISauce
+deactivate Factory
+
+Pizza -> Factory : CreateCheese()
+activate Factory
+Factory -> NYFactory : CreateCheese()
+NYFactory --> Factory : ReggianoCheese
+Factory --> Pizza : ICheese
+deactivate Factory
+
+Pizza --> Client : pizza gotowa do pieczenia
+deactivate Pizza
+
+note over Client
+  Zmiana na ChicagoPizzaIngredientFactory
+  nie wymaga modyfikacji CheesePizza!
+end note
+
+@enduml

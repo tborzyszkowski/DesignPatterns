@@ -1,0 +1,68 @@
+@startuml abstract_factory_gof
+skinparam backgroundColor #FFFFF0
+skinparam class {
+  BackgroundColor LightYellow
+  BorderColor DarkSlateGray
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+}
+skinparam ArrowColor DarkSlateGray
+
+title Fabryka Abstrakcyjna — Struktura GoF
+
+' AbstractFactory
+interface AbstractFactory {
+  + CreateProductA() : AbstractProductA
+  + CreateProductB() : AbstractProductB
+}
+
+class ConcreteFactory1 implements AbstractFactory {
+  + CreateProductA() : ProductA1
+  + CreateProductB() : ProductB1
+}
+
+class ConcreteFactory2 implements AbstractFactory {
+  + CreateProductA() : ProductA2
+  + CreateProductB() : ProductB2
+}
+
+' Abstract Products
+interface AbstractProductA
+interface AbstractProductB
+
+' Concrete Products
+class ProductA1 implements AbstractProductA
+class ProductA2 implements AbstractProductA
+class ProductB1 implements AbstractProductB
+class ProductB2 implements AbstractProductB
+
+' Client
+class Client {
+  - _factory : AbstractFactory
+  + Client(f : AbstractFactory)
+  + DoWork()
+}
+
+Client --> AbstractFactory : używa >
+Client --> AbstractProductA
+Client --> AbstractProductB
+
+ConcreteFactory1 ..> ProductA1 : tworzy
+ConcreteFactory1 ..> ProductB1 : tworzy
+ConcreteFactory2 ..> ProductA2 : tworzy
+ConcreteFactory2 ..> ProductB2 : tworzy
+
+note right of AbstractFactory
+  **Reguła**:
+  Jedna fabryka = jedna rodzina produktów.
+  Produkty jednej rodziny są ze sobą
+  **kompatybilne**.
+end note
+
+note bottom of Client
+  Klient jest odizolowany od konkretnych klas.
+  Zamiana całej rodziny → podmiana fabryki.
+end note
+
+@enduml
