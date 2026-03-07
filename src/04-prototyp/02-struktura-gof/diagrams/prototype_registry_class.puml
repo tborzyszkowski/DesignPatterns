@@ -27,8 +27,13 @@ abstract class Shape {
   + Clone() : Shape
 }
 
-class Circle { + Radius : double }
-class Rectangle { + Width : double\n+ Height : double }
+class Circle {
+  + Radius : double
+}
+class Rectangle {
+  + Width : double
+  + Height : double
+}
 
 ShapeRegistry "1" o-- "0..*" Shape : przechowuje prototypy
 Shape <|-- Circle
