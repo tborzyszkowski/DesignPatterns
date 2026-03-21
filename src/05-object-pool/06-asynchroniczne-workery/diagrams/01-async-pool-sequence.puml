@@ -1,0 +1,19 @@
+@startuml
+skinparam shadowing false
+skinparam monochrome true
+
+title Asynchroniczna pula workerow
+
+participant Request
+participant Pool
+participant Semaphore
+participant Worker
+
+Request -> Pool : AcquireWorkerAsync()
+Pool -> Semaphore : WaitAsync()
+Semaphore --> Pool : slot przyznany
+Pool -> Request : Worker
+Request -> Worker : ProcessJobAsync()
+Request -> Pool : ReleaseWorker(worker)
+Pool -> Semaphore : Release()
+@enduml

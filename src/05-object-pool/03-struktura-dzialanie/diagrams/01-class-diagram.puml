@@ -1,0 +1,25 @@
+@startuml class_diagram
+skinparam shadowing false
+skinparam monochrome true
+
+title Object Pool - diagram klas
+
+class Client {
+  +DoWork()
+}
+
+class ObjectPoolT {
+  -available
+  +Acquire(): T
+  +Release(item: T)
+}
+
+class ExpensiveResource {
+  +Content: string
+  +PerformWork(taskId: int)
+  +Reset()
+}
+
+Client --> ObjectPoolT
+ObjectPoolT o-- ExpensiveResource
+@enduml

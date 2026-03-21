@@ -1,0 +1,13 @@
+@startuml
+skinparam shadowing false
+skinparam monochrome true
+
+title Warianty implementacji w .NET
+
+rectangle "Wlasna pula\n(lock + Queue)" as A
+rectangle "ConcurrentBag/Queue" as B
+rectangle "Microsoft.Extensions.ObjectPool" as C
+
+A --> B : lepsza wspolbieznosc
+B --> C : produkcyjne API
+@enduml

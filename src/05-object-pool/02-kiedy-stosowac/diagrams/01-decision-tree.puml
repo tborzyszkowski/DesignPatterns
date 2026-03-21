@@ -1,0 +1,21 @@
+@startuml decision_tree
+skinparam shadowing false
+skinparam monochrome true
+
+title Czy uzyc Object Pool?
+
+start
+:Obiekt kosztowny\nlub limitowany?;
+if (Tak?) then (tak)
+  :Wysoka wspolbieznosc?;
+  if (Tak?) then (tak)
+    :Sprobuj Object Pool;
+  else (nie)
+    :Rozwaz Factory\nlub cache;
+  endif
+else (nie)
+  :Nie uzywaj puli;
+  :Pozostaw alokacje GC;
+endif
+stop
+@enduml

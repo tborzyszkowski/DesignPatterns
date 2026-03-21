@@ -1,24 +1,63 @@
-# Object Pool - Over-engineering i alternatywy
+# 05. Over-engineering i alternatywy
 
-Wzorzec Object Pool często bywa nadużywany, szczególnie w językach zarządzanych (managed languages) takich jak C# lub Java, które korzystają z automatycznego odśmiecania pamięci (Garbage Collector).
+## Kluczowa teza
 
-## Kiedy Object Pool to Over-Engineering (Antywzorzec):
-1. **Lekkie obiekty w platformach z systemem GC:** Generacja 0 (młode, małe obiekty alokowane krótko) w systemie .NET ma mniejszy narzut na rezerwację nowej pamięci niż koszty synchronizacji wątków (lock / Interlocked / ConcurrentBag), które musielibyśmy zapłacić pytając pulę o obiekt. Alokacja `new Object()` jest ekstremalnie szybka.
-2. **Krótki czas życia:** Zwrócenie małego obiektu do puli i "wyczyszczenie" go kosztuje więcej zasobów procesora, niż pozwolenie Garbage Collectorowi po prostu o nim zapomnieć. 
-3. **Złudna kontrola pamięci:** Konstrukcja Object Pooli tworzy silne referencje do obiektów w pamięci w samej Puli; zabezpiecza je to przed zebraniem przez Garbage Collector w momentach, w których program by tego potrzebował. Powoduje to, że pula często zajmuje całą zadeklarowaną pamięć i trzyma ją dopóki program działa, obniżając faktyczną przestrzeń na użytek.
+W .NET Object Pool nie jest „domyślną optymalizacją". Dla wielu małych i tanich obiektów pool pogarsza wydajność.
 
-## Alternatywy:
-- **Zostaw to Garbage Collectorowi:** Standardowe klasy nie potrzebują pulowania. 
-- **Wzorzec Pyłek (Flyweight):** Jeśli tworzysz tysiące obiektów i potrzebują one trzymać te same dane "tylko do odczytu", wystarczy wydzielić te same części do klas / struktur czytanych globalnie (współdzielony wskaźnik do Flyweight).
-- **Fabryka + Interfejsy (Abstract Factory):** W przypadku wstrzykiwania zależności (`Dependency Injection`), możesz polegać na wbudowanym mechanizmie IoC (od C#/.NET Core), wybierając na starcie np. Scoped / Transient objects zamist zarządzać pulą manualnie.
-- **Struktury typu `ref struct` / `Span<T>` i `ArrayPool<T>` :** Dla programowania ułamków sekund, np, analizatorów w C#, wystarczy obiekty zamienić na stosowe zamiast korzystać ze sterty. A dla tablic z alokacją w LOH, Microsoft wbudował i sugeruje `System.Buffers.ArrayPool<T>`.
+---
 
-## Przykład negatywny - gdzie pula przegrywa wydajnościowo
+## Kiedy pool szkodzi
 
-W podkatalogu `OverEngineeringSample` stworzyliśmy przykład pokazujący, jak zdefiniowanie "małego, szybkiego" obiektu w Puli obiektów pochłania dużo więcej czasu w scenariuszu współbieżnym z powodu synchronizacji wątków, w odniesieniu do prostej alokacji `new`.
+1. Obiekt jest mały i tani w utworzeniu.
+2. Koszt resetu i synchronizacji jest wyższy niż koszt `new`.
+3. Ruch jest niski, więc pula prawie nie reuse'uje instancji.
+4. Pula utrzymuje niepotrzebnie dużą liczbę obiektów i zwiększa zużycie pamięci.
 
-Analizę wydajności można łatwo odtworzyć uruchamiając kod:
+---
+
+## Diagramy
+
+### Kiedy nie stosować
+
+![Kiedy nie stosować](diagrams/01-when-not-to-use.png)
+
+Źródło: [diagrams/01-when-not-to-use.puml](diagrams/01-when-not-to-use.puml)
+
+### Alternatywy
+
+![Alternatywy](diagrams/02-alternatives.png)
+
+Źródło: [diagrams/02-alternatives.puml](diagrams/02-alternatives.puml)
+
+---
+
+## Alternatywy techniczne
+
+- zwykłe `new` i zaufanie GC,
+- `ArrayPool<T>` dla dużych buforów,
+- Flyweight dla współdzielenia niezmiennych danych,
+- Factory + poprawny lifetime w DI.
+
+---
+
+## Przykład C# (kontrprzykład)
+
+Kod: [OverEngineeringSample/Program.cs](OverEngineeringSample/Program.cs)
+
+Przykład porównuje dwa scenariusze:
+
+- tworzenie lekkich obiektów przez `new`,
+- tworzenie lekkich obiektów przez pool.
+
+Uruchom:
+
 ```bash
-cd OverEngineeringSample
+cd src/05-object-pool/05-over-engineering-alternatywy/OverEngineeringSample
 dotnet run -c Release
 ```
+
+---
+
+## Wniosek dydaktyczny
+
+Najpierw mierz, potem optymalizuj. Object Pool ma sens tylko tam, gdzie realnie redukuje koszt.

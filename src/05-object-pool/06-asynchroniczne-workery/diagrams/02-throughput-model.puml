@@ -1,0 +1,13 @@
+@startuml
+skinparam shadowing false
+skinparam monochrome true
+
+title Przyblizony model przepustowosci
+
+rectangle "workers = W" as W
+rectangle "sredni czas zadania = T" as T
+rectangle "QPS ~ W / T" as Q
+
+W --> Q
+T --> Q
+@enduml

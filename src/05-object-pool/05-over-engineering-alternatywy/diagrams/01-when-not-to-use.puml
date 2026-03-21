@@ -1,0 +1,21 @@
+@startuml
+skinparam shadowing false
+skinparam monochrome true
+
+title Kiedy NIE uzywac Object Pool
+
+start
+:Obiekt jest maly\ni tani?;
+if (Tak) then (tak)
+  :Nie tworz puli;
+  :Uzyj new + GC;
+else (nie)
+  :Sprawdz koszt resetu\ni synchronizacji;
+  if (Niski?) then (tak)
+    :Pool moze miec sens;
+  else (nie)
+    :Rozwaz ArrayPool/Flyweight;
+  endif
+endif
+stop
+@enduml

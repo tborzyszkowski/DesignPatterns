@@ -1,0 +1,15 @@
+@startuml
+skinparam shadowing false
+skinparam monochrome true
+
+title Alternatywy dla Object Pool
+
+rectangle "new + GC" as A
+rectangle "ArrayPool<T>" as B
+rectangle "Flyweight" as C
+rectangle "Factory/DI lifetime" as D
+
+A -[hidden]-> B
+B -[hidden]-> C
+C -[hidden]-> D
+@enduml

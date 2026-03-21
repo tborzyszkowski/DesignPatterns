@@ -1,0 +1,22 @@
+@startuml sequence_lifecycle
+skinparam shadowing false
+skinparam monochrome true
+
+title Cykl zycia obiektu w puli
+
+participant Client
+participant Pool
+participant Resource
+
+Client -> Pool : Acquire()
+alt wolny obiekt istnieje
+  Pool -> Client : Resource
+else brak wolnego obiektu
+  Pool -> Resource ++ : new Resource()
+  Pool -> Client : Resource
+end
+Client -> Resource : PerformWork()
+Client -> Pool : Release(Resource)
+Pool -> Resource : Reset()
+Pool -> Pool : odloz do kolejki
+@enduml

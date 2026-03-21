@@ -1,48 +1,66 @@
-# Różne implementacje i warianty wzorca Object Pool
+# 04. Implementacje i warianty
 
-Wzorzec Object Pool ewoluował na przestrzeni lat wraz z rozwojem platform i języków programowania. W języku C# (i generalnie w ekosystemie .NET) można wyróżnić kilka głównych wariantów implementacji:
+## Cel rozdziału
 
-## 1. Podejście klasyczne (lock + Queue/Stack)
-W starszych wersjach C# do zapewnienia bezpieczeństwa wątkowego (thread-safety) wykorzystywano standardowe kolekcje (`Queue<T>` lub `Stack<T>`) otoczone słowem kluczowym `lock`.
-- **Zalety:** Proste w zrozumieniu.
-- **Wady:** W systemach o wysokiej współbieżności blokady (locks) tworzą wąskie gardła i tzw. *lock contention*, drastycznie obniżając wydajność.
+Po tym rozdziale student powinien umieć dobrać wariant implementacji do wymagań systemu.
 
-## 2. Podejście nowoczesne (ConcurrentBag / ConcurrentQueue)
-Wykorzystanie przestrzeni nazw `System.Collections.Concurrent`. Kolekcja `ConcurrentBag<T>` jest zoptymalizowana pod kątem scenariuszy, w których ten sam wątek dodaje i pobiera elementy z puli. To podejście zostało wdrożone w naszym pierwszym przykładzie z sekcji 03.
+---
 
-## 3. Strategie alokacji: Eager vs Lazy Initialization
-- **Eager Initialization (Zachłanna):** Pula od razu przy starcie alokuje N obiektów i trzyma je w pamięci. 
-    - *Zastosowanie:* Kiedy zależy nam na maksymalnie krótkim czasie pierwszych żądań (od razu gotowe).
-- **Lazy Initialization (Leniwa):** Pula startuje pusta i tworzy obiekty na bieżąco, aż do osiągnięcia maksymalnego limitu.
-    - *Zastosowanie:* Kiedy chcemy oszczędzać pamięć i nie mamy pewności, czy wszystkie zasoby będą potrzebne.
+## Główne warianty w .NET
 
-## 4. Natywne podejście z .NET: `Microsoft.Extensions.ObjectPool`
-Obecnie w nowoczesnych aplikacjach (szczególnie w ASP.NET Core) rzadko pisze się własne implementacje. .NET oferuje gotową, niezwykle zoptymalizowaną bibliotekę `Microsoft.Extensions.ObjectPool`. Gwarantuje ona topową wydajność przy minimalnym narzucie na synchronizację w środowiskach wielowątkowych.
+1. **Manualny pool (`lock` + `Queue`)**
 
-### Diagram: Różnica między Lazy i Eager
+- prosty didaktycznie,
+- słaby przy dużej współbieżności.
 
-```plantuml
-@startuml
-skinparam componentStyle rectangle
+1. **Pool oparty o `ConcurrentBag`/`ConcurrentQueue`**
 
-package "Lazy Initialization" {
-  [Pula (Początkowo Pusta)] --> (Żądanie 1) : Tworzy Obj 1
-  [Pula (Początkowo Pusta)] --> (Żądanie 2) : Tworzy Obj 2
-}
+- mniejszy narzut blokad,
+- nadal wymaga poprawnego resetu stanu.
 
-package "Eager Initialization" {
-  [Pula (Pre-alokacja N=5)] --> (Żądanie 1) : Zwraca gotowy
-  [Pula (Pre-alokacja N=5)] --> (Żądanie 2) : Zwraca gotowy
-}
-@enduml
-```
+1. **`Microsoft.Extensions.ObjectPool`**
 
-## Przykład w kodzie
-W podkatalogu `VariantsSample` pokazano wykorzystanie profesjonalnego, wbudowanego z .NET mechanizmu `DefaultObjectPool<T>` z biblioteki `Microsoft.Extensions.ObjectPool`.
+- produkcyjne API,
+- polityki tworzenia i zwrotu (`IPooledObjectPolicy<T>`),
+- integracja z ASP.NET Core.
 
-Aby uruchomić:
+---
+
+## Diagramy
+
+### Eager vs Lazy
+
+![Eager vs Lazy](diagrams/01-eager-vs-lazy.png)
+
+Źródło: [diagrams/01-eager-vs-lazy.puml](diagrams/01-eager-vs-lazy.puml)
+
+### Mapa wariantów
+
+![Mapa wariantów](diagrams/02-variants-map.png)
+
+Źródło: [diagrams/02-variants-map.puml](diagrams/02-variants-map.puml)
+
+---
+
+## Przykład C Sharp
+
+Kod: [VariantsSample/Program.cs](VariantsSample/Program.cs)
+
+Przykład używa `DefaultObjectPool<StringBuilder>` i własnej polityki resetu.
+
+Uruchom:
+
 ```bash
-cd VariantsSample
-dotnet add package Microsoft.Extensions.ObjectPool
+cd src/05-object-pool/04-implementacje-warianty/VariantsSample
 dotnet run
 ```
+
+---
+
+## Rys historyczny (skrót)
+
+| Okres | Dominujące podejście |
+| --- | --- |
+| .NET Framework (wczesne) | manualne pule i `lock` |
+| .NET Core | `Concurrent*` + custom pools |
+| ASP.NET Core | `Microsoft.Extensions.ObjectPool` |

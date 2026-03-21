@@ -1,0 +1,16 @@
+@startuml
+skinparam shadowing false
+skinparam monochrome true
+
+title Eager vs Lazy initialization
+
+package "Eager" {
+  [Start aplikacji] --> [Tworzenie N obiektow]
+  [Tworzenie N obiektow] --> [Szybkie pierwsze requesty]
+}
+
+package "Lazy" {
+  [Start aplikacji] --> [Brak prealokacji]
+  [Brak prealokacji] --> [Tworzenie przy Acquire()]
+}
+@enduml

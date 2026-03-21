@@ -1,68 +1,59 @@
-# Struktura i działanie wzorca Object Pool
+# 03. Struktura i działanie wzorca
 
-Typowa struktura wzorca to:
-1. **Client** - Klasa potrzebująca zasób.
-2. **ReusablePool** - Pula, zarządca utrzymujący obiekty.
-3. **Reusable** - Sam unikatowy zasób, obiekty przechowywane w puli. Posiadają odpowiednie stany `acquired`/`free`.
+## Role w klasycznej strukturze
 
-## Działanie:
-Klient wypożycza z puli obiekt klasy "Reusable" poprzez metodę np. `Acquire()`. Po użyciu, klient go zwraca używając metody `Release()`, jednak z uwagą na czyszczenie danych na obiekcie tak, żeby nie istniało okno wycieku danych z jednego zdarzenia użytkowego do kolejnego (reset stanu do punktu domyślnego). Jeśli pula jest pusta lub cała zajęta:
-1. Pula buduje u siebie nowy obiekt, o ile to możliwe (bo np. limit max to 10 i wydać jeszcze można lub pool prealokuje na bieżąco - rośnie).
-2. Jeśli Pula osiągnęła limit wielkości, może na `Acquire` wyrzucać wyjątek, zablokować się z obietnicą dostępności (`Task / Promise`) i zwrócić, gdy coś się zwolni.
+1. **Client** - pobiera obiekt z puli i oddaje go po użyciu.
+2. **ObjectPool** - zarządza kolekcją wolnych i używanych obiektów.
+3. **Reusable/Resource** - kosztowny obiekt wielokrotnego użycia.
 
-![Diagram Struktur](structure.png)
+---
 
-## Diagram UML (klasy):
+## Cykl życia obiektu
 
-```plantuml (lub jako PNG po kompilacji)
-@startuml
-class Client {
-  -pool: ObjectPool
-  +DoWork()
-}
+1. `Acquire()` - klient prosi o zasób.
+2. Pool zwraca wolny obiekt albo tworzy nowy (do limitu).
+3. Klient używa zasobu.
+4. `Release()` - klient oddaje obiekt.
+5. Pool resetuje stan i odkłada obiekt do ponownego użycia.
 
-class ObjectPool {
-  -available: List<Reusable>
-  -inUse: List<Reusable>
-  +Acquire(): Reusable
-  +Release(res: Reusable)
-}
+---
 
-class Reusable {
-  +DoSomething()
-  +ResetState()
-}
+## Diagram klas
 
-Client -> ObjectPool: uses
-ObjectPool o-- Reusable: manages
-@enduml
+![Diagram klas](diagrams/01-class-diagram.png)
+
+Źródło: [diagrams/01-class-diagram.puml](diagrams/01-class-diagram.puml)
+
+## Diagram sekwencji
+
+![Diagram sekwencji](diagrams/02-sequence-lifecycle.png)
+
+Źródło: [diagrams/02-sequence-lifecycle.puml](diagrams/02-sequence-lifecycle.puml)
+
+---
+
+## Przykład C Sharp
+
+Kod: [StructureSample/Program.cs](StructureSample/Program.cs)
+
+W przykładzie pokazano:
+
+- implementację `Acquire()` i `Release()`,
+- reset stanu obiektu przed oddaniem,
+- limit maksymalnej liczby obiektów.
+
+Uruchom:
+
+```bash
+cd src/05-object-pool/03-struktura-dzialanie/StructureSample
+dotnet run
 ```
 
-## Diagram Sekwencji:
-W typowym powolnym systemie:
-```plantuml
-@startuml
-participant Client
-participant Pool as "Object Pool"
-participant Resource as "Reusable"
+---
 
-Client -> Pool: Acquire()
-activate Pool
-alt Pool is empty
-  Pool -> Resource**: new Reusable()
-end
-Pool -> Client: return Resource
-deactivate Pool
-Client -> Resource: DoSomething()
-activate Resource
-Resource -> Client: finish
-deactivate Resource
-Client -> Pool: Release(Resource)
-activate Pool
-Pool -> Resource: ResetState()
-Pool -> Client: OK
-deactivate Pool
-@enduml
-```
+## Najczęstsze błędy implementacyjne
 
-Wewnątrz folderu `StructureSample` można zaleźć pierwszy najprostszy kod do prześledzenia jak implementuje się `Acquire` i `Release`.
+1. Brak resetu stanu obiektu.
+2. Brak limitu rozmiaru puli.
+3. Brak synchronizacji przy współbieżnym dostępie.
+4. Podwójny `Release` tego samego obiektu.

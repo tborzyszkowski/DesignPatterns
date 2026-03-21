@@ -1,0 +1,17 @@
+@startuml history_context
+skinparam shadowing false
+skinparam monochrome true
+
+title Object Pool - kontekst historyczny
+
+rectangle "Lata 80/90\nC/C++ i systemy wbudowane" as A
+rectangle "Kosztowna alokacja\ni ograniczone zasoby" as B
+rectangle "Pule zasobow\n(reuse instancji)" as C
+rectangle "Java/.NET\nGarbage Collector" as D
+rectangle "Nowoczesne zastosowania\nDB, HTTP, GPU, API" as E
+
+A --> B
+B --> C
+C --> D
+D --> E
+@enduml

@@ -1,0 +1,18 @@
+@startuml usage_signals
+skinparam shadowing false
+skinparam monochrome true
+
+title Sygnały: kiedy pool pomaga, a kiedy szkodzi
+
+package "Pomaga" {
+  [Koszt inicjalizacji > 1ms]
+  [Limit zasobow zewnetrznych]
+  [Wysokie i stale RPS]
+}
+
+package "Szkodzi" {
+  [Tanie male obiekty]
+  [Niski ruch]
+  [Brak resetu stanu]
+}
+@enduml

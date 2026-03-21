@@ -1,0 +1,13 @@
+@startuml problem_vs_solution
+skinparam shadowing false
+skinparam monochrome true
+
+title Problem i rozwiazanie
+
+left to right direction
+
+rectangle "Bez puli\n- duzo alokacji\n- skoki GC\n- niestabilne latency" as NoPool
+rectangle "Object Pool\n- reuse\n- kontrola limitow\n- stabilniejsze czasy" as Pool
+
+NoPool --> Pool : potrzebna przewidywalnosc
+@enduml

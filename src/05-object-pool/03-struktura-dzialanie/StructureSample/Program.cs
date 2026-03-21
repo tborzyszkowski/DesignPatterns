@@ -43,7 +43,7 @@ namespace StructureSample
 
         public T Acquire()
         {
-            if (_items.TryTake(out T item))
+            if (_items.TryTake(out var item) && item is not null)
             {
                 Console.WriteLine("[Pool] Wypożyczono wolny zasób z puli.");
                 return item;
