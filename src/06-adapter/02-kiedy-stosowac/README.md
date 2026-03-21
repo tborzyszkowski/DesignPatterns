@@ -23,11 +23,11 @@ Nie stosuj, gdy:
 
 ## Diagramy
 
-![Drzewo decyzji](diagrams/01-decision-tree.png)
+![Drzewo decyzji](diagrams/adapter_decision_tree.png)
 
 Źródło: [diagrams/01-decision-tree.puml](diagrams/01-decision-tree.puml)
 
-![Sygnały](diagrams/02-signals.png)
+![Sygnały](diagrams/adapter_signals.png)
 
 Źródło: [diagrams/02-signals.puml](diagrams/02-signals.puml)
 

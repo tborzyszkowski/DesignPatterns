@@ -21,11 +21,11 @@ Adapter pozwala nie przepisywać całego klienta, tylko dodać warstwę tłumacz
 
 ## Diagramy
 
-![Kontekst adaptera](diagrams/01-context.png)
+![Kontekst adaptera](diagrams/adapter_context.png)
 
 Źródło: [diagrams/01-context.puml](diagrams/01-context.puml)
 
-![Problem i rozwiązanie](diagrams/02-problem-solution.png)
+![Problem i rozwiązanie](diagrams/adapter_solution.png)
 
 Źródło: [diagrams/02-problem-solution.puml](diagrams/02-problem-solution.puml)
 

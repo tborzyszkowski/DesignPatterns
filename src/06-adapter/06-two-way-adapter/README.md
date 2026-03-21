@@ -16,11 +16,11 @@ Wariant pojawił się jako rozszerzenie klasycznego Adaptera przy projektach mod
 
 ## Diagramy
 
-![Two way class](diagrams/01-two-way-class.png)
+![Two way class](diagrams/two_way_class.png)
 
 Źródło: [diagrams/01-two-way-class.puml](diagrams/01-two-way-class.puml)
 
-![Two way sequence](diagrams/02-two-way-sequence.png)
+![Two way sequence](diagrams/two_way_sequence.png)
 
 Źródło: [diagrams/02-two-way-sequence.puml](diagrams/02-two-way-sequence.puml)
 

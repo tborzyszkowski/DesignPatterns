@@ -9,11 +9,11 @@
 
 ## Diagramy
 
-![Diagram klas](diagrams/01-class-diagram.png)
+![Diagram klas](diagrams/adapter_class_diagram.png)
 
 Źródło: [diagrams/01-class-diagram.puml](diagrams/01-class-diagram.puml)
 
-![Diagram sekwencji](diagrams/02-sequence.png)
+![Diagram sekwencji](diagrams/adapter_sequence.png)
 
 Źródło: [diagrams/02-sequence.puml](diagrams/02-sequence.puml)
 

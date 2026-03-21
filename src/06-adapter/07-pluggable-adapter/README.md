@@ -16,11 +16,11 @@ Wariant popularyzował się wraz z systemami ETL i middleware, gdzie źródła d
 
 ## Diagramy
 
-![Pluggable class](diagrams/01-pluggable-class.png)
+![Pluggable class](diagrams/pluggable_class.png)
 
 Źródło: [diagrams/01-pluggable-class.puml](diagrams/01-pluggable-class.puml)
 
-![Pluggable sequence](diagrams/02-pluggable-sequence.png)
+![Pluggable sequence](diagrams/pluggable_sequence.png)
 
 Źródło: [diagrams/02-pluggable-sequence.puml](diagrams/02-pluggable-sequence.puml)
 

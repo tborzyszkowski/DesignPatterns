@@ -14,11 +14,11 @@
 
 ## Diagramy
 
-![Decyzja adapter czy nie](diagrams/01-decision-not-use.png)
+![Decyzja adapter czy nie](diagrams/decision_not_use_adapter.png)
 
 Źródło: [diagrams/01-decision-not-use.puml](diagrams/01-decision-not-use.puml)
 
-![Alternatywy](diagrams/02-alternatives-map.png)
+![Alternatywy](diagrams/alternatives_map.png)
 
 Źródło: [diagrams/02-alternatives-map.puml](diagrams/02-alternatives-map.puml)
 

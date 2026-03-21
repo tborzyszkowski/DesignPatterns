@@ -14,11 +14,11 @@
 
 ## Diagramy
 
-![Object vs Class Adapter](diagrams/01-object-vs-class.png)
+![Object vs Class Adapter](diagrams/object_vs_class_adapter.png)
 
 Źródło: [diagrams/01-object-vs-class.puml](diagrams/01-object-vs-class.puml)
 
-![Rys historyczny](diagrams/02-history.png)
+![Rys historyczny](diagrams/adapter_history.png)
 
 Źródło: [diagrams/02-history.puml](diagrams/02-history.puml)
 
