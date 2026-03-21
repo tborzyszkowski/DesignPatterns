@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\05-object-pool\nmkdir 01-idea-i-kontekst\nmkdir 02-kiedy-stosowac\nmkdir 03-struktura-dzialanie\nmkdir 04-implementacje-warianty\nmkdir 05-over-engineering-alternatywy\nmkdir 06-asynchroniczne-workery\n$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

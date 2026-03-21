@@ -13,6 +13,7 @@ Console.WriteLine("└───────────────────�
 
 // Co oznacza true, false, true? Trzeba sprawdzić definicję klasy!
 var p1 = new PizzaTelescoping("large", true, false, true);
+// p1.Bacon = true; 
 Console.WriteLine($"Teleskopowy: {p1}");
 Console.WriteLine("  ← Czy widzisz od razu, że mamy ser i bekon, ale nie pepperoni?");
 
