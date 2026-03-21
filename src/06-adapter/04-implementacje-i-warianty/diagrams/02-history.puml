@@ -1,0 +1,15 @@
+@startuml adapter_history
+skinparam shadowing false
+skinparam monochrome true
+
+title Rys historyczny adaptera
+
+rectangle "1994\nGoF publikuje Adapter" as A
+rectangle "2000\nIntegracje SOAP/XML\ni adaptery warstwy serwisowej" as B
+rectangle "2010\nAPI REST i adaptery DTO" as C
+rectangle "2020+\nChmura, SDK i pluggable adapters" as D
+
+A --> B
+B --> C
+C --> D
+@enduml

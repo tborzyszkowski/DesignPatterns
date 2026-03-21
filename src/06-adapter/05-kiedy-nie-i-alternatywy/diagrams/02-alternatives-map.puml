@@ -1,0 +1,15 @@
+@startuml alternatives_map
+skinparam shadowing false
+skinparam monochrome true
+
+title Adapter i alternatywy
+
+rectangle Adapter
+rectangle Facade
+rectangle "Anti-Corruption Layer" as ACL
+rectangle "Refaktoryzacja kontraktu" as Refactor
+
+Adapter -[hidden]-> Facade
+Facade -[hidden]-> ACL
+ACL -[hidden]-> Refactor
+@enduml

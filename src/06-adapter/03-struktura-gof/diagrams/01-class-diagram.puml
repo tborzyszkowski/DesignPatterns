@@ -1,0 +1,25 @@
+@startuml adapter_class_diagram
+skinparam shadowing false
+skinparam monochrome true
+
+title Adapter - diagram klas
+
+interface Target {
+  +Request(payload: string): string
+}
+
+class Adapter {
+  -adaptee: Adaptee
+  +Request(payload: string): string
+}
+
+class Adaptee {
+  +SpecificRequest(raw: string): string
+}
+
+class Client
+
+Target <|.. Adapter
+Adapter --> Adaptee
+Client --> Target
+@enduml

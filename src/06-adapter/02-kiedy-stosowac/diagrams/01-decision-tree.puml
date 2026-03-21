@@ -1,0 +1,20 @@
+@startuml adapter_decision_tree
+skinparam shadowing false
+skinparam monochrome true
+
+title Czy stosowac Adapter?
+
+start
+:Niekompatybilne API?;
+if (Tak) then (tak)
+  :Czy mozna zmienic dostawce?;
+  if (Nie) then (nie)
+    :Stosuj Adapter;
+  else (tak)
+    :Rozwaz refaktoryzacje kontraktu;
+  endif
+else (nie)
+  :Adapter zbedny;
+endif
+stop
+@enduml

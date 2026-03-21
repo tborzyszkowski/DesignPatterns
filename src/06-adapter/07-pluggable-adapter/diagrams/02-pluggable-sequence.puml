@@ -1,0 +1,15 @@
+@startuml pluggable_sequence
+skinparam shadowing false
+skinparam monochrome true
+
+title Pluggable Adapter - sekwencja
+
+participant Client
+participant Registry
+participant Adapter
+
+Client -> Registry: Resolve("json")
+Registry --> Client: Adapter
+Client -> Adapter: Adapt(input)
+Adapter --> Client: normalized output
+@enduml

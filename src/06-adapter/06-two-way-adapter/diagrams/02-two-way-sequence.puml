@@ -1,0 +1,15 @@
+@startuml two_way_sequence
+skinparam shadowing false
+skinparam monochrome true
+
+title Two Way Adapter - sekwencja
+
+participant ClientA
+participant Seabird
+participant ClientB
+
+ClientA -> Seabird: Fly()
+Seabird --> ClientA: result
+ClientB -> Seabird: Sail()
+Seabird --> ClientB: result
+@enduml

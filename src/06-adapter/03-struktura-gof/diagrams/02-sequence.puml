@@ -1,0 +1,15 @@
+@startuml adapter_sequence
+skinparam shadowing false
+skinparam monochrome true
+
+title Adapter - sekwencja wywolan
+
+participant Client
+participant Adapter
+participant Adaptee
+
+Client -> Adapter: Request("demo")
+Adapter -> Adaptee: SpecificRequest("demo")
+Adaptee --> Adapter: "legacy-result"
+Adapter --> Client: "mapped-result"
+@enduml

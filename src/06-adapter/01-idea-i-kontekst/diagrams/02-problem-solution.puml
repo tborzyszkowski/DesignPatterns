@@ -1,0 +1,13 @@
+@startuml adapter_solution
+skinparam shadowing false
+skinparam monochrome true
+
+title Problem i rozwiazanie
+
+rectangle Client
+rectangle Adapter
+rectangle Adaptee
+
+Client --> Adapter : oczekuje ITarget
+Adapter --> Adaptee : deleguje wywolanie
+@enduml

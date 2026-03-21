@@ -1,0 +1,22 @@
+@startuml object_vs_class_adapter
+skinparam shadowing false
+skinparam monochrome true
+
+title Object Adapter vs Class Adapter
+
+package "Object Adapter" {
+  interface TargetA
+  class ObjectAdapter
+  class AdapteeA
+  TargetA <|.. ObjectAdapter
+  ObjectAdapter --> AdapteeA
+}
+
+package "Class Adapter" {
+  interface TargetB
+  class ClassAdapter
+  class AdapteeB
+  TargetB <|.. ClassAdapter
+  AdapteeB <|-- ClassAdapter
+}
+@enduml

@@ -1,0 +1,21 @@
+@startuml pluggable_class
+skinparam shadowing false
+skinparam monochrome true
+
+title Pluggable Adapter - diagram klas
+
+interface IMessageAdapter {
+  +SourceType: string
+  +Adapt(input: string): string
+}
+
+class JsonAdapter
+class XmlAdapter
+class AdapterRegistry
+class Client
+
+IMessageAdapter <|.. JsonAdapter
+IMessageAdapter <|.. XmlAdapter
+AdapterRegistry --> IMessageAdapter
+Client --> AdapterRegistry
+@enduml

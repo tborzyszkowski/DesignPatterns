@@ -1,0 +1,22 @@
+@startuml two_way_class
+skinparam shadowing false
+skinparam monochrome true
+
+title Two Way Adapter - diagram klas
+
+interface IAircraft {
+  +Fly(): string
+}
+
+interface ISeacraft {
+  +Sail(): string
+}
+
+class Seabird {
+  +Fly(): string
+  +Sail(): string
+}
+
+IAircraft <|.. Seabird
+ISeacraft <|.. Seabird
+@enduml

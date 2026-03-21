@@ -1,0 +1,15 @@
+@startuml decision_not_use_adapter
+skinparam shadowing false
+skinparam monochrome true
+
+title Kiedy nie uzywac Adaptera
+
+start
+:Masz kontrole nad obiema stronami?;
+if (Tak) then (tak)
+  :Refaktoryzuj kontrakt;
+else (nie)
+  :Rozwaz Adapter lub ACL;
+endif
+stop
+@enduml

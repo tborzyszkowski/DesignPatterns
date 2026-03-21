@@ -1,0 +1,16 @@
+@startuml adapter_context
+skinparam shadowing false
+skinparam monochrome true
+
+title Kontekst adaptera
+
+package "Client" {
+  [Nowy kod aplikacji]
+}
+
+package "Legacy / External" {
+  [Stary system API]
+}
+
+[Nowy kod aplikacji] --> [Stary system API] : niezgodne interfejsy
+@enduml

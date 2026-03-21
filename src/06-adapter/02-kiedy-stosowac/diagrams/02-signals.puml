@@ -1,0 +1,11 @@
+@startuml adapter_signals
+skinparam shadowing false
+skinparam monochrome true
+
+title Sygnaly: pomaga vs szkodzi
+
+rectangle "Pomaga\n- legacy API\n- stabilny klient\n- migracja etapowa" as Good
+rectangle "Szkodzi\n- warstwa na warstwie\n- ukryty chaos domenowy\n- duzy koszt mapowania" as Bad
+
+Good -[hidden]-> Bad
+@enduml
