@@ -1,70 +1,139 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.ObjectPool; // Wymaga pakietu NuGet: Microsoft.Extensions.ObjectPool
+using Microsoft.Extensions.ObjectPool;
 
-namespace VariantsSample
+namespace VariantsSample;
+
+public sealed class StringBuilderPolicy : IPooledObjectPolicy<StringBuilder>
 {
-    // Wzorzec nakazuje nam mieć sposób na resetowanie stanu.
-    // Wbudowany system .NET ma interfejs IPooledObjectPolicy<T>.
-    public class StringBuilderPooledObjectPolicy : IPooledObjectPolicy<StringBuilder>
-    {
-        public StringBuilder Create()
-        {
-            Console.WriteLine("[Policy] Zbudowano nową instancję StringBuilder.");
-            return new StringBuilder();
-        }
+    public StringBuilder Create() => new(capacity: 256);
 
-        public bool Return(StringBuilder obj)
+    public bool Return(StringBuilder obj)
+    {
+        obj.Clear();
+        return true;
+    }
+}
+
+public sealed class ManualStringBuilderPool
+{
+    private readonly ConcurrentBag<StringBuilder> _items = new();
+
+    public ManualStringBuilderPool(int preload)
+    {
+        for (var i = 0; i < preload; i++)
         {
-            Console.WriteLine($"[Policy] Zwrócono. Długość: {obj.Length}. Czyszczenie...");
-            // Czyszczenie stanu do ponownego użycia
-            obj.Clear();
-            return true; // true = można zwrócić do puli. false = wyrzuć do Garbage Collectora
+            _items.Add(new StringBuilder(capacity: 256));
         }
     }
 
-    class Program
+    public StringBuilder Acquire()
     {
-        static async Task Main(string[] args)
+        return _items.TryTake(out var item) ? item : new StringBuilder(capacity: 256);
+    }
+
+    public void Release(StringBuilder item)
+    {
+        item.Clear();
+        _items.Add(item);
+    }
+}
+
+public static class Program
+{
+    private const int Parallelism = 8;
+    private const int Operations = 60_000;
+
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("=== 04. Implementacje i warianty Object Pool ===");
+        Console.WriteLine($"Parallelism={Parallelism}, Operations={Operations}");
+
+        var manualPool = new ManualStringBuilderPool(preload: Parallelism);
+        var dotnetPool = new DefaultObjectPool<StringBuilder>(new StringBuilderPolicy(), maximumRetained: Parallelism);
+
+        Warmup(manualPool, dotnetPool);
+
+        var noPoolMs = MeasureNoPool();
+        var manualMs = MeasureManualPool(manualPool);
+        var dotnetMs = MeasureDotnetPool(dotnetPool);
+
+        Console.WriteLine();
+        Console.WriteLine($"new StringBuilder   : {noPoolMs,5} ms");
+        Console.WriteLine($"manual ConcurrentBag: {manualMs,5} ms");
+        Console.WriteLine($"ObjectPool<T>       : {dotnetMs,5} ms");
+        Console.WriteLine();
+        Console.WriteLine("Interpretacja:");
+        Console.WriteLine("- wariant manualny jest prosty, ale łatwiej o błędy semantyczne resetu i limitów,");
+        Console.WriteLine("- biblioteczny ObjectPool<T> upraszcza kod i zwykle lepiej skaluje się pod współbieżnością,");
+        Console.WriteLine("- baseline bez puli pokazuje, czy pooling jest tu w ogóle potrzebny.");
+    }
+
+    private static void Warmup(ManualStringBuilderPool manualPool, ObjectPool<StringBuilder> dotnetPool)
+    {
+        _ = MeasureManualPool(manualPool);
+        _ = MeasureDotnetPool(dotnetPool);
+        _ = MeasureNoPool();
+    }
+
+    private static long MeasureNoPool()
+    {
+        var sw = Stopwatch.StartNew();
+        Parallel.For(0, Operations, new ParallelOptions { MaxDegreeOfParallelism = Parallelism }, i =>
         {
-            Console.WriteLine("--- Warianty: Microsoft.Extensions.ObjectPool Demo ---");
+            var sb = new StringBuilder(capacity: 256);
+            BuildMessage(sb, i);
+        });
+        sw.Stop();
+        return sw.ElapsedMilliseconds;
+    }
 
-            // Inicjalizujemy wbudowaną pulę dla StringBuildera wykorzystując własną politykę rządzacą tworzeniem/czyszczeniem.
-            var policy = new StringBuilderPooledObjectPolicy();
-            // MaximumRetained określa jak dużo elementów zatrzymujemy w buforze (resztę pożre GC)
-            var pool = new DefaultObjectPool<StringBuilder>(policy, maximumRetained: 2);
-
-            // Symulacja żądań asynchronicznych do naszego mechanizmu
-            var tasks = new Task[5];
-            for (int i = 0; i < 5; i++)
-            {
-                int taskId = i;
-                tasks[i] = Task.Run(() => DoFormatWork(pool, taskId));
-            }
-
-            await Task.WhenAll(tasks);
-            
-            Console.WriteLine("Wszystkie zadania ukończone.");
-        }
-
-        static void DoFormatWork(ObjectPool<StringBuilder> pool, int id)
+    private static long MeasureManualPool(ManualStringBuilderPool pool)
+    {
+        var sw = Stopwatch.StartNew();
+        Parallel.For(0, Operations, new ParallelOptions { MaxDegreeOfParallelism = Parallelism }, i =>
         {
-            // POBIERAMY (Zablokuje się / stworzy i zwróci)
-            StringBuilder buffer = pool.Get();
+            var sb = pool.Acquire();
             try
             {
-                buffer.Append($"Zadanie [{id}] zaczyna przygotowywać raport...");
-                Task.Delay(100).Wait(); // symulacja obróbki
-                buffer.Append(" Zakończono pomyślnie.");
-                
-                Console.WriteLine($"Wynik taskId={id} -> {buffer.ToString()}");
+                BuildMessage(sb, i);
             }
             finally
             {
-                // ZWRACAMY (Wykona się logika z polityki: "Return" i czyszczenie)
-                pool.Return(buffer);
+                pool.Release(sb);
             }
-        }
+        });
+        sw.Stop();
+        return sw.ElapsedMilliseconds;
+    }
+
+    private static long MeasureDotnetPool(ObjectPool<StringBuilder> pool)
+    {
+        var sw = Stopwatch.StartNew();
+        Parallel.For(0, Operations, new ParallelOptions { MaxDegreeOfParallelism = Parallelism }, i =>
+        {
+            var sb = pool.Get();
+            try
+            {
+                BuildMessage(sb, i);
+            }
+            finally
+            {
+                pool.Return(sb);
+            }
+        });
+        sw.Stop();
+        return sw.ElapsedMilliseconds;
+    }
+
+    private static void BuildMessage(StringBuilder sb, int i)
+    {
+        sb.Append("Task[").Append(i).Append("] ");
+        sb.Append("payload=").Append(i % 17).Append(" ");
+        sb.Append("status=OK");
+        _ = sb.Length;
     }
 }
