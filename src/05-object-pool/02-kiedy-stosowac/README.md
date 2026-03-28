@@ -148,6 +148,84 @@ Na co zwrócić uwagę podczas uruchamiania:
 3. Zmieniaj liczbę operacji i współbieżność (np. `operations = 200, 1000, 5000`).
 4. Sprawdzaj, czy wynik nie zmienia się po modyfikacji pojemności puli.
 
+### `Stopwatch` vs profiler: co jest „najlepsze"?
+
+Krótka odpowiedź: **`Stopwatch` jest dobry na szybkie porównanie wariantów**, ale **nie zastępuje profilera**. Najlepsza praktyka to użycie obu narzędzi.
+
+`Stopwatch` w tym przykładzie mierzy czas ścienny (wall-clock) całej operacji i świetnie nadaje się do pytania:
+"czy wariant z pool jest szybszy od wariantu bez pool przy tym samym obciążeniu?".
+
+Plusy `Stopwatch`:
+
+- bardzo prosty w użyciu i praktycznie bez konfiguracji,
+- niski narzut pomiaru,
+- łatwo automatyzować i porównywać wyniki między wariantami,
+- dobry do testów regresji wydajności w CI.
+
+Minusy `Stopwatch`:
+
+- nie pokazuje, **dlaczego** coś jest wolniejsze (GC, locki, czekanie na pool, CPU, I/O),
+- wynik bywa wrażliwy na „szum" środowiska (inne procesy, scheduler, thermal throttling),
+- pojedyncza liczba czasu ukrywa rozkład opóźnień (średnia może wyglądać dobrze, gdy P99 jest słabe),
+- nie rozdziela czasu pracy aplikacji od czasu pauz GC i synchronizacji.
+
+Co daje profiler ponad `Stopwatch`:
+
+- rozbicie czasu na metody (hot paths),
+- statystyki GC (alokacje, kolekcje Gen0/Gen1/Gen2, pauzy),
+- analiza blokad i oczekiwania (`SemaphoreSlim`, lock contention),
+- timeline zdarzeń, dzięki któremu można skorelować piki P95/P99 z GC lub synchronizacją.
+
+### Jak użyć profilera w praktyce (CLI)
+
+Najprostszy scenariusz bez IDE:
+
+1. Uruchom aplikację w trybie Release:
+
+```bash
+cd src/05-object-pool/02-kiedy-stosowac/Examples
+dotnet run -c Release
+```
+
+2. W drugim terminalu znajdź PID procesu:
+
+```bash
+dotnet-counters ps
+```
+
+3. Podejrzyj liczniki runtime na żywo (GC, CPU, alokacje):
+
+```bash
+dotnet-counters monitor --process-id <PID> System.Runtime
+```
+
+4. Zbierz ślad do głębszej analizy:
+
+```bash
+dotnet-trace collect --process-id <PID>
+```
+
+5. Otwórz wynik `.nettrace` w narzędziu wizualnym (np. PerfView lub Visual Studio) i sprawdź:
+
+- CPU stacks (gdzie idzie czas),
+- GC stats (Gen0/Gen1/Gen2, pause time),
+- contention/blocking (czy pool nie tworzy kolejki).
+
+### Jak użyć profilera w Visual Studio
+
+1. Otwórz projekt `Examples` i ustaw konfigurację `Release`.
+2. Wejdź w **Debug > Performance Profiler**.
+3. Zaznacz co najmniej: **CPU Usage** i **.NET Object Allocation** (opcjonalnie **Concurrency Visualizer**).
+4. Uruchom profilowanie, wykonaj scenariusz testowy, zatrzymaj sesję.
+5. Porównaj wariant bez puli i z pulą przy tym samym obciążeniu.
+
+Wniosek dydaktyczny:
+
+- `Stopwatch` odpowiada na pytanie **czy** jest szybciej,
+- profiler odpowiada na pytanie **dlaczego** jest szybciej lub wolniej.
+
+Do finalnych decyzji architektonicznych warto mieć oba typy danych.
+
 Uruchom:
 
 ```bash
