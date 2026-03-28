@@ -67,6 +67,25 @@ Jak interpretować: dużo krótkotrwałych alokacji zwykle zwiększa częstotliw
 Co mówi ta metryka: czy garbage collector staje się wąskim gardłem.
 Jak interpretować: wzrost Gen1/Gen2 i widoczne pauzy pod obciążeniem to sygnał, że warto rozważyć pooling lub inną strategię redukcji alokacji.
 
+Rozszerzenie: jak czytać Gen0/Gen1/Gen2 w praktyce:
+
+- **Gen0**: trafiają tu nowe, krótkotrwałe obiekty. Częste kolekcje Gen0 są normalne w aplikacjach serwerowych i same w sobie nie są problemem.
+- **Gen1**: obiekty, które przeżyły Gen0. Wzrost częstotliwości Gen1 oznacza, że więcej obiektów żyje dłużej niż zakładano i zaczyna obciążać kolejne etapy GC.
+- **Gen2**: obiekty długowieczne (oraz często większe struktury). Kolekcje Gen2 są najdroższe i zwykle najbardziej odczuwalne dla opóźnień.
+
+Na co patrzeć przed wdrożeniem puli:
+
+- czy przy tym samym ruchu liczba kolekcji Gen1/Gen2 rośnie szybciej niż throughput,
+- czy piki P95/P99 zgrywają się czasowo z kolekcjami Gen2,
+- czy całkowity czas spędzony w GC stanowi istotny procent czasu procesu,
+- czy po wprowadzeniu puli spadają alokacje i Gen0, ale nie rośnie nadmiernie czas oczekiwania na obiekt z puli.
+
+Praktyczna heurystyka:
+
+- wysoki Gen0 i niski Gen1/Gen2: najpierw optymalizuj lokalne alokacje, pool nie zawsze potrzebny,
+- rosnący Gen1/Gen2 + skoki P95/P99: pooling może pomóc, jeśli obiekt jest faktycznie drogi i bezpieczny do resetu,
+- brak poprawy P95/P99 po włączeniu puli: koszt synchronizacji lub zbyt mały rozmiar puli niweluje zysk.
+
 4. Przepustowość i opóźnienia pod obciążeniem.
 Co mówi ta metryka: jak system zachowuje się przy rzeczywistym ruchu równoległym.
 Jak interpretować: porównuj nie tylko średni czas, ale także P95/P99 oraz stabilność wyników przy tej samej liczbie równoległych operacji.
