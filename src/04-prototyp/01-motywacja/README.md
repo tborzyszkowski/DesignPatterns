@@ -73,6 +73,12 @@ Fabryka wymagałaby `if/switch` na typach. Prototyp — nie.
 
 ![Motywacja — koszt tworzenia](diagrams/prototype_motivation.png)
 
+W części z Prototypem poprawny koszt dla 100 instancji to:
+
+- `1 × 500 ms` (utworzenie prototypu)
+- `99 × < 1 ms` (klonowanie)
+- razem: około `500-600 ms` zamiast `50 000 ms`
+
 ---
 
 ## Kod — porównanie wydajności

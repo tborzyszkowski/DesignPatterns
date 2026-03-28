@@ -43,6 +43,7 @@ participant "clone()" as Clone
 Klient2 -> Proto : new ServerConfig() — raz
 Proto -> DB : pobierz dane (500 ms)
 DB --> Proto : dane
+Proto --> Klient2 : config #1 (prototyp)
 
 Klient2 -> Clone : clone prototypu (< 1 ms)
 Clone --> Klient2 : config #2 (kopia)
@@ -51,8 +52,8 @@ Klient2 -> Clone : clone prototypu (< 1 ms)
 Clone --> Klient2 : config #3 (kopia)
 
 note right
-  1 × 500 ms + n × ~0 ms
-  Na 100 kopii ≈ 500 ms
+  1 × 500 ms + 99 × < 1 ms
+  Na 100 kopii: ~500-600 ms
 end note
 
 @enduml
