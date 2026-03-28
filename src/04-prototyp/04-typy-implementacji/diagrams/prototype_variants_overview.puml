@@ -8,6 +8,7 @@ skinparam note {
   BackgroundColor #FFF8DC
 }
 skinparam ArrowColor DarkSlateGray
+top to bottom direction
 
 title Warianty implementacji Prototypu
 
@@ -59,5 +60,10 @@ package "Wariant 4: Record + with-expression (C# 9+)" {
     Tylko dla niemutowalnych VO.
   end note
 }
+
+' Wymuszenie kolejności pionowej sekcji
+P1 -[hidden]down-> CT
+CT -[hidden]down-> P3
+P3 -[hidden]down-> P4
 
 @enduml
