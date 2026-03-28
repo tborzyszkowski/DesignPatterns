@@ -15,6 +15,21 @@ Pokazać scenariusz, w którym Object Pool daje realną przewagę: kosztowne, ni
 - żądania czekają asynchronicznie na wolnego workera,
 - po użyciu worker wraca do puli.
 
+Założenia operacyjne (co to znaczy w praktyce):
+
+1. Worker jest zasobem ekskluzywnym: w danej chwili jeden worker obsługuje tylko jedno zadanie.
+2. Czas obsługi pojedynczego zadania jest zmienny (I/O), więc modelujemy nie tylko średnią, ale też ogon opóźnień (P95/P99 wait-time).
+3. Liczba workerów jest ograniczona zewnętrznie (koszt, limity API, limity połączeń), więc nie możemy "doskalować" bez końca.
+4. Backpressure realizujemy przez timeout oczekiwania: zamiast nieskończonej kolejki wolimy kontrolowane odrzucenia.
+5. Celem nie jest maksymalizacja samego throughput, ale kompromis: throughput + stabilny czas odpowiedzi + niski odsetek timeoutów.
+
+Model obciążenia przyjęty w przykładzie:
+
+- `jobs` określa łączną liczbę żądań testowych,
+- `workers` określa pojemność puli (maksymalna równoległość),
+- `timeoutMs` określa maksymalny czas oczekiwania na wolnego workera,
+- wynik testu to: czas całkowity, średni wait-time, liczba timeoutów i throughput.
+
 Wersja rozszerzona przykładu obejmuje dodatkowo:
 
 1. timeout oczekiwania na workera,
@@ -47,6 +62,22 @@ gdzie:
 - $W$ - liczba workerów,
 - $T$ - średni czas obsługi pojedynczego zadania (sekundy).
 
+Rozszerzenie modelu (bardziej realistyczne):
+
+$$QPS_{eff} \approx \frac{W}{T + W_q} \cdot (1 - p_{timeout})$$
+
+gdzie:
+
+- $W_q$ - średni czas oczekiwania w kolejce na workera,
+- $p_{timeout}$ - odsetek żądań, które przekroczyły timeout i zostały odrzucone.
+
+Jak czytać model:
+
+1. Gdy `wait-time` rośnie, nawet stałe `W` i `T` dają niższy efektywny throughput.
+2. Gdy timeout jest zbyt niski względem obciążenia, rośnie $p_{timeout}$ i spada liczba ukończonych żądań.
+3. Zwiększenie `W` pomaga tylko do momentu, gdy bottleneckiem staje się system zewnętrzny (API/DB/sieć).
+4. Dlatego w praktyce trzeba obserwować jednocześnie: `throughput`, `wait-time` i `timeouts`.
+
 ---
 
 ## Kod C#
@@ -60,6 +91,29 @@ Implementacja używa:
 - `ConcurrentQueue<HeavyWorker>` - kolejka wolnych workerów,
 - `SemaphoreSlim` - kontrola równoległości i czekanie asynchroniczne,
 - `Stopwatch` - pomiar całkowitego czasu obsługi.
+
+Architektura kodu (krok po kroku):
+
+1. Inicjalizacja puli:
+- tworzona jest pula z określoną liczbą workerów,
+- każdy worker reprezentuje kosztowny zasób I/O.
+
+2. Przyjęcie żądania:
+- zadanie wywołuje `AcquireWorkerAsync(timeout)`,
+- jeśli w limicie czasu nie ma slotu, żądanie jest oznaczane jako timeout.
+
+3. Obsługa biznesowa:
+- po pozyskaniu workera wykonywane jest `ProcessJobAsync(...)`,
+- mierzony jest czas oczekiwania na pozyskanie workera.
+
+4. Zwrot zasobu:
+- worker wraca do puli w `finally`,
+- gwarantuje to brak "zgubienia" workera nawet przy błędach.
+
+5. Agregacja metryk:
+- zliczane są sukcesy i timeouty,
+- liczony jest średni wait-time,
+- throughput liczony jest jako liczba zakończonych sukcesem żądań na sekundę.
 
 Dodatkowo implementacja mierzy:
 
@@ -87,6 +141,7 @@ Co to pokazuje:
 1. Pool może być nie tylko źródłem obiektów, ale też mechanizmem kontroli przeciążenia.
 2. Timeout chroni system przed nieograniczonym kolejkowaniem.
 3. Mierzenie wait-time pomaga dobrać liczbę workerów na podstawie danych.
+4. Ten sam kod może mieć różne SLA przy innym `workers/jobs/timeoutMs`, więc strojenie musi być oparte o pomiar.
 
 Uruchom:
 
@@ -102,6 +157,24 @@ dotnet run -- --workers 3 --jobs 20 --timeoutMs 1000
 dotnet run -- --workers 2 --jobs 100 --timeoutMs 300
 dotnet run -- --workers 6 --jobs 200 --timeoutMs 1500
 ```
+
+### Tabela scenariuszy testowych
+
+| Scenariusz | Parametry | Co symuluje | Oczekiwany wynik | Jak interpretować |
+| --- | --- | --- | --- | --- |
+| Niski ruch, zapas zasobów | `--workers 6 --jobs 20 --timeoutMs 1500` | System daleko od limitu | Niski wait-time, 0 timeoutów, stabilny throughput | Jeśli już tu pojawiają się timeouty, problem leży raczej w implementacji niż w pojemności puli |
+| Zbalansowane obciążenie | `--workers 4 --jobs 80 --timeoutMs 1000` | Typowy ruch produkcyjny | Umiarkowany wait-time, pojedyncze timeouty, dobry throughput | Dobry punkt referencyjny do porównań przy zmianie liczby workerów |
+| Wysokie obciążenie, mała pula | `--workers 2 --jobs 100 --timeoutMs 300` | Przeciążenie i backpressure | Wysoki wait-time, dużo timeoutów, spadek throughput efektywnego | Pokazuje granicę wydolności puli i koszt zbyt małego `workers` |
+| Wysokie obciążenie, większa pula | `--workers 6 --jobs 200 --timeoutMs 1500` | Skalowanie puli pod większy ruch | Mniej timeoutów niż przy małej puli, wyższy throughput | Jeśli poprawa jest mała, bottleneck jest poza pulą (API/DB/sieć) |
+| Agresywny timeout | `--workers 4 --jobs 120 --timeoutMs 100` | Polityka niskiej latencji kosztem odrzuceń | Niski średni wait-time, ale wyższy odsetek timeoutów | Dobre dla systemów SLA-first, gdzie lepszy szybki fail niż długa kolejka |
+| Łagodny timeout | `--workers 4 --jobs 120 --timeoutMs 2000` | Polityka maksymalizacji sukcesów | Mniej timeoutów, ale wyższy wait-time i większa zmienność | Dobre gdy ważniejszy jest completion rate niż twarde opóźnienie odpowiedzi |
+
+Opis użycia tabeli:
+
+1. Uruchom wszystkie scenariusze w tej samej konfiguracji maszyny i w trybie `Release`.
+2. Dla każdego scenariusza wykonaj 3-5 powtórzeń i porównaj medianę metryk.
+3. Zapisz osobno: `throughput`, średni wait-time, P95/P99 wait-time, liczbę timeoutów.
+4. Nie oceniaj wyniku tylko po jednym wskaźniku - decyzja o rozmiarze puli zawsze jest kompromisem.
 
 Interpretacja wyników:
 
