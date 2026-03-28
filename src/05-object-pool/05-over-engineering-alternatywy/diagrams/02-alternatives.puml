@@ -1,15 +1,31 @@
 @startuml
 skinparam shadowing false
 skinparam monochrome true
+top to bottom direction
 
-title Alternatywy dla Object Pool
+title Alternatywy dla Object Pool - diagram decyzyjny
 
-rectangle "new + GC" as A
-rectangle "ArrayPool<T>" as B
-rectangle "Flyweight" as C
-rectangle "Factory/DI lifetime" as D
+rectangle "P1: Czy obiekt jest maly i tani\nw utworzeniu?" as P1
+rectangle "P2: Czy pracujesz na duzych\nbuforach tablicowych?" as P2
+rectangle "P3: Czy obiekty maja duza czesc\nwspolna i niemutowalna?" as P3
+rectangle "P4: Czy problem dotyczy glownie\ncyklu zycia komponentow?" as P4
 
-A -[hidden]-> B
-B -[hidden]-> C
-C -[hidden]-> D
+rectangle "Wybierz: new + GC" as A
+rectangle "Wybierz: ArrayPool<T>" as B
+rectangle "Wybierz: Flyweight" as C
+rectangle "Wybierz: Factory/DI lifetime" as D
+rectangle "Rozwaz Object Pool\n(po pomiarach)" as E
+
+P1 --> A : Tak
+P1 --> P2 : Nie
+
+P2 --> B : Tak
+P2 --> P3 : Nie
+
+P3 --> C : Tak
+P3 --> P4 : Nie
+
+P4 --> D : Tak
+P4 --> E : Nie
+
 @enduml

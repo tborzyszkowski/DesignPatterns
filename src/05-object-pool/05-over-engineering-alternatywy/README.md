@@ -61,11 +61,28 @@ Kiedy wybrać którą alternatywę:
 
 Kod: [OverEngineeringSample/Program.cs](OverEngineeringSample/Program.cs)
 
-Przykład porównuje trzy scenariusze:
+Ten program jest celowo zbudowany jako **kontrprzykład**, żeby pokazać sytuację, w której Object Pool bywa gorszy od prostszego podejścia.
+
+Scenariusz testowy porównuje trzy warianty:
 
 - tworzenie lekkich obiektów przez `new`,
-- tworzenie lekkich obiektów przez pool.
+- tworzenie lekkich obiektów przez własny pool,
 - użycie `ArrayPool<byte>` jako alternatywy platformowej.
+
+Jak działa kod krok po kroku:
+
+1. Definiowany jest mały obiekt `SmallLightweightAction` z prostą operacją `Compute()`.
+2. `RunGCBased()` wykonuje miliony krótkich alokacji (`new SmallLightweightAction`) w `Parallel.For`.
+3. `RunPoolBased()` robi to samo, ale przez `PoolOfLightweightObjects` oparty o `ConcurrentBag` (Get/Return + reset stanu).
+4. `RunArrayPoolBased()` pokazuje alternatywę dla buforów: wypożyczanie i zwrot tablic przez `ArrayPool<byte>.Shared`.
+5. `Main()` najpierw robi rozgrzewkę JIT, potem mierzy każdy wariant `Stopwatch` i dodatkowo zlicza kolekcje GC Gen0.
+
+Dlaczego to jest dobry kontrprzykład dydaktyczny:
+
+1. Obiekt jest bardzo lekki, więc `new` jest dla GC tanie.
+2. Własna pula dokłada narzut koordynacji (`ConcurrentBag`, dodatkowe wywołania, reset stanu).
+3. Dla takiego typu obiektu koszt „obsługi puli" często przewyższa zysk z reuse.
+4. Jednocześnie `ArrayPool<T>` pokazuje przypadek, gdzie pooling ma sens, ale dla innej kategorii danych (bufory).
 
 Kluczowy fragment:
 
@@ -74,6 +91,13 @@ Console.WriteLine($"> Standardowa alokacja (new obj) zajęła:\t{newTime} ms | G
 Console.WriteLine($"> Własny Object Pool zajął:\t\t{poolTime} ms | Gen0={gcPoolAfter - gcPoolBefore}");
 Console.WriteLine($"> Alternatywa ArrayPool<byte>:\t{arrayPoolTime} ms | Gen0={gcArrayPoolAfter - gcArrayPoolBefore}");
 ```
+
+Jak czytać wynik:
+
+1. Jeśli `poolTime >= newTime`, to mamy sygnał over-engineeringu dla tego konkretnego obiektu.
+2. Jeśli `poolTime` jest minimalnie lepsze, ale kod staje się dużo bardziej złożony, korzyść może być pozorna.
+3. Jeśli `ArrayPool<byte>` wypada lepiej dla buforów, to znaczy, że warto dobrać narzędzie do rodzaju zasobu zamiast „poolować wszystko".
+4. Oceniaj jednocześnie czas i GC, bo sam czas bez kontekstu alokacji może wprowadzać w błąd.
 
 Wniosek z przykładu:
 
