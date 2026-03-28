@@ -47,6 +47,14 @@ Nie stosuj, gdy:
 
 Przed podjęciem decyzji o wprowadzeniu puli trzeba zebrać twarde dane. Sama intuicja bardzo często prowadzi do over-engineeringu.
 
+### Co oznacza P95/P99?
+
+- P95 (95. percentyl) oznacza czas, poniżej którego kończy się 95% pomiarów, a 5% najwolniejszych trwa dłużej.
+- P99 (99. percentyl) oznacza czas, poniżej którego kończy się 99% pomiarów, a 1% najwolniejszych trwa dłużej.
+- To metryki ogona rozkładu (tail latency), więc pokazują opóźnienia, które najbardziej odczuwa użytkownik przy pikach obciążenia.
+
+Przykład: jeśli P95 = 40 ms, a P99 = 120 ms, to większość żądań jest szybka, ale rzadkie przypadki są 3x wolniejsze i właśnie tam pooling może pomóc.
+
 1. Średni i percentylowy czas utworzenia obiektu (P95/P99).
 Co mówi ta metryka: czy tworzenie obiektu rzeczywiście boli wydajnościowo w ogonie rozkładu.
 Jak interpretować: jeśli średnia jest niska, ale P95/P99 wysokie, to pool może stabilizować czasy odpowiedzi.
