@@ -13,21 +13,24 @@ skinparam note {
 
 title Motywacja — koszt tworzenia obiektów
 
-== Bez Prototypu: każde tworzenie jest kosztowne ==
-
-actor Klient
+actor "Klient" as KlientL
 participant "new ServerConfig()" as C1
 database "Serwer / Baza danych" as DB
+participant "ServerConfig\n(prototyp)" as Proto
+participant "clone()" as Clone
+actor "Klient" as KlientP
 
-Klient -> C1 : request config #1
+== Bez Prototypu: każde tworzenie jest kosztowne ==
+
+KlientL -> C1 : request config #1
 C1 -> DB : pobierz dane (500 ms)
 DB --> C1 : dane
-C1 --> Klient : config #1
+C1 --> KlientL : config #1
 
-Klient -> C1 : request config #2 (te same dane!)
+KlientL -> C1 : request config #2 (te same dane!)
 C1 -> DB : pobierz dane ponownie (500 ms)
 DB --> C1 : dane
-C1 --> Klient : config #2
+C1 --> KlientL : config #2
 
 note right
   2 × 500 ms = 1000 ms
@@ -36,20 +39,16 @@ end note
 
 == Z Prototypem: klonujemy gotowy obiekt ==
 
-actor Klient2 as "Klient"
-participant "ServerConfig\n(prototyp)" as Proto
-participant "clone()" as Clone
-
-Klient2 -> Proto : new ServerConfig() — raz
+KlientP -> Proto : new ServerConfig() — raz
 Proto -> DB : pobierz dane (500 ms)
 DB --> Proto : dane
-Proto --> Klient2 : config #1 (prototyp)
+Proto --> KlientP : config #1 (prototyp)
 
-Klient2 -> Clone : clone prototypu (< 1 ms)
-Clone --> Klient2 : config #2 (kopia)
+KlientP -> Clone : clone prototypu (< 1 ms)
+Clone --> KlientP : config #2 (kopia)
 
-Klient2 -> Clone : clone prototypu (< 1 ms)
-Clone --> Klient2 : config #3 (kopia)
+KlientP -> Clone : clone prototypu (< 1 ms)
+Clone --> KlientP : config #3 (kopia)
 
 note right
   1 × 500 ms + 99 × < 1 ms
