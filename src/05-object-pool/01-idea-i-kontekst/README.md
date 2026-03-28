@@ -10,7 +10,9 @@ Po tym rozdziale student powinien:
 
 ---
 
-## Problem
+## Szczegółowy opis
+
+### Problem
 
 W wielu systemach tworzenie obiektu nie jest tanie. Dotyczy to szczególnie:
 
@@ -29,7 +31,7 @@ Object Pool przeciwdziała temu przez wielokrotne wykorzystanie już utworzonych
 
 ---
 
-## Kontekst historyczny
+### Kontekst historyczny
 
 - **Lata 80/90:** systemy C/C++, mało pamięci, kosztowna alokacja i ręczne zarządzanie pamięcią.
 - **GoF 1994:** wzorce kreacyjne porządkują strategie tworzenia obiektów.
@@ -38,15 +40,15 @@ Object Pool przeciwdziała temu przez wielokrotne wykorzystanie już utworzonych
 
 ---
 
-## Diagramy
+## Diagram wyjaśniający
 
-### Diagram kontekstu historycznego
+### Diagram 1: kontekst historyczny
 
 ![Kontekst historyczny](diagrams/01-history-context.png)
 
 Źródło: [diagrams/01-history-context.puml](diagrams/01-history-context.puml)
 
-### Problem vs rozwiązanie
+### Diagram 2: problem vs rozwiązanie
 
 ![Problem i rozwiązanie](diagrams/02-problem-vs-solution.png)
 
@@ -54,7 +56,9 @@ Object Pool przeciwdziała temu przez wielokrotne wykorzystanie już utworzonych
 
 ---
 
-## Minimalny przykład C Sharp
+## Kod C#
+
+### Minimalny przykład
 
 Kod demonstracyjny: [Examples/Program.cs](Examples/Program.cs)
 

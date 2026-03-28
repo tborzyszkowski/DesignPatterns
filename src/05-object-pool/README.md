@@ -24,7 +24,7 @@ Najczęściej używamy go dla obiektów:
 | [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Motywacja, geneza, problem biznesowy i techniczny |
 | [02](02-kiedy-stosowac/README.md) | Kiedy stosować | Kryteria decyzyjne, sygnały ostrzegawcze, checklista |
 | [03](03-struktura-dzialanie/README.md) | Struktura i działanie | Role we wzorcu, diagram klas i sekwencji, przykład bazowy |
-| [04](04-implementacje-warianty/README.md) | Implementacje i warianty | `ConcurrentBag`, `DefaultObjectPool<T>`, eager/lazy, blocking/non-blocking |
+| [04](04-implementacje-warianty/README.md) | Implementacje i warianty | `lock+Queue`, `ConcurrentBag`, `DefaultObjectPool<T>` w układzie: opis + diagram + kod |
 | [05](05-over-engineering-alternatywy/README.md) | Over-engineering i alternatywy | Kiedy pool szkodzi, czym go zastąpić |
 | [06](06-asynchroniczne-workery/README.md) | Asynchroniczni workerzy | Realny scenariusz I/O, limit zasobów, pomiar przepustowości |
 

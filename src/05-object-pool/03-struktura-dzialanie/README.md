@@ -1,6 +1,8 @@
 # 03. Struktura i działanie wzorca
 
-## Role w klasycznej strukturze
+## Szczegółowy opis
+
+### Role w klasycznej strukturze
 
 1. **Client** - pobiera obiekt z puli i oddaje go po użyciu.
 2. **ObjectPool** - zarządza kolekcją wolnych i używanych obiektów.
@@ -8,7 +10,7 @@
 
 ---
 
-## Cykl życia obiektu
+### Cykl życia obiektu
 
 1. `Acquire()` - klient prosi o zasób.
 2. Pool zwraca wolny obiekt albo tworzy nowy (do limitu).
@@ -18,13 +20,15 @@
 
 ---
 
-## Diagram klas
+## Diagram wyjaśniający
+
+### Diagram klas
 
 ![Diagram klas](diagrams/01-class-diagram.png)
 
 Źródło: [diagrams/01-class-diagram.puml](diagrams/01-class-diagram.puml)
 
-## Diagram sekwencji
+### Diagram sekwencji
 
 ![Diagram sekwencji](diagrams/02-sequence-lifecycle.png)
 
@@ -32,7 +36,9 @@
 
 ---
 
-## Przykład C Sharp
+## Kod C#
+
+### Przykład
 
 Kod: [StructureSample/Program.cs](StructureSample/Program.cs)
 

@@ -6,7 +6,9 @@ Pokazać scenariusz, w którym Object Pool daje realną przewagę: kosztowne, ni
 
 ---
 
-## Założenia przykładu
+## Szczegółowy opis
+
+### Założenia przykładu
 
 - mamy tylko `W` drogich workerów (limit licencji/API),
 - napływa dużo żądań równolegle,
@@ -22,13 +24,15 @@ Wersja rozszerzona przykładu obejmuje dodatkowo:
 
 ---
 
-## Diagram sekwencji
+## Diagram wyjaśniający
+
+### Diagram sekwencji
 
 ![Asynchroniczna pula](diagrams/01-async-pool-sequence.png)
 
 Źródło: [diagrams/01-async-pool-sequence.puml](diagrams/01-async-pool-sequence.puml)
 
-## Model przepustowości
+### Model przepustowości
 
 ![Model przepustowości](diagrams/02-throughput-model.png)
 
@@ -45,7 +49,9 @@ gdzie:
 
 ---
 
-## Przykład C Sharp
+## Kod C#
+
+### Przykład
 
 Kod: [AsyncWorkersSample/Program.cs](AsyncWorkersSample/Program.cs)
 

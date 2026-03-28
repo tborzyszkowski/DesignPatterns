@@ -1,0 +1,27 @@
+@startuml
+skinparam shadowing false
+skinparam monochrome true
+
+title Wariant 3: Microsoft.Extensions.ObjectPool
+
+actor "Worker Thread" as T
+rectangle "DefaultObjectPool<T>" as P
+rectangle "IPooledObjectPolicy<T>" as Policy
+rectangle "Resource T" as R
+
+T -> P : Get()
+P -> Policy : Create() (gdy pusto)
+Policy --> P : new T
+P --> T : T
+
+T -> R : Use()
+T -> P : Return(T)
+P -> Policy : Return(T)
+Policy --> P : true/false
+
+note right of Policy
+Policy centralizuje
+Create i Reset
+end note
+
+@enduml

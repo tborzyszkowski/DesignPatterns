@@ -1,0 +1,26 @@
+@startuml
+skinparam shadowing false
+skinparam monochrome true
+left to right direction
+
+title Wariant 1: Manualny pool (lock + Queue)
+
+rectangle "Worker Thread" as T
+rectangle "Acquire()" as A
+rectangle "lock(sync)" as L
+rectangle "Queue<T>" as Q
+rectangle "Create new T\n(gdy pusto)" as C
+rectangle "Use resource" as U
+rectangle "Release() + Reset()" as R
+
+T --> A
+A --> L
+L --> Q : dequeue gdy dostepny
+L --> C : gdy queue pusta
+Q --> U
+C --> U
+U --> R
+R --> L
+L --> Q : enqueue
+
+@enduml

@@ -1,12 +1,14 @@
 # 05. Over-engineering i alternatywy
 
-## Kluczowa teza
+## Szczegółowy opis
+
+### Kluczowa teza
 
 W .NET Object Pool nie jest „domyślną optymalizacją". Dla wielu małych i tanich obiektów pool pogarsza wydajność.
 
 ---
 
-## Kiedy pool szkodzi
+### Kiedy pool szkodzi
 
 1. Obiekt jest mały i tani w utworzeniu.
 2. Koszt resetu i synchronizacji jest wyższy niż koszt `new`.
@@ -21,15 +23,15 @@ Dodatkowe symptomy over-engineeringu:
 
 ---
 
-## Diagramy
+## Diagram wyjaśniający
 
-### Kiedy nie stosować
+### Diagram 1: kiedy nie stosować
 
 ![Kiedy nie stosować](diagrams/01-when-not-to-use.png)
 
 Źródło: [diagrams/01-when-not-to-use.puml](diagrams/01-when-not-to-use.puml)
 
-### Alternatywy
+### Diagram 2: alternatywy
 
 ![Alternatywy](diagrams/02-alternatives.png)
 
@@ -37,7 +39,7 @@ Dodatkowe symptomy over-engineeringu:
 
 ---
 
-## Alternatywy techniczne
+### Alternatywy techniczne
 
 - zwykłe `new` i zaufanie GC,
 - `ArrayPool<T>` dla dużych buforów,
@@ -53,7 +55,9 @@ Kiedy wybrać którą alternatywę:
 
 ---
 
-## Przykład C# (kontrprzykład)
+## Kod C#
+
+### Kontrprzykład
 
 Kod: [OverEngineeringSample/Program.cs](OverEngineeringSample/Program.cs)
 

@@ -1,0 +1,29 @@
+@startuml
+skinparam shadowing false
+skinparam monochrome true
+left to right direction
+
+title Wariant 2: Pool na ConcurrentBag<T>
+
+rectangle "Worker Thread" as T
+rectangle "TryTake()" as A
+rectangle "ConcurrentBag<T>" as B
+rectangle "Create new T\n(gdy brak elementu)" as C
+rectangle "Use resource" as U
+rectangle "Add(Reset(T))" as R
+
+T --> A
+A --> B : sukces
+A --> C : brak elementu
+B --> U
+C --> U
+U --> R
+R --> B
+
+note right of B
+Brak globalnego lock.
+Nizszy narzut przy
+duzej wspolbieznosci.
+end note
+
+@enduml
