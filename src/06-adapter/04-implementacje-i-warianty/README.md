@@ -158,10 +158,3 @@ dotnet run
 
 ---
 
-## Rys historyczny (opcjonalny w tym rozdziale)
-
-Rys historyczny jest przydatny jako tło, ale merytorycznie bardziej pasuje do rozdziału 01 (Idea i kontekst). W rozdziale 04 najważniejsze jest porównanie implementacji.
-
-![Rys historyczny](diagrams/adapter_history.png)
-
-Źródło: [diagrams/02-history.puml](diagrams/02-history.puml)
