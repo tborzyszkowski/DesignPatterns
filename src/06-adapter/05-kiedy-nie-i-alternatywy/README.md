@@ -65,6 +65,32 @@ Dla każdej opcji modeluje:
 - współczynnik ryzyka semantycznego (`SemanticRiskFactor`),
 - horyzont czasowy analizy (w przykładzie: `12` miesięcy).
 
+Co oznaczają te parametry (na przykładzie):
+
+1. `InitialCostPoints` (koszt startowy): jednorazowy koszt wejścia, np. analiza, implementacja, testy i wdrożenie.
+Przykład: dla `Refactor` wartość `14.0` oznacza duży koszt początkowy.
+
+2. `MonthlyMaintenancePoints` (miesięczny koszt utrzymania): koszt ponoszony co miesiąc, np. poprawki mapowań, obsługa zmian API, testy regresji.
+Przykład: dla `Adapter` wartość `2.5` oznacza, że utrzymanie jest relatywnie drogie miesiąc do miesiąca.
+
+3. `SemanticRiskFactor` (współczynnik ryzyka semantycznego): mnożnik ryzyka, który zwiększa koszt całkowity.
+Interpretacja: `1.00` = brak narzutu ryzyka, `1.10` = +10%, `1.30` = +30%.
+Przykład: `Adapter` ma `1.30`, bo mapowanie może zniekształcać znaczenie danych i generować dodatkowe poprawki.
+
+4. `Months` (horyzont czasowy analizy): liczba miesięcy, dla których liczysz opłacalność decyzji.
+Przykład: w tym rozdziale `Months = 12`, więc oceniamy koszt roczny, a nie tylko koszt startowy.
+
+W jakich jednostkach liczyć:
+
+1. Najprościej dydaktycznie: używaj punktów (`Points`) i porównuj opcje względnie.
+2. W projekcie produkcyjnym: zamień punkty na jedną stałą jednostkę biznesową, np. roboczodni (`person-days`) albo tysiące PLN.
+3. Kluczowe: wszystkie opcje muszą być liczone w tej samej jednostce.
+
+Mini-przykład jednostek:
+
+- jeśli `1 point = 1 roboczodzień`, to `Initial=8.0` oznacza 8 roboczodni,
+- jeśli `1 point = 1000 PLN`, to `Initial=8.0` oznacza 8 000 PLN.
+
 Model kosztu całkowitego:
 
 $$Total = (Initial + Monthly \cdot Months) \cdot RiskFactor$$
