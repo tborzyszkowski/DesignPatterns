@@ -30,6 +30,24 @@ Jak to mierzyć na bazie programu z tego rozdziału:
 
 $$overhead = \frac{AdapterMs - NoAdapterMs}{NoAdapterMs} \cdot 100$$
 
+Wyjaśnienie symboli:
+
+- `NoAdapterMs` - czas wykonania scenariusza bez warstwy adaptera (w milisekundach),
+- `AdapterMs` - czas wykonania tego samego scenariusza z adapterem (w milisekundach),
+- `overhead` - procentowy narzut czasu wynikający z dodania adaptera.
+
+Jednostki:
+
+1. Czas (`NoAdapterMs`, `AdapterMs`) licz w tych samych jednostkach, najlepiej w `ms`.
+2. Wynik `overhead` jest bezwymiarowy i podawany w `%`.
+3. Dla porównań między scenariuszami utrzymuj stałe warunki testu (ta sama maszyna, ten sam build, ta sama liczba operacji).
+
+Szybka interpretacja wyniku:
+
+- `overhead < 5%` - zwykle mały koszt adaptera,
+- `5%-20%` - koszt umiarkowany, wymaga oceny korzyści architektonicznych,
+- `> 20%` - wysoki narzut, warto uprościć mapowanie lub rozważyć inny punkt integracji.
+
 Wersja tekstowa (gdy renderer matematyki jest wyłączony):
 
 `overhead[%] = ((AdapterMs - NoAdapterMs) / NoAdapterMs) * 100`
