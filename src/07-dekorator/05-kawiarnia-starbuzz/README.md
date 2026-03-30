@@ -15,6 +15,34 @@ Każde zamówienie to inna kombinacja dodatków, więc dziedziczenie prowadziło
 
 Źródło: [diagrams/01-starbuzz-class.puml](diagrams/01-starbuzz-class.puml)
 
+## Jak wyglądałby system przy samym dziedziczeniu
+
+Załóżmy dokładnie ten sam zakres co w przykładzie:
+
+- 2 kawy bazowe: `Espresso`, `HouseBlend`,
+- 3 dodatki: `Mocha`, `Soy`, `Whip`,
+- maksymalnie 3 dodatki do jednej kawy.
+
+Jeśli modelujemy to tylko przez dziedziczenie, to musimy utworzyć osobne klasy dla każdej kombinacji dodatków dla każdej kawy.
+
+![Dziedziczenie bez dekoratora](diagrams/starbuzz_inheritance_limit3.png)
+
+Źródło: [diagrams/04-inheritance-explosion-limit3.puml](diagrams/04-inheritance-explosion-limit3.puml)
+
+Interpretacja diagramu:
+
+1. Dla jednej kawy liczba kombinacji dodatków (bez powtórzeń, kolejność bez znaczenia) to:
+
+	`C(3,0) + C(3,1) + C(3,2) + C(3,3) = 1 + 3 + 3 + 1 = 8`.
+
+2. Dla dwóch kaw dostajemy:
+
+	`2 * 8 = 16` klas końcowych napojów.
+
+3. To już przy bardzo małej skali daje dużo klas, a każda kolejna kawa lub dodatek zwiększa liczbę wariantów kombinatorycznie.
+
+Wniosek: Dekorator eliminuje potrzebę tworzenia wszystkich tych klas z góry, bo dodatki składamy dynamicznie w runtime.
+
 ## Diagram sekwencji ceny
 
 ![Starbuzz sequence](diagrams/starbuzz_sequence.png)

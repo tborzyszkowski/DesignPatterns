@@ -1,0 +1,57 @@
+@startuml starbuzz_inheritance_limit3
+skinparam shadowing false
+skinparam monochrome true
+
+left to right direction
+
+title Starbuzz bez Dekoratora - dziedziczenie (2 kawy, 3 dodatki, max 3 dodatki)
+
+abstract class Beverage
+
+package "Espresso variants" {
+  class Espresso
+  class EspressoWithMocha
+  class EspressoWithSoy
+  class EspressoWithWhip
+  class EspressoWithMochaSoy
+  class EspressoWithMochaWhip
+  class EspressoWithSoyWhip
+  class EspressoWithMochaSoyWhip
+}
+
+package "HouseBlend variants" {
+  class HouseBlend
+  class HouseBlendWithMocha
+  class HouseBlendWithSoy
+  class HouseBlendWithWhip
+  class HouseBlendWithMochaSoy
+  class HouseBlendWithMochaWhip
+  class HouseBlendWithSoyWhip
+  class HouseBlendWithMochaSoyWhip
+}
+
+Beverage <|-- Espresso
+Beverage <|-- EspressoWithMocha
+Beverage <|-- EspressoWithSoy
+Beverage <|-- EspressoWithWhip
+Beverage <|-- EspressoWithMochaSoy
+Beverage <|-- EspressoWithMochaWhip
+Beverage <|-- EspressoWithSoyWhip
+Beverage <|-- EspressoWithMochaSoyWhip
+
+Beverage <|-- HouseBlend
+Beverage <|-- HouseBlendWithMocha
+Beverage <|-- HouseBlendWithSoy
+Beverage <|-- HouseBlendWithWhip
+Beverage <|-- HouseBlendWithMochaSoy
+Beverage <|-- HouseBlendWithMochaWhip
+Beverage <|-- HouseBlendWithSoyWhip
+Beverage <|-- HouseBlendWithMochaSoyWhip
+
+note bottom
+Dla 1 kawy i 3 dodatkow (bez powtorzen, kolejnosc bez znaczenia):
+C(3,0) + C(3,1) + C(3,2) + C(3,3) = 8 wariantow.
+Dla 2 kaw: 2 * 8 = 16 klas koncowych.
+end note
+
+@enduml
