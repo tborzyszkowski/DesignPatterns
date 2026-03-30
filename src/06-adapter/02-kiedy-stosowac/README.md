@@ -26,9 +26,13 @@ Jak to mierzyć na bazie programu z tego rozdziału:
 1. Użyj `Benchmark.Run(operations, mapCostMs)` i porównaj `NoAdapterMs` vs `AdapterMs`.
 2. Zmieniaj `mapCostMs`, aby symulować coraz cięższe mapowanie i walidację danych.
 3. Zmieniaj `operations`, aby sprawdzić wpływ skali ruchu na koszt warstwy adaptera.
-4. Policz narzut adaptera jako:
+4. Oblicz narzut adaptera jako:
 
-$$overhead\% = \frac{AdapterMs - NoAdapterMs}{NoAdapterMs} \cdot 100\%$$
+$$overhead = \frac{AdapterMs - NoAdapterMs}{NoAdapterMs} \cdot 100$$
+
+Wersja tekstowa (gdy renderer matematyki jest wyłączony):
+
+`overhead[%] = ((AdapterMs - NoAdapterMs) / NoAdapterMs) * 100`
 
 5. Uruchamiaj każdy scenariusz kilka razy i porównuj medianę, nie pojedynczy pomiar.
 
@@ -85,6 +89,16 @@ dotnet run -c Release
 
 3. Zapisz wyniki dla `NoAdapterMs` i `AdapterMs`.
 4. Policz narzut procentowy adaptera i sprawdź, czy zysk izolacji kontraktu uzasadnia koszt.
+
+Przykładowe obliczenie:
+
+1. Załóżmy, że `NoAdapterMs = 120`, a `AdapterMs = 150`.
+2. Różnica to `30 ms`.
+3. Narzut procentowy:
+
+$$overhead = \frac{150 - 120}{120} \cdot 100 = 25\%$$
+
+4. Interpretacja: adapter zwiększa czas o 25%. Taki koszt może być akceptowalny tylko wtedy, gdy zyskujesz wyraźną stabilność kontraktu i niższe ryzyko migracji.
 
 Fragment:
 

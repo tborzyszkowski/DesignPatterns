@@ -26,6 +26,11 @@ Adapter pozwala nie przepisywać całego klienta, tylko dodać warstwę tłumacz
 3. W erze mikroserwisów i zewnętrznych SDK problem wrócił jako różnice w semantyce endpointów, nazwach pól i modelach błędów.
 4. Adapter utrwalił się jako bezpieczna strategia migracji etapowej: klient pozostaje stabilny, a integracja jest izolowana w jednej warstwie.
 
+Wyjaśnienie skrótów:
+
+- EAI (Enterprise Application Integration): podejście do łączenia wielu systemów firmowych (ERP, CRM, billing), które mają różne formaty danych i protokoły.
+- SOA (Service-Oriented Architecture): architektura oparta o usługi z jasno zdefiniowanymi kontraktami; adapter bywa używany, gdy kontrakty usług nie są zgodne między wersjami lub dostawcami.
+
 ## Diagramy
 
 ![Kontekst adaptera](diagrams/adapter_context.png)
