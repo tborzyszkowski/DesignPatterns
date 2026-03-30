@@ -1,0 +1,20 @@
+@startuml decorator_decision
+skinparam shadowing false
+skinparam monochrome true
+
+title Czy stosowac Dekorator?
+
+start
+:Czy potrzebujesz\nrozszerzac zachowanie\ndynamicznie?;
+if (Tak) then (tak)
+  :Czy chcesz uniknac\nrozrostu dziedziczenia?;
+  if (Tak) then (tak)
+    :Rozwaz Dekorator;
+  else (nie)
+    :Rozwaz dziedziczenie;
+  endif
+else (nie)
+  :Dekorator zbedny;
+endif
+stop
+@enduml

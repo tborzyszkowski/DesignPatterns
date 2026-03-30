@@ -1,0 +1,15 @@
+@startuml decorator_history
+skinparam shadowing false
+skinparam monochrome true
+
+title Rys historyczny wzorca Dekorator
+
+rectangle "1987-1994\nRosnaca zlozonosc GUI\ni potrzeba dynamicznego\nrozszerzania zachowan" as A
+rectangle "1994\nGoF publikuje\nDecorator" as B
+rectangle "2000+\nJava IO / .NET Stream\npopularyzuja podejscie" as C
+rectangle "Dzisiaj\nMiddleware, pipeline,\npluginy i cross-cutting" as D
+
+A --> B
+B --> C
+C --> D
+@enduml

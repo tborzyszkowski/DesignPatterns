@@ -1,0 +1,18 @@
+@startuml decorator_gof_sequence
+skinparam shadowing false
+skinparam monochrome true
+
+title Dekorator GoF - sekwencja
+
+participant Client
+participant DecoratorB
+participant DecoratorA
+participant ConcreteComponent
+
+Client -> DecoratorB: Operation()
+DecoratorB -> DecoratorA: Operation()
+DecoratorA -> ConcreteComponent: Operation()
+ConcreteComponent --> DecoratorA: base result
+DecoratorA --> DecoratorB: result + A
+DecoratorB --> Client: result + A + B
+@enduml

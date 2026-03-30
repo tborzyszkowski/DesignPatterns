@@ -1,0 +1,18 @@
+@startuml bcl_stream_sequence
+skinparam shadowing false
+skinparam monochrome true
+
+title Sekwencja: kompresja przez lancuch Stream
+
+participant App
+participant BufferedStream
+participant GZipStream
+participant StreamWriter
+participant MemoryStream
+
+App -> StreamWriter: Write(text)
+StreamWriter -> GZipStream: Write(bytes)
+GZipStream -> BufferedStream: Write(compressed)
+BufferedStream -> MemoryStream: Write(payload)
+MemoryStream --> App: byte[]
+@enduml

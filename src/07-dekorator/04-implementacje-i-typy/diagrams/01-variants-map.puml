@@ -1,0 +1,13 @@
+@startuml decorator_variants
+skinparam shadowing false
+skinparam monochrome true
+
+title Typy implementacji Dekoratora w C#
+
+rectangle "Klasyczny Decorator\n(interfejs + klasy)" as A
+rectangle "Funkcyjny Decorator\n(Func<T,T>)" as B
+rectangle "Pipeline/DI Decorator\n(lista krokow)" as C
+
+A --> B : prostsza skladnia
+B --> C : latwa kompozycja runtime
+@enduml

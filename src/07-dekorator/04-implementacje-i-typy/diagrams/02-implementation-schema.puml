@@ -1,0 +1,14 @@
+@startuml decorator_schema
+skinparam shadowing false
+skinparam monochrome true
+
+title Schemat implementacji Dekoratora
+
+start
+:Zdefiniuj kontrakt Component;
+:Zaimplementuj ConcreteComponent;
+:Utworz bazowy Decorator\nz referencja do Component;
+:Dodaj dekoratory konkretne;
+:Zloz lancuch dekoratorow\nw Main/DI;
+stop
+@enduml

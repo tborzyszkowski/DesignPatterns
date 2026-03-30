@@ -1,0 +1,24 @@
+@startuml decorator_idea
+skinparam shadowing false
+skinparam monochrome true
+
+title Idea Dekoratora
+
+interface Component {
+  +Operation(): string
+}
+
+class ConcreteComponent
+abstract class Decorator {
+  -inner: Component
+  +Operation(): string
+}
+class ConcreteDecoratorA
+class ConcreteDecoratorB
+
+Component <|.. ConcreteComponent
+Component <|.. Decorator
+Decorator <|-- ConcreteDecoratorA
+Decorator <|-- ConcreteDecoratorB
+Decorator --> Component
+@enduml

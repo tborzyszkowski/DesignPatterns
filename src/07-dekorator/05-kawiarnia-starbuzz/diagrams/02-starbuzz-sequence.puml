@@ -1,0 +1,21 @@
+@startuml starbuzz_sequence
+skinparam shadowing false
+skinparam monochrome true
+
+title Starbuzz - sekwencja liczenia ceny
+
+participant Client
+participant Whip
+participant Mocha
+participant Soy
+participant HouseBlend
+
+Client -> Whip: Cost()
+Whip -> Mocha: Cost()
+Mocha -> Soy: Cost()
+Soy -> HouseBlend: Cost()
+HouseBlend --> Soy: 6.00
+Soy --> Mocha: 6.80
+Mocha --> Whip: 8.00
+Whip --> Client: 8.60
+@enduml

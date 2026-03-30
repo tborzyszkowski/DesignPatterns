@@ -1,0 +1,25 @@
+@startuml starbuzz_class
+skinparam shadowing false
+skinparam monochrome true
+
+title Starbuzz - diagram klas
+
+abstract class Beverage {
+  +Description: string
+  +Cost(): decimal
+}
+class Espresso
+class HouseBlend
+abstract class CondimentDecorator
+class Mocha
+class Soy
+class Whip
+
+Beverage <|-- Espresso
+Beverage <|-- HouseBlend
+Beverage <|-- CondimentDecorator
+CondimentDecorator <|-- Mocha
+CondimentDecorator <|-- Soy
+CondimentDecorator <|-- Whip
+CondimentDecorator --> Beverage
+@enduml

@@ -1,0 +1,12 @@
+@startuml decorator_tradeoffs
+skinparam shadowing false
+skinparam monochrome true
+left to right direction
+
+title Zalety i wady Dekoratora
+
+rectangle "Zalety\n+ OCP\n+ Kompozycja zachowan\n+ Runtime flexibility" as Good
+rectangle "Wady\n- Wiecej obiektow\n- Trudniejszy debug\n- Kolejnosc dekoratorow" as Bad
+
+Good -[hidden]-> Bad
+@enduml

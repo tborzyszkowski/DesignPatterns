@@ -1,0 +1,21 @@
+@startuml bcl_stream_class
+skinparam shadowing false
+skinparam monochrome true
+
+title .NET Stream jako Dekorator
+
+abstract class Stream
+class MemoryStream
+class BufferedStream
+class GZipStream
+class StreamReader
+class StreamWriter
+
+Stream <|-- MemoryStream
+Stream <|-- BufferedStream
+Stream <|-- GZipStream
+BufferedStream --> Stream : wraps
+GZipStream --> Stream : wraps
+StreamReader --> Stream
+StreamWriter --> Stream
+@enduml

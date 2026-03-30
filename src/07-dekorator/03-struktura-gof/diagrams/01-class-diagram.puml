@@ -1,0 +1,25 @@
+@startuml decorator_gof_class
+skinparam shadowing false
+skinparam monochrome true
+
+title Dekorator GoF - diagram klas
+
+interface Component {
+  +Operation(): string
+}
+class ConcreteComponent
+abstract class Decorator {
+  -component: Component
+  +Operation(): string
+}
+class ConcreteDecoratorA
+class ConcreteDecoratorB
+class Client
+
+Component <|.. ConcreteComponent
+Component <|.. Decorator
+Decorator <|-- ConcreteDecoratorA
+Decorator <|-- ConcreteDecoratorB
+Decorator --> Component
+Client --> Component
+@enduml

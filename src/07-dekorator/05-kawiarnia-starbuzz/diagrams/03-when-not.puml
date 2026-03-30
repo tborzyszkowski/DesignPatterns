@@ -1,0 +1,20 @@
+@startuml decorator_alternatives
+skinparam shadowing false
+skinparam monochrome true
+
+title Kiedy wybrac alternatywe zamiast Dekoratora?
+
+start
+:Czy liczba kombinacji\nzachowan rosnie wykladniczo?;
+if (Tak) then (tak)
+  :Rozwaz Strategy / Policy;
+else (nie)
+  :Czy zachowanie musi byc\ndodawane runtime?;
+  if (Tak) then (tak)
+    :Decorator jest dobry;
+  else (nie)
+    :Rozwaz prostszy model\n(kompozycja, dziedziczenie);
+  endif
+endif
+stop
+@enduml
