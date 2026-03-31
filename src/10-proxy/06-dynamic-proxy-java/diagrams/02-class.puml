@@ -1,0 +1,27 @@
+@startuml dynamic_proxy_java_class
+title Dynamic Proxy Java - class diagram
+
+skinparam monochrome true
+skinparam dpi 150
+
+interface PaymentService {
+  +pay(orderId: String): String
+}
+
+class RealPaymentService {
+  +pay(orderId: String): String
+}
+
+class TimingHandler {
+  -target: Object
+  +invoke(proxy: Object, method: Method, args: Object[]): Object
+}
+
+class "JDK Proxy (generated)" as JdkProxy
+
+PaymentService <|.. RealPaymentService
+JdkProxy ..|> PaymentService
+TimingHandler ..> RealPaymentService : method.invoke(target,args)
+JdkProxy --> TimingHandler : invoke(...)
+
+@enduml

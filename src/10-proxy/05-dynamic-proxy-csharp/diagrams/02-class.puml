@@ -1,0 +1,34 @@
+@startuml dynamic_proxy_csharp_class
+title Dynamic Proxy C# - class diagram
+
+skinparam monochrome true
+skinparam dpi 150
+
+interface IOrderService {
+  +PlaceOrder(orderId: string): string
+}
+
+class RealOrderService {
+  +PlaceOrder(orderId: string): string
+}
+
+class ProxyFactory {
+  +Create<T>(target: T, logger: Action<string>): T
+}
+
+class "MonitoringProxy<T>" as MonitoringProxy {
+  +Target: T
+  +Logger: Action<string>
+  +Invoke(method: MethodInfo, args: object?[]): object
+}
+
+class "DispatchProxy (generated)" as DispatchProxyGenerated
+
+IOrderService <|.. RealOrderService
+DispatchProxyGenerated ..|> IOrderService
+MonitoringProxy --|> DispatchProxy
+ProxyFactory ..> DispatchProxyGenerated : Create<T>()
+DispatchProxyGenerated --> MonitoringProxy : delegates Invoke
+MonitoringProxy --> IOrderService : calls Target
+
+@enduml
