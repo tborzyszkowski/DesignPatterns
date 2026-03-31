@@ -1,0 +1,24 @@
+@startuml composite_problem_context
+title Composite - problem i motywacja
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle "Kod bez Composite" {
+  rectangle "if type == file" as F
+  rectangle "if type == folder" as D
+  rectangle "if type == archive" as A
+}
+
+note right
+Rosnąca liczba typów powoduje
+rozgałęzienia i duplikację logiki.
+end note
+
+rectangle "Kod z Composite" {
+  rectangle "Component.Operation()" as C
+  rectangle "Client używa jednego API" as CL
+  CL --> C
+}
+
+@enduml

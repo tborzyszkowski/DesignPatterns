@@ -1,0 +1,24 @@
+@startuml composite_decision_tree
+title Composite - drzewo decyzji
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Masz strukturę część-całość?;
+if (Tak) then (Tak)
+  :Klient ma traktować
+liść i gałąź jednakowo?;
+  if (Tak) then (Tak)
+    :Rozważ Composite;
+  else (Nie)
+    :Rozważ osobne API
+na poziomy hierarchii;
+  endif
+else (Nie)
+  :Composite prawdopodobnie
+nie jest potrzebny;
+endif
+stop
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml composite_or_not
+title Composite - czy użyć?
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Czy model jest drzewiasty?;
+if (Tak) then (Tak)
+  :Czy chcesz jednolitego API
+na liście i gałęzie?;
+  if (Tak) then (Tak)
+    :Użyj Composite;
+  else (Nie)
+    :Rozważ osobne interfejsy;
+  endif
+else (Nie)
+  :Użyj prostszej struktury
+(np. listy + serwis);
+endif
+stop
+
+@enduml

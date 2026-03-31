@@ -1,0 +1,16 @@
+@startuml composite_alternatives
+title Composite - alternatywy
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle "Composite" as C
+rectangle "Decorator" as D
+rectangle "Visitor" as V
+rectangle "Płaska kolekcja + serwis" as F
+
+C --> D : inny cel
+C --> V : uzupełnienie
+C --> F : gdy brak drzewa
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml composite_decision_lifecycle
+title Composite - cykl decyzji architektonicznej
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Architekt
+participant "Analiza domeny" as Domain
+participant "Projekt API" as Api
+participant "Implementacja" as Impl
+participant "Walidacja" as Verify
+
+Architekt -> Domain : Czy model to drzewo?
+Domain --> Architekt : Tak/Nie
+Architekt -> Api : Wspólny interfejs
+Api -> Impl : Leaf + Composite
+Impl -> Verify : Testy scenariuszy
+Verify --> Architekt : Decyzja potwierdzona
+
+@enduml

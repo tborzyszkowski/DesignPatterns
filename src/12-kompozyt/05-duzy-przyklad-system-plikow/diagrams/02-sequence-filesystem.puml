@@ -1,0 +1,19 @@
+@startuml composite_filesystem_sequence
+title Composite - GetSize() na poddrzewie
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant Root as DirectoryNode
+participant Child as DirectoryNode
+participant Leaf as FileNode
+
+Client -> Root : GetSize()
+Root -> Child : GetSize()
+Child -> Leaf : GetSize()
+Leaf --> Child : size
+Child --> Root : partial sum
+Root --> Client : total size
+
+@enduml

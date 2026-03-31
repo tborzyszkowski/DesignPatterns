@@ -1,0 +1,19 @@
+@startuml composite_lifecycle
+title Composite - cykl życia wywołania
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant RootComposite as Root
+participant ChildComposite as Child
+participant Leaf as Leaf
+
+Client -> Root : Operation()
+Root -> Child : Operation()
+Child -> Leaf : Operation()
+Leaf --> Child : done
+Child --> Root : done
+Root --> Client : done
+
+@enduml

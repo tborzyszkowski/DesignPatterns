@@ -1,0 +1,21 @@
+@startuml composite_variants
+title Composite - warianty implementacji
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle "Transparent" {
+  rectangle "Component ma Add/Remove" as T1
+  rectangle "Leaf rzuca wyjątek" as T2
+}
+
+rectangle "Safe" {
+  rectangle "Add/Remove tylko w Composite" as S1
+  rectangle "Mniej błędów API" as S2
+}
+
+rectangle "Iterator" {
+  rectangle "BFS/DFS bez głębokiej rekurencji" as I1
+}
+
+@enduml

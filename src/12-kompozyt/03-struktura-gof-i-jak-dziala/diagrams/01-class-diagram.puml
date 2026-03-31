@@ -1,0 +1,31 @@
+@startuml composite_class
+title Composite - diagram klas
+
+skinparam monochrome true
+skinparam dpi 150
+
+abstract class Component {
+  +Operation()
+  +Add(Component)
+  +Remove(Component)
+}
+
+class Leaf {
+  +Operation()
+}
+
+class Composite {
+  -children
+  +Operation()
+  +Add(Component)
+  +Remove(Component)
+}
+
+class Client
+
+Component <|-- Leaf
+Component <|-- Composite
+Composite o--> Component : children
+Client --> Component
+
+@enduml

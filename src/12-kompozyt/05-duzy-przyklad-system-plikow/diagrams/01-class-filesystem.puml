@@ -1,0 +1,29 @@
+@startuml composite_filesystem_class
+title Composite - system plików (klasy)
+
+skinparam monochrome true
+skinparam dpi 150
+
+interface IFileSystemNode {
+  +GetSize()
+  +PrintTree()
+}
+
+class FileNode {
+  -size
+  +GetSize()
+  +PrintTree()
+}
+
+class DirectoryNode {
+  -children
+  +Add(IFileSystemNode)
+  +GetSize()
+  +PrintTree()
+}
+
+IFileSystemNode <|.. FileNode
+IFileSystemNode <|.. DirectoryNode
+DirectoryNode o--> IFileSystemNode : children
+
+@enduml

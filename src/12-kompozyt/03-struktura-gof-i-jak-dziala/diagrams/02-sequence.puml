@@ -1,0 +1,19 @@
+@startuml composite_sequence
+title Composite - diagram sekwencji
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant Root as CompositeRoot
+participant Child as CompositeChild
+participant Leaf as LeafNode
+
+Client -> Root : Operation()
+Root -> Child : Operation()
+Child -> Leaf : Operation()
+Leaf --> Child : done
+Child --> Root : done
+Root --> Client : done
+
+@enduml

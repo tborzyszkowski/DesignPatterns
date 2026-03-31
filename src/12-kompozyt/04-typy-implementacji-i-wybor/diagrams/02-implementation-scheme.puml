@@ -1,0 +1,18 @@
+@startuml composite_implementation_scheme
+title Composite - schemat implementacji
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Zdefiniuj Component;
+if (Czy liść ma zarządzać dziećmi?) then (Nie)
+  :Safe Composite;
+else (Tak)
+  :Transparent Composite;
+endif
+:Zaimplementuj Leaf i Composite;
+:Zadbaj o traversale i walidacje cykli;
+stop
+
+@enduml
