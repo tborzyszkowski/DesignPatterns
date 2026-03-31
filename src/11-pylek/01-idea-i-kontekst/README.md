@@ -1,46 +1,46 @@
 # 01. Idea i kontekst
 
-## Cel rozdzialu
+## Cel rozdziału
 
-Zrozumiec, jaki problem pamieciowy rozwiazuje wzorzec Pylek i dlaczego sama optymalizacja algorytmu nie zawsze wystarcza.
+Zrozumieć, jaki problem pamięciowy rozwiązuje wzorzec Pyłek i dlaczego sama optymalizacja algorytmu nie zawsze wystarcza.
 
-## Szczegolowe wyjasnienie
+## Szczegółowe wyjaśnienie
 
-Wzorzec Pylek (Flyweight) stosujemy wtedy, gdy system tworzy bardzo duzo obiektow o podobnej strukturze.
-Kluczowa obserwacja jest taka, ze czesc danych zwykle powtarza sie miedzy wieloma instancjami.
+Wzorzec Pyłek (Flyweight) stosujemy wtedy, gdy system tworzy bardzo dużo obiektów o podobnej strukturze.
+Kluczowa obserwacja jest taka, że część danych zwykle powtarza się między wieloma instancjami.
 
-Zamiast przechowywac wszystko w kazdym obiekcie:
+Zamiast przechowywać wszystko w każdym obiekcie:
 
-1. Wydzielamy dane wspolne jako `intrinsic state`.
-1. Przechowujemy je raz i wspoldzielimy.
-1. Dane zalezne od kontekstu (`extrinsic state`) podajemy przy wywolaniu metody.
+1. Wydzielamy dane wspólne jako `intrinsic state`.
+1. Przechowujemy je raz i współdzielimy.
+1. Dane zależne od kontekstu (`extrinsic state`) podajemy przy wywołaniu metody.
 
 Dlaczego to pomaga:
 
-1. Zmniejsza liczbe duzych, zduplikowanych instancji.
-1. Ogranicza zuzycie pamieci i presje na GC.
-1. Poprawia przewidywalnosc dzialania pod duzym obciazeniem.
+1. Zmniejsza liczbę dużych, zduplikowanych instancji.
+1. Ogranicza zużycie pamięci i presję na GC.
+1. Poprawia przewidywalność działania pod dużym obciążeniem.
 
 ## Problem
 
-W wielu systemach tworzymy ogromna liczbe obiektow o bardzo podobnej strukturze.
-Przyklady:
+W wielu systemach tworzymy ogromną liczbę obiektów o bardzo podobnej strukturze.
+Przykłady:
 
 1. Znaki tekstu w edytorze.
 1. Kafelki mapy w grze.
 1. Ikony na dashboardzie.
 
-Jesli kazdy obiekt przechowuje caly stan, to:
+Jeśli każdy obiekt przechowuje cały stan, to:
 
-1. Rosnie zuzycie pamieci.
-1. Rosnie presja na GC.
-1. Spada przewidywalnosc wydajnosci.
+1. Rośnie zużycie pamięci.
+1. Rośnie presja na GC.
+1. Spada przewidywalność wydajności.
 
-## Intuicja wzorca Pylek
+## Intuicja wzorca Pyłek
 
-1. Oddzielamy czesc wspolna (intrinsic) od kontekstowej (extrinsic).
-1. Czesc wspolna jest tworzona raz i wspoldzielona.
-1. Czesc kontekstowa jest przekazywana przez klienta przy wywolaniu.
+1. Oddzielamy część wspólną (intrinsic) od kontekstowej (extrinsic).
+1. Część wspólna jest tworzona raz i współdzielona.
+1. Część kontekstowa jest przekazywana przez klienta przy wywołaniu.
 
 ## Diagramy
 
@@ -48,33 +48,33 @@ Jesli kazdy obiekt przechowuje caly stan, to:
 
 ![Diagram problemu](diagrams/flyweight_problem_context.png)
 
-Zrodlo: [diagrams/01-problem-context.puml](diagrams/01-problem-context.puml)
+Źródło: [diagrams/01-problem-context.puml](diagrams/01-problem-context.puml)
 
 Opis:
 
-1. Kazdy obiekt przechowuje te same dane wspolne (np. font i ksztalt glifu).
-1. Takie duplikaty sa glowna przyczyna wzrostu zuzycia pamieci.
+1. Każdy obiekt przechowuje te same dane wspólne (np. font i kształt glifu).
+1. Takie duplikaty są główną przyczyną wzrostu zużycia pamięci.
 
 ### Diagram idei Flyweight
 
 ![Diagram idei](diagrams/flyweight_idea.png)
 
-Zrodlo: [diagrams/02-flyweight-idea.puml](diagrams/02-flyweight-idea.puml)
+Źródło: [diagrams/02-flyweight-idea.puml](diagrams/02-flyweight-idea.puml)
 
 Opis:
 
 1. `Client` pobiera obiekt z `FlyweightFactory` po kluczu intrinsic.
-1. Factory zwraca wspoldzielony obiekt, jesli juz istnieje.
+1. Factory zwraca współdzielony obiekt, jeśli już istnieje.
 1. `Client` przekazuje extrinsic state w czasie operacji (np. `Draw`).
 
 ## Minimalny scenariusz
 
-Zamiast 1 000 000 obiektow `Glyph` z duplikatami czcionki i ksztaltu:
+Zamiast 1 000 000 obiektów `Glyph` z duplikatami czcionki i kształtu:
 
-1. Tworzymy male repozytorium unikalnych flyweightow.
-1. Klient przekazuje pozycje, rozmiar i kolor jako extrinsic state.
+1. Tworzymy małe repozytorium unikalnych flyweightów.
+1. Klient przekazuje pozycję, rozmiar i kolor jako extrinsic state.
 
-## Przykladowy program
+## Przykładowy program
 
 Kod: [Examples/Program.cs](Examples/Program.cs)
 
@@ -89,17 +89,17 @@ Co robi program:
 
 1. Dla tekstu `AABACA` prosi `GlyphFactory` o glif po kluczu `(symbol, font)`.
 1. Factory tworzy flyweight tylko dla nowych kluczy i trzyma je w cache.
-1. Przy kazdym rysowaniu klient przekazuje `x`, `y`, `pointSize`, `color` jako extrinsic state.
-1. Na koncu program wypisuje liczbe unikalnych flyweightow i liczbe wywolan `Draw`.
+1. Przy każdym rysowaniu klient przekazuje `x`, `y`, `pointSize`, `color` jako extrinsic state.
+1. Na końcu program wypisuje liczbę unikalnych flyweightów i liczbę wywołań `Draw`.
 
-Jak interpretowac wynik:
+Jak interpretować wynik:
 
-1. `Total draw calls` odpowiada liczbie znakow do narysowania.
-1. `Unique flyweights` jest mniejsze, bo `A` i inne powtorzenia sa wspoldzielone.
-1. Ta roznica pokazuje istote Flyweight: mniej obiektow przy tej samej funkcjonalnosci.
+1. `Total draw calls` odpowiada liczbie znaków do narysowania.
+1. `Unique flyweights` jest mniejsze, bo `A` i inne powtórzenia są współdzielone.
+1. Ta różnica pokazuje istotę Flyweight: mniej obiektów przy tej samej funkcjonalności.
 
-## Co student powinien zapamietac
+## Co student powinien zapamiętać
 
-1. Flyweight optymalizuje pamiec, nie semantyke domeny.
-1. Nie kazdy projekt zyska na tym wzorcu.
+1. Flyweight optymalizuje pamięć, nie semantykę domeny.
+1. Nie każdy projekt zyska na tym wzorcu.
 1. Najpierw analiza modelu i metryki, potem implementacja.

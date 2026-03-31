@@ -1,22 +1,22 @@
 # 04. Implementacja C#
 
-## Cel rozdzialu
+## Cel rozdziału
 
-Pokazac praktyczna implementacje FlyweightFactory w C# z naciskiem na poprawny klucz, niemutowalnosc i wspolbieznosc.
+Pokazać praktyczną implementację FlyweightFactory w C# z naciskiem na poprawny klucz, niemutowalność i współbieżność.
 
 ## Szkielet architektury
 
 1. `IFlyweight` - kontrakt operacji z extrinsic state.
 1. `ConcreteFlyweight` - immutable intrinsic state.
-1. `FlyweightKey` - klucz identyfikujacy wspolny stan.
+1. `FlyweightKey` - klucz identyfikujący wspólny stan.
 1. `FlyweightFactory` - cache oparty o `ConcurrentDictionary`.
 
 ## Zalecenia implementacyjne
 
 1. Trzymaj intrinsic jako `readonly`.
-1. Uzywaj jawnego typu klucza zamiast surowych stringow.
+1. Używaj jawnego typu klucza zamiast surowych stringów.
 1. Zadbaj o deterministyczne `Equals` i `GetHashCode` klucza.
-1. Rejestruj metryki: liczba miss/hit oraz liczba unikalnych flyweightow.
+1. Rejestruj metryki: liczba miss/hit oraz liczba unikalnych flyweightów.
 
 ## Pseudokod factory
 
@@ -32,14 +32,14 @@ public sealed class FlyweightFactory
 }
 ```
 
-## Najczestsze bledy C#
+## Najczęstsze błędy C#
 
 1. Mutowanie intrinsic po utworzeniu flyweight.
-1. Niespojny klucz (`ToLower`/`Trim` wykonywane raz, a raz nie).
-1. Wstrzykiwanie zaleznosci zaleznych od requestu do flyweight.
+1. Niespójny klucz (`ToLower`/`Trim` wykonywane raz, a raz nie).
+1. Wstrzykiwanie zależności zależnych od requestu do flyweight.
 
-## Co mierzyc w demie
+## Co mierzyć w demie
 
 1. `UniqueFlyweights`.
 1. `Requests` i `HitRatio`.
-1. Przyblizona roznica pamieci miedzy wersja naiwna i flyweight.
+1. Przybliżona różnica pamięci między wersją naiwną i flyweight.

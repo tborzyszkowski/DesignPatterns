@@ -1,40 +1,40 @@
 # 02. Intrinsic vs Extrinsic
 
-## Cel rozdzialu
+## Cel rozdziału
 
-Nauczyc sie poprawnie dzielic stan obiektu i unikac najczestszych bledow projektowych.
+Nauczyć się poprawnie dzielić stan obiektu i unikać najczęstszych błędów projektowych.
 
 ## Definicje
 
-1. `Intrinsic state` - stan wspolny, niemutowalny, wspoldzielony.
-1. `Extrinsic state` - stan zalezy od kontekstu uzycia, podawany przez klienta.
+1. `Intrinsic state` - stan wspólny, niemutowalny, współdzielony.
+1. `Extrinsic state` - stan zależny od kontekstu użycia, podawany przez klienta.
 
-## Jak dzielic stan - procedura
+## Jak dzielić stan - procedura
 
 1. Wypisz wszystkie pola obiektu.
-1. Oznacz, ktore pola sa identyczne dla wielu instancji.
-1. Sprawdz, czy pola wspolne moga byc niemutowalne.
-1. Pola kontekstowe usun z flyweight i przekazuj w metodzie operacyjnej.
+1. Oznacz, które pola są identyczne dla wielu instancji.
+1. Sprawdź, czy pola wspólne mogą być niemutowalne.
+1. Pola kontekstowe usuń z flyweight i przekazuj w metodzie operacyjnej.
 
-## Przyklad: znak tekstowy
+## Przykład: znak tekstowy
 
 1. Intrinsic: symbol glifu, metryki czcionki, font family.
 1. Extrinsic: pozycja `(x, y)`, kolor, rozmiar, warstwa.
 
-## Typowe bledy
+## Typowe błędy
 
 1. Wrzucenie mutowalnego stanu do intrinsic.
-1. Zbyt duzy klucz w factory (nadmierna liczba flyweightow).
-1. Brak jednoznacznej odpowiedzialnosci klienta za extrinsic state.
+1. Zbyt duży klucz w factory (nadmierna liczba flyweightów).
+1. Brak jednoznacznej odpowiedzialności klienta za extrinsic state.
 
-## Diagram pamieci
+## Diagram pamięci
 
-![Diagram pamieci](diagrams/flyweight_memory_layout.png)
+![Diagram pamięci](diagrams/flyweight_memory_layout.png)
 
-Zrodlo: [diagrams/01-memory-layout.puml](diagrams/01-memory-layout.puml)
+Źródło: [diagrams/01-memory-layout.puml](diagrams/01-memory-layout.puml)
 
-## Checklista przed implementacja
+## Checklista przed implementacją
 
-1. Czy liczba obiektow jest wystarczajaco duza?
-1. Czy intrinsic ma wysoki wspolczynnik powtarzalnosci?
-1. Czy zespol rozumie konsekwencje dodatkowej warstwy factory?
+1. Czy liczba obiektów jest wystarczająco duża?
+1. Czy intrinsic ma wysoki współczynnik powtarzalności?
+1. Czy zespół rozumie konsekwencje dodatkowej warstwy factory?

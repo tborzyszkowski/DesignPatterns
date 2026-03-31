@@ -1,42 +1,42 @@
-# Wzorzec Pylek (Flyweight)
+# Wzorzec Pyłek (Flyweight)
 
-## Cel modulu
+## Cel modułu
 
-Ten modul zawiera komplet materialow do wykladu o wzorcu Pylek.
-Nacisk jest na rozdzielenie stanu wspoldzielonego (`intrinsic`) i kontekstowego (`extrinsic`) oraz na praktyczna ocene zysku pamieci.
+Ten moduł zawiera komplet materiałów do wykładu o wzorcu Pyłek.
+Nacisk położono na rozdzielenie stanu współdzielonego (`intrinsic`) i kontekstowego (`extrinsic`) oraz na praktyczną ocenę zysku pamięci.
 
-## Spis tematow
+## Spis tematów
 
 | # | Temat | Opis |
 | --- | --- | --- |
 | [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Problem redundancji danych i motywacja biznesowa |
-| [02](02-intrinsic-vs-extrinsic/README.md) | Intrinsic vs Extrinsic | Jak podzielic stan i uniknac bledow modelowania |
-| [03](03-struktura-gof/README.md) | Struktura GoF | Role, relacje i przeplyw wywolan |
-| [04](04-implementacja-csharp/README.md) | Implementacja C# | FlyweightFactory, cache i wspolbieznosc |
-| [05](05-case-study-czcionki-i-tiles/README.md) | Case study | Czcionki i kafelki jako duza liczba obiektow |
-| [06](06-kiedy-stosowac-i-alternatywy/README.md) | Kiedy stosowac | Decyzje architektoniczne i porownanie z alternatywami |
+| [02](02-intrinsic-vs-extrinsic/README.md) | Intrinsic vs Extrinsic | Jak podzielić stan i uniknąć błędów modelowania |
+| [03](03-struktura-gof/README.md) | Struktura GoF | Role, relacje i przepływ wywołań |
+| [04](04-implementacja-csharp/README.md) | Implementacja C# | FlyweightFactory, cache i współbieżność |
+| [05](05-case-study-czcionki-i-tiles/README.md) | Case study | Czcionki i kafelki jako duża liczba obiektów |
+| [06](06-kiedy-stosowac-i-alternatywy/README.md) | Kiedy stosować | Decyzje architektoniczne i porównanie z alternatywami |
 
 ## Efekty uczenia
 
-Po module student:
+Po tym module student:
 
-1. Rozumie, kiedy Flyweight ma sens i jaki problem rozwiazuje.
-1. Potrafi rozdzielic stan na intrinsic i extrinsic.
-1. Umie zaprojektowac factory z cache dla flyweightow.
-1. Potrafi porownac Flyweight z Object Pool i zwyklym cache.
+1. Rozumie, kiedy Flyweight ma sens i jaki problem rozwiązuje.
+1. Potrafi rozdzielić stan na intrinsic i extrinsic.
+1. Umie zaprojektować fabrykę z cache dla flyweightów.
+1. Potrafi porównać Flyweight z Object Pool i zwykłym cache.
 
-## Jak korzystac z modulu
+## Jak korzystać z modułu
 
-1. Zacznij od 01 i przechodz sekwencyjnie do 06.
-1. Po kazdym temacie odtworz diagram i uruchom przyklad.
-1. Na koncu rozwiaz zadania z [ZADANIA.md](ZADANIA.md).
+1. Zacznij od 01 i przechodź sekwencyjnie do 06.
+1. Po każdym temacie odtwórz diagram i uruchom przykład.
+1. Na końcu rozwiąż zadania z [ZADANIA.md](ZADANIA.md).
 
-## Materialy prowadzacego
+## Materiały prowadzącego
 
 Scenariusz 90-minutowego spotkania: [MATERIALY-WYKLAD.md](MATERIALY-WYKLAD.md)
 
 ## Literatura
 
-1. GoF, *Design Patterns*, rozdzial Flyweight.
+1. GoF, *Design Patterns*, rozdział Flyweight.
 1. Refactoring.Guru, Flyweight pattern.
 1. Dokumentacja .NET: `ConcurrentDictionary`, `WeakReference`, `string.Intern`.

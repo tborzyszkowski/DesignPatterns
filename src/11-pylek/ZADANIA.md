@@ -1,28 +1,28 @@
-# Zadania - Wzorzec Pylek
+# Zadania - Wzorzec Pyłek
 
 ## Zadanie 1 (podstawowe)
 
-Zaprojektuj prosty `IconFactory`, ktory zwraca wspoldzielone ikony po kluczu (`type`, `color`).
+Zaprojektuj prostą klasę `IconFactory`, która zwraca współdzielone ikony po kluczu (`type`, `color`).
 
 Kryteria:
 
-1. Brak duplikatow flyweight dla tego samego klucza.
-1. Kod klienta przekazuje pozycje ikony jako extrinsic state.
-1. Pokaz liczbe utworzonych flyweightow.
+1. Brak duplikatów flyweight dla tego samego klucza.
+1. Kod klienta przekazuje pozycję ikony jako extrinsic state.
+1. Pokaż liczbę utworzonych flyweightów.
 
-## Zadanie 2 (srednie)
+## Zadanie 2 (średnie)
 
-Rozszerz przyklad o bezpieczenstwo wspolbieznosci (`ConcurrentDictionary`).
+Rozszerz przykład o bezpieczeństwo współbieżności (`ConcurrentDictionary`).
 
 Kryteria:
 
-1. Poprawne dzialanie pod obciazeniem wielowatkowym.
+1. Poprawne działanie pod obciążeniem wielowątkowym.
 1. Brak race condition podczas tworzenia nowego flyweight.
-1. Test lub scenariusz, ktory pokazuje stabilny wynik.
+1. Test lub scenariusz, który pokazuje stabilny wynik.
 
 ## Zadanie 3 (zaawansowane)
 
-Porownaj trzy podejscia:
+Porównaj trzy podejścia:
 
 1. Bez Flyweight.
 1. Flyweight z silnym cache.
@@ -30,12 +30,12 @@ Porownaj trzy podejscia:
 
 Kryteria:
 
-1. Tabela porownawcza pamieci i czasu.
-1. Opis ryzyk i kompromisow kazdego podejscia.
-1. Wniosek, ktore podejscie jest najlepsze dla Twojego scenariusza.
+1. Tabela porównawcza pamięci i czasu.
+1. Opis ryzyk i kompromisów każdego podejścia.
+1. Wniosek, które podejście jest najlepsze dla Twojego scenariusza.
 
 ## Pytania kontrolne
 
 1. Co jest intrinsic, a co extrinsic w Twoim modelu?
-1. Co sie stanie, jesli intrinsic bedzie mutowalny?
-1. Czym Flyweight rozni sie od Object Pool?
+1. Co się stanie, jeśli intrinsic będzie mutowalny?
+1. Czym Flyweight różni się od Object Pool?

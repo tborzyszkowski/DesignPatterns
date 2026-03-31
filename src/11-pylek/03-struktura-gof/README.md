@@ -1,22 +1,22 @@
 # 03. Struktura GoF Flyweight
 
-## Szczegolowy opis
+## Szczegółowy opis
 
-Wzorzec Pylek definiuje mechanizm wspoldzielenia obiektow, aby zmniejszyc liczbe instancji i zuzycie pamieci.
+Wzorzec Pyłek definiuje mechanizm współdzielenia obiektów, aby zmniejszyć liczbę instancji i zużycie pamięci.
 
 ## Role we wzorcu
 
-1. `Flyweight` - interfejs operacji przyjmujacy extrinsic state.
+1. `Flyweight` - interfejs operacji przyjmujący extrinsic state.
 1. `ConcreteFlyweight` - przechowuje intrinsic state.
-1. `FlyweightFactory` - zwraca istniejacy flyweight lub tworzy nowy.
-1. `Client` - przechowuje/extrahuje extrinsic state i wywoluje operacje.
+1. `FlyweightFactory` - zwraca istniejący flyweight lub tworzy nowy.
+1. `Client` - przechowuje extrinsic state i wywołuje operacje.
 
-Jak dziala wspolpraca rol:
+Jak działa współpraca ról:
 
 1. `Client` prosi `FlyweightFactory` o obiekt po kluczu intrinsic.
-1. Factory sprawdza cache i zwraca istniejacy flyweight lub tworzy nowy.
-1. `Client` wywoluje operacje na flyweight, przekazujac extrinsic state.
-1. `ConcreteFlyweight` laczy intrinsic z extrinsic tylko na czas operacji.
+1. Factory sprawdza cache i zwraca istniejący flyweight lub tworzy nowy.
+1. `Client` wywołuje operacje na flyweight, przekazując extrinsic state.
+1. `ConcreteFlyweight` łączy intrinsic z extrinsic tylko na czas operacji.
 
 ## Diagramy
 
@@ -24,16 +24,16 @@ Jak dziala wspolpraca rol:
 
 ![Diagram klas](diagrams/flyweight_class.png)
 
-Zrodlo: [diagrams/01-class.puml](diagrams/01-class.puml)
+Źródło: [diagrams/01-class.puml](diagrams/01-class.puml)
 
 ### Diagram sekwencji
 
 ![Diagram sekwencji](diagrams/flyweight_sequence.png)
 
-Zrodlo: [diagrams/02-sequence.puml](diagrams/02-sequence.puml)
+Źródło: [diagrams/02-sequence.puml](diagrams/02-sequence.puml)
 
 ## Praktyczne konsekwencje
 
-1. Mniej instancji i mniejsze zuzycie pamieci.
-1. Wyzsza zlozonosc modelu przez rozdzielenie stanu.
-1. Koniecznosc dbania o niemutowalnosc intrinsic.
+1. Mniej instancji i mniejsze zużycie pamięci.
+1. Wyższa złożoność modelu przez rozdzielenie stanu.
+1. Konieczność dbania o niemutowalność intrinsic.

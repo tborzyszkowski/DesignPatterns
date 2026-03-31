@@ -1,41 +1,41 @@
-# 06. Kiedy stosowac i alternatywy
+# 06. Kiedy stosować i alternatywy
 
-## Cel rozdzialu
+## Cel rozdziału
 
-Podjac swiadoma decyzje, czy Flyweight jest najlepszym wyborem dla danego problemu.
+Podjąć świadomą decyzję, czy Flyweight jest najlepszym wyborem dla danego problemu.
 
-## Kiedy stosowac Flyweight
+## Kiedy stosować Flyweight
 
-1. Bardzo duza liczba obiektow.
-1. Wysoki stopien wspolnego, niemutowalnego stanu.
-1. Wyrazne oddzielenie kontekstu klienta od reprezentacji wspolnej.
+1. Bardzo duża liczba obiektów.
+1. Wysoki stopień wspólnego, niemutowalnego stanu.
+1. Wyraźne oddzielenie kontekstu klienta od reprezentacji wspólnej.
 
-## Kiedy nie stosowac
+## Kiedy nie stosować
 
-1. Mala skala obiektow.
-1. Niski poziom wspoldzielenia stanu.
-1. Brak presji pamieciowej i brak problemow GC.
+1. Mała skala obiektów.
+1. Niski poziom współdzielenia stanu.
+1. Brak presji pamięciowej i brak problemów GC.
 
-## Porownanie z alternatywami
+## Porównanie z alternatywami
 
-1. `Object Pool`: recykling obiektow tymczasowych, nie wspoldzielenie reprezentacji.
-1. Zwykly cache wynikow: przechowuje rezultaty, niekoniecznie obiekty modelu.
-1. Immutable value objects: upraszczaja model, ale nie usuwaja duplikatow same z siebie.
+1. `Object Pool`: recykling obiektów tymczasowych, nie współdzielenie reprezentacji.
+1. Zwykły cache wyników: przechowuje rezultaty, niekoniecznie obiekty modelu.
+1. Immutable value objects: upraszczają model, ale nie usuwają duplikatów same z siebie.
 
 ## Mini drzewo decyzyjne
 
-1. Czy masz bardzo duzo podobnych obiektow? Jesli nie, odpusc Flyweight.
-1. Czy potrafisz wydzielic niemutowalny intrinsic? Jesli nie, odpusc Flyweight.
-1. Czy pomiar pokazuje problem pamieci? Jesli tak, wdrazaj stopniowo.
+1. Czy masz bardzo dużo podobnych obiektów? Jeśli nie, odpuść Flyweight.
+1. Czy potrafisz wydzielić niemutowalny intrinsic? Jeśli nie, odpuść Flyweight.
+1. Czy pomiar pokazuje problem pamięci? Jeśli tak, wdrażaj stopniowo.
 
 ## Ryzyka i zabezpieczenia
 
 1. Ryzyko: niekontrolowany rozrost cache -> limit lub `WeakReference`.
-1. Ryzyko: zly klucz -> testy kontraktowe dla klucza.
-1. Ryzyko: nadmiarowa zlozonosc -> utrzymuj prosty interfejs klienta.
+1. Ryzyko: zły klucz -> testy kontraktowe dla klucza.
+1. Ryzyko: nadmiarowa złożoność -> utrzymuj prosty interfejs klienta.
 
-## Diagram porownawczy
+## Diagram porównawczy
 
-![Diagram porownawczy](diagrams/flyweight_vs_pool.png)
+![Diagram porównawczy](diagrams/flyweight_vs_pool.png)
 
-Zrodlo: [diagrams/01-flyweight-vs-pool.puml](diagrams/01-flyweight-vs-pool.puml)
+Źródło: [diagrams/01-flyweight-vs-pool.puml](diagrams/01-flyweight-vs-pool.puml)
