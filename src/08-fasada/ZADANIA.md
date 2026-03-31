@@ -64,3 +64,12 @@ Rozwiązanie (skrót):
 1. Mockuj wszystkie subsystemy.
 2. Testuj kontrakt fasady, a nie szczegóły implementacji subsystemów.
 3. Sprawdź także czy fasada nie przecieka wyjątków technicznych.
+
+## Pytania kontrolne
+
+1. Co to jest wzorzec Fasada i czym różni się od ACL (Anti-Corruption Layer)?
+2. Wymień trzy sygnały, że klient potrzebuje fasady zamiast bezpośredniego użycia subsystemów.
+3. Co to jest "god object" i jak unikać przeładowania fasady zbyt wieloma odpowiedzialnościami?
+4. Jakie są pięć typów implementacji fasady i kiedy stosować każdy z nich?
+5. Czym różni się fasada od Mediatora przy wielokierunkowej komunikacji?
+6. Dlaczego `HttpClient` jest przykładem wzorca fasadopodobnego z ekosystemu .NET?

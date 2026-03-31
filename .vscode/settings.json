@@ -17,6 +17,7 @@
             "matchCommandLine": true
         },
         "Test-Path": true,
-        "Out-Null": true
+        "Out-Null": true,
+        "dotnet test": true
     }
 }
