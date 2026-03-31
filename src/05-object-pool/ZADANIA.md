@@ -82,3 +82,17 @@ Rozwiązanie (skrót):
 
 Omówienie:
 Celem zadania jest nauczenie podejścia: najpierw sprawdź gotowe narzędzie platformy, potem twórz własną infrastrukturę.
+
+## Pytania kontrolne
+
+1. Jakie trzy role pełnią obiekty we wzorcu Object Pool i jak współpracują (Pool, Resource, Client)?
+
+1. Dlaczego resetowanie stanu obiektu przy zwrocie do puli jest krytyczne i jakie błędy mogą wyniknąć z jego braku?
+
+1. Jak zmierzyć, czy Object Pool jest opłacalny w danym scenariuszu — jakie metryki porównujesz?
+
+1. Czym różnią się warianty implementacji puli: `lock + Queue`, `ConcurrentBag` i `DefaultObjectPool<T>`?
+
+1. Kiedy Object Pool staje się over-engineeringiem i jakie są alternatywy (np. `ArrayPool<T>`, GC)?
+
+1. Jak działa asynchroniczna pula workerów z `SemaphoreSlim` i dlaczego timeout na `Acquire` jest ważny w produkcji?
