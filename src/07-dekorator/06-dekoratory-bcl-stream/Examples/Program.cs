@@ -18,7 +18,7 @@ public static class Program
         Console.WriteLine($"Restored text   : {restored}");
     }
 
-    private static byte[] Compress(string text)
+    internal static byte[] Compress(string text)
     {
         using var output = new MemoryStream();
         using (var buffered = new BufferedStream(output, 4096))
@@ -30,7 +30,7 @@ public static class Program
         return output.ToArray();
     }
 
-    private static string Decompress(byte[] payload)
+    internal static string Decompress(byte[] payload)
     {
         using var input = new MemoryStream(payload);
         using var buffered = new BufferedStream(input, 4096);

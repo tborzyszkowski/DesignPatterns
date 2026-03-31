@@ -104,3 +104,12 @@ Rozwiązanie (skrót):
 Wyjaśnienie:
 
 To ćwiczenie łączy teorię Dekoratora z praktyką bibliotek standardowych .NET.
+
+## Pytania kontrolne
+
+1. Czym różni się Dekorator od dziedziczenia i kiedy kompozycja jest lepszym wyborem?
+2. Jakie są cztery role GoF we wzorcu Dekorator i za co każda jest odpowiedzialna?
+3. Co to jest efekt eksplozji klas i jak Dekorator go eliminuje?
+4. Jakie są trzy typy implementacji Dekoratora w C# i kiedy stosować każdy z nich?
+5. Dlaczego kolejność zagnieżdżania dekoratorów ma znaczenie — podaj przykład z kodem?
+6. W jaki sposób `GZipStream(BufferedStream(MemoryStream))` realizuje wzorzec Dekorator w BCL?
