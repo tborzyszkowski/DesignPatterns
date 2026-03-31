@@ -3,6 +3,8 @@
 // =========================================================================
 
 using OpenClosed.WithoutOcp;
+using WithoutOcp = OpenClosed.WithoutOcp;
+using WithOcp = OpenClosed.WithOcp;
 
 Console.WriteLine("=== BEZ OCP (naruszenie) ===");
 Console.WriteLine("Dodanie nowego typu przesyłki wymaga MODYFIKACJI OrderProcessor\n");
