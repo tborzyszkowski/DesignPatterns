@@ -31,9 +31,24 @@ Po tym module student:
 1. Po każdym temacie odtwórz diagram i uruchom przykład.
 1. Na końcu rozwiąż zadania z [ZADANIA.md](ZADANIA.md).
 
+## Uruchamianie przykładów
+
+```bash
+cd src/11-pylek/01-idea-i-kontekst/Examples && dotnet run
+cd src/11-pylek/02-intrinsic-vs-extrinsic/Examples && dotnet run
+cd src/11-pylek/03-struktura-gof/Examples && dotnet run
+cd src/11-pylek/04-implementacja-csharp/Examples && dotnet run
+cd src/11-pylek/05-case-study-czcionki-i-tiles/Examples && dotnet run
+cd src/11-pylek/06-kiedy-stosowac-i-alternatywy/Examples && dotnet run
+```
+
 ## Materiały prowadzącego
 
 Scenariusz 90-minutowego spotkania: [MATERIALY-WYKLAD.md](MATERIALY-WYKLAD.md)
+
+## Zadania
+
+Zadania wraz z pytaniami kontrolnymi: [ZADANIA.md](ZADANIA.md)
 
 ## Literatura
 

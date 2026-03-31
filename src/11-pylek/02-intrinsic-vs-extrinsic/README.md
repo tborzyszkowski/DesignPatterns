@@ -33,6 +33,18 @@ Nauczyć się poprawnie dzielić stan obiektu i unikać najczęstszych błędów
 
 Źródło: [diagrams/01-memory-layout.puml](diagrams/01-memory-layout.puml)
 
+## Przykładowy program C#
+
+Kod: [Examples/Program.cs](Examples/Program.cs)
+
+Program pokazuje podział stanu na intrinsic (`iconType`, `colorTheme`) i extrinsic (`x`, `y`, `label`) na przykładzie ikon przycisków.
+Factory zwraca ten sam obiekt dla identycznego klucza intrinsic.
+
+```bash
+cd src/11-pylek/02-intrinsic-vs-extrinsic/Examples
+dotnet run
+```
+
 ## Checklista przed implementacją
 
 1. Czy liczba obiektów jest wystarczająco duża?

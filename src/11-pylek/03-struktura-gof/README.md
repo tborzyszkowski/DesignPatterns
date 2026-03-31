@@ -32,6 +32,18 @@ Jak działa współpraca ról:
 
 Źródło: [diagrams/02-sequence.puml](diagrams/02-sequence.puml)
 
+## Przykładowy program C#
+
+Kod: [Examples/Program.cs](Examples/Program.cs)
+
+Program demonstruje klasyczną strukturę GoF: `IFlyweight`, `ConcreteFlyweight`, `FlyweightFactory`.
+Factory loguje każde tworzenie nowego flyweight — widoczna jest różnica między miss a hit.
+
+```bash
+cd src/11-pylek/03-struktura-gof/Examples
+dotnet run
+```
+
 ## Praktyczne konsekwencje
 
 1. Mniej instancji i mniejsze zużycie pamięci.

@@ -34,6 +34,21 @@ Podjąć świadomą decyzję, czy Flyweight jest najlepszym wyborem dla danego p
 1. Ryzyko: zły klucz -> testy kontraktowe dla klucza.
 1. Ryzyko: nadmiarowa złożoność -> utrzymuj prosty interfejs klienta.
 
+## Przykładowy program C#
+
+Kod: [Examples/Program.cs](Examples/Program.cs)
+
+Program zestawia trzy warianty dla systemu cząstek:
+
+1. **Naiwny** – każda cząstka przechowuje pełny stan (duplikaty).
+1. **Flyweight** – typ cząstki jest współdzielony, pozycja to extrinsic state.
+1. **Płaski model** – gdy obiekty są unikalne, Flyweight nic nie wnosi.
+
+```bash
+cd src/11-pylek/06-kiedy-stosowac-i-alternatywy/Examples
+dotnet run
+```
+
 ## Diagram porównawczy
 
 ![Diagram porównawczy](diagrams/flyweight_vs_pool.png)

@@ -11,6 +11,10 @@
         "/^Get-ChildItem \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\12-kompozyt\" -Recurse -Filter \"\\*\\.csproj\" \\| ForEach-Object \\{ Write-Host \"Building: \\$\\(\\$_\\.Directory\\.Parent\\.Name\\)\"; \\$result = dotnet build \\$_\\.FullName -c Release --nologo 2>&1; if \\(\\$LASTEXITCODE -ne 0\\) \\{ Write-Host \"FAILED: \\$result\" \\} else \\{ Write-Host \"OK\" \\} \\}$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^Get-ChildItem \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\11-pylek\" -Recurse \\| Select-Object FullName \\| ForEach-Object \\{ \\$_\\.FullName\\.Replace\\(\"C:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\11-pylek\\\\\", \"\"\\) \\}$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

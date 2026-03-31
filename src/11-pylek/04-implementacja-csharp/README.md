@@ -38,6 +38,18 @@ public sealed class FlyweightFactory
 1. Niespójny klucz (`ToLower`/`Trim` wykonywane raz, a raz nie).
 1. Wstrzykiwanie zależności zależnych od requestu do flyweight.
 
+## Przykładowy program C#
+
+Kod: [Examples/Program.cs](Examples/Program.cs)
+
+Program implementuje `TokenFactory` opartą o `ConcurrentDictionary` z silnie typowanym kluczem (`record struct`).
+Wyświetla metryki: liczba unikalnych flyweightów, trafień i pudłów, hit ratio.
+
+```bash
+cd src/11-pylek/04-implementacja-csharp/Examples
+dotnet run
+```
+
 ## Co mierzyć w demie
 
 1. `UniqueFlyweights`.
