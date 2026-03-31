@@ -61,3 +61,34 @@ Rozwiazanie (skrot):
 1. Most: dwie osie zmiennosci rozwijane niezaleznie.
 2. Adapter: integracja niekompatybilnych API.
 3. Strategia: podmiana algorytmu w jednej osi.
+
+### Szablon checklisty decyzyjnej (do wypelnienia)
+
+Uzyj szablonu dla kazdego scenariusza. Oznacz TAK/NIE i wpisz decyzje.
+
+Scenariusz: ______________________________
+
+1. Czy glowny problem to integracja obcego API? [ ] TAK [ ] NIE
+2. Czy model domenowy ma zostac bez zmian? [ ] TAK [ ] NIE
+3. Czy zmienia sie glownie algorytm? [ ] TAK [ ] NIE
+4. Czy masz tylko jedna os zmiennosci? [ ] TAK [ ] NIE
+5. Czy masz co najmniej dwie osie zmiennosci? [ ] TAK [ ] NIE
+6. Czy osie beda rozwijane niezaleznie? [ ] TAK [ ] NIE
+7. Czy grozi eksplozja klas typu XViaY? [ ] TAK [ ] NIE
+
+Wniosek (zaznacz jedno):
+
+1. [ ] Adapter
+2. [ ] Strategia
+3. [ ] Most
+
+Uzasadnienie (2-3 zdania):
+
+____________________________________________________________
+____________________________________________________________
+
+Szybka podpowiedz:
+
+1. Integracja obcego API -> Adapter.
+2. Jedna os i podmiana algorytmu -> Strategia.
+3. Dwie osie rozwijane niezaleznie -> Most.

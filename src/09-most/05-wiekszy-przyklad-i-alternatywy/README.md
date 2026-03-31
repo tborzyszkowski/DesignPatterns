@@ -33,6 +33,32 @@ Zrodlo: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
 2. Strategia - gdy zmienia sie glownie algorytm.
 3. Fasada - gdy upraszczasz wejscie do subsystemu.
 
+### Krotka checklista decyzyjna
+
+Scenariusz integracji obcego API:
+
+1. Model domenowy bez zmian? [tak]
+2. Problemem jest roznica interfejsow? [tak]
+3. Brak nowej osi biznesowej? [tak]
+
+Decyzja: **Adapter**.
+
+Scenariusz podmiany algorytmu:
+
+1. Zmienia sie glownie sposob liczenia/decyzji? [tak]
+2. Jedna os zmiennosci? [tak]
+3. Kontekst tylko deleguje? [tak]
+
+Decyzja: **Strategia**.
+
+Scenariusz dwoch osi rozwoju:
+
+1. Co najmniej 2 osie zmiennosci? [tak]
+2. Osie rozwijane niezaleznie? [tak]
+3. Rosnie liczba klas typu XViaY? [tak]
+
+Decyzja: **Most**.
+
 ## Kod C#
 
 Kod: [Examples/Program.cs](Examples/Program.cs)
