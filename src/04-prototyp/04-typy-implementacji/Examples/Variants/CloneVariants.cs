@@ -99,7 +99,7 @@ public sealed class ServerConfig : PrototypeBase<ServerConfig>
     public int    Port        { get; init; } = 8080;
     public List<string> AllowedHosts { get; init; } = [];
 
-    private ServerConfig() { }
+    internal ServerConfig() { }
 
     /// <summary>Symuluje drogi załadunek konfiguracji (100 ms).</summary>
     public static ServerConfig LoadFromServer(string environment)

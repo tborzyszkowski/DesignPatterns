@@ -14,8 +14,8 @@ public sealed class ServerConfig
     public IReadOnlyList<string> AllowedIps { get; private set; }
     public TimeSpan InitTime { get; }
 
-    // Prywatny konstruktor — używany zarówno przez fabrykę jak i przez Clone()
-    private ServerConfig(string host, int port, string database,
+    // Konstruktor — używany zarówno przez fabrykę jak i przez Clone()
+    internal ServerConfig(string host, int port, string database,
         int poolSize, List<string> allowedIps, TimeSpan initTime)
     {
         Host       = host;
