@@ -55,3 +55,19 @@ Rozwiązanie (skrót):
 
 Omówienie:
 To praktyczny wzorzec dla architektury pluginowej i integracji zewnętrznych.
+
+## Pytania kontrolne
+
+1. Jakie cztery role definiuje wzorzec Adapter wg GoF i jak współpracują?
+
+1. Czym różni się Object Adapter (kompozycja) od Class Adapter (dziedziczenie) i kiedy preferujesz każdy wariant?
+
+1. W jakich sytuacjach adapter staje się antywzorcem i jakie sygnały powinny skłonić do refaktoryzacji?
+
+1. Jak Two Way Adapter rozszerza klasyczny wzorzec i jakie ryzyka wprowadza?
+
+1. Na czym polega Pluggable Adapter i jak rejestr adapterów realizuje zasadę Open/Closed?
+
+1. Jakie są alternatywy dla Adaptera (Fasada, Anti-Corruption Layer, refaktoryzacja kontraktu) i kiedy je wybierasz zamiast Adaptera?
+
+1. Jak mierzyć opłacalność warstwy adaptera i kiedy narzut mapowania przewyższa korzyści architektoniczne?

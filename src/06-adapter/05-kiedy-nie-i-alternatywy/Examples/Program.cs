@@ -62,7 +62,7 @@ public static class Program
 		Console.WriteLine("- refactor wybieraj, gdy masz kontrole nad obiema stronami integracji.");
 	}
 
-	private static double EstimateTotalCost(IntegrationOption option, int months)
+	internal static double EstimateTotalCost(IntegrationOption option, int months)
 	{
 		var baseline = option.InitialCostPoints + (option.MonthlyMaintenancePoints * months);
 		return baseline * option.SemanticRiskFactor;
