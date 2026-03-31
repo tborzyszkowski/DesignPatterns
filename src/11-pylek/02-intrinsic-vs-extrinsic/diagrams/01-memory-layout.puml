@@ -1,0 +1,23 @@
+@startuml flyweight_memory_layout
+title Flyweight - memory layout
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle "Bez Flyweight" as A {
+  card "Glyph A\nfont=Arial\nshape=A\ncolor=black\npoint=12\nx=10 y=20" as A1
+  card "Glyph A\nfont=Arial\nshape=A\ncolor=black\npoint=14\nx=40 y=20" as A2
+  card "Glyph A\nfont=Arial\nshape=A\ncolor=black\npoint=16\nx=70 y=20" as A3
+}
+
+rectangle "Z Flyweight" as B {
+  card "Flyweight('A')\nfont=Arial\nshape=A" as F
+  card "Extrinsic#1\ncolor,point,x,y" as E1
+  card "Extrinsic#2\ncolor,point,x,y" as E2
+  card "Extrinsic#3\ncolor,point,x,y" as E3
+  E1 --> F
+  E2 --> F
+  E3 --> F
+}
+
+@enduml

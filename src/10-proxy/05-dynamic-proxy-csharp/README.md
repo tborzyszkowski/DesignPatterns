@@ -4,6 +4,16 @@
 
 Pokazac interception runtime bez pisania osobnej klasy proxy dla kazdego interfejsu.
 
+## W kilku slowach: czym jest Dynamic Proxy
+
+Dynamic Proxy to obiekt proxy tworzony automatycznie w runtime, ktory przechwytuje wywolania metod i moze dodac logike techniczna (np. logowanie, pomiar czasu, autoryzacje), zanim deleguje do obiektu docelowego.
+
+Roznica wzgledem zwyklego (statycznego) proxy:
+
+1. Static Proxy piszesz recznie jako osobna klase dla interfejsu.
+1. Dynamic Proxy jest generowany w locie (w C# np. przez `DispatchProxy`), wiec mniej kodu powtarzalnego.
+1. Static Proxy jest prostszy w debugowaniu, Dynamic Proxy jest bardziej elastyczny przy wielu interfejsach.
+
 ## Szczegolowe wyjasnienie koncepcji w C#
 
 W C# dynamic proxy mozna zbudowac przez `DispatchProxy`, ktory generuje implementacje interfejsu w runtime.

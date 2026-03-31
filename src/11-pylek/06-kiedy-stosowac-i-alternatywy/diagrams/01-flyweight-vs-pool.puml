@@ -1,0 +1,20 @@
+@startuml flyweight_vs_pool
+title Flyweight vs Object Pool
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle "Flyweight" {
+  usecase "Cel: zmniejszenie pamieci\nprzez wspoldzielenie\nreprezentacji" as F1
+  usecase "Stan: intrinsic + extrinsic" as F2
+}
+
+rectangle "Object Pool" {
+  usecase "Cel: ograniczenie kosztu\ntworzenia/zwalniania\nobiektow" as P1
+  usecase "Stan: obiekt czasowo\nwypozyczany" as P2
+}
+
+F1 -[hidden]- F2
+P1 -[hidden]- P2
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml flyweight_class
+title Flyweight - class diagram
+
+skinparam monochrome true
+skinparam dpi 150
+
+interface Flyweight {
+  +Operation(extrinsicState)
+}
+
+class ConcreteFlyweight {
+  -intrinsicState
+  +Operation(extrinsicState)
+}
+
+class UnsharedConcreteFlyweight {
+  +Operation(extrinsicState)
+}
+
+class FlyweightFactory {
+  -cache
+  +Get(key): Flyweight
+}
+
+class Client
+
+Flyweight <|.. ConcreteFlyweight
+Flyweight <|.. UnsharedConcreteFlyweight
+FlyweightFactory --> Flyweight : returns
+Client --> FlyweightFactory : Get(key)
+Client --> Flyweight : Operation(extrinsic)
+
+@enduml

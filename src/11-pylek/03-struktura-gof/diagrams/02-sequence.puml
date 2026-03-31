@@ -1,0 +1,23 @@
+@startuml flyweight_sequence
+title Flyweight - sequence
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant FlyweightFactory as Factory
+participant ConcreteFlyweight as Flyweight
+
+Client -> Factory : Get(key)
+Factory -> Factory : cache lookup
+alt hit
+  Factory --> Client : existing flyweight
+else miss
+  Factory -> Flyweight : create(intrinsic)
+  Factory --> Client : new flyweight
+end
+
+Client -> Flyweight : Operation(extrinsicState)
+Flyweight --> Client : result
+
+@enduml

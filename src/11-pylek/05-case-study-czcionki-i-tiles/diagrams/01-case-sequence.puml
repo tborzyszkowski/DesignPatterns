@@ -1,0 +1,26 @@
+@startuml flyweight_case_sequence
+title Flyweight case - fonts and tiles
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Renderer
+participant "GlyphFactory" as Factory
+participant "GlyphFlyweight('A')" as GlyphA
+
+Renderer -> Factory : Get('A')
+Factory --> Renderer : GlyphA
+Renderer -> GlyphA : Draw(x,y,size,color)
+GlyphA --> Renderer : rendered
+
+== Tiles ==
+
+participant "TileFactory" as TileFactory
+participant "TileFlyweight('grass')" as Grass
+
+Renderer -> TileFactory : Get('grass')
+TileFactory --> Renderer : Grass
+Renderer -> Grass : Draw(x,y,layer)
+Grass --> Renderer : rendered
+
+@enduml
