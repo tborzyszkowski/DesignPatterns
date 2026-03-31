@@ -22,9 +22,13 @@ Jak dziala wspolpraca rol:
 
 ### Diagram klas
 
+![Diagram klas](diagrams/flyweight_class.png)
+
 Zrodlo: [diagrams/01-class.puml](diagrams/01-class.puml)
 
 ### Diagram sekwencji
+
+![Diagram sekwencji](diagrams/flyweight_sequence.png)
 
 Zrodlo: [diagrams/02-sequence.puml](diagrams/02-sequence.puml)
 

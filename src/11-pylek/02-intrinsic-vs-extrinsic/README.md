@@ -29,6 +29,8 @@ Nauczyc sie poprawnie dzielic stan obiektu i unikac najczestszych bledow projekt
 
 ## Diagram pamieci
 
+![Diagram pamieci](diagrams/flyweight_memory_layout.png)
+
 Zrodlo: [diagrams/01-memory-layout.puml](diagrams/01-memory-layout.puml)
 
 ## Checklista przed implementacja

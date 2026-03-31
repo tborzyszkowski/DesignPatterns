@@ -36,4 +36,6 @@ Podjac swiadoma decyzje, czy Flyweight jest najlepszym wyborem dla danego proble
 
 ## Diagram porownawczy
 
+![Diagram porownawczy](diagrams/flyweight_vs_pool.png)
+
 Zrodlo: [diagrams/01-flyweight-vs-pool.puml](diagrams/01-flyweight-vs-pool.puml)

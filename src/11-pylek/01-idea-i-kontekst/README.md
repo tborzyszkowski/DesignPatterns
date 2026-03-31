@@ -46,6 +46,8 @@ Jesli kazdy obiekt przechowuje caly stan, to:
 
 ### Diagram problemu
 
+![Diagram problemu](diagrams/flyweight_problem_context.png)
+
 Zrodlo: [diagrams/01-problem-context.puml](diagrams/01-problem-context.puml)
 
 Opis:
@@ -54,6 +56,8 @@ Opis:
 1. Takie duplikaty sa glowna przyczyna wzrostu zuzycia pamieci.
 
 ### Diagram idei Flyweight
+
+![Diagram idei](diagrams/flyweight_idea.png)
 
 Zrodlo: [diagrams/02-flyweight-idea.puml](diagrams/02-flyweight-idea.puml)
 

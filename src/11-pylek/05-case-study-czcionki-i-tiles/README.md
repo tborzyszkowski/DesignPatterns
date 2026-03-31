@@ -36,6 +36,8 @@ Podejscie Flyweight:
 
 ## Diagram interakcji
 
+![Diagram interakcji](diagrams/flyweight_case_sequence.png)
+
 Zrodlo: [diagrams/01-case-sequence.puml](diagrams/01-case-sequence.puml)
 
 ## Wnioski
