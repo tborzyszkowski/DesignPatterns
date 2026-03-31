@@ -3,6 +3,14 @@
         "/^cd c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\05-object-pool\nmkdir 01-idea-i-kontekst\nmkdir 02-kiedy-stosowac\nmkdir 03-struktura-dzialanie\nmkdir 04-implementacje-warianty\nmkdir 05-over-engineering-alternatywy\nmkdir 06-asynchroniczne-workery\n$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^Set-Location \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\12-kompozyt\"; dotnet build 2>&1 \\| Tail -20$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Get-ChildItem \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\12-kompozyt\" -Recurse -Filter \"\\*\\.csproj\" \\| ForEach-Object \\{ Write-Host \"Building: \\$\\(\\$_\\.Directory\\.Parent\\.Name\\)\"; \\$result = dotnet build \\$_\\.FullName -c Release --nologo 2>&1; if \\(\\$LASTEXITCODE -ne 0\\) \\{ Write-Host \"FAILED: \\$result\" \\} else \\{ Write-Host \"OK\" \\} \\}$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

@@ -84,3 +84,12 @@ Dodaj wizytatora raportującego liczbę liści i kompozytów w drzewie.
 Wskazówka:
 
 1. To dobre ćwiczenie pokazujące połączenie Composite + Visitor.
+
+## Pytania kontrolne
+
+1. Co to jest `Component` i jakie ma obowiązki we wzorcu Kompozyt?
+1. Czym różni się Transparent Composite od Safe Composite?
+1. Kiedy warto zastąpić rekurencję w `Operation()` iteratorem BFS lub DFS?
+1. Jakie ryzyko niesie dodanie `Add/Remove` do interfejsu `Component`?
+1. Jak zabezpieczyć drzewo przed dodaniem cyklu i dlaczego to ważne?
+1. Porównaj Kompozyt z Wzorcem Dekoratora — kiedy wybrałbyś każdy z nich?

@@ -45,3 +45,18 @@ Pokazać, jak projektować hierarchie część-całość, aby klient mógł trak
 1. Kompozyt upraszcza kod klienta.
 1. Koszt to większa odpowiedzialność projektanta za spójność drzewa.
 1. Często dobrze działa razem z Visitor lub Iterator.
+
+## Materiał do tablicy/slajdów
+
+1. Definicja Kompozytu (1 zdanie).
+1. Schemat: Client → Component ← Leaf, Composite (dzieci).
+1. Różnica Transparent vs Safe Composite.
+1. Lista ryzyk: cykle w drzewie, metody zarządzania dziećmi w liściach, głęboka rekurencja.
+
+## FAQ
+
+1. Czy Kompozyt to to samo co drzewo danych? Nie. Drzewo to struktura danych; Kompozyt to wzorzec nadający tej strukturze jednolite API przez wspólny interfejs `Component`.
+1. Czy liść może mieć dzieci w Safe Composite? Nie — metoda `Add` jest tylko w `Composite`, więc próba dodania dziecka do liścia nie skompiluje się lub da błąd w czasie wykonania.
+1. Kiedy zamiast rekurencji użyć iteratora? Gdy drzewo jest bardzo głębokie (ryzyko `StackOverflowException`) lub gdy potrzebujesz różnych strategii przejścia (BFS, DFS, priorytetowe).
+1. Czy Kompozyt i Dekorator to to samo? Nie. Dekorator rozszerza zachowanie jednego obiektu; Kompozyt grupuje wiele obiektów w hierarchię i traktuje je jednakowo.
+1. Czy mogę użyć Kompozytu z LINQ? Tak. Jeśli `Composite` implementuje `IEnumerable<Component>`, możesz korzystać z LINQ do filtrowania i projekcji węzłów.

@@ -35,7 +35,11 @@ Do przejścia po drzewie używany jest iterator (np. BFS/DFS) zamiast czystej re
 
 Kod: [Examples/Program.cs](Examples/Program.cs)
 
-Program porównuje wariant transparent i safe na tym samym problemie.
+Program porównuje wszystkie trzy warianty na tym samym zestawie węzłów:
+
+1. Transparent Composite — `Add/Remove` w bazowej klasie `TransparentComponent`, liść rzuca `NotSupportedException`.
+1. Safe Composite — `Add` tylko w `SafeComposite`, liść `SafeLeaf` nie wie nic o dzieciach.
+1. Composite + Iterator (BFS) — `IterNode` udostępnia `Children`, a statyczna klasa `BfsIterator` przechodzi drzewo kolejką zamiast czystą rekurencją.
 
 ```bash
 cd src/12-kompozyt/04-typy-implementacji-i-wybor/Examples
