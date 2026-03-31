@@ -1,0 +1,17 @@
+@startuml static_proxy_sequence
+title Static Proxy - sekwencja
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant ReportServiceProxy
+participant RealReportService
+
+Client -> ReportServiceProxy : GetMonthlyReport(month)
+ReportServiceProxy -> ReportServiceProxy : check role + log
+ReportServiceProxy -> RealReportService : GetMonthlyReport(month)
+RealReportService --> ReportServiceProxy : report
+ReportServiceProxy --> Client : report
+
+@enduml

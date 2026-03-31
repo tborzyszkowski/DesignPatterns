@@ -1,0 +1,19 @@
+@startuml proxy_decision_map
+title Proxy - mapa decyzji
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+if (Ten sam kontrakt?) then (tak)
+  if (Kontrola dostepu/lazy/cache?) then (tak)
+    :Proxy;
+  else (nie)
+    :Sprawdz Decorator;
+  endif
+else (nie)
+  :Adapter;
+endif
+stop
+
+@enduml

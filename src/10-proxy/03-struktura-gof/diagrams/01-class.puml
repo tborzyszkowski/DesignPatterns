@@ -1,0 +1,17 @@
+@startuml proxy_class
+title Proxy - diagram klas GoF
+
+skinparam monochrome true
+skinparam dpi 150
+
+interface ISubject
+class Proxy
+class RealSubject
+class Client
+
+Proxy ..|> ISubject
+RealSubject ..|> ISubject
+Proxy --> RealSubject
+Client --> ISubject
+
+@enduml

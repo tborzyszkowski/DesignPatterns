@@ -1,0 +1,16 @@
+@startuml proxy_motivation
+title Proxy - motywacja
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+rectangle "Direct access" as Direct
+rectangle "Proxy gate" as Gate
+rectangle "Real service" as Real
+
+Client --> Direct
+Client --> Gate
+Gate --> Real
+
+@enduml

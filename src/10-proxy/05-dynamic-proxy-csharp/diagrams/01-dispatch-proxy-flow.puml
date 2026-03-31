@@ -1,0 +1,18 @@
+@startuml dynamic_proxy_csharp_flow
+title Dynamic Proxy C# - DispatchProxy flow
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant "Generated Proxy" as Proxy
+participant "MonitoringProxy.Invoke" as Invoke
+participant RealOrderService
+
+Client -> Proxy : PlaceOrder(orderId)
+Proxy -> Invoke : Invoke(method,args)
+Invoke -> RealOrderService : method.Invoke(target,args)
+RealOrderService --> Invoke : result/exception
+Invoke --> Client : result/exception
+
+@enduml

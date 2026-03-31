@@ -1,0 +1,18 @@
+@startuml dynamic_proxy_java_flow
+title Dynamic Proxy Java - InvocationHandler flow
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant "JDK Proxy" as Proxy
+participant "InvocationHandler" as Handler
+participant RealPaymentService
+
+Client -> Proxy : pay(orderId)
+Proxy -> Handler : invoke(proxy,method,args)
+Handler -> RealPaymentService : method.invoke(target,args)
+RealPaymentService --> Handler : result
+Handler --> Client : result
+
+@enduml
