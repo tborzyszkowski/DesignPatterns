@@ -31,7 +31,16 @@ Opis diagramu klas:
 
 ## Przyklad C Sharp
 
-Kod: [../04-static-proxy/Examples/Program.cs](../04-static-proxy/Examples/Program.cs)
+Kod: [Examples/Program.cs](Examples/Program.cs)
+
+Program ilustruje kazda z czterech rol GoF (`ISubject`, `RealSubject`, `Proxy`, `Client`).
+Proxy jest Caching Proxy: pierwsze wywolanie pelni delegacje do `RealSubject`, kolejne zwraca wynik z cache.
+W logach widoczne sa pre-check, delegacja i post-processing.
+
+```bash
+cd src/10-proxy/03-struktura-gof/Examples
+dotnet run
+```
 
 Co robi program:
 

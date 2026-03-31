@@ -75,3 +75,12 @@ Uzasadnienie:
 
 ____________________________________________________________
 ____________________________________________________________
+
+## Pytania kontrolne
+
+1. Co odroznia Proxy od Adaptera — zachowaj jeden kontrakt vs zmien kontrakt?
+2. Czym rozni sie Virtual Proxy od Protection Proxy?
+3. Dlaczego Dynamic Proxy utrudnia debugowanie?
+4. Kiedy Static Proxy jest lepszy niz Dynamic Proxy?
+5. Co sie stanie, kiedy wlozysz logike biznesowa do Proxy zamiast do RealSubject?
+6. Jak zabezpieczyc sie przed niekontrolowanym rozrostem warstw proxy?

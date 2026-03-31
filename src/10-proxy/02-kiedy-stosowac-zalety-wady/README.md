@@ -116,6 +116,18 @@ image.Display(); // drugi raz bez kosztu tworzenia
 3. Decyzja o lazy loading jest zamknieta w Proxy, nie w kliencie.
 4. Ten scenariusz to klasyczny przypadek dla Virtual Proxy.
 
+## Przykladowy program C#
+
+Kod: [Examples/Program.cs](Examples/Program.cs)
+
+Program demonstruje Virtual Proxy z leniwym ladowaniem obrazu. Obiekt `ImageProxy` nie tworzy `RealImage`
+dopoki klient nie wywoula `Display()` po raz pierwszy. Drugie wywolanie nie powoduje ponownego ladowania.
+
+```bash
+cd src/10-proxy/02-kiedy-stosowac-zalety-wady/Examples
+dotnet run
+```
+
 ## Dalsze kroki
 
 1. Static Proxy z kontrola uprawnien: [../04-static-proxy/README.md](../04-static-proxy/README.md)

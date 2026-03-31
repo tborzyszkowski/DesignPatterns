@@ -19,6 +19,9 @@ Kazdy temat ma osobny katalog z README oraz (tam gdzie ma sens) kodem uruchamial
 ## Jak uruchamiac przyklady C#
 
 ```bash
+cd src/10-proxy/01-idea-i-kontekst/Examples && dotnet run
+cd src/10-proxy/02-kiedy-stosowac-zalety-wady/Examples && dotnet run
+cd src/10-proxy/03-struktura-gof/Examples && dotnet run
 cd src/10-proxy/04-static-proxy/Examples && dotnet run
 cd src/10-proxy/05-dynamic-proxy-csharp/Examples && dotnet run
 ```

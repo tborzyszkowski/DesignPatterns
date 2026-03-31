@@ -148,7 +148,19 @@ adminProxy.DeleteAllReports();
 4. RealReportService nie zna zasad autoryzacji.
 5. Zasady dostepu sa w jednym miejscu i latwo je testowac.
 
+## Przykladowy program C#
+
+Kod: [Examples/Program.cs](Examples/Program.cs)
+
+Program pokazuje Protection Proxy z kontrola roli. Klient pracuje wylacznie na interfejsie `IReportService`.
+Dla roli `User` operacja `DeleteAllReports()` rzuca `UnauthorizedAccessException`. Dla roli `Admin` przechodzi.
+
+```bash
+cd src/10-proxy/01-idea-i-kontekst/Examples
+dotnet run
+```
+
 ## Dalsze kroki
 
-1. Kod uruchamialny (bardziej rozbudowany): [../04-static-proxy/Examples/Program.cs](../04-static-proxy/Examples/Program.cs)
+1. Pelna implementacja Static Proxy z loggerem: [../04-static-proxy/Examples/Program.cs](../04-static-proxy/Examples/Program.cs)
 2. Wersja dynamiczna w C#: [../05-dynamic-proxy-csharp/README.md](../05-dynamic-proxy-csharp/README.md)
