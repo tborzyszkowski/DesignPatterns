@@ -78,6 +78,15 @@ Scenariusz: ______________________________
 
 Wniosek (zaznacz jedno):
 
+## Pytania kontrolne
+
+1. Co odroznia Most od Adaptera — jaki jest glowny kryterium wyboru?
+2. Czym jest os zmiennosci w kontekscie wzorca Most i podaj przyklad dwoch osi?
+3. Co to jest leakage implementacji w Abstraction i jak go wyeliminowac?
+4. Kiedy Most jest overengineering — wymien dwa sygnaly ostrzegawcze?
+5. Jakie sa trzy warianty implementacji Mostu i kiedy stosowac kazdy z nich?
+6. Czym rozni sie Most od Strategii przy podmianach runtime?
+
 1. [ ] Adapter
 2. [ ] Strategia
 3. [ ] Most
