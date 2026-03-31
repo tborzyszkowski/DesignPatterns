@@ -1,0 +1,23 @@
+@startuml facade_decision_tree
+title Kiedy stosowac Fasade - mapa decyzji
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+if (Klient wywoluje wiele subsystemow?) then (tak)
+  if (Kolejnosc i obsluga bledow sie powtarza?) then (tak)
+    :Rozwaz Fasade;
+  else (nie)
+    :Sprawdz prostsza kompozycje;
+  endif
+else (nie)
+  :Fasada moze byc zbedna;
+endif
+
+if (Potrzebna translacja modelu?) then (tak)
+  :Dodaj ACL obok Fasady;
+endif
+stop
+
+@enduml

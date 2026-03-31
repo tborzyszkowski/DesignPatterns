@@ -1,0 +1,22 @@
+@startuml facade_class
+title Fasada - diagram klas
+
+skinparam monochrome true
+skinparam dpi 150
+
+interface Client
+
+class ReportFacade {
+  +BuildReport(month)
+}
+
+class DataLoader
+class Aggregator
+class Formatter
+
+Client --> ReportFacade
+ReportFacade --> DataLoader
+ReportFacade --> Aggregator
+ReportFacade --> Formatter
+
+@enduml

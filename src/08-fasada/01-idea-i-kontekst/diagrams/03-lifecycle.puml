@@ -1,0 +1,15 @@
+@startuml facade_lifecycle_topic01
+title Cykl zycia uzycia Fasady (temat 01)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Klient tworzy zadanie biznesowe;
+:Klient wywoluje metode Fasady;
+:Fasada orkiestruje subsystemy;
+:Fasada agreguje wynik i maskuje szczegoly;
+:Klient otrzymuje prosty rezultat;
+stop
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml facade_lifecycle_topic06
+title Cykl zycia wywolania ApiFacade (temat 06)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Klient wywoluje ApiFacade;
+:ApiFacade tworzy/konfiguruje request;
+:HttpClient wysyla zadanie;
+:Odbior i walidacja odpowiedzi;
+:Mapowanie payloadu na model klienta;
+:Zwrot prostego wyniku;
+stop
+
+@enduml

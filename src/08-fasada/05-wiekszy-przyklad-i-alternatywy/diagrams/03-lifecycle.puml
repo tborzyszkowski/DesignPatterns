@@ -1,0 +1,17 @@
+@startuml facade_lifecycle_topic05
+title Cykl zycia use-case zamowienia (temat 05)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Start PlaceOrder;
+:Walidacja klienta;
+:Rezerwacja towaru;
+:Autoryzacja platnosci;
+:Tworzenie wysylki;
+:Powiadomienie klienta;
+:Zwrot OrderResult;
+stop
+
+@enduml

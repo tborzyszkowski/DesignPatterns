@@ -1,0 +1,16 @@
+@startuml facade_lifecycle_topic04
+title Cykl zycia implementacji Fasady (temat 04)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Wybierz typ fasady;
+:Zdefiniuj kontrakt API;
+:Dodaj polityki (security/ACL/async);
+:Zaimplementuj orkiestracje;
+:Przetestuj scenariusze i bledy;
+:Wdrozenie i monitoring;
+stop
+
+@enduml

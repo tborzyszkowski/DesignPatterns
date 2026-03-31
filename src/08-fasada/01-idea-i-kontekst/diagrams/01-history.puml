@@ -1,0 +1,22 @@
+@startuml facade_history
+title Fasada - rys historyczny i kontekst
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor "Lata 90" as A
+actor "GoF 1994" as B
+actor "Architektura enterprise" as C
+actor "Mikroserwisy i cloud" as D
+
+A --> B : Formalizacja wzorca
+B --> C : Upraszczanie bibliotek i frameworkow
+C --> D : Fasada + ACL + API Gateway
+
+note right of D
+Wspolczesnie fasada bywa
+punktem orkiestracji use-case,
+bezpieczenstwa i translacji modelu.
+end note
+
+@enduml

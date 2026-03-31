@@ -1,0 +1,22 @@
+@startuml httpclient_sequence
+title Sekwencja uzycia ApiFacade + HttpClient
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant ApiFacade
+participant HttpClient
+participant "HttpMessageHandler" as Handler
+participant "Remote API" as Remote
+
+Client -> ApiFacade : GetUserSummaryAsync("42")
+ApiFacade -> HttpClient : GetAsync("/users/42")
+HttpClient -> Handler : SendAsync(request)
+Handler -> Remote : HTTP GET
+Remote --> Handler : 200 OK + JSON
+Handler --> HttpClient : response
+HttpClient --> ApiFacade : HttpResponseMessage
+ApiFacade --> Client : UserSummary
+
+@enduml

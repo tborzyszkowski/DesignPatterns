@@ -1,0 +1,35 @@
+@startuml facade_compare
+title Porownanie: klient bez i z Fasada
+
+skinparam monochrome true
+skinparam dpi 150
+
+package "Bez fasady" {
+  class ClientA {
+    +Preview()
+  }
+  class AuthService
+  class PricingService
+  class ShippingService
+
+  ClientA --> AuthService
+  ClientA --> PricingService
+  ClientA --> ShippingService
+}
+
+package "Z fasada" {
+  class ClientB {
+    +Preview()
+  }
+  class PurchasePreviewFacade
+  class "AuthService" as AuthService2
+  class "PricingService" as PricingService2
+  class "ShippingService" as ShippingService2
+
+  ClientB --> PurchasePreviewFacade
+  PurchasePreviewFacade --> AuthService2
+  PurchasePreviewFacade --> PricingService2
+  PurchasePreviewFacade --> ShippingService2
+}
+
+@enduml

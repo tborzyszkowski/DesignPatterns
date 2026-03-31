@@ -1,0 +1,18 @@
+@startuml facade_lifecycle_topic02
+title Cykl zycia decyzji architektonicznej (temat 02)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Identyfikacja bolu klienta;
+:Analiza sprzezen i powtorzen;
+if (Zlozonosc orkiestracji wysoka?) then (tak)
+  :Wprowadzenie Fasady;
+  :Pomiar efektu i ryzyk;
+else (nie)
+  :Pozostaw prostszy model;
+endif
+stop
+
+@enduml

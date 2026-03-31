@@ -1,0 +1,22 @@
+@startuml facade_selection_matrix
+title Macierz wyboru typu Fasady
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle "Problem: zlozone API" as P1
+rectangle "Problem: bezpieczenstwo" as P2
+rectangle "Problem: integracja\nz obcym modelem" as P3
+rectangle "Problem: I/O asynchroniczne" as P4
+
+rectangle "Simple Facade" as F1
+rectangle "Secure Facade" as F2
+rectangle "Facade + ACL" as F3
+rectangle "Async Facade" as F4
+
+P1 --> F1
+P2 --> F2
+P3 --> F3
+P4 --> F4
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml standard_facades_class
+title Przyklady fasadopodobnych API w .NET
+
+skinparam monochrome true
+skinparam dpi 150
+
+class ApiFacade
+class HttpClient
+class ILogger
+class IMemoryCache
+
+class "HttpMessageHandler pipeline" as Handler
+class "Log Providers" as Providers
+class "Cache internals" as CacheInternals
+
+ApiFacade --> HttpClient
+HttpClient --> Handler
+
+ILogger --> Providers
+IMemoryCache --> CacheInternals
+
+@enduml

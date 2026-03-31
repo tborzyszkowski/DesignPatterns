@@ -1,0 +1,23 @@
+@startuml ecommerce_facade_class
+title E-commerce - fasada zamowien (diagram klas)
+
+skinparam monochrome true
+skinparam dpi 150
+
+class OrderFacade {
+  +PlaceOrder(request)
+}
+
+class CustomerService
+class InventoryService
+class PaymentService
+class ShippingService
+class NotificationService
+
+OrderFacade --> CustomerService
+OrderFacade --> InventoryService
+OrderFacade --> PaymentService
+OrderFacade --> ShippingService
+OrderFacade --> NotificationService
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml ecommerce_facade_sequence
+title E-commerce - fasada zamowien (sekwencja)
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant OrderFacade
+participant CustomerService
+participant InventoryService
+participant PaymentService
+participant ShippingService
+participant NotificationService
+
+Client -> OrderFacade : PlaceOrder(request)
+OrderFacade -> CustomerService : Exists(customerId)
+CustomerService --> OrderFacade : true
+OrderFacade -> InventoryService : Reserve(sku, qty)
+InventoryService --> OrderFacade : true
+OrderFacade -> PaymentService : Charge(customer, amount)
+PaymentService --> OrderFacade : true
+OrderFacade -> ShippingService : CreateShipment(...)
+ShippingService --> OrderFacade : shipmentId
+OrderFacade -> NotificationService : Send(...)
+OrderFacade --> Client : OrderResult.Ok
+
+@enduml

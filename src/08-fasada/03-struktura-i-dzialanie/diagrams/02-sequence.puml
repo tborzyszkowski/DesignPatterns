@@ -1,0 +1,22 @@
+@startuml facade_sequence
+title Fasada - diagram sekwencji
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant ReportFacade
+participant DataLoader
+participant Aggregator
+participant Formatter
+
+Client -> ReportFacade : BuildReport("2026-03")
+ReportFacade -> DataLoader : Load(month)
+DataLoader --> ReportFacade : raw data
+ReportFacade -> Aggregator : Aggregate(raw)
+Aggregator --> ReportFacade : summary
+ReportFacade -> Formatter : Format(month, summary)
+Formatter --> ReportFacade : report
+ReportFacade --> Client : report
+
+@enduml

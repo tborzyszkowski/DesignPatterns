@@ -1,0 +1,15 @@
+@startuml facade_lifecycle_topic03
+title Cykl zycia obiektow wzorca Fasada (temat 03)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Utworzenie Fasady i subsystemow;
+:Wywolanie use-case przez klienta;
+:Przeplyw przez subsystem A/B/C;
+:Agregacja odpowiedzi;
+:Zwrot jednego wyniku;
+stop
+
+@enduml

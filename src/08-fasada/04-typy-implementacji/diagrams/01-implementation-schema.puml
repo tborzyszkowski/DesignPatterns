@@ -1,0 +1,30 @@
+@startuml facade_implementation_schema
+title Typy implementacji Fasady
+
+skinparam monochrome true
+skinparam dpi 150
+
+class "SimpleMediaFacade" as Simple
+class "SecureMediaFacade" as Secure
+class "AsyncMediaFacade" as Async
+
+class CatalogService
+class PlayerService
+class AuthorizationService
+
+Simple --> CatalogService
+Simple --> PlayerService
+
+Secure --> CatalogService
+Secure --> PlayerService
+Secure --> AuthorizationService
+
+Async --> CatalogService
+Async --> PlayerService
+
+note right of Secure
+Wariant security-centric:
+autoryzacja i audyt
+end note
+
+@enduml

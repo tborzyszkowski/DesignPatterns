@@ -1,0 +1,22 @@
+@startuml facade_context
+title Kontekst uzycia wzorca Fasada
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle Client
+rectangle "CheckoutFacade" as Facade
+rectangle "ACL Translator" as ACL
+rectangle Inventory
+rectangle Payment
+rectangle Notification
+rectangle "Partner API" as Partner
+
+Client --> Facade : PlaceOrder(...)
+Facade --> Inventory : HasStock(...)
+Facade --> Payment : Charge(...)
+Facade --> Notification : Send(...)
+Facade --> ACL : Translate(...)
+ACL --> Partner : mapowanie kontraktu
+
+@enduml
