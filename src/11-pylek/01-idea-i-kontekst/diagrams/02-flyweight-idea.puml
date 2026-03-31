@@ -1,0 +1,26 @@
+@startuml flyweight_idea
+title Flyweight - core idea
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant "FlyweightFactory" as Factory
+participant "GlyphFlyweight('A')" as GlyphA
+
+Client -> Factory : Get('A')
+Factory --> Client : GlyphA
+
+Client -> GlyphA : Draw(x,y,size,color)
+GlyphA --> Client : rendered
+
+note right of GlyphA
+Intrinsic:
+- symbol='A'
+- font='Arial'
+
+Extrinsic przekazywany
+w Draw(...)
+end note
+
+@enduml

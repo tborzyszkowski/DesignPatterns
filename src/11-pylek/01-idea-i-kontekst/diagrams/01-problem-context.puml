@@ -1,0 +1,18 @@
+@startuml flyweight_problem_context
+title Flyweight - problem context
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle "Naiwne podejscie" as Naive {
+  card "Glyph A\nfont=Arial\nshape=A\ncolor=black\nsize=12\nx=10 y=20" as N1
+  card "Glyph A\nfont=Arial\nshape=A\ncolor=red\nsize=16\nx=40 y=20" as N2
+  card "Glyph A\nfont=Arial\nshape=A\ncolor=blue\nsize=12\nx=70 y=20" as N3
+}
+
+note bottom of Naive
+Duplikacja danych wspolnych
+powoduje duze zuzycie pamieci.
+end note
+
+@enduml
