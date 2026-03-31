@@ -1,0 +1,16 @@
+@startuml bridge_sequence
+title Most - diagram sekwencji
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant Abstraction
+participant IReportImplementor
+
+Client -> Abstraction : Operation(input)
+Abstraction -> IReportImplementor : Render(input)
+IReportImplementor --> Abstraction : output
+Abstraction --> Client : output
+
+@enduml

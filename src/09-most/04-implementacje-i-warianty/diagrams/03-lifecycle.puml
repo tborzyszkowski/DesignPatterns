@@ -1,0 +1,15 @@
+@startuml bridge_lifecycle_topic04
+title Cykl implementacji (temat 04)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Wybierz wariant bridge;
+:Zdefiniuj kontrakt implementora;
+:Dodaj abstrakcje;
+:Podlacz factory/DI;
+:Uruchom test scenariusza;
+stop
+
+@enduml

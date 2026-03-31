@@ -1,0 +1,16 @@
+@startuml bridge_libs_sequence
+title AppLogger + sink - sekwencja
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant AppLogger
+participant ILogSink
+
+Client -> AppLogger : Log(text)
+AppLogger -> ILogSink : Write(line)
+ILogSink --> AppLogger : ok
+AppLogger --> Client : done
+
+@enduml

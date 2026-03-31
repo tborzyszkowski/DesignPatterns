@@ -1,0 +1,19 @@
+@startuml bridge_decision_map
+title Kiedy stosowac Most
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+if (Czy masz >=2 osie zmiennosci?) then (tak)
+  if (Czy osie beda rozwijane niezaleznie?) then (tak)
+    :Most jest dobrym kandydatem;
+  else (nie)
+    :Sprawdz prostsza abstrakcje;
+  endif
+else (nie)
+  :Rozwaz Strategia lub prosta hierarchie;
+endif
+stop
+
+@enduml

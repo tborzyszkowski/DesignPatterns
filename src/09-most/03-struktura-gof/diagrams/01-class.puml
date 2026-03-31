@@ -1,0 +1,20 @@
+@startuml bridge_class
+title Most - diagram klas GoF
+
+skinparam monochrome true
+skinparam dpi 150
+
+abstract class Abstraction
+class StandardReport
+class PremiumReport
+interface IReportImplementor
+class PdfReportImplementor
+class CsvReportImplementor
+
+Abstraction --> IReportImplementor
+Abstraction <|-- StandardReport
+Abstraction <|-- PremiumReport
+IReportImplementor <|.. PdfReportImplementor
+IReportImplementor <|.. CsvReportImplementor
+
+@enduml

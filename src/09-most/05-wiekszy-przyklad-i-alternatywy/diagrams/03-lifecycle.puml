@@ -1,0 +1,15 @@
+@startuml bridge_lifecycle_topic05
+title Cykl use-case (temat 05)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Klient wybiera typ Alert;
+:Podaje provider implementora;
+:Wywoluje Notify;
+:Provider dostarcza komunikat;
+:Monitoring i logowanie;
+stop
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml bridge_big_case_sequence
+title Wiekszy przypadek - sekwencja
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant Alert
+participant INotificationProvider
+
+Client -> Alert : Notify(message)
+Alert -> INotificationProvider : SendMessage(payload)
+INotificationProvider --> Alert : ok
+Alert --> Client : done
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml bridge_big_case_class
+title Wiekszy przypadek - klasy
+
+skinparam monochrome true
+skinparam dpi 150
+
+abstract class Alert
+class MarketingAlert
+class IncidentAlert
+class SecurityIncidentAlert
+interface INotificationProvider
+class EmailProvider
+class SmsProvider
+class PushProvider
+
+Alert --> INotificationProvider
+Alert <|-- MarketingAlert
+Alert <|-- IncidentAlert
+Alert <|-- SecurityIncidentAlert
+INotificationProvider <|.. EmailProvider
+INotificationProvider <|.. SmsProvider
+INotificationProvider <|.. PushProvider
+
+@enduml

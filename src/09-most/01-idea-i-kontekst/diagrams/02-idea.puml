@@ -1,0 +1,21 @@
+@startuml bridge_idea
+title Idea Mostu
+
+skinparam monochrome true
+skinparam dpi 150
+
+class BasicRemote
+interface IDevice
+class TvDevice
+class RadioDevice
+
+BasicRemote --> IDevice
+IDevice <|.. TvDevice
+IDevice <|.. RadioDevice
+
+note right of BasicRemote
+Abstraction i Implementor
+rozwijane niezaleznie.
+end note
+
+@enduml

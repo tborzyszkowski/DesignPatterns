@@ -1,0 +1,20 @@
+@startuml bridge_factory
+title Factory + Bridge
+
+skinparam monochrome true
+skinparam dpi 150
+
+class MessageBridge
+class SenderFactory
+interface IMessageSender
+class EmailSender
+class SmsSender
+class PushSender
+
+MessageBridge --> IMessageSender
+SenderFactory --> IMessageSender : Create(kind)
+IMessageSender <|.. EmailSender
+IMessageSender <|.. SmsSender
+IMessageSender <|.. PushSender
+
+@enduml

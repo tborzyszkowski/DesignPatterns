@@ -1,0 +1,15 @@
+@startuml bridge_lifecycle_topic03
+title Cykl obiektow GoF (temat 03)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Utworzenie implementora;
+:Utworzenie abstrakcji;
+:Wywolanie operacji;
+:Delegacja do implementora;
+:Zwrot wyniku;
+stop
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml bridge_lifecycle_topic02
+title Cykl decyzji (temat 02)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Identyfikacja osi zmiennosci;
+:Ocena kosztu eksplozji klas;
+:Wybierz Most lub alternatywe;
+:Zweryfikuj po implementacji;
+stop
+
+@enduml

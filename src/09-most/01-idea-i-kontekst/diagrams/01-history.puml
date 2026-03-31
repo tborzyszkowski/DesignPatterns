@@ -1,0 +1,16 @@
+@startuml bridge_history
+title Bridge - rys historyczny
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor "GoF 1994" as A
+actor "UI frameworks" as B
+actor "Enterprise integration" as C
+actor "Cloud era" as D
+
+A --> B : formalizacja wzorca
+B --> C : separacja API i backendu
+C --> D : niezalezna ewolucja osi zmiennosci
+
+@enduml

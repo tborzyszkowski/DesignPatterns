@@ -1,0 +1,15 @@
+@startuml bridge_lifecycle_topic01
+title Cykl zycia Mostu (temat 01)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Klient wybiera abstrakcje;
+:Wstrzykuje implementor;
+:Wywoluje operacje;
+:Abstraction deleguje do implementora;
+:Wynik wraca do klienta;
+stop
+
+@enduml

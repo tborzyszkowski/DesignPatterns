@@ -1,0 +1,15 @@
+@startuml bridge_vs_patterns
+title Most vs Adapter vs Strategia
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle "Bridge\n2 osie zmiennosci" as B
+rectangle "Adapter\nintegracja API" as A
+rectangle "Strategia\npodmiana algorytmu" as S
+
+note right of B
+Abstraction <-> Implementor
+end note
+
+@enduml

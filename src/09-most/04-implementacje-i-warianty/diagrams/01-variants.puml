@@ -1,0 +1,14 @@
+@startuml bridge_variants
+title Warianty implementacji Mostu
+
+skinparam monochrome true
+skinparam dpi 150
+
+rectangle "Statyczny\nBridge" as S
+rectangle "Dynamiczny\nBridge" as D
+rectangle "Factory + Bridge" as F
+
+S --> D : runtime switch
+D --> F : konfiguracja / plugin
+
+@enduml

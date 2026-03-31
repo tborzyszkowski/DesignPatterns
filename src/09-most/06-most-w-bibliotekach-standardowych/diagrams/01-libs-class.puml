@@ -1,0 +1,16 @@
+@startuml bridge_libs_class
+title Mostopodobne API w bibliotekach
+
+skinparam monochrome true
+skinparam dpi 150
+
+class AppLogger
+interface ILogSink
+class ConsoleSink
+class MemorySink
+
+AppLogger --> ILogSink
+ILogSink <|.. ConsoleSink
+ILogSink <|.. MemorySink
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml bridge_lifecycle_topic06
+title Cykl wywolania (temat 06)
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+:Klient wybiera logger;
+:Wstrzykuje sink;
+:Wywoluje Log;
+:Sink zapisuje rekord;
+:Zwrot sterowania;
+stop
+
+@enduml
