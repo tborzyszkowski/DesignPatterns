@@ -36,6 +36,39 @@ Zrodlo: [diagrams/01-decision-map.puml](diagrams/01-decision-map.puml)
 
 Zrodlo: [diagrams/02-compare.puml](diagrams/02-compare.puml)
 
+## Checklista decyzyjna per scenariusz
+
+### Scenariusz A: Integracja z zewnetrznym API (np. nowy dostawca kuriera)
+
+1. Czy model domenowy ma zostac bez zmian? [tak]
+2. Czy glownym problemem jest roznica interfejsow? [tak]
+3. Czy nie projektujesz nowej, niezaleznej osi biznesowej? [tak]
+
+Wniosek: wybierz **Adapter**.
+
+### Scenariusz B: Podmiana sposobu liczenia (np. rabat standardowy/premium)
+
+1. Czy zmienia sie glownie algorytm, a nie infrastruktura? [tak]
+2. Czy masz jedna os decyzji (wariant algorytmu)? [tak]
+3. Czy obiekt kontekstowy ma tylko delegowac obliczenia? [tak]
+
+Wniosek: wybierz **Strategia**.
+
+### Scenariusz C: Dwie osie rozwoju (np. typ Alertu x kanal dostarczenia)
+
+1. Czy masz co najmniej 2 osie zmiennosci? [tak]
+2. Czy osie beda rozwijane niezaleznie (oddzielne release'y/zespoly)? [tak]
+3. Czy bez rozdzielenia grozi eksplozja klas typu XViaY? [tak]
+4. Czy chcesz moc podmieniac implementor bez zmian po stronie Abstraction? [tak]
+
+Wniosek: wybierz **Most**.
+
+### Szybka regula 10 sekund
+
+1. Integracja obcego API -> **Adapter**.
+2. Podmiana algorytmu w jednej osi -> **Strategia**.
+3. Niezalezny rozwoj dwoch osi -> **Most**.
+
 ## Cykl decyzji
 
 ![Decision lifecycle](diagrams/bridge_lifecycle_topic02.png)
