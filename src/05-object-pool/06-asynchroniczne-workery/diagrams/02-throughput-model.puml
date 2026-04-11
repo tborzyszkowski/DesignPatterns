@@ -1,13 +1,46 @@
 @startuml
 skinparam shadowing false
 skinparam monochrome true
+skinparam defaultFontSize 11
+skinparam padding 5
 
-title Przyblizony model przepustowosci
+title Model przepustowosci Object Pool\n(prawo Little'ego)
 
-rectangle "workers = W" as W
-rectangle "sredni czas zadania = T" as T
-rectangle "QPS ~ W / T" as Q
+rectangle "Nowe\nzadanie" as REQ
 
-W --> Q
-T --> Q
+queue "Kolejka oczekujacych\n---\nWq = sredni czas\noczekiwania na slot" as QUEUE
+
+package "Pula: W workerow" {
+  rectangle "Worker\n---\nT = sredni czas\nobslugi zadania" as WRK
+}
+
+rectangle "Ukonczone\n(sukces)" as OK
+
+rectangle "Odrzucone\n(timeout)" as FAIL
+
+REQ -down-> QUEUE
+QUEUE -right-> FAIL : Wq > timeoutMs
+QUEUE -down-> WRK : wolny worker
+WRK -down-> OK
+
+note left of QUEUE
+  Wq rosnie gdy:
+  ruch > W / T
+end note
+
+note right of WRK
+  Gorna granica (prawo Little'ego):
+  QPS_max = W / T
+end note
+
+note right of OK
+  Efektywny throughput:
+  QPS_eff = W / (T + Wq)
+           * (1 - p_timeout)
+end note
+
+note right of FAIL
+  p_timeout = odrzucone / wszystkie
+end note
+
 @enduml

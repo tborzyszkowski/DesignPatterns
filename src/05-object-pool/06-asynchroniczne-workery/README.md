@@ -53,25 +53,70 @@ Wersja rozszerzona przykładu obejmuje dodatkowo:
 
 Źródło: [diagrams/02-throughput-model.puml](diagrams/02-throughput-model.puml)
 
-Przybliżenie:
+#### Intuicja — prawo Little'ego
 
-$$QPS \approx \frac{W}{T}$$
+Prawo Little'ego (Little's Law) opisuje każdy stabilny system kolejkowy:
+
+$$N = \lambda \cdot L$$
 
 gdzie:
 
-- $W$ - liczba workerów,
-- $T$ - średni czas obsługi pojedynczego zadania (sekundy).
+- $N$ — liczba zadań jednocześnie przetwarzanych (= workerów zajętych w danej chwili),
+- $\lambda$ — natężenie ruchu (żądań na sekundę, QPS),
+- $L$ — średni czas spędzony przez zadanie w systemie.
 
-Rozszerzenie modelu (bardziej realistyczne):
+Gdy wszyscy $W$ workerzy są zajęci ($N = W$) i każde zadanie przetwarzane jest przez czas $T$, prawo daje górne ograniczenie:
+
+$$QPS_{max} = \frac{W}{T}$$
+
+To jest **idealne maksimum** — osiągalne tylko gdy queue jest pusta i nie ma timeoutów.
+
+#### Formuła rozszerzona (efektywny throughput)
+
+W praktyce każde żądanie czeka najpierw $W_q$ w kolejce, zanim dostanie workera, a część żądań jest odrzucana timeout'em:
 
 $$QPS_{eff} \approx \frac{W}{T + W_q} \cdot (1 - p_{timeout})$$
 
 gdzie:
 
-- $W_q$ - średni czas oczekiwania w kolejce na workera,
-- $p_{timeout}$ - odsetek żądań, które przekroczyły timeout i zostały odrzucone.
+- $W$ — liczba workerów w puli,
+- $T$ — średni czas obsługi przez workera (sekundy),
+- $W_q$ — średni czas oczekiwania w kolejce na wolnego workera (sekundy),
+- $p_{timeout}$ — odsetek żądań odrzuconych przez timeout (0–1).
 
-Jak czytać model:
+Rozkład czasu odpowiedzi dla **jednego** żądania:
+
+$$t_{response} = \underbrace{W_q}_{\text{kolejka}} + \underbrace{T}_{\text{obsługa}}$$
+
+Żądanie jest odrzucane, gdy $W_q$ przekroczy ustawiony `timeoutMs` zanim zwolni się worker.
+
+#### Przykład liczbowy
+
+Przyjmij: $W = 4$, $T = 200\,\text{ms} = 0{,}2\,\text{s}$, $W_q = 50\,\text{ms} = 0{,}05\,\text{s}$, $p_{timeout} = 0{,}05$
+
+Górna granica:
+
+$$QPS_{max} = \frac{4}{0{,}2} = 20 \text{ req/s}$$
+
+Efektywny throughput:
+
+$$QPS_{eff} = \frac{4}{0{,}2 + 0{,}05} \cdot (1 - 0{,}05) = \frac{4}{0{,}25} \cdot 0{,}95 = 16 \cdot 0{,}95 \approx 15{,}2 \text{ req/s}$$
+
+Efektywny throughput jest **~24% niższy** niż ideał — tylko przez kolejkowanie (+50 ms) i 5% odrzutów.
+
+#### Jak parametry wpływają na siebie nawzajem
+
+| Zmiana | Efekt na $W_q$ | Efekt na $p_{timeout}$ | Efekt na $QPS_{eff}$ |
+|---|---|---|---|
+| ↑ liczba workerów $W$ | ↓ (mniej czekania) | ↓ | ↑ |
+| ↑ czas zadania $T$ | ↑ (kolejka rośnie) | ↑ | ↓ |
+| ↑ natężenie ruchu | ↑ (kolejka rośnie) | ↑ | ↓ przy stałym $W$ |
+| ↑ `timeoutMs` | — | ↓ (więcej czasu na slot) | ↑ (więcej ukończonych) |
+| ↓ `timeoutMs` | — | ↑ (szybciej porzucamy) | ↓ (mniej ukończonych) |
+
+Kluczowa obserwacja: zwiększenie $W$ pomaga tylko do momentu, gdy bottleneckiem staje się zasób zewnętrzny (API/DB/sieć) — wtedy $T$ samo w sobie rośnie i efekt jest zniwelowany.
+
+#### Jak czytać model
 
 1. Gdy `wait-time` rośnie, nawet stałe `W` i `T` dają niższy efektywny throughput.
 2. Gdy timeout jest zbyt niski względem obciążenia, rośnie $p_{timeout}$ i spada liczba ukończonych żądań.

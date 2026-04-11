@@ -18,6 +18,7 @@
         },
         "Test-Path": true,
         "Out-Null": true,
-        "dotnet test": true
+        "dotnet test": true,
+        "java": true
     }
 }
