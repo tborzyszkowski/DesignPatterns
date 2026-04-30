@@ -19,6 +19,18 @@
         "Test-Path": true,
         "Out-Null": true,
         "dotnet test": true,
-        "java": true
+        "java": true,
+        "/^Push-Location \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\09-most\\\\01-idea-i-kontekst\\\\Tests\"; dotnet test --logger \"console;verbosity=normal\" 2>&1 \\| Select-Object -Last 30; Pop-Location$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Push-Location \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\09-most\\\\05-wiekszy-przyklad-i-alternatywy\\\\Tests\"; dotnet test --logger \"console;verbosity=normal\" 2>&1 \\| Select-Object -Last 20; Pop-Location$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Push-Location \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\09-most\\\\05-wiekszy-przyklad-i-alternatywy\\\\Tests\"; dotnet test --logger \"console;verbosity=normal\" 2>&1 \\| Select-Object -Last 10; Pop-Location$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     }
 }

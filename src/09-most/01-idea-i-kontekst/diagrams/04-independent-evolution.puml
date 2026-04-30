@@ -1,0 +1,48 @@
+@startuml bridge_independent_evolution
+title Niezalezny rozwoj abstrakcji i implementacji
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam noteFontSize 11
+
+|Team A - Piloty (Abstraction)|
+|Team B - Urzadzenia (Implementor)|
+
+|Team A - Piloty (Abstraction)|
+:Sprint 1;
+note right
+  BasicRemote
+  AdvancedRemote
+end note
+
+|Team B - Urzadzenia (Implementor)|
+:Sprint 1;
+note left
+  TvDevice
+  RadioDevice
+end note
+
+|Team A - Piloty (Abstraction)|
+:Sprint 2\n+VoiceRemote;
+note right
+  Brak zmian w TvDevice/RadioDevice.
+  VoiceRemote dostaje IDevice z konstruktora.
+end note
+
+|Team B - Urzadzenia (Implementor)|
+:Sprint 2\n+ProjectorDevice;
+note left
+  Brak zmian w BasicRemote/AdvancedRemote.
+  ProjectorDevice implementuje IDevice.
+end note
+
+|Team A - Piloty (Abstraction)|
+:Sprint 3\n+GestureRemote;
+
+|Team B - Urzadzenia (Implementor)|
+:Sprint 3\n+SmartSpeakerDevice;
+
+|Team A - Piloty (Abstraction)|
+stop
+
+@enduml

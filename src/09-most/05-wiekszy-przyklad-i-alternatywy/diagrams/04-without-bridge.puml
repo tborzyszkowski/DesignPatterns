@@ -1,0 +1,29 @@
+@startuml bridge_without_bridge
+title Bez Mostu: eksplozja klas (3 alerty x 3 kanaly = 9 klas)
+
+skinparam monochrome true
+skinparam dpi 150
+
+note as Problem
+  Kazda kombinacja Alert+Provider
+  to osobna klasa.
+  Nowy kanal => +3 klasy.
+  Nowy alert => +3 klasy.
+end note
+
+class MarketingAlertViaEmail
+class MarketingAlertViaSms
+class MarketingAlertViaPush
+class IncidentAlertViaEmail
+class IncidentAlertViaSms
+class IncidentAlertViaPush
+class SecurityAlertViaEmail
+class SecurityAlertViaSms
+class SecurityAlertViaPush
+
+note bottom of MarketingAlertViaEmail
+  Powielony kod formatowania.
+  Powielony kod wysylki.
+end note
+
+@enduml

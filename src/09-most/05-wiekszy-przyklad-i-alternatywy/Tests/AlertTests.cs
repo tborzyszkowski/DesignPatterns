@@ -32,7 +32,7 @@ public class AlertTests
 
         alert.Notify("login");
 
-        Assert.Equal("[SECURITY] login", provider.LastPayload);
+        Assert.Equal("[SECURITY][HIGH] login", provider.LastPayload);
     }
 
     private sealed class FakeProvider : INotificationProvider

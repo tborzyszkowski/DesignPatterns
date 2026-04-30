@@ -1,16 +1,30 @@
 @startuml bridge_history
-title Bridge - rys historyczny
+title Bridge - problem eksplozji klas bez Mostu
 
 skinparam monochrome true
 skinparam dpi 150
+skinparam classBackgroundColor White
 
-actor "GoF 1994" as A
-actor "UI frameworks" as B
-actor "Enterprise integration" as C
-actor "Cloud era" as D
+note as N1
+  Czyste dziedziczenie: 3 piloty x 3 urzadzenia = 9 klas
+  (kazda kombinacja to osobna klasa)
+end note
 
-A --> B : formalizacja wzorca
-B --> C : separacja API i backendu
-C --> D : niezalezna ewolucja osi zmiennosci
+class BasicRemoteTv
+class BasicRemoteRadio
+class BasicRemoteProjector
+class AdvancedRemoteTv
+class AdvancedRemoteRadio
+class AdvancedRemoteProjector
+class VoiceRemoteTv
+class VoiceRemoteRadio
+class VoiceRemoteProjector
+
+note bottom of BasicRemoteTv
+  Dodanie nowego urzadzenia
+  => +3 nowe klasy (jeden wiersz)
+  Dodanie nowego pilota
+  => +3 nowe klasy (jedna kolumna)
+end note
 
 @enduml

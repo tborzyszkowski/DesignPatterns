@@ -4,33 +4,67 @@
 
 Zrozumiec dlaczego Most powstal i jakie problemy rozwiazuje w projektowaniu klas.
 
-## Problem
+## Problem: eksplozja klas przez dziedziczenie
 
-Gdy mamy dwie osie zmiennosci, np.:
+Mamy dwie niezalezne osie zmiennosci:
 
-1. rodzaj pilota (BasicRemote, AdvancedRemote),
-2. rodzaj urzadzenia (TvDevice, RadioDevice, ProjectorDevice),
+- Os A (abstrakcja/zachowanie): BasicRemote, AdvancedRemote, VoiceRemote
+- Os B (implementacja/technologia): TvDevice, RadioDevice, ProjectorDevice, SmartSpeakerDevice
 
-to dziedziczenie prowadzi do eksplozji kombinacji klas.
+Przy podejsciu czystego dziedziczenia kazda kombinacja to osobna klasa:
 
-## Rys historyczny
+| | TvDevice | RadioDevice | ProjectorDevice | SmartSpeakerDevice |
+|---|---|---|---|---|
+| BasicRemote | BasicRemoteTv | BasicRemoteRadio | BasicRemoteProjector | BasicRemoteSpeaker |
+| AdvancedRemote | AdvancedRemoteTv | AdvancedRemoteRadio | AdvancedRemoteProjector | AdvancedRemoteSpeaker |
+| VoiceRemote | VoiceRemoteTv | VoiceRemoteRadio | VoiceRemoteProjector | VoiceRemoteSpeaker |
+
+**3 piloty x 4 urzadzenia = 12 klas.** Dodanie jednego nowego pilota lub urzadzenia to dodanie kolejnego wiersza lub kolumny do tabeli — N + M nowych klas zamiast N lub M.
 
 ![Bridge history](diagrams/bridge_history.png)
 
 Zrodlo: [diagrams/01-history.puml](diagrams/01-history.puml)
 
-## Idea Mostu
+## Rozwiazanie: Most rozdziela osie
 
 Most rozdziela:
 
-1. Abstraction (co klient chce zrobic),
-2. Implementor (jak to technicznie wykonac).
+1. **Abstraction** — co klient chce zrobic (pilot: wlacz, ustaw glosnosc),
+2. **Implementor** — jak to technicznie wykonac (urzadzenie: TV, Radio, Projektor).
 
-Dzieki temu obie osie rozwijaja sie niezaleznie.
+Abstraction przechowuje referencje do Implementora przez interfejs i deleguje do niego operacje niskopoziomowe.
 
 ![Bridge idea](diagrams/bridge_idea.png)
 
 Zrodlo: [diagrams/02-idea.puml](diagrams/02-idea.puml)
+
+## Niezalezny rozwoj dwoch osi — scenariusz zespolowy
+
+Klucza zaleta Mostu jest to, ze oba wymiary moga byc rozwijane bez wiedzy o sobie nawzajem:
+
+```
+Sprint 1 — Team A (Piloty):
+  + BasicRemote    [abstraction]
+  + AdvancedRemote [refined abstraction]
+
+Sprint 1 — Team B (Urzadzenia):
+  + TvDevice       [implementor]
+  + RadioDevice    [implementor]
+
+Sprint 2 — Team A (nowy pilot, bez zmian w Team B):
+  + VoiceRemote    [refined abstraction]
+  Brak dotkniec klas TvDevice, RadioDevice.
+
+Sprint 2 — Team B (nowe urzadzenie, bez zmian w Team A):
+  + ProjectorDevice [implementor]
+  Brak dotkniec klas BasicRemote, AdvancedRemote, VoiceRemote.
+```
+
+Dodanie `VoiceRemote` i `ProjectorDevice` to **2 nowe klasy**, a nie 2*N lub M*2.
+
+![Bridge independent evolution](diagrams/bridge_independent_evolution.png)
+
+Zrodlo: [diagrams/04-independent-evolution.puml](diagrams/04-independent-evolution.puml)
 
 ## Cykl zycia
 
@@ -44,9 +78,11 @@ Kod: [Examples/Program.cs](Examples/Program.cs)
 
 Program pokazuje:
 
-1. jedna abstrakcje pilota,
-2. dwa implementory urzadzen,
-3. runtime switching implementora.
+1. BasicRemote i AdvancedRemote jako dwie abstrakcje,
+2. TvDevice, RadioDevice, ProjectorDevice jako implementory,
+3. runtime switching implementora (podmiana urzadzenia bez zmiany pilota),
+4. rozszerzenie abstrakcji (Mute tylko w AdvancedRemote) bez zmian implementorow,
+5. rozszerzenie implementacji (ProjectorDevice) bez zmian pilotow.
 
 ## Uruchom
 
@@ -57,11 +93,14 @@ dotnet run
 
 ## Zadania z rozwiazaniami
 
-1. Dodaj SmartSpeakerDevice.
-Rozwiazanie: nowy implementor IDevice, bez zmian w BasicRemote.
+1. Dodaj `SmartSpeakerDevice` (os implementacji).
+   Rozwiazanie: nowy implementor `IDevice`, bez zmian w `BasicRemote` ani `AdvancedRemote`.
 
-2. Dodaj Mute tylko po stronie AdvancedRemote.
-Rozwiazanie: RefinedAbstraction rozszerza API bez naruszania implementorow.
+1. Dodaj `Mute` tylko po stronie `AdvancedRemote` (os abstrakcji).
+   Rozwiazanie: `RefinedAbstraction` rozszerza API bez naruszania implementorow.
+
+1. Policz, ile klas trzeba by napisac bez Mostu dla 4 pilotow i 5 urzadzen.
+   Rozwiazanie: 4×5 = 20 klas vs 4 + 5 = 9 klas z Mostem.
 
 ## Literatura
 

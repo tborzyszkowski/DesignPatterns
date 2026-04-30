@@ -1,21 +1,48 @@
 @startuml bridge_idea
-title Idea Mostu
+title Idea Mostu - dwie niezalezne osie
 
 skinparam monochrome true
 skinparam dpi 150
 
-class BasicRemote
-interface IDevice
-class TvDevice
-class RadioDevice
+package "Os abstrakcji (Piloty)" {
+    abstract class Remote {
+        # device: IDevice
+        + TogglePower()
+    }
+    class BasicRemote
+    class AdvancedRemote {
+        + Mute()
+    }
+    class VoiceRemote {
+        + VoiceCommand(cmd)
+    }
+    Remote <|-- BasicRemote
+    Remote <|-- AdvancedRemote
+    Remote <|-- VoiceRemote
+}
 
-BasicRemote --> IDevice
-IDevice <|.. TvDevice
-IDevice <|.. RadioDevice
+package "Os implementacji (Urzadzenia)" {
+    interface IDevice {
+        + Enable()
+        + Disable()
+        + SetVolume(int)
+        + Status(): string
+    }
+    class TvDevice
+    class RadioDevice
+    class ProjectorDevice
+    IDevice <|.. TvDevice
+    IDevice <|.. RadioDevice
+    IDevice <|.. ProjectorDevice
+}
 
-note right of BasicRemote
-Abstraction i Implementor
-rozwijane niezaleznie.
+Remote --> IDevice : deleguje\n(most)
+
+note on link
+  Dodanie VoiceRemote nie wymaga
+  zmian w TvDevice/RadioDevice.
+  Dodanie ProjectorDevice nie wymaga
+  zmian w BasicRemote/AdvancedRemote.
 end note
 
 @enduml
