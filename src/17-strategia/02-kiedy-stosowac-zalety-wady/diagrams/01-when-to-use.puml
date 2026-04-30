@@ -1,0 +1,31 @@
+@startuml strategy_when_to_use
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Kiedy stosować wzorzec Strategia?
+
+start
+
+:Masz algorytm z wieloma wariantami?;
+
+if (Warianty różnią się\nkompletną logiką?) then (tak)
+  if (Potrzebujesz podmiany\nw runtime?) then (tak)
+    #A5D6A7:Strategia\n(interfejs + klasy);
+  else (nie)
+    if (Warianty mają\nwspólny szkielet?) then (tak)
+      #FFF176:Metoda Szablonowa;
+    else (nie)
+      #A5D6A7:Strategia\n(interfejs + klasy);
+    endif
+  endif
+else (nie — tylko parametry)
+  if (Wariantów > 2?) then (tak)
+    #90CAF9:Strategia (lambda/Func<>)\nlub prosty parametr;
+  else (nie)
+    #FFCCBC:Prosty if/else\nlub metoda wirtualna;
+  endif
+endif
+
+stop
+
+@enduml

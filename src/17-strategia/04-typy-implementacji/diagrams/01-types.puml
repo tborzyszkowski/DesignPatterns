@@ -1,0 +1,55 @@
+@startuml strategy_types
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 13
+
+title Typy implementacji wzorca Strategia w C#
+
+package "Typ 1: Interfejs" #E8F5E9 {
+  interface ISort1 {
+    Sort(data)
+  }
+  class BubbleSort
+  class QuickSort
+  BubbleSort ..|> ISort1
+  QuickSort ..|> ISort1
+}
+
+package "Typ 2: Klasa abstrakcyjna" #E3F2FD {
+  abstract class BaseTax {
+    + Calculate(amount) : decimal
+    # Rate() : decimal
+  }
+  class VatStrategy extends BaseTax
+  class ExemptStrategy extends BaseTax
+}
+
+package "Typ 3: Func delegat" #FFF9C4 {
+  class SorterFunc {
+    - _fn : Func
+    + Sort(data) : IList
+  }
+}
+
+package "Typ 4: Enum + Slownik" #FFECB3 {
+  enum Format {
+    Json
+    Csv
+    Xml
+  }
+  class ExporterDict {
+    - _map : Dictionary
+    + Export(data, format) : string
+  }
+}
+
+note bottom of SorterFunc
+  Najzwiezlejszy
+  Brak nazwanego kontraktu
+end note
+
+note bottom of ExporterDict
+  Wybor z konfiguracji
+  Brak polimorfizmu OOP
+end note
+
+@enduml

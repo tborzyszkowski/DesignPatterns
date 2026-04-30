@@ -1,0 +1,41 @@
+@startuml strategy_order_sequence
+skinparam backgroundColor #FAFAFA
+skinparam sequenceArrowColor #1565C0
+skinparam titleFontSize 13
+
+title E-commerce — sekwencja przetwarzania zamówienia
+
+actor Customer as C
+participant "OrderProcessor" as OP
+participant "Order" as O
+participant ":IDiscountStrategy" as DS
+participant ":IShippingStrategy" as SS
+participant ":IPaymentStrategy" as PS
+
+C -> OP : PlaceOrder(cart, discountStrategy, shippingStrategy, paymentStrategy)
+activate OP
+
+OP -> O : new Order(cart.Items, customer)
+activate O
+
+OP -> O : ApplyDiscount(discountStrategy)
+O -> DS : Apply(totalValue)
+DS --> O : discountedPrice
+O --> OP : discountedPrice
+
+OP -> O : CalculateShipping(shippingStrategy)
+O -> SS : Calculate(this)
+SS --> O : shippingCost
+O --> OP : shippingCost
+
+OP -> O : ProcessPayment(paymentStrategy, totalWithShipping)
+O -> PS : Process(amount)
+PS --> O : PaymentResult
+O --> OP : PaymentResult
+
+OP --> C : OrderConfirmation
+
+deactivate O
+deactivate OP
+
+@enduml

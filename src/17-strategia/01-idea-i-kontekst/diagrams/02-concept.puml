@@ -1,0 +1,57 @@
+@startuml strategy_concept
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam interfaceBackgroundColor #E3F2FD
+skinparam interfaceBorderColor #1565C0
+skinparam arrowColor #1565C0
+skinparam titleFontSize 14
+
+title Rozwiązanie: wzorzec Strategia
+
+interface IRouteStrategy #E3F2FD {
+  + BuildRoute(from, to) : Route
+}
+
+class Navigator #E8F5E9 {
+  - _strategy : IRouteStrategy
+  --
+  + Navigator(strategy)
+  + SetStrategy(strategy)
+  + BuildRoute(from, to) : Route
+}
+
+class CarStrategy #FFF9C4 {
+  + BuildRoute(from, to) : Route
+  note: Trasa autostradami
+}
+
+class BikeStrategy #FFF9C4 {
+  + BuildRoute(from, to) : Route
+  note: Trasa ścieżkami
+}
+
+class WalkingStrategy #FFF9C4 {
+  + BuildRoute(from, to) : Route
+  note: Trasa piesza
+}
+
+class TransitStrategy #FFF9C4 {
+  + BuildRoute(from, to) : Route
+  note: Komunikacja miejska
+}
+
+Navigator o--> IRouteStrategy : "używa ▶"
+IRouteStrategy <|.. CarStrategy
+IRouteStrategy <|.. BikeStrategy
+IRouteStrategy <|.. WalkingStrategy
+IRouteStrategy <|.. TransitStrategy
+
+note right of Navigator
+  ✅ Navigator nie zmienia się gdy
+  dodajemy nowy środek transportu
+  ✅ Każdy algorytm testowalny osobno
+  ✅ Podmiana w runtime
+end note
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml strategy_pros_cons
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 13
+
+title Wzorzec Strategia — zalety i wady
+
+rectangle "ZALETY" #A5D6A7 {
+  (OCP: nowe strategie\nbez zmiany Context)
+  (SRP: algorytm oddzielony\nod Context)
+  (Testowalność:\nstrategię można mockować)
+  (Runtime swap:\npodmiana bez restartu)
+  (Kompozycja\nzamiast dziedziczenia)
+}
+
+rectangle "WADY" #FFCDD2 {
+  (Over-engineering\ndla 2 wariantów)
+  (Wzrost liczby\nklas/plików)
+  (Klient musi\nznać strategie)
+  (Komunikacja\nContext↔Strategy)
+}
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml strategy_problem
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #C62828
+skinparam classBackgroundColor #FFEBEE
+skinparam titleFontSize 14
+
+title Problem: eksplozja warunków if/switch
+
+class Navigator #FFCDD2 {
+  - _transport : string
+  --
+  + BuildRoute(from, to) : Route
+  --
+  if transport == "car" ...
+  else if transport == "bike" ...
+  else if transport == "walking" ...
+  else if transport == "transit" ...
+}
+
+note bottom of Navigator
+  ❌ Naruszenie OCP: klasa musi być
+  modyfikowana przy każdym nowym wariancie
+  ❌ Trudne testowanie poszczególnych algorytmów
+  ❌ Kod rośnie liniowo z liczbą wariantów
+end note
+
+@enduml

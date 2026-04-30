@@ -1,0 +1,61 @@
+@startuml strategy_variants
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam interfaceBackgroundColor #E3F2FD
+skinparam interfaceBorderColor #1565C0
+skinparam arrowColor #555
+skinparam titleFontSize 13
+
+title Warianty implementacji wzorca Strategia w C#
+
+package "Wariant 1: Interfejs" {
+  interface IStrategy1 {
+    + Execute() : string
+  }
+  class ConcreteA1 implements IStrategy1
+  class ConcreteB1 implements IStrategy1
+}
+
+package "Wariant 2: Klasa abstrakcyjna" {
+  abstract class AbstractStrategy2 {
+    + {abstract} Execute() : string
+    + Log() : void
+  }
+  class ConcreteA2 extends AbstractStrategy2
+  class ConcreteB2 extends AbstractStrategy2
+}
+
+package "Wariant 3: Delegat / Func<>" {
+  class Context3 #FFF9C4 {
+    - _strategy: Func<string>
+    + Context3(Func<string> s)
+    + Execute() : string
+  }
+}
+
+package "Wariant 4: Enum + Słownik-fabryka" {
+  enum StrategyKind {
+    A
+    B
+    C
+  }
+  class Context4 #FFCCBC {
+    - _strategies: Dictionary
+    + Execute(StrategyKind) : string
+  }
+}
+
+note bottom of Context3
+  Najzwięźlejszy — dobry
+  dla prostych algorytmów
+  (1-2 linii kodu)
+end note
+
+note bottom of Context4
+  Dobry gdy wariant
+  wybierany z konfiguracji
+  lub bazy danych
+end note
+
+@enduml

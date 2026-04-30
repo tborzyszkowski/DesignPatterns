@@ -1,0 +1,60 @@
+@startuml strategy_sequence
+skinparam backgroundColor #FAFAFA
+skinparam sequenceArrowColor #1565C0
+skinparam sequenceLifeLineBorderColor #888
+skinparam sequenceParticipantBackgroundColor #E3F2FD
+skinparam sequenceParticipantBorderColor #1565C0
+skinparam titleFontSize 14
+
+title Wzorzec Strategia — diagram sekwencji
+
+actor Client
+participant Context
+participant ":IStrategy" as IStrategy
+participant "ConcreteStrategyA" as A
+participant "ConcreteStrategyB" as B
+
+Client -> A : new ConcreteStrategyA()
+activate A
+A --> Client : strategyA
+deactivate A
+
+Client -> Context : new Context(strategyA)
+activate Context
+
+Client -> Context : ExecuteStrategy()
+Context -> IStrategy : Execute()
+activate IStrategy
+IStrategy -> A : Execute() [dispatch]
+activate A
+A --> IStrategy : result
+deactivate A
+IStrategy --> Context : result
+deactivate IStrategy
+Context --> Client : result
+
+note right of Client
+  Podmiana strategii w runtime:
+end note
+
+Client -> B : new ConcreteStrategyB()
+activate B
+B --> Client : strategyB
+deactivate B
+
+Client -> Context : SetStrategy(strategyB)
+
+Client -> Context : ExecuteStrategy()
+Context -> IStrategy : Execute()
+activate IStrategy
+IStrategy -> B : Execute() [dispatch]
+activate B
+B --> IStrategy : result
+deactivate B
+IStrategy --> Context : result
+deactivate IStrategy
+Context --> Client : result
+
+deactivate Context
+
+@enduml

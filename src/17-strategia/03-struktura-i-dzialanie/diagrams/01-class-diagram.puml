@@ -1,0 +1,59 @@
+@startuml strategy_class_diagram
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam interfaceBackgroundColor #E3F2FD
+skinparam interfaceBorderColor #1565C0
+skinparam arrowColor #333
+skinparam titleFontSize 14
+skinparam shadowing false
+
+title Wzorzec Strategia — diagram klas (GoF)
+
+class Client #FFECB3 {
+}
+
+class Context #E8F5E9 {
+  - strategy : IStrategy
+  --
+  + Context(strategy : IStrategy)
+  + SetStrategy(strategy : IStrategy)
+  + ExecuteStrategy()
+}
+
+interface IStrategy #E3F2FD {
+  + Execute(context : Context) : void
+}
+
+class ConcreteStrategyA #FAFAFA {
+  + Execute(context : Context) : void
+}
+
+class ConcreteStrategyB #FAFAFA {
+  + Execute(context : Context) : void
+}
+
+class ConcreteStrategyC #FAFAFA {
+  + Execute(context : Context) : void
+}
+
+Client --> Context : "tworzy i konfiguruje"
+Client ..> ConcreteStrategyA : "wybiera strategię"
+Context o--> IStrategy : "strategy"
+IStrategy <|.. ConcreteStrategyA
+IStrategy <|.. ConcreteStrategyB
+IStrategy <|.. ConcreteStrategyC
+
+note right of Context
+  Context deleguje wykonanie
+  algorytmu do strategii.
+  Nie zna konkretnych typów.
+end note
+
+note right of IStrategy
+  Wspólny interfejs dla
+  wszystkich algorytmów.
+  Context używa TYLKO tego.
+end note
+
+@enduml

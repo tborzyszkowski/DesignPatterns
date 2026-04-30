@@ -1,0 +1,70 @@
+@startuml strategy_order_system
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam interfaceBackgroundColor #E3F2FD
+skinparam interfaceBorderColor #1565C0
+skinparam arrowColor #333
+skinparam titleFontSize 13
+
+title E-commerce — system zamówień ze wzorcem Strategia
+
+class Order #E8F5E9 {
+  + Id : int
+  + Customer : Customer
+  + Items : List<OrderItem>
+  + TotalValue : decimal
+  --
+  + ApplyDiscount(IDiscountStrategy) : decimal
+  + CalculateShipping(IShippingStrategy) : decimal
+  + ProcessPayment(IPaymentStrategy) : PaymentResult
+}
+
+class Customer {
+  + Name : string
+  + Email : string
+  + IsMember : bool
+  + OrderCount : int
+}
+
+class OrderItem {
+  + ProductName : string
+  + Quantity : int
+  + UnitPrice : decimal
+}
+
+interface IDiscountStrategy #E3F2FD {
+  + Apply(orderValue : decimal) : decimal
+  + Name : string
+}
+
+interface IShippingStrategy #E3F2FD {
+  + Calculate(order : Order) : decimal
+  + Name : string
+}
+
+interface IPaymentStrategy #E3F2FD {
+  + Process(amount : decimal) : PaymentResult
+  + Name : string
+}
+
+class NoDiscount implements IDiscountStrategy
+class PercentageDiscount implements IDiscountStrategy
+class LoyaltyDiscount implements IDiscountStrategy
+class BulkDiscount implements IDiscountStrategy
+
+class StandardShipping implements IShippingStrategy
+class ExpressShipping implements IShippingStrategy
+class FreeShippingAbove implements IShippingStrategy
+
+class CreditCardPayment implements IPaymentStrategy
+class PayPalPayment implements IPaymentStrategy
+class BankTransferPayment implements IPaymentStrategy
+
+Order --> IDiscountStrategy : "discount"
+Order --> IShippingStrategy : "shipping"
+Order --> IPaymentStrategy : "payment"
+Order --> Customer
+Order --> OrderItem
+
+@enduml

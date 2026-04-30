@@ -1,0 +1,29 @@
+@startuml strategy_decision
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Jak wybrać typ implementacji Strategii?
+
+start
+
+:Masz algorytm z wieloma wariantami;
+
+if (Algorytm prosty\n(1-3 linii)?) then (tak)
+  #FFF176:Func<> / lambda\n(Wariant 3);
+  stop
+else (nie)
+  if (Warianty mają\nwspólny kod?) then (tak)
+    #90CAF9:Klasa abstrakcyjna\n(Wariant 2);
+    stop
+  else (nie)
+    if (Wybór z konfiguracji\nlub enum/string?) then (tak)
+      #FFCCBC:Enum + Słownik\n(Wariant 4);
+      stop
+    else (nie)
+      #A5D6A7:Interfejs\n(Wariant 1 — domyślny);
+      stop
+    endif
+  endif
+endif
+
+@enduml
