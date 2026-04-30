@@ -1,0 +1,56 @@
+@startuml template_method_report_sequence
+skinparam backgroundColor #FAFAFA
+skinparam sequenceParticipantBorderColor #2E7D32
+skinparam titleFontSize 14
+
+title Sekwencja: ReportGenerator.Generate()
+
+actor Client
+participant "ReportGenerator\n(Abstract)" as Base
+participant "HtmlReportGenerator\n(Concrete)" as Concrete
+
+Client -> Base : Generate()
+activate Base
+
+Base -> Concrete : LoadData()
+activate Concrete
+Concrete --> Base : IEnumerable<SalesRecord>
+deactivate Concrete
+
+Base -> Concrete : FilterData(data)
+activate Concrete
+Concrete --> Base : IEnumerable<SalesRecord> (filtered)
+deactivate Concrete
+
+Base -> Concrete : FormatTitle(title)
+activate Concrete
+Concrete --> Base : "<h1>Raport sprzedaży</h1>"
+deactivate Concrete
+
+loop foreach row in filteredData
+  Base -> Concrete : FormatRow(row)
+  activate Concrete
+  Concrete --> Base : "<tr><td>...</td></tr>"
+  deactivate Concrete
+end
+
+Base -> Concrete : AddSummary(rows)
+activate Concrete
+note right: Hook — opcjonalny
+Concrete --> Base : "<div class='summary'>...</div>"
+deactivate Concrete
+
+Base -> Concrete : GetHeader()
+activate Concrete
+Concrete --> Base : "<!DOCTYPE html>..."
+deactivate Concrete
+
+Base -> Concrete : GetFooter()
+activate Concrete
+Concrete --> Base : "</html>"
+deactivate Concrete
+
+Base --> Client : string (report content)
+deactivate Base
+
+@enduml

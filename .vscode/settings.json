@@ -75,6 +75,18 @@
         "/^\\$base = \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\14-polecenie\"\n\\$projects = Get-ChildItem -Path \\$base -Filter \"\\*\\.csproj\" -Recurse\nforeach \\(\\$p in \\$projects\\) \\{\n    Write-Host \"`n=== Building: \\$\\(\\$p\\.FullName\\) ===\"\n    Push-Location \\$p\\.DirectoryName\n    dotnet build -c Release --nologo 2>&1 \\| Select-Object -Last 5\n    Pop-Location\n\\}\n$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^\\$files = Get-ChildItem -Path \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\15-metoda-szablonowa\" -Filter \"Program\\.cs\" -Recurse\nforeach \\(\\$f in \\$files\\) \\{\n    \\$content = Get-Content \\$f\\.FullName -Raw\n    \\$new = \\$content -replace 'public sealed void ', 'public void '\n    if \\(\\$content -ne \\$new\\) \\{\n        Set-Content \\$f\\.FullName -Value \\$new -NoNewline\n        Write-Host \"Fixed: \\$\\(\\$f\\.FullName\\)\"\n    \\}\n\\}$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Get-ChildItem -Path \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\15-metoda-szablonowa\" -Filter \"Program\\.cs\" -Recurse \\| ForEach-Object \\{ \\$c = Get-Content \\$_\\.FullName -Raw; \\$n = \\$c -replace 'public sealed void ', 'public void '; if \\(\\$c -ne \\$n\\) \\{ Set-Content \\$_\\.FullName \\$n -NoNewline; Write-Host \"Fixed: \\$\\(\\$_\\.FullName\\)\" \\} \\}$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^\\$files = Get-ChildItem \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\15-metoda-szablonowa\" -Filter \"Program\\.cs\" -Recurse\nforeach \\(\\$f in \\$files\\) \\{\n    \\(Get-Content \\$f\\.FullName -Raw\\) -replace 'public sealed void ', 'public void ' \\| Set-Content \\$f\\.FullName\n    Write-Host \"Processed \\$\\(\\$f\\.Name\\) at \\$\\(\\$f\\.Directory\\)\"\n\\}$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

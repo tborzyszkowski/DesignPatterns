@@ -1,0 +1,48 @@
+@startuml template_method_lifecycle
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+skinparam activityBackgroundColor #E3F2FD
+skinparam activityBorderColor #1565C0
+skinparam arrowColor #1565C0
+
+title Cykl życia wywołania metody szablonowej
+
+|Klasa bazowa (AbstractClass)|
+start
+:TemplateMethod() [sealed];
+note right
+  Klient wywołuje
+  metodę szablonową
+end note
+
+|Klasa bazowa (AbstractClass)|
+:Step1: wspólna logika bazowa;
+
+|Podklasa (ConcreteClass)|
+:PrimitiveOperation1()\n[abstract — obowiązkowy];
+note right
+  Klasa bazowa wywołuje
+  metody podklasy!
+  (Hollywood Principle)
+end note
+
+|Klasa bazowa (AbstractClass)|
+:Step2: kolejna wspólna logika;
+
+|Podklasa (ConcreteClass)|
+:PrimitiveOperation2()\n[abstract — obowiązkowy];
+
+|Klasa bazowa (AbstractClass)|
+if (Hook() przesłonięty?) then (tak)
+  |Podklasa (ConcreteClass)|
+  :Hook()\n[virtual — opcjonalny];
+else (nie)
+  |Klasa bazowa (AbstractClass)|
+  :Hook() domyślna implementacja\n(np. nic nie robi);
+endif
+
+|Klasa bazowa (AbstractClass)|
+:Finalizacja wspólna;
+stop
+
+@enduml

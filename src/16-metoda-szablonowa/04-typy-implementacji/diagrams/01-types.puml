@@ -1,0 +1,48 @@
+@startuml template_method_types
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam titleFontSize 14
+
+title Typy implementacji Metody Szablonowej
+
+package "Typ 1: Czysto abstrakcyjny" #E8F5E9 {
+  abstract class "AbstractSorter" as T1 {
+    + {method} <<sealed>> Sort(data)
+    # {abstract} DoSort(data)
+    # {abstract} Compare(a, b)
+  }
+}
+
+package "Typ 2: Z haczykami" #FFF9C4 {
+  abstract class "AbstractBeverage" as T2 {
+    + {method} <<sealed>> Prepare()
+    # {abstract} Brew()
+    # {method} AddCondiments()
+    # {method} WantCondiments() : bool
+    note: Hook: virtual bool = true
+  }
+}
+
+package "Typ 3: Z impl. domyślnymi" as P3 #E3F2FD {
+  abstract class "HttpHandler" as T3 {
+    + {method} <<sealed>> Handle(req)
+    # {method} Authenticate(req) = true
+    # {abstract} Process(req)
+    # {method} Log(result)
+  }
+}
+
+package "Typ 4: Delegaty (bez dziedziczenia)" #F3E5F5 {
+  class "Pipeline" as T4 {
+    - _steps : Action[]
+    + {method} <<sealed>> Execute()
+    + New(params Action[] steps)
+  }
+}
+
+T1 --> T2 : bardziej elastyczny
+T2 --> T3 : więcej domyślnych kroków
+T3 --> T4 : bez hierarchii (kompozycja)
+
+@enduml

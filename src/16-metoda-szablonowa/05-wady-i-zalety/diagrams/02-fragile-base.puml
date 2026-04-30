@@ -1,0 +1,30 @@
+@startuml template_method_fragile_base
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Fragile Base Class — zmiana bazowej psuje podklasy
+
+class "AbstractProcessor v1" as V1 #A5D6A7 {
+  + <<sealed>> Process()
+  # Step1()
+  # Step2()
+}
+
+class "AbstractProcessor v2" as V2 #EF9A9A {
+  + <<sealed>> Process()
+  # Step1()
+  # Step2()
+  # Step3()  «NEW — obowiązkowy»
+  note: Podklasy bez Step3 — błąd kompilacji!
+}
+
+class ConcreteA #E3F2FD {
+  # Step1()
+  # Step2()
+  note: OK z v1, błąd z v2!
+}
+
+V1 <|-- ConcreteA
+V2 <|.. ConcreteA : <<breaks>>
+
+@enduml

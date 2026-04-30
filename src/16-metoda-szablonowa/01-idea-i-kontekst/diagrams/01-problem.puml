@@ -1,0 +1,56 @@
+@startuml template_method_problem
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #C62828
+skinparam classBackgroundColor #FFEBEE
+skinparam titleFontSize 14
+
+title Problem: duplikacja szkieletu algorytmu
+
+class CsvExporter {
+  + Export(data: List<Record>) : void
+  --
+  ' KOD: connect to data source
+  ' KOD: validate data
+  ' KOD: open CSV file
+  ' KOD: write header row
+  ' KOD: write data rows (CSV format)
+  ' KOD: close file
+  ' KOD: log result
+}
+
+class JsonExporter {
+  + Export(data: List<Record>) : void
+  --
+  ' KOD: connect to data source
+  ' KOD: validate data
+  ' KOD: open JSON file
+  ' KOD: write opening brace
+  ' KOD: write data rows (JSON format)
+  ' KOD: write closing brace
+  ' KOD: log result
+}
+
+class XmlExporter {
+  + Export(data: List<Record>) : void
+  --
+  ' KOD: connect to data source
+  ' KOD: validate data
+  ' KOD: open XML file
+  ' KOD: write XML declaration
+  ' KOD: write data rows (XML format)
+  ' KOD: close root element
+  ' KOD: log result
+}
+
+note bottom of CsvExporter
+  Struktura IDENTYCZNA w każdej klasie!
+  Zmiana logiki logowania = 3 edycje.
+  Zmiana kolejności kroków = 3 edycje.
+end note
+
+note "Duplikacja kodu\nnarusza DRY!" as N1 #FFD54F
+CsvExporter .. N1
+JsonExporter .. N1
+XmlExporter .. N1
+
+@enduml

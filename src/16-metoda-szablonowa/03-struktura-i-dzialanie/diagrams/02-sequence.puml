@@ -1,0 +1,49 @@
+@startuml template_method_sequence
+skinparam backgroundColor #FAFAFA
+skinparam sequenceArrowColor #1565C0
+skinparam participantBackgroundColor #E3F2FD
+skinparam participantBorderColor #1565C0
+skinparam titleFontSize 14
+
+title Wzorzec Metoda Szablonowa — Diagram sekwencji
+
+actor Client
+participant "abstractObj\n:AbstractClass" as Abs
+participant "concreteObj\n:ConcreteClass" as Con
+
+note over Abs, Con
+  Klasa abstrakcyjna kontroluje przepływ.
+  Podklasa dostarcza tylko implementację kroków.
+  (Hollywood Principle: "Nie dzwoń do nas...")
+end note
+
+Client -> Abs : TemplateMethod()
+activate Abs
+
+Abs -> Con : PrimitiveOperation1()
+activate Con
+Con --> Abs : (wynik kroku 1)
+deactivate Con
+
+Abs -> Con : PrimitiveOperation2()
+activate Con
+Con --> Abs : (wynik kroku 2)
+deactivate Con
+
+Abs -> Abs : Hook()
+note right of Abs
+  Hook wywoływany w AbstractClass
+  (może być pusty lub mieć impl. domyślną)
+end note
+
+alt ConcreteClass przesłania Hook
+  Abs -> Con : Hook()
+  activate Con
+  Con --> Abs : (opcjonalne zachowanie)
+  deactivate Con
+end
+
+Abs --> Client : (zakończono)
+deactivate Abs
+
+@enduml

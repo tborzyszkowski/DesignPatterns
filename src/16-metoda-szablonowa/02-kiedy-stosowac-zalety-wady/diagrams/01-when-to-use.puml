@@ -1,0 +1,30 @@
+@startuml template_method_when_to_use
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Kiedy stosować Metodę Szablonową — mapa decyzyjna
+
+start
+
+:Masz algorytm\nz ustaloną sekwencją kroków?;
+
+if (Czy kroki są\nidentyczne w różnych wariantach?) then (tak — niektóre)
+  :Wspólne kroki → klasa bazowa\nZmienne kroki → abstract/virtual;
+  
+  if (Czy potrzebujesz\nzmieniać algorytm w runtime?) then (tak)
+    #FFD54F:Rozważ Strategię\n(kompozycja > dziedziczenie);
+  else (nie)
+    #A5D6A7:Template Method\n— odpowiedni wybór!;
+  endif
+  
+else (nie — każdy krok jest unikalny)
+  if (Czy masz wiele\nzmiennych zachowań?) then (tak — N > 2)
+    #FFCDD2:Rozważ Builder\nlub Pipeline;
+  else (nie — jedno zachowanie)
+    #FFCDD2:Nie używaj wzorca —\nzwykła klasa wystarczy;
+  endif
+endif
+
+stop
+
+@enduml

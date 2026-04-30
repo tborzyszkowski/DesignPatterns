@@ -1,0 +1,31 @@
+@startuml template_method_decision
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Jak wybrać typ implementacji?
+
+start
+
+:Masz algorytm z wieloma krokami;
+
+if (Wszystkie kroki\nSĄ unikalne w\nkażdym wariancie?) then (tak)
+  #A5D6A7:Typ 1: Czysto abstrakcyjny\n(wszystkie kroki = abstract);
+else (nie — część kroków wspólna)
+  if (Opcjonalne zachowania\n(rzadkie rozszerzenia)?) then (tak)
+    #FFF176:Typ 2: Z haczykami\n(abstract + virtual hooks);
+  else (nie)
+    if (Większość kroków\nma rozsądną impl. domyślną?) then (tak)
+      #90CAF9:Typ 3: Domyślne implementacje\n(abstract minimum + virtual reszta);
+    else (nie)
+      if (Chcesz uniknąć\nhierar chii klas?) then (tak)
+        #CE93D8:Typ 4: Delegaty / Func<>\n(bez dziedziczenia, kompozycja);
+      else (nie)
+        #A5D6A7:Typ 1 lub 2\n(klasyczne Template Method);
+      endif
+    endif
+  endif
+endif
+
+stop
+
+@enduml

@@ -1,0 +1,49 @@
+@startuml template_method_variants
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam titleFontSize 14
+
+title Odmiany Metody Szablonowej
+
+abstract class "Wariant A\nCzysto abstrakcyjny" as A {
+  + {method} <<sealed>> Execute()
+  # {abstract} Step1()
+  # {abstract} Step2()
+  # {abstract} Step3()
+  ..
+  Wszystkie kroki obowiązkowe
+}
+
+abstract class "Wariant B\nZ haczykami (hooks)" as B {
+  + {method} <<sealed>> Execute()
+  # {abstract} RequiredStep()
+  # {method} OptionalHook()
+  ..
+  Hook: virtual, domyślnie pusty
+}
+
+abstract class "Wariant C\nZ impl. domyślnymi" as C {
+  + {method} <<sealed>> Execute()
+  # {abstract} CoreStep()
+  # {method} Step1WithDefault()
+  # {method} Step2WithDefault()
+  ..
+  Podklasa przesłania co chce
+}
+
+class "Wariant D\nHybryda z delegatem" as D {
+  - _step1 : Action
+  - _step2 : Action
+  + {method} <<sealed>> Execute()
+  + New(step1, step2) : D
+  ..
+  Bez dziedziczenia!
+}
+
+note bottom of A : "Najlepsza gdy każdy krok\njest obowiązkowy i unikalny"
+note bottom of B : "Najlepsza gdy kroki opcjonalne\n(np. logowanie, walidacja)"
+note bottom of C : "Najlepsza gdy warianty\nróżnią się tylko w kilku krokach"
+note bottom of D : "Najlepsza gdy chcesz\nuniknąć hierarchii klas"
+
+@enduml

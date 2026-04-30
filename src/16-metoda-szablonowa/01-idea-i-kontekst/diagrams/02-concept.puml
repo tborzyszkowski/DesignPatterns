@@ -1,0 +1,70 @@
+@startuml template_method_concept
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E3F2FD
+skinparam classBorderColor #1565C0
+skinparam abstractClassBackgroundColor #BBDEFB
+skinparam abstractClassBorderColor #0D47A1
+skinparam arrowColor #1565C0
+skinparam titleFontSize 14
+
+title Rozwiązanie: Metoda Szablonowa
+
+abstract class DataExporter {
+  + {method} <<sealed>> Export(data) : void
+  ..Szkielet algorytmu..
+  ' 1. ConnectToSource()
+  ' 2. ValidateData()
+  ' 3. WriteHeader()
+  ' 4. WriteRows(data)
+  ' 5. Finalize()
+  ' 6. LogResult()
+  --
+  # {abstract} ConnectToSource() : void
+  # {abstract} ValidateData(data) : void
+  # {abstract} WriteHeader() : void
+  # {abstract} WriteRow(record) : void
+  # {abstract} Finalize() : void
+  # {method} LogResult() : void
+}
+
+note right of DataExporter
+  LogResult() ma domyślną implementację
+  (wszystkie eksportery logują tak samo)
+  
+  Metoda Export() jest SEALED —
+  nikt nie może zmienić kolejności kroków!
+end note
+
+class CsvExporter {
+  # ConnectToSource() : void
+  # ValidateData(data) : void
+  # WriteHeader() : void
+  # WriteRow(record) : void
+  # Finalize() : void
+}
+
+class JsonExporter {
+  # ConnectToSource() : void
+  # ValidateData(data) : void
+  # WriteHeader() : void
+  # WriteRow(record) : void
+  # Finalize() : void
+}
+
+class XmlExporter {
+  # ConnectToSource() : void
+  # ValidateData(data) : void
+  # WriteHeader() : void
+  # WriteRow(record) : void
+  # Finalize() : void
+}
+
+DataExporter <|-- CsvExporter
+DataExporter <|-- JsonExporter
+DataExporter <|-- XmlExporter
+
+note bottom of CsvExporter : "Formatowanie CSV\n(tylko to co unikalne)"
+note bottom of JsonExporter : "Formatowanie JSON\n(tylko to co unikalne)"
+note bottom of XmlExporter : "Formatowanie XML\n(tylko to co unikalne)"
+
+@enduml

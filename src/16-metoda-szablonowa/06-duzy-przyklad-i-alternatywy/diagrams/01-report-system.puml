@@ -1,0 +1,55 @@
+@startuml template_method_report_system
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam titleFontSize 14
+
+title System Generowania Raportów — ReportGenerator
+
+abstract class ReportGenerator {
+  - _title : string
+  --
+  + <<sealed>> Generate() : string
+  # {abstract} LoadData() : IEnumerable<string>
+  # {abstract} FilterData(data) : IEnumerable<string>
+  # {abstract} FormatTitle(title) : string
+  # {abstract} FormatRow(row) : string
+  # {abstract} GetExtension() : string
+  --
+  # {virtual} AddSummary(rows) : string
+  # {virtual} GetHeader() : string
+  # {virtual} GetFooter() : string
+}
+
+class HtmlReportGenerator {
+  # LoadData()
+  # FilterData()
+  # FormatTitle()
+  # FormatRow()
+  # GetExtension()
+  # AddSummary()
+}
+
+class CsvReportGenerator {
+  # LoadData()
+  # FilterData()
+  # FormatTitle()
+  # FormatRow()
+  # GetExtension()
+}
+
+class MarkdownReportGenerator {
+  # LoadData()
+  # FilterData()
+  # FormatTitle()
+  # FormatRow()
+  # GetExtension()
+  # GetHeader()
+  # GetFooter()
+}
+
+ReportGenerator <|-- HtmlReportGenerator
+ReportGenerator <|-- CsvReportGenerator
+ReportGenerator <|-- MarkdownReportGenerator
+
+@enduml

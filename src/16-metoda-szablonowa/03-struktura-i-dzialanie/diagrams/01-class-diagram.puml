@@ -1,0 +1,52 @@
+@startuml template_method_class_diagram
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E3F2FD
+skinparam classBorderColor #1565C0
+skinparam abstractClassBackgroundColor #BBDEFB
+skinparam abstractClassBorderColor #0D47A1
+skinparam arrowColor #1565C0
+skinparam titleFontSize 14
+
+title Wzorzec Metoda Szablonowa — Diagram klas (GoF)
+
+abstract class AbstractClass {
+  + {method} <<sealed>> TemplateMethod() : void
+  --
+  # {abstract} PrimitiveOperation1() : void
+  # {abstract} PrimitiveOperation2() : void
+  # {method} Hook() : void
+}
+
+class ConcreteClassA {
+  # PrimitiveOperation1() : void
+  # PrimitiveOperation2() : void
+}
+
+class ConcreteClassB {
+  # PrimitiveOperation1() : void
+  # PrimitiveOperation2() : void
+  # Hook() : void
+}
+
+class Client {
+  + DoWork()
+}
+
+AbstractClass <|-- ConcreteClassA : dziedziczenie
+AbstractClass <|-- ConcreteClassB : dziedziczenie
+Client --> AbstractClass : używa (przez polimorfizm)
+
+note right of AbstractClass
+  SEALED — klient nie może zmienić
+  kolejności kroków.
+  
+  PrimitiveOperation = abstract
+  Hook = virtual (domyślnie pusty)
+end note
+
+note bottom of ConcreteClassB
+  ConcreteClassB przesłania Hook()
+  dodając opcjonalne zachowanie
+end note
+
+@enduml

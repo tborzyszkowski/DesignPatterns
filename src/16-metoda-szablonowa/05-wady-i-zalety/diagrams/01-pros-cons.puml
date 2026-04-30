@@ -1,0 +1,25 @@
+@startuml template_method_pros_cons
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+rectangle "Zalety" #A5D6A7 {
+  card Z1 as "DRY — brak duplikacji algorytmu"
+  card Z2 as "OCP — nowe warianty = nowa podklasa"
+  card Z3 as "Kontrola rozszerzania (sealed)"
+  card Z4 as "Hollywood Principle (IoC)"
+  card Z5 as "Wspólna logika: logging, walidacja"
+}
+
+rectangle "Wady" #EF9A9A {
+  card W1 as "Fragile Base Class Problem"
+  card W2 as "Naruszenie LSP (ryzyko)"
+  card W3 as "Trudny debug (rozproszone wywołania)"
+  card W4 as "C# bez wielodziedziczenia"
+  card W5 as "Trudna testowalność (abstract klasa)"
+}
+
+Z1 -[hidden]- W1
+Z2 -[hidden]- W2
+Z3 -[hidden]- W3
+
+@enduml
