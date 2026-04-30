@@ -1,0 +1,71 @@
+@startuml iterator_variants
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E3F2FD
+skinparam classBorderColor #1565C0
+skinparam interfaceBackgroundColor #BBDEFB
+skinparam interfaceBorderColor #0D47A1
+skinparam arrowColor #1565C0
+skinparam titleFontSize 15
+
+title Odmiany wzorca Iterator
+
+interface "IEnumerable<T>" as IEnum {
+  + GetEnumerator() : IEnumerator<T>
+}
+
+class "ForwardIterator\n(domyślny)" as Forward {
+  Przechodzi od początku
+  do końca → index++
+}
+
+class "ReverseIterator" as Reverse {
+  Przechodzi od końca
+  do początku → index--
+}
+
+class "FilteredIterator" as Filtered {
+  Pomija elementy\nnie spełniające warunku
+  ← predicate
+}
+
+class "BidirectionalIterator\n(Cursor)" as Cursor {
+  MoveNext() i MovePrev()
+  Zna pozycję bieżącą
+}
+
+class "LazyGenerator\n(yield return)" as Lazy {
+  Generuje elementy\nna żądanie (pull)
+  Może być nieskończony
+}
+
+class "CompositeIterator" as Composite {
+  Scala iteratory
+  z wielu kolekcji
+  w jedną sekwencję
+}
+
+IEnum <|.. Forward
+IEnum <|.. Reverse
+IEnum <|.. Filtered
+IEnum <|.. Cursor
+IEnum <|.. Lazy
+IEnum <|.. Composite
+
+note bottom of Filtered
+  Where() z LINQ
+  jest implementacją
+  FilteredIteratora
+end note
+
+note bottom of Lazy
+  IEnumerable<int> Fib()
+  {
+    int a=0, b=1;
+    while(true) {
+      yield return a;
+      (a,b)=(b,a+b);
+    }
+  }
+end note
+
+@enduml

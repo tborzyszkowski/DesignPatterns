@@ -1,0 +1,45 @@
+@startuml iterator_sequence
+skinparam backgroundColor #FAFAFA
+skinparam sequenceArrowColor #4527A0
+skinparam sequenceLifeLineBorderColor #7E57C2
+skinparam participantBackgroundColor #EDE7F6
+skinparam participantBorderColor #4527A0
+skinparam titleFontSize 16
+
+title Wzorzec Iterator — Diagram sekwencji
+
+participant Client
+participant ":ConcreteAggregate" as Agg
+participant ":ConcreteIterator" as Iter
+
+Client -> Agg : CreateIterator()
+activate Agg
+Agg -> Iter : <<create>>(this)
+activate Iter
+Agg <-- Iter
+Client <-- Agg : iter
+deactivate Agg
+
+loop dopóki iter.MoveNext() == true
+  Client -> Iter : MoveNext()
+  activate Iter
+  Iter -> Iter : _index++
+  Iter -> Agg : GetAt(_index)
+  Iter <-- Agg : element
+  Client <-- Iter : true/false
+  deactivate Iter
+
+  alt MoveNext() == true
+    Client -> Iter : Current
+    activate Iter
+    Client <-- Iter : element
+    deactivate Iter
+    Client -> Client : Process(element)
+  end
+end
+
+Client -> Iter : Dispose()
+activate Iter
+deactivate Iter
+
+@enduml

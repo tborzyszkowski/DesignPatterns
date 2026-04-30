@@ -1,0 +1,23 @@
+@startuml iterator_pros_cons
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 15
+
+title Wzorzec Iterator — Analiza Zalet i Wad
+
+rectangle "ZALETY" #E8F5E9 {
+  card "SRP\nOddziela przechodzenie\nod przechowywania" as srp #A5D6A7
+  card "OCP\nNowe iteratory bez\nzmian kolekcji" as ocp #A5D6A7
+  card "Wielokrotna\niteracja\nNiezależne kursory" as multi #A5D6A7
+  card "Uniform API\nTablice, drzewa, grafy\n— ten sam interfejs" as uniform #A5D6A7
+  card "Leniwe\ngenerowanie\nyield return" as lazy #A5D6A7
+}
+
+rectangle "WADY" #FFEBEE {
+  card "Overkill\nDla prostych List<T>\nzawsze używaj foreach" as over #FFCDD2
+  card "Alokacje\nGetEnumerator()\nalokuje obiekt" as alloc #FFCDD2
+  card "Modyfikacja\npodczas iteracji\n→ InvalidOperationException" as modify #FFCDD2
+  card "Reset() często\nniewspierany\nyield nie obsługuje" as reset #FFCDD2
+  card "Złożoność\ndla prostych\nstruktur" as complex #FFCDD2
+}
+
+@enduml

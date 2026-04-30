@@ -1,0 +1,70 @@
+@startuml iterator_class_diagram
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #EDE7F6
+skinparam classBorderColor #4527A0
+skinparam interfaceBackgroundColor #D1C4E9
+skinparam interfaceBorderColor #311B92
+skinparam arrowColor #4527A0
+skinparam titleFontSize 16
+skinparam noteBorderColor #7E57C2
+
+title Wzorzec Iterator — Diagram klas (GoF)
+
+interface Iterator <<interface>> {
+  + MoveNext() : bool
+  + Current : T
+  + Reset() : void
+}
+
+interface Aggregate <<interface>> {
+  + CreateIterator() : Iterator
+}
+
+class ConcreteIterator {
+  - _aggregate : ConcreteAggregate
+  - _index : int
+  + MoveNext() : bool
+  + Current : T
+  + Reset() : void
+}
+
+class ConcreteAggregate {
+  - _items : List<T>
+  + Add(item: T) : void
+  + CreateIterator() : Iterator
+  # GetAt(i: int) : T
+  # Count : int
+}
+
+class Client {
+  + Traverse(agg: Aggregate) : void
+}
+
+Iterator <|.. ConcreteIterator : implementuje
+Aggregate <|.. ConcreteAggregate : implementuje
+ConcreteAggregate ..> ConcreteIterator : tworzy
+ConcreteIterator --> ConcreteAggregate : przechowuje referencję
+Client --> Iterator : używa
+Client --> Aggregate : pobiera iterator
+
+note right of ConcreteIterator
+  Każde wywołanie CreateIterator()
+  zwraca NOWY niezależny kursor.
+  Stan iteracji jest w ConcreteIterator,
+  NIE w kolekcji.
+end note
+
+note bottom of Aggregate
+  W .NET: IEnumerable<T>
+  CreateIterator() = GetEnumerator()
+end note
+
+note bottom of Iterator
+  W .NET: IEnumerator<T>
+  + MoveNext(): bool
+  + Current: T
+  + Dispose(): void
+  (Reset() rzuca NotSupportedException)
+end note
+
+@enduml

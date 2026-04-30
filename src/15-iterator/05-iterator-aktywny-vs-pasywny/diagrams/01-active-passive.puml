@@ -1,0 +1,21 @@
+@startuml iterator_active_passive
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 15
+skinparam defaultFontSize 12
+
+title Iterator Aktywny (zewnętrzny) vs Pasywny (wewnętrzny)
+
+rectangle "Iterator Aktywny (Pull / Zewnętrzny)" #E8F5E9 {
+  card "Klient wywołuje MoveNext()\nKlient wywołuje Current\nKlient kontroluje pętlę\nMożna zatrzymać w dowolnym miejscu" as pull #A5D6A7
+}
+
+rectangle "Iterator Pasywny (Push / Wewnętrzny)" #FFF9C4 {
+  card "Klient przekazuje action(element)\nKolekcja kontroluje pętlę\nProstsza składnia\nMniej elastyczna" as push #FFF176
+}
+
+rectangle ".NET Przykłady" #F3E5F5 {
+  card "Aktywny:\nforeach / IEnumerator\nLINQ\nIAsyncEnumerable" as active_ex #CE93D8
+  card "Pasywny:\nList.ForEach()\nArray.ForEach()\nObservable.Subscribe()" as passive_ex #CE93D8
+}
+
+@enduml

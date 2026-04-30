@@ -1,0 +1,37 @@
+@startuml iterator_lifecycle
+skinparam backgroundColor #FAFAFA
+skinparam stateBorderColor #4527A0
+skinparam stateBackgroundColor #EDE7F6
+skinparam arrowColor #4527A0
+skinparam titleFontSize 15
+
+title Cykl życia iteratora
+
+[*] --> Niezainicjowany : GetEnumerator() / CreateIterator()
+
+Niezainicjowany --> Aktywny : MoveNext() = true\n(pierwszy element)
+
+Aktywny --> Aktywny : MoveNext() = true\n(następny element)
+
+Aktywny --> Zakończony : MoveNext() = false\n(brak kolejnych)
+
+Zakończony --> Niezainicjowany : Reset()\n(jeśli obsługiwane)
+
+Aktywny --> Błąd : Kolekcja zmieniona\npodczas iteracji
+
+Zakończony --> [*] : Dispose()
+Błąd --> [*] : InvalidOperationException
+
+note right of Aktywny
+  Current jest ważne
+  tylko w stanie Aktywny
+  (po MoveNext() = true)
+end note
+
+note right of Niezainicjowany
+  Stan początkowy:
+  Current = default
+  (nie wywołuj Current przed MoveNext()!)
+end note
+
+@enduml

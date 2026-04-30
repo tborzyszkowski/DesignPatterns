@@ -1,0 +1,45 @@
+@startuml iterator_when_to_use
+skinparam backgroundColor #FAFAFA
+skinparam DiagramBorderColor #90A4AE
+skinparam titleFontSize 15
+skinparam defaultFontSize 12
+
+title Kiedy stosować wzorzec Iterator?
+
+|Warunek|
+|Potrzebujesz\niteracji po kolekcji|
+
+|<color:#2E7D32>Stosuj Iterator</color>|
+|<color:#C62828>Nie stosuj / alternatywa</color>|
+
+|Warunek|
+:Ukryć wewnętrzną\nstrukturę kolekcji?;
+if (TAK) then (tak)
+  :<color:#2E7D32>**Iterator**\nImplementuj IEnumerable<T>;</color>;
+else (nie)
+  :<color:#C62828>Bezpośredni dostęp do\ntablicy/listy wystarczy</color>;
+endif
+
+:Potrzeba wielu\nniezależnych iteratorów?;
+if (TAK) then (tak)
+  :<color:#2E7D32>**ConcreteIterator**\nKażdy GetEnumerator() = nowy kursor;</color>;
+else (nie)
+  :<color:#888888>Prosty foreach wystarczy</color>;
+endif
+
+:Specjalny porządek\niteracji (DFS, BFS, reverse)?;
+if (TAK) then (tak)
+  :<color:#2E7D32>**Custom IEnumerator<T>**\nlub yield return z logiką;</color>;
+else (nie)
+  :<color:#C62828>LINQ (OrderBy, Reverse)\njest prostsze</color>;
+endif
+
+:Leniwe generowanie\nelementów (nieskończona sekwencja)?;
+if (TAK) then (tak)
+  :<color:#2E7D32>**yield return generator**\nIEnumerable<T> bez materiahzacji;</color>;
+else (nie)
+  :<color:#888888>Zwróć List<T> lub array</color>;
+endif
+
+|Warunek|
+@enduml

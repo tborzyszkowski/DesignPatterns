@@ -1,0 +1,36 @@
+@startuml iterator_problem
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #FFF9C4
+skinparam classBorderColor #F57F17
+skinparam arrowColor #E65100
+skinparam titleFontSize 16
+
+title Problem: Klient zależy od wewnętrznej struktury kolekcji
+
+class NaiveBookshelf {
+  - _books : string[]
+  - _count : int
+  + Add(title: string) : void
+  + GetBooks() : string[]
+  + Count : int
+  + GetAt(index: int) : string
+}
+
+class Client {
+  + PrintAll() : void
+}
+
+note right of Client
+  Client musi wiedzieć że
+  używana jest tablica!
+  
+  for (int i = 0; i < shelf.Count; i++)
+    Console.WriteLine(shelf.GetAt(i));
+  
+  Co jeśli zmienimy na LinkedList?
+  Klient trzeba przepisać!
+end note
+
+Client --> NaiveBookshelf : zależy od implementacji
+
+@enduml

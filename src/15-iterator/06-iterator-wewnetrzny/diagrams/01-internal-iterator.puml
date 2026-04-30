@@ -1,0 +1,42 @@
+@startuml iterator_internal
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #FFF8E1
+skinparam classBorderColor #F57F17
+skinparam interfaceBackgroundColor #FFE082
+skinparam interfaceBorderColor #FF8F00
+skinparam arrowColor #E65100
+skinparam titleFontSize 15
+
+title Iterator Wewnętrzny — Koncepcja
+
+class "TreeNode<T>" as Node {
+  + Value : T
+  + Children : List<TreeNode<T>>
+  --
+  + ForEach(action: Action<T>) : void
+  + Map<R>(transform: Func<T,R>) : TreeNode<R>
+  + Fold<R>(seed: R, combine: Func<R,T,R>) : R
+}
+
+note right of Node
+  Iterator wewnętrzny:
+  - Kolekcja/struktura kontroluje przechodzenie
+  - Klient dostarcza funkcję (Action, Func)
+  - Bezpieczne dla struktur rekurencyjnych
+  
+  Porównaj z zewnętrznym:
+  foreach (var node in tree.DfsIterator())
+    process(node.Value);
+  
+  vs. wewnętrznym:
+  tree.ForEach(value => process(value));
+end note
+
+class "Client" as C {
+  + ProcessAll(tree: TreeNode<T>) : void
+}
+
+C -> Node : tree.ForEach(action)
+Node -> Node : rekurencyjna iteracja\nprzez Children
+
+@enduml

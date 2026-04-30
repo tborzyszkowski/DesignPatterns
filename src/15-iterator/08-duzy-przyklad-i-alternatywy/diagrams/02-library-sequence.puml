@@ -1,0 +1,53 @@
+@startuml iterator_library_sequence
+skinparam backgroundColor #FAFAFA
+skinparam sequenceArrowColor #1565C0
+skinparam participantBackgroundColor #E3F2FD
+skinparam participantBorderColor #1565C0
+skinparam titleFontSize 14
+
+title Katalog Biblioteki — Scenariusz przeglądania
+
+participant "Klient\n(Bibliotekarz)" as Client
+participant ":Library" as Lib
+participant ":FilteredIterator" as Filter
+participant "Database\n(symulacja)" as DB
+
+Client -> Lib : GetByGenre("Fantastyka")
+activate Lib
+Lib -> Filter : <<create>>(source, pred)
+Lib --> Client : IEnumerable<Book>
+deactivate Lib
+
+Client -> Filter : GetEnumerator()
+activate Filter
+Filter --> Client : enumerator
+deactivate Filter
+
+loop foreach book in filteredBooks
+  Client -> Filter : MoveNext()
+  activate Filter
+  Filter -> Filter : _index++
+  Filter -> Filter : predicate(book)?
+  alt pasuje do filtru
+    Filter --> Client : true
+    Client -> Filter : Current
+    Filter --> Client : book
+    Client -> Client : DisplayBook(book)
+  else nie pasuje
+    Filter -> Filter : kontynuuj pętlę
+  end
+  deactivate Filter
+end
+
+Client -> Lib : GetAvailable()
+activate Lib
+Lib --> Client : IEnumerable<Book>
+deactivate Lib
+
+note over Client,DB
+  Biblioteka ukrywa implementację —
+  klient nie wie czy dane są w tablicy,
+  liście, bazie danych czy pliku.
+end note
+
+@enduml

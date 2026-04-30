@@ -1,0 +1,62 @@
+@startuml iterator_types
+skinparam backgroundColor #FAFAFA
+skinparam packageBackgroundColor #F3E5F5
+skinparam packageBorderColor #6A1B9A
+skinparam classBackgroundColor #EDE7F6
+skinparam classBorderColor #4527A0
+skinparam titleFontSize 15
+
+title Typy implementacji Iteratora w C#
+
+package "1. Pull (zewnętrzny / aktywny)" {
+  class ExternalIterator {
+    Klient steruje iteracją
+    wywołując MoveNext()
+    ---
+    + MoveNext() : bool
+    + Current : T
+  }
+}
+
+package "2. Push (wewnętrzny / pasywny)" {
+  class InternalIterator {
+    Kolekcja steruje iteracją
+    wywołuje callback dla każdego elementu
+    ---
+    + ForEach(action: Action<T>) : void
+  }
+}
+
+package "3. Lazy Generator (yield)" {
+  class LazyIterator {
+    Elementy generowane na żądanie
+    Może być nieskończony
+    ---
+    yield return element;
+  }
+}
+
+package "4. LINQ-compatible" {
+  class LinqIterator {
+    Implementuje IEnumerable<T>
+    Integruje z Where/Select/OrderBy
+    ---
+    GetEnumerator() → yield return
+  }
+}
+
+package "5. Kursor dwukierunkowy" {
+  class BidirectionalCursor {
+    Porusza się w obu kierunkach
+    Zna bieżącą pozycję
+    ---
+    + MoveNext() : bool
+    + MovePrev() : bool
+    + Current : T
+  }
+}
+
+ExternalIterator ..> InternalIterator : jest\nalternatywą
+LazyIterator ..|> LinqIterator : jest\nspecjalnym przypadkiem
+
+@enduml

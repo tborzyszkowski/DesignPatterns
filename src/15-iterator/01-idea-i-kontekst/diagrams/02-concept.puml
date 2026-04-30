@@ -1,0 +1,55 @@
+@startuml iterator_concept
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam interfaceBackgroundColor #C8E6C9
+skinparam interfaceBorderColor #1B5E20
+skinparam arrowColor #1B5E20
+skinparam titleFontSize 16
+
+title Rozwiązanie: Wzorzec Iterator oddziela kolekcję od logiki przechodzenia
+
+interface "IIterator<T>" as IIterator {
+  + MoveNext() : bool
+  + Current : T
+  + Reset() : void
+}
+
+interface "IAggregate<T>" as IAggregate {
+  + CreateIterator() : IIterator<T>
+}
+
+class BookCollection implements IAggregate {
+  - _books : List<Book>
+  + Add(book: Book) : void
+  + CreateIterator() : IIterator<Book>
+  # GetAt(i: int) : Book
+  # Count : int
+}
+
+class BookIterator implements IIterator {
+  - _collection : BookCollection
+  - _index : int
+  + MoveNext() : bool
+  + Current : Book
+  + Reset() : void
+}
+
+class Client {
+  + PrintAll(iter: IIterator<Book>) : void
+}
+
+BookCollection ..> BookIterator : tworzy
+BookIterator --> BookCollection : czyta elementy
+Client --> IIterator : używa
+Client --> IAggregate : pobiera iterator
+
+note bottom of Client
+  iter = collection.CreateIterator();
+  while (iter.MoveNext())
+    Console.WriteLine(iter.Current);
+  
+  Klient nie wie jak przechowywane są dane!
+end note
+
+@enduml
