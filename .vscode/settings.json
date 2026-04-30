@@ -67,6 +67,14 @@
         "/^Copy-Item \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\13-obserwator\\\\05-duzy-przyklad-i-alternatywy\\\\Examples\\\\WeatherStation\\.cs\" \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\13-obserwator\\\\05-duzy-przyklad-i-alternatywy\\\\WeatherStationLib\\\\WeatherStation\\.cs\"$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^\\$puml = \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\plantuml\\.jar\"\n\\$srcDir = \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\14-polecenie\"\n\\$pumlFiles = Get-ChildItem -Path \\$srcDir -Filter \"\\*\\.puml\" -Recurse\nWrite-Host \"Znaleziono \\$\\(\\$pumlFiles\\.Count\\) plikow \\.puml\"\nforeach \\(\\$f in \\$pumlFiles\\) \\{\n    Write-Host \"Kompiluje: \\$\\(\\$f\\.FullName\\)\"\n    & java -jar \\$puml -tpng \"\\$\\(\\$f\\.FullName\\)\" -o \"\\$\\(\\$f\\.DirectoryName\\)\"\n\\}\nWrite-Host \"Gotowe!\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^\\$base = \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\14-polecenie\"\n\\$projects = Get-ChildItem -Path \\$base -Filter \"\\*\\.csproj\" -Recurse\nforeach \\(\\$p in \\$projects\\) \\{\n    Write-Host \"`n=== Building: \\$\\(\\$p\\.FullName\\) ===\"\n    Push-Location \\$p\\.DirectoryName\n    dotnet build -c Release --nologo 2>&1 \\| Select-Object -Last 5\n    Pop-Location\n\\}\n$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

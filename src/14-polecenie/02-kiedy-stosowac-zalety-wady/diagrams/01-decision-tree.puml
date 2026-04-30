@@ -1,0 +1,39 @@
+@startuml command_decision
+title Kiedy stosowac wzorzec Polecenie - drzewo decyzyjne
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+
+:Masz operacje do wykonania;
+
+if (Potrzebujesz undo/redo?) then (TAK)
+    :Wzorzec Polecenie\n(z metodą Undo)\n**[WYMAGANY]**;
+    stop
+else (NIE)
+    if (Operacje mają być kolejkowane\nlub wykonywane asynchronicznie?) then (TAK)
+        :Wzorzec Polecenie\n(z kolejką)\n**[ZALECANY]**;
+        stop
+    else (NIE)
+        if (Potrzebujesz logu transakcji\nlub event sourcing?) then (TAK)
+            :Wzorzec Polecenie\n(z persystencją)\n**[ZALECANY]**;
+            stop
+        else (NIE)
+            if (Chcesz dynamicznie przypisywać\nakcje do przycisków/menu?) then (TAK)
+                :Wzorzec Polecenie\n(parametryzacja)\n**[OPCJONALNY]**;
+                stop
+            else (NIE)
+                if (Logika jest prosta\ni jednorazowa?) then (TAK)
+                    :Delegat / Action<T>\n**[WYSTARCZY]**;
+                    stop
+                else (NIE)
+                    :Wzorzec Strategia\nlub inne wzorce;
+                    stop
+                endif
+            endif
+        endif
+    endif
+endif
+
+@enduml

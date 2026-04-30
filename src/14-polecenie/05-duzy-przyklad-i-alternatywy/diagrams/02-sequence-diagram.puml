@@ -1,0 +1,71 @@
+@startuml smarthome_sequence
+title Smart Home - scenariusz "Wychodzę z domu"
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Uzytkownik
+participant RemoteControl
+participant MacroCommand
+participant LightOffCommand
+participant SecurityArmCommand
+participant ThermostatSetCommand
+participant SmartLight
+participant SecuritySystem
+participant Thermostat
+
+Uzytkownik -> RemoteControl : PressButton(slot=0)
+activate RemoteControl
+
+RemoteControl -> MacroCommand : Execute()
+activate MacroCommand
+
+    MacroCommand -> LightOffCommand : Execute()
+    activate LightOffCommand
+        LightOffCommand -> SmartLight : TurnOff()
+        SmartLight --> LightOffCommand : done
+    deactivate LightOffCommand
+
+    MacroCommand -> SecurityArmCommand : Execute()
+    activate SecurityArmCommand
+        SecurityArmCommand -> SecuritySystem : Arm("1234")
+        SecuritySystem --> SecurityArmCommand : done
+    deactivate SecurityArmCommand
+
+    MacroCommand -> ThermostatSetCommand : Execute()
+    activate ThermostatSetCommand
+        ThermostatSetCommand -> Thermostat : SetTemperature(16.0)
+        Thermostat --> ThermostatSetCommand : done
+    deactivate ThermostatSetCommand
+
+MacroCommand --> RemoteControl : done
+deactivate MacroCommand
+RemoteControl --> Uzytkownik : done
+deactivate RemoteControl
+
+note over Uzytkownik, Thermostat
+  Jeden przycisk = 3 akcje.
+  RemoteControl nie wie, ile i jakich.
+  MacroCommand jest przezroczysty dla RemoteControl.
+end note
+
+== Użytkownik wraca — UNDO ==
+
+Uzytkownik -> RemoteControl : PressUndo()
+activate RemoteControl
+    RemoteControl -> MacroCommand : Undo()
+    activate MacroCommand
+        note right
+          Cofamy w ODWROTNEJ kolejności:
+          1. Thermostat → 21°C
+          2. SecuritySystem → Disarm
+          3. SmartLight → TurnOn
+        end note
+        MacroCommand -> ThermostatSetCommand : Undo()
+        MacroCommand -> SecurityArmCommand : Undo()
+        MacroCommand -> LightOffCommand : Undo()
+    deactivate MacroCommand
+RemoteControl --> Uzytkownik : done
+deactivate RemoteControl
+
+@enduml

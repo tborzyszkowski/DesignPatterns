@@ -1,0 +1,59 @@
+@startuml command_variants
+title Odmiany wzorca Polecenie
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+
+package "Prosty Command" {
+    interface ICommand_S {
+        + Execute()
+    }
+    class ConcreteCommand_S {
+        + Execute()
+    }
+    ICommand_S <|.. ConcreteCommand_S
+}
+
+package "Command z Undo" {
+    interface IUndoCommand {
+        + Execute()
+        + Undo()
+    }
+    class ConcreteUndoCmd {
+        - _prevState
+        + Execute()
+        + Undo()
+    }
+    IUndoCommand <|.. ConcreteUndoCmd
+}
+
+package "MacroCommand (Composite)" {
+    class MacroCommand {
+        - _commands: List<ICommand>
+        + Add(ICommand)
+        + Execute()
+        + Undo()
+    }
+}
+
+package "AsyncCommand" {
+    interface IAsyncCommand {
+        + ExecuteAsync(): Task
+    }
+    class ConcreteAsyncCmd {
+        + ExecuteAsync(): Task
+    }
+    IAsyncCommand <|.. ConcreteAsyncCmd
+}
+
+package "Lambda Command" {
+    class LambdaCommand {
+        - _action: Action
+        - _undo: Action
+        + Execute()
+        + Undo()
+    }
+}
+
+@enduml

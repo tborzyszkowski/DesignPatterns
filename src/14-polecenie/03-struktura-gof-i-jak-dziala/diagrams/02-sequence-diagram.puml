@@ -1,0 +1,66 @@
+@startuml command_sequence
+title Wzorzec Polecenie - diagram sekwencji
+
+skinparam monochrome true
+skinparam dpi 150
+
+participant Client
+participant Invoker
+participant ConcreteCommand
+participant Receiver
+
+== Konfiguracja ==
+
+Client -> Receiver : new Receiver()
+activate Receiver
+deactivate Receiver
+
+Client -> ConcreteCommand : new ConcreteCommand(receiver)
+activate ConcreteCommand
+deactivate ConcreteCommand
+
+Client -> Invoker : SetCommand(concreteCommand)
+activate Invoker
+deactivate Invoker
+
+== Wykonanie ==
+
+autonumber
+
+Client -> Invoker : ExecuteCommand()
+activate Invoker
+    Invoker -> ConcreteCommand : Execute()
+    activate ConcreteCommand
+        ConcreteCommand -> Receiver : Action()
+        activate Receiver
+        Receiver --> ConcreteCommand : done
+        deactivate Receiver
+    ConcreteCommand --> Invoker : done
+    deactivate ConcreteCommand
+Invoker --> Client : done
+deactivate Invoker
+
+== Cofnięcie (Undo) ==
+
+autonumber
+
+Client -> Invoker : UndoCommand()
+activate Invoker
+    Invoker -> ConcreteCommand : Undo()
+    activate ConcreteCommand
+        ConcreteCommand -> Receiver : ReverseAction()
+        activate Receiver
+        Receiver --> ConcreteCommand : done
+        deactivate Receiver
+    ConcreteCommand --> Invoker : done
+    deactivate ConcreteCommand
+Invoker --> Client : done
+deactivate Invoker
+
+note over Invoker, ConcreteCommand
+  Invoker nie zna Receiver.
+  Invoker nie wie, co robi ConcreteCommand.
+  Invoker wie tylko: "wywołaj Execute() lub Undo()".
+end note
+
+@enduml

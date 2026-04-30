@@ -1,0 +1,64 @@
+@startuml smarthome_alternatives
+title Alternatywy dla wzorca Polecenie
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+
+package "Wzorzec Polecenie" {
+    note as NCmd
+      + Pełna historia Undo/Redo
+      + Kolejkowanie
+      + Makropolecenia
+      - Wiele klas
+      - Złożoność
+    end note
+}
+
+package "Wzorzec Strategia" {
+    note as NStr
+      + Prosta wymiana algorytmu
+      + Mniej klas
+      - Brak historii
+      - Brak Undo
+      Kiedy: wymieniasz ALGORYTM,
+      nie AKCJĘ
+    end note
+}
+
+package "Lancuch Zobowiazan" {
+    note as NCoR
+      + Dynamiczny routing
+      + Obsługa wielu handlerów
+      - Brak Undo
+      - Brak kolejkowania
+      Kiedy: nie wiesz kto obsłuży
+    end note
+}
+
+package "Delegat / Action<T>" {
+    note as NDel
+      + Minimum kodu
+      + Wbudowany w C#
+      - Brak Undo
+      - Trudna serializacja
+      Kiedy: prosta, jednorazowa akcja
+    end note
+}
+
+package "Event Sourcing / CQRS" {
+    note as NES
+      + Pełna historia zdarzeń
+      + Skalowalność
+      - Duża złożoność
+      - Wymaga infrastruktury
+      Kiedy: architektura rozproszona
+    end note
+}
+
+NCmd -[hidden]right- NStr
+NStr -[hidden]right- NCoR
+NCmd -[hidden]down- NDel
+NDel -[hidden]right- NES
+
+@enduml

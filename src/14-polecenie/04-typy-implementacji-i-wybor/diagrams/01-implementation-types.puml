@@ -1,0 +1,73 @@
+@startuml command_implementation_types
+title Typy implementacji wzorca Polecenie
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+
+package "Typ 1: Prosty Command" {
+    interface ICommand1 {
+        + Execute()
+    }
+    class SimpleConcreteCommand {
+        - receiver: Receiver
+        + Execute()
+    }
+    ICommand1 <|.. SimpleConcreteCommand
+}
+
+package "Typ 2: Command z Undo/Redo" {
+    interface IUndoCommand {
+        + Execute()
+        + Undo()
+    }
+    class UndoableCommand {
+        - receiver: Receiver
+        - prevState
+        + Execute()
+        + Undo()
+    }
+    class CommandHistory {
+        - undoStack: Stack
+        - redoStack: Stack
+        + Execute(IUndoCommand)
+        + Undo()
+        + Redo()
+    }
+    IUndoCommand <|.. UndoableCommand
+    CommandHistory o--> IUndoCommand
+}
+
+package "Typ 3: MacroCommand" {
+    class MacroCommand {
+        - commands: List<IUndoCommand>
+        + Add(IUndoCommand)
+        + Execute()
+        + Undo()
+    }
+    IUndoCommand <|.. MacroCommand
+    MacroCommand o--> IUndoCommand
+}
+
+package "Typ 4: AsyncCommand" {
+    interface IAsyncCommand {
+        + ExecuteAsync(): Task
+        + CanExecute(): bool
+    }
+    class AsyncConcreteCommand {
+        + ExecuteAsync(): Task
+        + CanExecute(): bool
+    }
+    IAsyncCommand <|.. AsyncConcreteCommand
+}
+
+package "Typ 5: LambdaCommand" {
+    class LambdaCommand {
+        - execute: Action
+        - undo: Action
+        + Execute()
+        + Undo()
+    }
+}
+
+@enduml

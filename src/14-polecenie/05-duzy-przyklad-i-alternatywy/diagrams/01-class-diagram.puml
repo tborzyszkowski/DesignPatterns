@@ -1,0 +1,127 @@
+@startuml smarthome_class_diagram
+title Smart Home - pelny diagram klas wzorca Polecenie
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+' ── Interfejsy ──────────────────────────────────────────────────────────────
+interface ICommand {
+    + Execute()
+    + Undo()
+    + Description: string
+}
+
+' ── Invoker ──────────────────────────────────────────────────────────────────
+class RemoteControl {
+    - _slots: ICommand[7]
+    - _history: CommandHistory
+    + SetCommand(slot, ICommand)
+    + PressButton(slot)
+    + PressUndo()
+    + PrintStatus()
+}
+
+class CommandHistory {
+    - _undoStack: Stack<ICommand>
+    - _redoStack: Stack<ICommand>
+    + Execute(ICommand)
+    + Undo()
+    + Redo()
+}
+
+' ── NoOp Command (Null Object) ───────────────────────────────────────────────
+class NoOpCommand {
+    + Execute()
+    + Undo()
+    + Description: string
+}
+
+' ── MacroCommand ──────────────────────────────────────────────────────────────
+class MacroCommand {
+    - _commands: ICommand[]
+    + Execute()
+    + Undo()
+    + Description: string
+}
+
+' ── Receivers ─────────────────────────────────────────────────────────────────
+class SmartLight {
+    + Room: string
+    + Brightness: int
+    + IsOn: bool
+    + TurnOn()
+    + TurnOff()
+    + Dim(int)
+    + Brighten(int)
+}
+
+class Thermostat {
+    + Temperature: double
+    + SetTemperature(double)
+}
+
+class SecuritySystem {
+    + IsArmed: bool
+    + Arm(string)
+    + Disarm(string)
+}
+
+class MusicPlayer {
+    + IsPlaying: bool
+    + Volume: int
+    + Play(string)
+    + Stop()
+    + SetVolume(int)
+}
+
+class GarageDoor {
+    + IsOpen: bool
+    + Open()
+    + Close()
+}
+
+' ── ConcreteCommands ──────────────────────────────────────────────────────────
+class LightOnCommand
+class LightOffCommand
+class LightDimCommand
+class ThermostatSetCommand
+class SecurityArmCommand
+class SecurityDisarmCommand
+class MusicPlayCommand
+class MusicStopCommand
+class GarageOpenCommand
+class GarageCloseCommand
+
+' ── Relacje ──────────────────────────────────────────────────────────────────
+ICommand <|.. NoOpCommand
+ICommand <|.. MacroCommand
+ICommand <|.. LightOnCommand
+ICommand <|.. LightOffCommand
+ICommand <|.. LightDimCommand
+ICommand <|.. ThermostatSetCommand
+ICommand <|.. SecurityArmCommand
+ICommand <|.. SecurityDisarmCommand
+ICommand <|.. MusicPlayCommand
+ICommand <|.. MusicStopCommand
+ICommand <|.. GarageOpenCommand
+ICommand <|.. GarageCloseCommand
+
+RemoteControl o--> ICommand : slots[]
+RemoteControl --> CommandHistory
+CommandHistory o--> ICommand : stacks
+MacroCommand o--> ICommand : commands[]
+
+LightOnCommand --> SmartLight
+LightOffCommand --> SmartLight
+LightDimCommand --> SmartLight
+ThermostatSetCommand --> Thermostat
+SecurityArmCommand --> SecuritySystem
+SecurityDisarmCommand --> SecuritySystem
+MusicPlayCommand --> MusicPlayer
+MusicStopCommand --> MusicPlayer
+GarageOpenCommand --> GarageDoor
+GarageCloseCommand --> GarageDoor
+
+@enduml

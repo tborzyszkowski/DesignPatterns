@@ -1,0 +1,50 @@
+@startuml command_solution
+title Polecenie - rozwiazanie: enkapsulacja zadania
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+
+interface ICommand {
+    + Execute()
+}
+
+class Button {
+    - _command: ICommand
+    + SetCommand(ICommand)
+    + Click()
+}
+
+class LightOnCommand {
+    - _light: Light
+    + Execute()
+}
+
+class FanStartCommand {
+    - _fan: Fan
+    + Execute()
+}
+
+class Light {
+    + TurnOn()
+    + TurnOff()
+}
+
+class Fan {
+    + Start()
+    + Stop()
+}
+
+ICommand <|.. LightOnCommand
+ICommand <|.. FanStartCommand
+Button o--> ICommand : <<uses>>
+LightOnCommand --> Light
+FanStartCommand --> Fan
+
+note right of Button
+  Button zna tylko ICommand.
+  Nowy odbiornik = nowe polecenie,
+  zero zmian w Button!
+end note
+
+@enduml

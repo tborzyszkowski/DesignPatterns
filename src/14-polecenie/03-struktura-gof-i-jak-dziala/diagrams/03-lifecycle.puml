@@ -1,0 +1,31 @@
+@startuml command_lifecycle
+title Cykl zycia polecenia
+
+skinparam monochrome true
+skinparam dpi 150
+
+[*] --> Utworzone : new ConcreteCommand(receiver)
+
+Utworzone --> Przypisane : invoker.SetCommand(cmd)
+
+Przypisane --> Wykonane : invoker.ExecuteCommand()\n→ cmd.Execute()
+
+Wykonane --> Cofniete : invoker.UndoCommand()\n→ cmd.Undo()
+
+Cofniete --> Wykonane : invoker.ExecuteCommand()\n(redo)
+
+Wykonane --> Zakolejkowane : queue.Enqueue(cmd)
+
+Zakolejkowane --> Wykonane : queue.ProcessNext()
+
+Wykonane --> [*] : garbage collected
+
+note right of Przypisane
+  Polecenie jest obiektem —
+  można je przechowywać,
+  przekazywać i serializo-
+  wać zanim zostanie
+  wykonane.
+end note
+
+@enduml

@@ -1,0 +1,72 @@
+@startuml command_undo_redo_sequence
+title Command z Undo i Redo - diagram sekwencji
+
+skinparam monochrome true
+skinparam dpi 150
+
+participant Client
+participant CommandHistory
+participant Command1
+participant Command2
+participant Receiver
+
+== Execute 2 poleceń ==
+
+Client -> CommandHistory : Execute(cmd1)
+activate CommandHistory
+    CommandHistory -> Command1 : Execute()
+    activate Command1
+        Command1 -> Receiver : Action1()
+    deactivate Command1
+    CommandHistory -> CommandHistory : undoStack.Push(cmd1)
+deactivate CommandHistory
+
+Client -> CommandHistory : Execute(cmd2)
+activate CommandHistory
+    CommandHistory -> Command2 : Execute()
+    activate Command2
+        Command2 -> Receiver : Action2()
+    deactivate Command2
+    CommandHistory -> CommandHistory : undoStack.Push(cmd2)
+deactivate CommandHistory
+
+note over CommandHistory
+  undoStack: [cmd1, cmd2]
+  redoStack: []
+end note
+
+== Undo (cofnij cmd2) ==
+
+Client -> CommandHistory : Undo()
+activate CommandHistory
+    CommandHistory -> CommandHistory : cmd2 = undoStack.Pop()
+    CommandHistory -> Command2 : Undo()
+    activate Command2
+        Command2 -> Receiver : ReverseAction2()
+    deactivate Command2
+    CommandHistory -> CommandHistory : redoStack.Push(cmd2)
+deactivate CommandHistory
+
+note over CommandHistory
+  undoStack: [cmd1]
+  redoStack: [cmd2]
+end note
+
+== Redo (ponów cmd2) ==
+
+Client -> CommandHistory : Redo()
+activate CommandHistory
+    CommandHistory -> CommandHistory : cmd2 = redoStack.Pop()
+    CommandHistory -> Command2 : Execute()
+    activate Command2
+        Command2 -> Receiver : Action2()
+    deactivate Command2
+    CommandHistory -> CommandHistory : undoStack.Push(cmd2)
+deactivate CommandHistory
+
+note over CommandHistory
+  undoStack: [cmd1, cmd2]
+  redoStack: []
+end note
+
+@enduml

@@ -1,0 +1,59 @@
+@startuml command_class_diagram
+title Wzorzec Polecenie - diagram klas (GoF)
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+interface Command {
+    + Execute()
+    + Undo()
+}
+
+class ConcreteCommand {
+    - _receiver: Receiver
+    - _prevState
+    + Execute()
+    + Undo()
+}
+
+class Invoker {
+    - _command: Command
+    + SetCommand(Command)
+    + ExecuteCommand()
+    + UndoCommand()
+}
+
+class Receiver {
+    + Action()
+    + ReverseAction()
+}
+
+class Client {
+    <<creates>>
+}
+
+Command <|.. ConcreteCommand
+ConcreteCommand --> Receiver : receiver.Action()
+Invoker o--> Command : <<uses>>
+Client ..> ConcreteCommand : <<creates>>
+Client ..> Receiver : <<creates>>
+Client ..> Invoker : <<configures>>
+
+note right of Invoker
+  Invoker nie wie, co robi Command.
+  Zna tylko interfejs Command.
+end note
+
+note right of ConcreteCommand
+  Łączy Receiver z konkretną akcją.
+  Przechowuje stan potrzebny do Undo.
+end note
+
+note bottom of Receiver
+  Receiver zawiera faktyczną
+  logikę biznesową.
+end note
+
+@enduml
