@@ -12,6 +12,7 @@ Wymagania:
 1. `MenuItem` jako liść.
 1. `MenuGroup` jako kompozyt z listą dzieci.
 1. Klient wywołuje tylko `Render()` na korzeniu.
+1. Menu co najmniej 3-poziomowe (Plik → Nowy → Dokument tekstowy).
 
 Rozwiązanie (skrót):
 
@@ -37,34 +38,58 @@ Wyjaśnienie:
 
 Klient nie rozróżnia, czy renderuje pojedynczy element, czy całą grupę. To jest główny zysk wzorca.
 
-## Zadanie 2 (średnie): Liczenie kosztu poddrzewa
+## Zadanie 2 (podstawowe): Koszyk z pakietami
 
 Treść:
 
-W strukturze sklepu (`Product`, `Category`) dodaj metodę `GetTotalPrice()` dla całego poddrzewa.
+Zbuduj koszyk zakupów, w którym klient może dodawać produkty (`Product`) i zestawy (`Bundle`). Zestaw może zawierać produkty i inne zestawy.
 
 Wymagania:
 
+1. Wspólny interfejs `ICartItem` z metodą `decimal GetTotalPrice()` i `string GetName()`.
 1. `Product` zwraca własną cenę.
-1. `Category` sumuje ceny dzieci.
-1. Pokazanie wyniku dla wielopoziomowej struktury.
+1. `Bundle` sumuje ceny dzieci i może mieć rabat procentowy.
+1. Wypisz drzewo koszyka z cenami i sumą końcową.
 
-Rozwiązanie (idea):
+Przykładowa struktura:
 
-1. Liść zwraca wartość lokalną.
-1. Kompozyt agreguje wyniki dzieci przez sumowanie.
-1. Rekurencja pozwala obsłużyć dowolną głębokość.
+```
+Koszyk
+├── Laptop (3499 zł)
+├── Zestaw "Home Office" (rabat 10%)
+│   ├── Monitor (1299 zł)
+│   └── Klawiatura (199 zł)
+└── Myszka (89 zł)
+```
 
-## Zadanie 3 (zaawansowane): Ochrona przed cyklami
+Pytanie kontrolne: ile poziomów może mieć koszyk? Czy kod klienta musiałby się zmieniać przy dodaniu nowego poziomu zagnieżdżenia?
+
+## Zadanie 3 (średnie): Struktura organizacyjna firmy
 
 Treść:
 
-Rozszerz `Composite` o walidację uniemożliwiającą dodanie elementu, który tworzyłby cykl.
+Zamodeluj hierarchię firmy: `Employee` (liść) i `Manager` (kompozyt). Zaimplementuj operacje agregujące na poddrzewach.
+
+Wymagania:
+
+1. Interfejs `IOrganizationUnit` z metodami `decimal GetSalaryBudget()`, `int GetHeadcount()`, `void PrintTree(int level = 0)`.
+1. `Employee` zwraca własną pensję i liczy siebie jako 1 osobę.
+1. `Manager` jest również pracownikiem (ma pensję) i zarządza podwładnymi.
+1. `GetSalaryBudget()` na `CEO` zwraca sumę dla całej firmy.
+1. `GetSalaryBudget()` na `CTO` zwraca sumę tylko dla działu technicznego.
+1. Zbuduj co najmniej 3-poziomową hierarchię i wypisz drzewo z budżetami.
+
+## Zadanie 4 (średnie): Ochrona przed cyklami
+
+Treść:
+
+Rozszerz `Composite` (dowolny z poprzednich zadań) o walidację uniemożliwiającą dodanie elementu, który tworzyłby cykl.
 
 Wymagania:
 
 1. Metoda `Add()` odrzuca próbę dodania przodka jako dziecka.
-1. Test scenariusza błędnego.
+1. Odrzuca też próbę dodania samego siebie.
+1. Test scenariusza błędnego z oczekiwanym wyjątkiem.
 
 Rozwiązanie (skrót):
 
@@ -75,21 +100,57 @@ Wyjaśnienie:
 
 Bez walidacji cykli struktura przestaje być drzewem i może powodować nieskończoną rekurencję.
 
-## Zadanie 4 (bonus): Visitor na Composite
+## Zadanie 5 (zaawansowane): Drzewo wyrażeń matematycznych
 
 Treść:
 
-Dodaj wizytatora raportującego liczbę liści i kompozytów w drzewie.
+Zaimplementuj AST dla wyrażeń matematycznych z czterema operatorami (`+`, `-`, `*`, `/`).
 
-Wskazówka:
+Wymagania:
 
-1. To dobre ćwiczenie pokazujące połączenie Composite + Visitor.
+1. Interfejs `IExpression` z metodą `double Evaluate()` i `string ToInfix()`.
+1. `NumberExpression` (liść) — zwraca wartość i jej reprezentację.
+1. `BinaryExpression` (kompozyt) — dwa operandy (`left`, `right`) i operator.
+1. Zbuduj wyrażenie `(3 + 4) * (10 - 1) / 3` z samych węzłów.
+1. Wywołaj `Evaluate()` i `ToInfix()` na korzeniu.
+1. Dodaj `UnaryExpression` (negacja) — bez zmiany kodu klienta.
+
+Pytanie kontrolne: co musiałbyś zmienić w kodzie klienta, gdybyś chciał dodać nowy typ węzła (np. `FunctionCallExpression`)? Porównaj z podejściem bez Kompozytu.
+
+## Zadanie 6 (zaawansowane): Procedura decyzyjna
+
+Dla każdego z poniższych scenariuszy zastosuj procedurę decyzyjną z rozdziału 02 i udokumentuj wybór.
+
+Scenariusz A:
+System zarządzania dokumentami. Dokument może być plikiem lub folderem. Foldery mogą zawierać pliki i inne foldery. Chcesz obliczyć rozmiar, wyświetlić drzewo i wyszukać po nazwie.
+
+Scenariusz B:
+Lista pracowników w firmie. Każdy pracownik ma `Id`, `Name`, `Department`, `Salary`. Potrzebujesz wyfiltrować i posortować pracowników wg departamentu.
+
+Scenariusz C:
+Widget UI: `ScrollablePanel` owijający dowolny inny widget. `ScrollablePanel` dodaje paski przewijania do wnętrza. Nie zarządza wieloma dziećmi — tylko jednym.
+
+Scenariusz D:
+Raportowanie: masz stabilną hierarchię dokumentów (Kompozyt: `Section → Paragraph → TextNode`). Często dodajesz nowe typy raportów (PDF, HTML, Word, Markdown).
+
+Scenariusz E:
+Bill of Materials (BOM) w systemie ERP. Produkt końcowy składa się z podzespołów, te z części, a części mogą być proste lub złożone. `GetTotalCost()` musi działać na każdym poziomie.
+
+Dla każdego scenariusza podaj:
+
+1. Jaki wzorzec/podejście wybrałeś (Kompozyt / Dekorator / Visitor / Prosta lista)?
+1. Które pytania z checklisty były rozstrzygające?
+1. Jeśli Kompozyt: wskaż liść, gałąź i wspólny interfejs.
+
+Klucz odpowiedzi: A=Kompozyt (Leaf:File, Composite:Folder, INode), B=Prosta lista (brak hierarchii, filtr/sort), C=Dekorator (jedno dziecko, nie lista), D=Kompozyt+Visitor (stabilna struktura + nowe operacje), E=Kompozyt (Leaf:Part, Composite:Subassembly, IComponent).
 
 ## Pytania kontrolne
 
-1. Co to jest `Component` i jakie ma obowiązki we wzorcu Kompozyt?
-1. Czym różni się Transparent Composite od Safe Composite?
-1. Kiedy warto zastąpić rekurencję w `Operation()` iteratorem BFS lub DFS?
-1. Jakie ryzyko niesie dodanie `Add/Remove` do interfejsu `Component`?
-1. Jak zabezpieczyć drzewo przed dodaniem cyklu i dlaczego to ważne?
-1. Porównaj Kompozyt z Wzorcem Dekoratora — kiedy wybrałbyś każdy z nich?
+1. Co jest liściem (`Leaf`), a co gałęzią (`Composite`) w Twoim modelu z Zadania 3?
+1. Jaka jest kluczowa różnica między Dekoratorem a Kompozytem? (podaj przykład każdego)
+1. Kiedy warto łączyć Kompozyt z Visitorem? Podaj przykład scenariusza.
+1. Co się stanie, jeśli do interfejsu `Component` dodasz metodę specyficzną tylko dla gałęzi (np. `Add`)? Jak liść powinien ją obsługiwać?
+1. Jakie są konsekwencje wydajnościowe czystej rekurencji na bardzo głębokim drzewie (10 000 poziomów)?
+1. Czym różni się Transparent Composite od Safe Composite? Kiedy każdy jest lepszy?
+1. Jak obsłużyć sytuację, gdy Visitor musi przetworzyć Composite, ale nie zna wszystkich typów węzłów z góry?
+1. Kiedy Kompozyt NIE da żadnego zysku mimo drzewiastej struktury?

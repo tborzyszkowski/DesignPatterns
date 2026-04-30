@@ -1,0 +1,64 @@
+@startuml observer_weather_class
+title Stacja Pogodowa - diagram klas
+
+skinparam monochrome true
+skinparam dpi 150
+
+interface IWeatherObserver {
+    + Update(data: WeatherData)
+}
+
+class WeatherData {
+    + Temperature: float
+    + Humidity: float
+    + Pressure: float
+}
+
+class WeatherStation {
+    - observers: List<IWeatherObserver>
+    - lastReading: WeatherData?
+    + Subscribe(obs: IWeatherObserver)
+    + Unsubscribe(obs: IWeatherObserver)
+    + SetMeasurements(temp, hum, pressure)
+    + LastReading: WeatherData?
+    - NotifyAll(data: WeatherData)
+}
+
+class CurrentConditionsDisplay {
+    - lastData: WeatherData?
+    + Update(data: WeatherData)
+    + Display()
+}
+
+class StatisticsDisplay {
+    - samples: List<float>
+    + Update(data: WeatherData)
+    + Display()
+    + Average: float
+    + Min: float
+    + Max: float
+}
+
+class ForecastDisplay {
+    - currentPressure: float
+    - lastPressure: float
+    + Update(data: WeatherData)
+    + Display()
+}
+
+class HeatIndexDisplay {
+    - heatIndex: float
+    + Update(data: WeatherData)
+    + Display()
+    - ComputeHeatIndex(celsius, humidity): float
+}
+
+WeatherStation o--> "0..*" IWeatherObserver : notyfikuje
+WeatherStation ..> WeatherData : tworzy
+
+IWeatherObserver <|.. CurrentConditionsDisplay
+IWeatherObserver <|.. StatisticsDisplay
+IWeatherObserver <|.. ForecastDisplay
+IWeatherObserver <|.. HeatIndexDisplay
+
+@enduml

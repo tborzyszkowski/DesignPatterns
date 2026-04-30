@@ -1,0 +1,57 @@
+@startuml observer_impl_types
+title Observer - trzy typy implementacji w C#
+
+skinparam monochrome true
+skinparam dpi 150
+
+package "Wariant 1: Reczny interfejs" {
+    interface ITemperatureObserver1 {
+        + OnTemperatureChanged(temp: float)
+    }
+    class TemperatureSensor1 {
+        - observers: List<ITemperatureObserver1>
+        + Subscribe(obs)
+        + Unsubscribe(obs)
+        - NotifyAll(temp)
+    }
+    class DisplayA {
+        + OnTemperatureChanged(temp)
+    }
+    TemperatureSensor1 o--> ITemperatureObserver1
+    ITemperatureObserver1 <|.. DisplayA
+}
+
+package "Wariant 2: Zdarzenia C#" {
+    class TemperatureSensor2 {
+        + <<event>> TemperatureChanged: EventHandler<Args>
+        # OnTemperatureChanged(temp)
+    }
+    class TempChangedArgs {
+        + Temperature: float
+    }
+    class HandlerB {
+        + Handle(sender, e: TempChangedArgs)
+    }
+    TemperatureSensor2 ..> TempChangedArgs : tworzy
+    HandlerB ..> TemperatureSensor2 : += / -=
+}
+
+package "Wariant 3: IObservable<T>" {
+    interface "IObservable<float>" as IObsF {
+        + Subscribe(observer: IObserver<float>): IDisposable
+    }
+    interface "IObserver<float>" as IObsObsF {
+        + OnNext(value: float)
+        + OnError(error: Exception)
+        + OnCompleted()
+    }
+    class "Subject<float>" as SubjF {
+        + OnNext(value)
+        + Where(predicate) : IObservable
+        + Throttle(span) : IObservable
+    }
+    SubjF ..|> IObsF
+    IObsF ..> IObsObsF : notyfikuje
+}
+
+@enduml

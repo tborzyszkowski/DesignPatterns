@@ -1,16 +1,68 @@
 @startuml composite_alternatives
-title Composite - alternatywy
+title Composite - alternatywy i kiedy co wybrac
 
 skinparam monochrome true
 skinparam dpi 150
 
-rectangle "Composite" as C
-rectangle "Decorator" as D
-rectangle "Visitor" as V
-rectangle "Płaska kolekcja + serwis" as F
+rectangle "Composite\n(ten wzorzec)" {
+    note as C
+      Cel: jednolite API dla
+      hierarchii czesc-calosc
+      ----
+      Jedno dziecko: NIE (lista dzieci)
+      Rekurencja: TAK
+      ----
+      Uzyj gdy: drzewo o dowolnej
+      glebokosci, ta sama operacja
+      na lisciu i galezia
+    end note
+}
 
-C --> D : inny cel
-C --> V : uzupełnienie
-C --> F : gdy brak drzewa
+rectangle "Dekorator" {
+    note as D
+      Cel: rozszerzanie zachowania
+      jednego obiektu
+      ----
+      Jedno dziecko: TAK (wrappee)
+      Rekurencja: NIE
+      ----
+      Uzyj gdy: chcesz owiac obiekt
+      nowymi warstwami zachowania
+      (kompresja, logowanie, cache)
+    end note
+}
+
+rectangle "Visitor" {
+    note as V
+      Cel: nowe operacje na
+      stabilnej strukturze
+      ----
+      Laczy sie z: Composite
+      Operacja: zewnetrzna klasa
+      ----
+      Uzyj gdy: struktura stabilna,
+      czesto nowe operacje
+      (eksport, analiza, walidacja)
+    end note
+}
+
+rectangle "Prosta lista + serwis" {
+    note as F
+      Cel: plaska kolekcja,
+      stala glebokoscia
+      ----
+      Hierarchia: 1-2 poziomy max
+      Interfejs: inny per poziom
+      ----
+      Uzyj gdy: brak potrzeby
+      rekurencji ani jednolitego API
+      (lista zamowien, pozycje faktury)
+    end note
+}
+
+C -[hidden]- D
+D -[hidden]- V
+V -[hidden]- F
 
 @enduml
+

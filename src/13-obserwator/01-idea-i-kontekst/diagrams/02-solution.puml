@@ -1,0 +1,57 @@
+@startuml observer_solution
+title Observer - rozwiazanie: luznie powiazan przez interfejs
+
+skinparam monochrome true
+skinparam dpi 150
+
+interface IObserver {
+    + Update(temperature: float, humidity: float)
+}
+
+interface ISubject {
+    + Subscribe(observer: IObserver)
+    + Unsubscribe(observer: IObserver)
+    + NotifyAll()
+}
+
+class WeatherStation {
+    - observers: List<IObserver>
+    - temperature: float
+    - humidity: float
+    + Subscribe(observer)
+    + Unsubscribe(observer)
+    + NotifyAll()
+    + SetMeasurements(t, h)
+}
+
+class CurrentConditionsDisplay {
+    + Update(t, h)
+}
+
+class StatisticsDisplay {
+    + Update(t, h)
+}
+
+class ForecastDisplay {
+    + Update(t, h)
+}
+
+class MobileAppDisplay {
+    + Update(t, h)
+}
+
+ISubject <|.. WeatherStation
+IObserver <|.. CurrentConditionsDisplay
+IObserver <|.. StatisticsDisplay
+IObserver <|.. ForecastDisplay
+IObserver <|.. MobileAppDisplay
+
+WeatherStation o--> "0..*" IObserver : notyfikuje przez interfejs
+
+note right of WeatherStation
+WeatherStation zna tylko IObserver.
+Nowy wyswietlacz = nowa klasa,
+zero zmian w WeatherStation.
+end note
+
+@enduml

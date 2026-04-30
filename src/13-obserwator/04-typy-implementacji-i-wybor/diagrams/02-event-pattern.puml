@@ -1,0 +1,46 @@
+@startuml observer_event_pattern
+title Observer - wzorzec zdarzen C# (konwencja .NET)
+
+skinparam monochrome true
+skinparam dpi 150
+
+class EventArgs {
+}
+
+class TemperatureChangedEventArgs {
+    + Temperature: float
+    + TemperatureChangedEventArgs(temp: float)
+}
+
+EventArgs <|-- TemperatureChangedEventArgs
+
+class TemperatureSensor {
+    + <<event>> TemperatureChanged: EventHandler<TemperatureChangedEventArgs>
+    - SetTemperature(value: float)
+    # OnTemperatureChanged(args: TemperatureChangedEventArgs)
+}
+
+note right of TemperatureSensor
+Wywolanie:
+TemperatureChanged?.Invoke(this, args)
+
+Subskrypcja:
+sensor.TemperatureChanged += handler
+
+Wypisanie:
+sensor.TemperatureChanged -= handler
+end note
+
+class SubscriberA {
+    + HandleTemperature(s: object, e: TemperatureChangedEventArgs)
+}
+
+class SubscriberB {
+    + HandleTemperature(s: object, e: TemperatureChangedEventArgs)
+}
+
+TemperatureSensor ..> TemperatureChangedEventArgs : tworzy
+SubscriberA ..> TemperatureSensor : += / -=
+SubscriberB ..> TemperatureSensor : += / -=
+
+@enduml

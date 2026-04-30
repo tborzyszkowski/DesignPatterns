@@ -1,0 +1,44 @@
+@startuml observer_weather_sequence
+title Stacja Pogodowa - diagram sekwencji
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant "WeatherStation" as WS
+participant "CurrentDisplay" as CD
+participant "StatisticsDisplay" as SD
+participant "HeatIndexDisplay" as HI
+
+== Rejestracja ==
+Client -> WS : Subscribe(currentDisplay)
+Client -> WS : Subscribe(statisticsDisplay)
+Client -> WS : Subscribe(heatIndexDisplay)
+
+== Pomiar 1 ==
+Client -> WS : SetMeasurements(22.5, 65, 1013)
+WS -> WS : lastReading = new WeatherData(22.5, 65, 1013)
+WS -> WS : NotifyAll(data)
+WS -> CD : Update(data)
+CD -> CD : Render "22.5°C, 65%"
+WS -> SD : Update(data)
+SD -> SD : AddSample(22.5)
+WS -> HI : Update(data)
+HI -> HI : ComputeHeatIndex(22.5, 65)
+HI -> HI : Render "HI: 22.8°C"
+
+== Odlaczenie wyswietlacza ==
+Client -> WS : Unsubscribe(heatIndexDisplay)
+
+== Pomiar 2 — HeatIndex nie dostaje ==
+Client -> WS : SetMeasurements(30.0, 80, 1005)
+WS -> WS : NotifyAll(data)
+WS -> CD : Update(data)
+WS -> SD : Update(data)
+
+note right of WS
+HeatIndexDisplay zostal wypisany -
+nie otrzymuje powiadomienia
+end note
+
+@enduml

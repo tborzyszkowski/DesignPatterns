@@ -1,24 +1,55 @@
 @startuml composite_decision_tree
-title Composite - drzewo decyzji
+title Composite - pelna procedura decyzyjna
 
 skinparam monochrome true
 skinparam dpi 150
 
 start
-:Masz strukturę część-całość?;
-if (Tak) then (Tak)
-  :Klient ma traktować
-liść i gałąź jednakowo?;
-  if (Tak) then (Tak)
-    :Rozważ Composite;
-  else (Nie)
-    :Rozważ osobne API
-na poziomy hierarchii;
-  endif
-else (Nie)
-  :Composite prawdopodobnie
-nie jest potrzebny;
-endif
-stop
 
+:Dane tworza strukture drzewiasta\n(relacja czesc-calosc)?;
+if (TAK) then (tak)
+else (nie)
+    :Brak hierarchii\nUzyj prostej listy lub slownika;
+    stop
+endif
+
+:Ta sama operacja ma dzialac\nna lisciu i galezia jednakowo?;
+if (TAK) then (tak)
+else (nie)
+    :Rozne API per poziom\nProsta klasa z lista dzieci;
+    stop
+endif
+
+:Chcesz tylko rozszerzac zachowanie\npodatnego obiektu (owiniecie)?;
+if (TAK) then (tak)
+    :Dekorator\n(nie Composite);
+    stop
+else (nie)
+endif
+
+:Struktura stabilna, czesto nowe operacje?;
+if (TAK) then (tak)
+    :Composite + Visitor\n(Composite dla struktury,\nVisitor dla nowych operacji);
+    stop
+else (nie)
+endif
+
+:COMPOSITE jest odpowiedni;
+
+:Klient musi wywolywac Add/Remove\nprzez interfejs Component?;
+if (TAK) then (tak)
+    :Transparent Composite\n(Add/Remove w interfejsie;\nlisc rzuca NotSupportedException);
+else (nie)
+    :Safe Composite\n(Add/Remove tylko w klasie Composite;\nbezpieczniejsze API);
+endif
+
+:Glebokosci drzewa nieznana\nlub ryzyko przepelnienia stosu?;
+if (TAK) then (tak)
+    :Dodaj Iterator (BFS/DFS)\nzamiast czystej rekurencji;
+else (nie)
+    :Czysta rekurencja\nwystarczy;
+endif
+
+stop
 @enduml
+

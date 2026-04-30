@@ -1,0 +1,53 @@
+@startuml observer_alternatives
+title Observer vs alternatywy
+
+skinparam monochrome true
+skinparam dpi 150
+
+package "Observer\n(jeden source, wiele targets)" {
+    class WeatherStation_obs as "WeatherStation\n[Subject]"
+    class CurrentDisplay_obs as "CurrentDisplay\n[Observer]"
+    class StatsDisplay_obs as "StatsDisplay\n[Observer]"
+
+    WeatherStation_obs --> CurrentDisplay_obs : Update()
+    WeatherStation_obs --> StatsDisplay_obs : Update()
+}
+
+package "Mediator\n(wiele stron komunikuja sie wzajemnie)" {
+    class ChatRoom as "ChatRoom\n[Mediator]"
+    class UserA as "User A"
+    class UserB as "User B"
+    class UserC as "User C"
+
+    UserA --> ChatRoom : Send()
+    UserB --> ChatRoom : Send()
+    ChatRoom --> UserA : Deliver()
+    ChatRoom --> UserB : Deliver()
+    ChatRoom --> UserC : Deliver()
+}
+
+package "Pub/Sub\n(broker posredniczy)" {
+    class Publisher
+    class MessageBus as "Message Bus\n[Broker]"
+    class Subscriber1
+    class Subscriber2
+
+    Publisher --> MessageBus : Publish(topic, msg)
+    MessageBus --> Subscriber1 : Deliver()
+    MessageBus --> Subscriber2 : Deliver()
+
+    note right of MessageBus
+    Kolejkowanie, trwalosc,
+    retry, rozne procesy
+    end note
+}
+
+package "Polling\n(consumer pyta sam)" {
+    class DataSource
+    class ConsumerX as "Consumer\n[pyta co 5s]"
+
+    ConsumerX --> DataSource : GetLatest()
+    DataSource --> ConsumerX : data
+}
+
+@enduml

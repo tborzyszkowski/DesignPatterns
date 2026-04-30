@@ -1,0 +1,38 @@
+@startuml observer_sequence
+title Observer - pelny cykl zycia (diagram sekwencji)
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Client
+participant "Subject\n(WeatherStation)" as S
+participant "ObserverA\n(CurrentDisplay)" as OA
+participant "ObserverB\n(StatsDisplay)" as OB
+
+== Rejestracja ==
+Client -> S : Subscribe(observerA)
+S -> S : observers.Add(observerA)
+Client -> S : Subscribe(observerB)
+S -> S : observers.Add(observerB)
+
+== Zmiana stanu ==
+Client -> S : SetMeasurements(22.5, 65)
+S -> S : temperature=22.5, humidity=65
+S -> S : Notify()
+
+== Notyfikacja ==
+S -> OA : Update(22.5, 65)
+OA -> OA : Render("22.5°C 65%")
+S -> OB : Update(22.5, 65)
+OB -> OB : AddSample(22.5)
+
+== Wypisanie ==
+Client -> S : Unsubscribe(observerA)
+S -> S : observers.Remove(observerA)
+
+== Kolejna zmiana — tylko ObserverB powiadamiany ==
+Client -> S : SetMeasurements(19.0, 70)
+S -> S : Notify()
+S -> OB : Update(19.0, 70)
+
+@enduml

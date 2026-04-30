@@ -1,0 +1,50 @@
+@startuml observer_class_gof
+title Observer - diagram klas (GoF)
+
+skinparam monochrome true
+skinparam dpi 150
+
+interface IObserver<TData> {
+    + Update(data: TData)
+}
+
+interface ISubject<TData> {
+    + Subscribe(observer: IObserver<TData>)
+    + Unsubscribe(observer: IObserver<TData>)
+    + Notify(data: TData)
+}
+
+abstract class SubjectBase<TData> {
+    - observers: List<IObserver<TData>>
+    + Subscribe(observer)
+    + Unsubscribe(observer)
+    # Notify(data)
+}
+
+class ConcreteSubject<TData> {
+    - state: TData
+    + SetState(newState: TData)
+}
+
+class ConcreteObserverA<TData> {
+    + Update(data: TData)
+}
+
+class ConcreteObserverB<TData> {
+    + Update(data: TData)
+}
+
+ISubject <|.. SubjectBase
+SubjectBase <|-- ConcreteSubject
+IObserver <|.. ConcreteObserverA
+IObserver <|.. ConcreteObserverB
+
+SubjectBase o--> "0..*" IObserver : notyfikuje
+
+note right of SubjectBase
+Bezpieczna iteracja:
+foreach obs in observers.ToList()
+  obs.Update(data);
+end note
+
+@enduml

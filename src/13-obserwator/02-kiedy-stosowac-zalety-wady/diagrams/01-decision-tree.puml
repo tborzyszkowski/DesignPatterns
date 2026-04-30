@@ -1,0 +1,49 @@
+@startuml observer_decision_tree
+title Observer - procedura decyzyjna
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+
+:Zmiana stanu jednego obiektu powinna\npowiadamiac inne obiekty?;
+if (TAK) then (tak)
+else (nie)
+    :Prosta zaleznosc / DI\nlub brak powiadamiania;
+    stop
+endif
+
+:Liczba/typ powiadamianych zmienna\nlub nieznana z gory?;
+if (TAK) then (tak)
+else (nie)
+    if (Zawsze 1 odbiorca?) then (TAK)
+        :Prosta zaleznosc przez interfejs\n(bez listy obserwatorow);
+        stop
+    else (NIE)
+        :Obserwator z malym kodem;
+    endif
+endif
+
+:Chcesz logowac / dekorowac\nkazde wywolanie metody?;
+if (TAK) then (tak)
+    :AOP / Dekorator / Middleware\n(nie Observer);
+    stop
+else (nie)
+endif
+
+:OBSERVER jest odpowiedni;
+
+:Potrzebujesz stramieni async,\nfiltrowania, kompozycji?;
+if (TAK) then (tak)
+    :IObservable<T> / Rx.NET;
+else (nie)
+    :API publiczne / interop .NET?;
+    if (TAK) then (tak)
+        :Zdarzenia C# (event EventHandler);
+    else (NIE)
+        :Reczny interfejs IObserver\n(pelna kontrola, zero zaleznosci);
+    endif
+endif
+
+stop
+@enduml

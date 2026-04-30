@@ -1,0 +1,62 @@
+@startuml observer_push_pull
+title Observer - Push Model vs Pull Model
+
+skinparam monochrome true
+skinparam dpi 150
+
+package "Push Model" {
+    class PushSubject {
+        - temp: float
+        - hum: float
+        + Notify()
+    }
+    interface IPushObserver {
+        + Update(temp: float, hum: float)
+    }
+    class PushObserver {
+        + Update(temp, hum)
+    }
+    PushSubject -> IPushObserver : Update(temp, hum)\nSubject wysyla dane
+    IPushObserver <|.. PushObserver
+}
+
+package "Pull Model" {
+    interface IWeatherData {
+        + Temperature: float
+        + Humidity: float
+    }
+    class PullSubject {
+        + Temperature: float
+        + Humidity: float
+        + Notify()
+    }
+    interface IPullObserver {
+        + Update(source: IWeatherData)
+    }
+    class PullObserverA {
+        + Update(source)
+        ' Pobiera tylko Temperature
+    }
+    class PullObserverB {
+        + Update(source)
+        ' Pobiera tylko Humidity
+    }
+    PullSubject -> IPullObserver : Update(this)
+    PullObserver_user -> IWeatherData : source.Temperature\nsource.Humidity
+    IPullObserver <|.. PullObserverA
+    IPullObserver <|.. PullObserverB
+    PullSubject ..|> IWeatherData
+}
+
+note bottom of PushSubject
+Zalety: mniejsze powiazan
+Wady: sztywny interfejs Update
+end note
+
+note bottom of PullSubject
+Zalety: elastyczny, Observer
+bierze co potrzeba
+Wady: Observer zna IWeatherData
+end note
+
+@enduml

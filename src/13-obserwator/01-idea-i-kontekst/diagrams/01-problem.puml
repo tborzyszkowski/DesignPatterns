@@ -1,0 +1,38 @@
+@startuml observer_problem
+title Observer - problem: scisle powiazan bez wzorca
+
+skinparam monochrome true
+skinparam dpi 150
+
+class WeatherStation {
+    - temperature: float
+    - humidity: float
+    - currentDisplay: CurrentConditionsDisplay
+    - statisticsDisplay: StatisticsDisplay
+    - forecastDisplay: ForecastDisplay
+    + SetMeasurements(t, h)
+}
+
+class CurrentConditionsDisplay {
+    + Update(t, h)
+}
+
+class StatisticsDisplay {
+    + Update(t, h)
+}
+
+class ForecastDisplay {
+    + Update(t, h)
+}
+
+WeatherStation --> CurrentConditionsDisplay : bezposrednia zaleznosc
+WeatherStation --> StatisticsDisplay : bezposrednia zaleznosc
+WeatherStation --> ForecastDisplay : bezposrednia zaleznosc
+
+note bottom of WeatherStation
+Dodanie nowego wyswietlacza
+wymaga zmiany WeatherStation.
+Naruszenie OCP!
+end note
+
+@enduml
