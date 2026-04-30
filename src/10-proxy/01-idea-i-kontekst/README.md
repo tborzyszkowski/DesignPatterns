@@ -8,147 +8,132 @@ Po tym temacie powinienes umiec odpowiedziec na pytania:
 
 1. Dlaczego klient nie powinien czasem rozmawiac bezposrednio z RealSubject?
 2. Co daje dodatkowa warstwa kontrolna (Proxy)?
-3. Jak odroznic Proxy od Adaptera i Dekoratora?
+3. Jakie sa 4 glowne typy Proxy i kiedy kazdy z nich stosowac?
+4. Jak odroznic Proxy od Adaptera i Dekoratora?
 
-## Problem
+## Problem: brak kontroli nad dostepem do obiektu
 
-Klient nie powinien zawsze:
+Wyobraz sobie serwis bazodanowy generujacy raporty. Klient wywoluje go bezposrednio. Pojawia sie problem: kazdy uzytkownik moze skasowac wszystko, inicjalizacja polaczenia trwa 2 sekundy nawet jesli raport nie jest potrzebny, a kazda operacja jest niewidoczna w logach.
 
-1. miec pelnego dostepu do RealSubject,
-2. inicjalizowac ciezkich zasobow od razu,
-3. znac szczegolow infrastruktury zdalnej.
+Potrzebujemy warstwy, ktora — nie zmieniajac kontraktu klienta — moze:
 
-W praktyce oznacza to, ze potrzebujemy warstwy, ktora:
-
-1. pilnuje polityk (kto i kiedy moze wywolac metode),
-2. moze odlozyc koszt (lazy initialization),
-3. moze dodac aspekty techniczne (logowanie, cache, retry),
-4. nie zmienia kontraktu widzianego przez klienta.
+1. Pilnowac polityk dostepu (kto i kiedy moze wywolac metode).
+2. Odlozyc koszt inicjalizacji (lazy initialization).
+3. Zwrocic wynik z cache zamiast kosztownego wywolania.
+4. Dodac logowanie i metryki bez ingerencji w logike domenowa.
+5. Ukryc fakt, ze RealSubject jest zdalne (siec, RPC, REST).
 
 ## Idea Proxy
 
-Proxy ma ten sam kontrakt co RealSubject, ale dodaje kontrolowany punkt wejscia.
+Proxy ma **ten sam kontrakt** co RealSubject, ale dodaje kontrolowany punkt wejscia:
 
-1. Client -> ISubject.
-2. Proxy : ISubject.
-3. RealSubject : ISubject.
+```
+Client --> ISubject <|.. Proxy --> RealSubject : ISubject
+```
 
-## Diagram
+Klient nie wie, czy pracuje z Proxy, czy z RealSubject. Obie klasy implementuja ten sam interfejs.
 
 ![Proxy motivation](diagrams/proxy_motivation.png)
 
 Zrodlo: [diagrams/01-proxy-motivation.puml](diagrams/01-proxy-motivation.puml)
 
-Na diagramie klient ma dwa warianty:
-
-1. dostep bezposredni (trudniej kontrolowac),
-2. dostep przez Proxy (mozna walidowac, logowac i ograniczac).
-
 ## Przeplyw wywolania krok po kroku
 
-1. Klient wywoluje metode na interfejsie ISubject.
-2. Wywolanie trafia najpierw do Proxy.
-3. Proxy wykonuje logike pre-check (np. role, cache, telemetry).
-4. Proxy deleguje wywolanie do RealSubject.
-5. Proxy moze wykonac logike post-check i zwrocic wynik klientowi.
+1. Klient wywoluje metode na interfejsie `ISubject`.
+1. Wywolanie trafia do `Proxy`, nie do `RealSubject`.
+1. Proxy wykonuje logike **pre-check**: autoryzacja, sprawdzenie cache, start pomiaru czasu.
+1. Proxy deleguje (lub nie) wywolanie do `RealSubject`.
+1. Proxy wykonuje logike **post-check**: zapis do cache, stop pomiaru czasu, log wyniku.
+1. Wynik wraca do klienta.
 
-## Typowe zastosowania
+## Cztery typy Proxy — kiedy ktory
 
-1. Protection Proxy: autoryzacja.
-2. Virtual Proxy: lazy initialization.
-3. Remote Proxy: ukrycie komunikacji sieciowej.
-4. Caching/Logging Proxy: cross-cutting concerns.
+| Typ | Cel | Przyklad z zycia | Przyklad C# |
+|---|---|---|---|
+| **Protection Proxy** | Kontrola uprawnien | Bramka w biurze — wchodzisz tylko ze zenietką | Proxy sprawdza role przed `Delete()` |
+| **Virtual Proxy** | Lazy initialization | Miniatura zdjecia zamiast oryginalnego pliku | `ImageProxy` tworzy `RealImage` dopiero przy `Display()` |
+| **Remote Proxy** | Ukrycie lokalizacji | Recepcja przyjmuje zamowienie, kuchnia je realizuje | Stub gRPC ukrywa fakt komunikacji sieciowej |
+| **Caching Proxy** | Zapamietanie wynikow | Kelner pamięta zamowienie stolika — nie pyta szefa drugi raz | `_cache[key]` zamiast ponownego zapytania do bazy |
 
-## Co odroznia od innych wzorcow
+![Proxy types](diagrams/proxy_types.png)
 
-1. Adapter zmienia interfejs, Proxy zachowuje ten sam.
-2. Dekorator glownie rozszerza zachowanie, Proxy glownie kontroluje dostep.
+Zrodlo: [diagrams/02-proxy-types.puml](diagrams/02-proxy-types.puml)
+
+## Co odroznia Proxy od innych wzorcow
+
+| Wzorzec | Zachowuje kontrakt? | Glowny cel |
+|---|---|---|
+| **Proxy** | Tak | Kontrola dostepu, lazy, cache, remote |
+| **Adapter** | Nie — zmienia interfejs | Dostosowanie obcego API do swojego kontraktu |
+| **Dekorator** | Tak | Nakladanie nowych zachowan warstwowo |
+| **Strategia** | Tak | Podmiana algorytmu w jednej osi |
+
+Krotka regula: jesli zachowujesz interfejs i chcesz **kontrolowac**, nie **rozszerzac** — to Proxy. Jesli chcesz warstwowo **doklejac** zachowania — to Dekorator.
 
 ## Przykladowy program C# (Protection Proxy)
 
-Ponizej minimalny, samodzielny przyklad pokazujacy kontrole uprawnien.
+Ponizej minimalny, samodzielny przyklad pokazujacy cztery etapy wzorca:
 
 ```csharp
-enum UserRole
-{
-	User,
-	Admin
-}
-
-sealed record UserContext(UserRole Role);
-
+// Subject
 interface IReportService
 {
-	string GetMonthlyReport(int month);
-	void DeleteAllReports();
+    string GetMonthlyReport(int month);
+    void DeleteAllReports();
 }
 
+// RealSubject — logika domenowa, bez znajomosci ról
 sealed class RealReportService : IReportService
 {
-	public string GetMonthlyReport(int month) => $"REPORT-{month:00}";
-
-	public void DeleteAllReports()
-	{
-		Console.WriteLine("RealReportService: all reports deleted");
-	}
+    public string GetMonthlyReport(int month) => $"REPORT-{month:00}";
+    public void DeleteAllReports() => Console.WriteLine("RealReportService: deleted");
 }
 
-sealed class ReportServiceProxy : IReportService
+// Protection Proxy — warunek dostepu, pre-check
+sealed class ReportServiceProxy(IReportService inner, UserContext ctx) : IReportService
 {
-	private readonly IReportService _inner;
-	private readonly UserContext _context;
+    public string GetMonthlyReport(int month)
+    {
+        Console.WriteLine($"Proxy: GET report/{month} [role={ctx.Role}]");
+        return inner.GetMonthlyReport(month);
+    }
 
-	public ReportServiceProxy(IReportService inner, UserContext context)
-	{
-		_inner = inner;
-		_context = context;
-	}
-
-	public string GetMonthlyReport(int month)
-	{
-		Console.WriteLine($"Proxy: GetMonthlyReport({month})");
-		return _inner.GetMonthlyReport(month);
-	}
-
-	public void DeleteAllReports()
-	{
-		Console.WriteLine("Proxy: DeleteAllReports() requested");
-
-		if (_context.Role != UserRole.Admin)
-		{
-			throw new UnauthorizedAccessException("Only Admin can delete reports.");
-		}
-
-		_inner.DeleteAllReports();
-	}
+    public void DeleteAllReports()
+    {
+        Console.WriteLine("Proxy: DELETE requested");
+        if (ctx.Role != UserRole.Admin)
+            throw new UnauthorizedAccessException("Only Admin can delete reports.");
+        inner.DeleteAllReports();
+    }
 }
 
-var userProxy = new ReportServiceProxy(new RealReportService(), new UserContext(UserRole.User));
-var adminProxy = new ReportServiceProxy(new RealReportService(), new UserContext(UserRole.Admin));
+// Client — pracuje wylacznie na IReportService, nie zna Proxy ani RealSubject
+IReportService userProxy  = new ReportServiceProxy(new RealReportService(), new UserContext(UserRole.User));
+IReportService adminProxy = new ReportServiceProxy(new RealReportService(), new UserContext(UserRole.Admin));
 
 Console.WriteLine(userProxy.GetMonthlyReport(3));
+// => Proxy: GET report/3 [role=User]
+// => REPORT-03
 
-try
-{
-	userProxy.DeleteAllReports();
-}
-catch (UnauthorizedAccessException ex)
-{
-	Console.WriteLine($"Expected: {ex.Message}");
-}
+try { userProxy.DeleteAllReports(); }
+catch (UnauthorizedAccessException ex) { Console.WriteLine($"Expected: {ex.Message}"); }
+// => Proxy: DELETE requested
+// => Expected: Only Admin can delete reports.
 
 adminProxy.DeleteAllReports();
+// => Proxy: DELETE requested
+// => RealReportService: deleted
 ```
 
 ### Co sie tu dzieje?
 
-1. Klient widzi tylko IReportService.
-2. ReportServiceProxy implementuje ten sam interfejs co RealReportService.
-3. Proxy sprawdza role przed operacja krytyczna.
-4. RealReportService nie zna zasad autoryzacji.
-5. Zasady dostepu sa w jednym miejscu i latwo je testowac.
+1. Klient widzi tylko `IReportService` — nie wie, czy ma Proxy, czy RealSubject.
+1. `ReportServiceProxy` implementuje ten sam interfejs co `RealReportService`.
+1. Proxy sprawdza role przed operacja krytyczna (pre-check).
+1. `RealReportService` nie zna zasad autoryzacji — SRP zachowane.
+1. Zasady dostepu sa w jednym miejscu i latwo je testowac.
 
-## Przykladowy program C#
+## Kod przykladu
 
 Kod: [Examples/Program.cs](Examples/Program.cs)
 
@@ -162,5 +147,6 @@ dotnet run
 
 ## Dalsze kroki
 
-1. Pelna implementacja Static Proxy z loggerem: [../04-static-proxy/Examples/Program.cs](../04-static-proxy/Examples/Program.cs)
-2. Wersja dynamiczna w C#: [../05-dynamic-proxy-csharp/README.md](../05-dynamic-proxy-csharp/README.md)
+1. Pelna implementacja Static Proxy z loggerem: [../04-static-proxy/README.md](../04-static-proxy/README.md)
+1. Wersja dynamiczna w C#: [../05-dynamic-proxy-csharp/README.md](../05-dynamic-proxy-csharp/README.md)
+1. Procedura decyzyjna — kiedy ktory wzorzec: [../02-kiedy-stosowac-zalety-wady/README.md](../02-kiedy-stosowac-zalety-wady/README.md)

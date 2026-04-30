@@ -2,126 +2,157 @@
 
 ## Cel tematu
 
-Nauczyc sie podejmowac decyzje, kiedy Proxy rozwiazuje problem, a kiedy lepiej wybrac inny wzorzec.
+Nauczyc sie podejmowac decyzje: kiedy Proxy rozwiazuje problem, jaki typ Proxy wybrac, a kiedy lepiej wybrac inny wzorzec.
 
-## Sygnaly, ze warto
+## Krok 1 - czy w ogole Proxy?
 
-1. Potrzebujesz kontroli dostepu do operacji.
-2. Tworzenie obiektu jest kosztowne i chcesz lazy init.
-3. Chcesz dodac cache/logowanie bez zmian klienta.
-4. Chcesz ukryc zdalne wywolanie za lokalnym interfejsem.
+Pytania filtrujace:
 
-## Diagram decyzji
+1. Chcesz zachowac ten sam kontrakt co RealSubject dla klienta? **[jesli TAK - Proxy kandyduje]**
+1. Chcesz dodac logike kontrolna/infrastrukturalna bez zmiany kodu klienta? **[jesli TAK - Proxy kandyduje]**
+1. Chcesz zmienic interfejs obcego API? **[jesli TAK - Adapter, nie Proxy]**
+1. Chcesz warstwowo nakladac zachowania (dekorowanie)? **[jesli TAK - Dekorator, nie Proxy]**
+1. Chcesz zmienic algorytm obliczen? **[jesli TAK - Strategia, nie Proxy]**
+
+## Krok 2 - jaki typ Proxy?
+
+Jesli przeszles krok 1 i wybrales Proxy, dobierz typ:
+
+```
+Potrzebujesz kontroli uprawnien przed wywolaniem?
+  TAK => Protection Proxy
+  NIE => kontynuuj
+
+Tworzenie RealSubject jest kosztowne i moze byc niepotrzebne?
+  TAK => Virtual Proxy
+  NIE => kontynuuj
+
+RealSubject jest na innym hoscie (siec, RPC, REST)?
+  TAK => Remote Proxy
+  NIE => kontynuuj
+
+Wyniki sa stabilne i chcesz zaoszczedzic na wielokrotnych wywolaniach?
+  TAK => Caching Proxy
+  NIE => rozważ Logging/Monitoring Proxy (cross-cutting concerns)
+```
 
 ![Proxy decision map](diagrams/proxy_decision_map.png)
 
 Zrodlo: [diagrams/01-decision-map.puml](diagrams/01-decision-map.puml)
 
-Interpretacja mapy:
+## Krok 3 - Proxy vs inne wzorce (pelna tabela)
 
-1. Jesli kontrakt ma pozostac ten sam i chcesz kontrolowac dostep, zwykle wybierasz Proxy.
-2. Jesli musisz zmienic kontrakt obcego API, zwykle wybierasz Adapter.
-3. Jesli chcesz glownie nakladac zachowania warstwowo, sprawdz Dekorator.
+| Pytanie kluczowe | Wzorzec | Uzasadnienie |
+|---|---|---|
+| Zmieniasz kontrakt obcego API? | **Adapter** | Adapter transluje sygnature - Proxy jej nie zmienia |
+| Ten sam kontrakt + kontrola uprawnien? | **Protection Proxy** | Pilnuje polityk bez wiedzy klienta |
+| Ten sam kontrakt + lazy init? | **Virtual Proxy** | Odklada koszt tworzenia do momentu uzycia |
+| Ten sam kontrakt + ukrycie sieci? | **Remote Proxy** | Klient mysli, ze wywoluje lokalny obiekt |
+| Ten sam kontrakt + cache wynikow? | **Caching Proxy** | Zwraca zapamietany wynik zamiast delegowac |
+| Ten sam kontrakt + warstwowe rozszerzanie? | **Dekorator** | Dekorator naklada nowe zachowanie addytywnie |
+| Podmiana algorytmu w jednej osi? | **Strategia** | Strategia zmienia co sie oblicza, nie kto ma dostep |
 
-## Kiedy nie
+![Proxy vs patterns](diagrams/proxy_vs_patterns.png)
 
-1. Logika posrednia jest minimalna i jednorazowa.
-2. Prostsza kompozycja lub middleware wystarczy.
-3. Narzut na debugging i wydajnosc przewyzsza zysk.
+Zrodlo: [diagrams/02-proxy-vs-patterns.puml](diagrams/02-proxy-vs-patterns.puml)
+
+## Scenariusze decyzyjne - przyklady z zycia
+
+### Scenariusz A: serwis raportow - kto moze usuwac?
+
+Masz `IReportService`. Chcesz, zeby `DeleteAllReports()` bylo dostepne tylko dla admina.
+
+1. Czy zmieniasz kontrakt? [NIE]
+1. Czy to kontrola uprawnien? [TAK]
+1. Decyzja: **Protection Proxy**.
+
+Koszt rozszerzenia: 1 klasa `ReportServiceProxy`, klient bez zmian.
+
+### Scenariusz B: galeria obrazow - ladowanie tylko gdy potrzebne
+
+Masz `IImage`. Obraz wazy 50 MB. Uzytkownik moze nigdy nie otworzyc galerii.
+
+1. Czy zmieniasz kontrakt? [NIE]
+1. Czy tworzenie jest kosztowne i moze byc odlozone? [TAK]
+1. Decyzja: **Virtual Proxy**.
+
+Koszt rozszerzenia: 1 klasa `ImageProxy`, klient bez zmian.
+
+### Scenariusz C: zewnetrzny serwis platnosci - ukrycie HTTP
+
+Masz kontrakt `IPaymentGateway`. Implementacja to wywolanie REST API.
+
+1. Czy zmieniasz kontrakt? [NIE - tworzysz wlasny kontrakt i ukrywasz HTTP]
+1. Czy RealSubject jest zdalny? [TAK]
+1. Decyzja: **Remote Proxy**.
+
+Klient wywoluje `IPaymentGateway.Pay()` jak lokalny obiekt.
+
+### Scenariusz D: wyszukiwarka produktow - wyniki sie powtarzaja
+
+Masz `IProductSearch`. Zapytanie do bazy trwa 300 ms. Te same frazy wyszukiwane wielokrotnie.
+
+1. Czy zmieniasz kontrakt? [NIE]
+1. Czy wyniki sa stabilne w czasie? [TAK - TTL 5 min]
+1. Decyzja: **Caching Proxy**.
+
+Koszt rozszerzenia: 1 klasa z `Dictionary<string, Product[]>`, klient bez zmian.
+
+### Scenariusz E: nowy dostawca kuriera - inny interfejs
+
+Masz `IDeliveryService`. Nowy kurier ma API z innymi metodami i typami.
+
+1. Czy zmieniasz kontrakt? [TAK - translacja sygnatury]
+1. Decyzja: **Adapter**, nie Proxy.
+
+## Checklista decyzyjna - szablon 10 sekund
+
+```
+Pytanie                                    TAK/NIE  Wzorzec
+------------------------------------------------------
+Zmieniam kontrakt obcego API?              [ ]      Adapter
+Ten sam kontrakt + kontrola uprawnien?     [ ]      Protection Proxy
+Ten sam kontrakt + lazy init?              [ ]      Virtual Proxy
+Ten sam kontrakt + ukrycie sieci?          [ ]      Remote Proxy
+Ten sam kontrakt + cache wynikow?          [ ]      Caching Proxy
+Ten sam kontrakt + nakladam warstwy?       [ ]      Dekorator
+Podmiana algorytmu (jedna os)?             [ ]      Strategia
+```
+
+## Kiedy nie stosowac Proxy
+
+1. Logika posrednia jest minimalna i jednorazowa - prosta kompozycja wystarczy.
+1. Masz juz middleware (np. ASP.NET pipeline) realizujacy ten cel.
+1. Narzut na debugowanie i wydajnosc przewyzsza zysk.
+1. Liczba interfejsow jest duza - rozważ Dynamic Proxy zamiast Static.
 
 ## Zalety
 
-1. Separacja odpowiedzialnosci infrastrukturalnych.
-2. Lepsza kontrola dostepu i obserwowalnosc.
-3. Zachowanie jednego kontraktu dla klienta.
+1. Separacja odpowiedzialnosci infrastrukturalnych od domenowych.
+1. Lepsza kontrola dostepu i obserwowalnosc.
+1. Zachowanie jednego kontraktu dla klienta.
+1. Latwa wymiana Proxy bez zmian klienta lub RealSubject.
 
 ## Wady
 
 1. Wiecej klas i poziomow wywolan.
-2. Trudniejsza diagnostyka bledow.
-3. Potencjalny narzut runtime (szczegolnie dynamiczny proxy).
+1. Trudniejsza diagnostyka bledow (szczegolnie Dynamic Proxy).
+1. Potencjalny narzut runtime.
+1. Ryzyko logiki biznesowej w Proxy zamiast w RealSubject.
 
-## Typowe bledy decyzyjne
+## Typowe bledy
 
-1. Uzywanie Proxy do zmiany interfejsu (to zwykle Adapter).
-2. Wkladanie logiki biznesowej do Proxy zamiast do RealSubject.
-3. Dodawanie wielu warstw proxy bez monitoringu i metryk.
-4. Brak testow dla scenariuszy dostepu zabronionego i bledow.
+1. Uzywanie Proxy do zmiany interfejsu - to Adapter.
+1. Wkladanie logiki domenowej do Proxy - SRP naruszone.
+1. Wiele warstw proxy bez metryk - trudny debugging.
+1. Brak testow dla sciezki dostepu zabronionego.
 
-## Krotka checklista decyzyjna
-
-Scenariusz: obce API, inny kontrakt -> **Adapter**.
-
-Scenariusz: ta sama umowa, kontrola dostepu/lazy/cache -> **Proxy**.
-
-Scenariusz: jedna os podmiany algorytmu -> **Strategia**.
-
-Scenariusz: rozszerzanie odpowiedzialnosci obiektu warstwowo -> **Dekorator**.
-
-## Przykladowy program C# (Virtual Proxy)
-
-Ponizej prosty przyklad pokazuje, kiedy Proxy jest lepszy niz bezposredni dostep: ciezki obiekt tworzony jest dopiero przy pierwszym uzyciu.
-
-```csharp
-interface IImage
-{
-	void Display();
-}
-
-sealed class RealImage : IImage
-{
-	private readonly string _path;
-
-	public RealImage(string path)
-	{
-		_path = path;
-		Console.WriteLine($"Loading image from disk: {_path}");
-		Thread.Sleep(300); // symulacja kosztu I/O
-	}
-
-	public void Display()
-	{
-		Console.WriteLine($"Displaying {_path}");
-	}
-}
-
-sealed class ImageProxy : IImage
-{
-	private readonly string _path;
-	private RealImage? _realImage;
-
-	public ImageProxy(string path)
-	{
-		_path = path;
-	}
-
-	public void Display()
-	{
-		_realImage ??= new RealImage(_path);
-		_realImage.Display();
-	}
-}
-
-IImage image = new ImageProxy("hero-banner.png");
-
-Console.WriteLine("Proxy created. No disk load yet.");
-image.Display(); // tutaj dopiero lazy init RealImage
-image.Display(); // drugi raz bez kosztu tworzenia
-```
-
-### Co ten przyklad udowadnia?
-
-1. Klient pracuje na tym samym kontrakcie (`IImage`).
-2. Koszt tworzenia ciezkiego obiektu jest odlozony do momentu potrzeby.
-3. Decyzja o lazy loading jest zamknieta w Proxy, nie w kliencie.
-4. Ten scenariusz to klasyczny przypadek dla Virtual Proxy.
-
-## Przykladowy program C#
+## Kod przykladu
 
 Kod: [Examples/Program.cs](Examples/Program.cs)
 
 Program demonstruje Virtual Proxy z leniwym ladowaniem obrazu. Obiekt `ImageProxy` nie tworzy `RealImage`
-dopoki klient nie wywoula `Display()` po raz pierwszy. Drugie wywolanie nie powoduje ponownego ladowania.
+dopoki klient nie wywola `Display()` po raz pierwszy. Drugie wywolanie nie powoduje ponownego ladowania.
 
 ```bash
 cd src/10-proxy/02-kiedy-stosowac-zalety-wady/Examples
@@ -131,4 +162,4 @@ dotnet run
 ## Dalsze kroki
 
 1. Static Proxy z kontrola uprawnien: [../04-static-proxy/README.md](../04-static-proxy/README.md)
-2. Dynamic Proxy i interception runtime: [../05-dynamic-proxy-csharp/README.md](../05-dynamic-proxy-csharp/README.md)
+1. Dynamic Proxy i interception runtime: [../05-dynamic-proxy-csharp/README.md](../05-dynamic-proxy-csharp/README.md)

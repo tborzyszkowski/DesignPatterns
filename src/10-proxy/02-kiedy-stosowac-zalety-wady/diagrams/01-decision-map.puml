@@ -1,19 +1,54 @@
 @startuml proxy_decision_map
-title Proxy - mapa decyzji
+title Procedura decyzyjna - kiedy ktory wzorzec / jaki typ Proxy
 
 skinparam monochrome true
 skinparam dpi 150
 
 start
-if (Ten sam kontrakt?) then (tak)
-  if (Kontrola dostepu/lazy/cache?) then (tak)
-    :Proxy;
-  else (nie)
-    :Sprawdz Decorator;
+
+if (Zachowujesz ten sam kontrakt\ndla klienta?) then (TAK)
+
+  if (Nakladasz zachowania\nwarstwowo (addytywnie)?) then (TAK)
+    :Dekorator;
+    stop
   endif
-else (nie)
-  :Adapter;
+
+  if (Zmieniasz glownie\nalgorytm obliczen?) then (TAK)
+    :Strategia;
+    stop
+  endif
+
+  note right
+    Mamy Proxy.
+    Wybierz typ:
+  end note
+
+  if (Kontrola uprawnien\nprzed wywolaniem?) then (TAK)
+    :Protection Proxy\n(np. sprawdzenie roli przed Delete);
+    stop
+  endif
+
+  if (Tworzenie RealSubject\nkosztowne i moze byc odlozone?) then (TAK)
+    :Virtual Proxy\n(lazy initialization);
+    stop
+  endif
+
+  if (RealSubject jest\nna innym hoscie?) then (TAK)
+    :Remote Proxy\n(ukrycie sieci/RPC/REST);
+    stop
+  endif
+
+  if (Wyniki stabilne\ni powtarzalne?) then (TAK)
+    :Caching Proxy\n(cache wynikow);
+    stop
+  endif
+
+  :Logging / Monitoring Proxy\n(cross-cutting concerns);
+  stop
+
+else (NIE)
+  :Adapter\n(translacja sygnatury);
+  stop
 endif
-stop
 
 @enduml

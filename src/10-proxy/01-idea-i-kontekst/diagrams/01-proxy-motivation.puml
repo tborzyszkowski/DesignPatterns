@@ -1,16 +1,33 @@
 @startuml proxy_motivation
-title Proxy - motywacja
+title Proxy - kontrolowany punkt wejscia
 
 skinparam monochrome true
 skinparam dpi 150
 
 actor Client
-rectangle "Direct access" as Direct
-rectangle "Proxy gate" as Gate
-rectangle "Real service" as Real
 
-Client --> Direct
-Client --> Gate
-Gate --> Real
+rectangle "Bez Proxy\n(brak kontroli)" as NP {
+    rectangle "RealSubject\n(pelen dostep)" as RS1
+}
+
+rectangle "Z Proxy\n(kontrolowany dostep)" as WP {
+    rectangle "Proxy\n(pre-check + post-check)" as P
+    rectangle "RealSubject" as RS2
+}
+
+Client --> RS1 : bezposrednie wywolanie\n(brak autoryzacji, logowania, cache)
+Client --> P   : wywolanie przez Proxy
+P --> RS2      : delegacja (po walidacji)
+
+note right of P
+  Pre-check:
+  - autoryzacja (Protection)
+  - sprawdzenie cache (Caching)
+  - lazy init (Virtual)
+  Post-check:
+  - log wyniku
+  - zapis do cache
+  - pomiar czasu
+end note
 
 @enduml
