@@ -1,0 +1,35 @@
+@startuml flyweight_memory_gain
+title Flyweight - zysk pamieci: 6 wywolan, 3 unikalne flyweighty
+
+skinparam monochrome true
+skinparam dpi 150
+
+package "FlyweightFactory (cache)" {
+    card "Flyweight 'A'\n---\nSymbol: 'A'\nFont: Arial\nMetrics: {...}" as FA
+    card "Flyweight 'B'\n---\nSymbol: 'B'\nFont: Arial\nMetrics: {...}" as FB
+    card "Flyweight 'C'\n---\nSymbol: 'C'\nFont: Arial\nMetrics: {...}" as FC
+}
+
+package "Klient - extrinsic state (per wywolanie)" {
+    card "Draw #1: ref->FA, x=10, y=20, color=black" as D1
+    card "Draw #2: ref->FA, x=40, y=20, color=red" as D2
+    card "Draw #3: ref->FA, x=70, y=20, color=blue" as D3
+    card "Draw #4: ref->FB, x=100, y=20, color=black" as D4
+    card "Draw #5: ref->FA, x=130, y=20, color=green" as D5
+    card "Draw #6: ref->FC, x=160, y=20, color=black" as D6
+}
+
+D1 --> FA
+D2 --> FA
+D3 --> FA
+D5 --> FA
+D4 --> FB
+D6 --> FC
+
+note bottom
+Bez Flyweight: 6 obiektow x ~70B = ~420B
+Z Flyweight  : 3 flyweighty x ~30B + 6 x ~20B = ~210B
+Oszczednosc  : ~50% (rosnie wykadniczo przy milionach obiektow)
+end note
+
+@enduml

@@ -4,43 +4,57 @@
 
 Zrozumieć, jaki problem pamięciowy rozwiązuje wzorzec Pyłek i dlaczego sama optymalizacja algorytmu nie zawsze wystarcza.
 
-## Szczegółowe wyjaśnienie
+## Problem: miliony obiektów, z których większość jest identyczna
 
-Wzorzec Pyłek (Flyweight) stosujemy wtedy, gdy system tworzy bardzo dużo obiektów o podobnej strukturze.
-Kluczowa obserwacja jest taka, że część danych zwykle powtarza się między wieloma instancjami.
+Wyobraź sobie edytor tekstu renderujący dokument 500 stron. Każda strona ma ok. 3000 znaków. Razem: 1 500 000 obiektów `Glyph`. Każdy przechowuje:
 
-Zamiast przechowywać wszystko w każdym obiekcie:
+- `char Symbol` (2 B)
+- `string FontFamily` (ref = 8 B + dane)
+- `FontMetrics Metrics` (40 B)
+- `int X, Y, PointSize` (12 B)
+- `string Color` (ref = 8 B + dane)
 
-1. Wydzielamy dane wspólne jako `intrinsic state`.
-1. Przechowujemy je raz i współdzielimy.
-1. Dane zależne od kontekstu (`extrinsic state`) podajemy przy wywołaniu metody.
+Razem ok. 70–80 B na znak. Przy 1,5 mln znaków to **ok. 120 MB** — tylko na glify.
 
-Dlaczego to pomaga:
+**Kluczowa obserwacja:** `FontFamily`, `Metrics` i `Symbol` są identyczne dla setek tysięcy znaków. `X`, `Y`, `PointSize`, `Color` są unikalne dla każdego wystąpienia.
 
-1. Zmniejsza liczbę dużych, zduplikowanych instancji.
-1. Ogranicza zużycie pamięci i presję na GC.
-1. Poprawia przewidywalność działania pod dużym obciążeniem.
+## Rozwiązanie: podział stanu na intrinsic i extrinsic
 
-## Problem
+| Część stanu | Nazwa | Gdzie przechowana | Przykład |
+|---|---|---|---|
+| Wspólna, niemutowalna | `intrinsic` | Raz, w flyweight | `Symbol='A'`, `FontFamily="Arial"`, `Metrics` |
+| Zależna od kontekstu | `extrinsic` | U klienta, przekazywana przy wywołaniu | `X`, `Y`, `PointSize`, `Color` |
 
-W wielu systemach tworzymy ogromną liczbę obiektów o bardzo podobnej strukturze.
-Przykłady:
+Zamiast 1 500 000 obiektów z pełnym stanem:
 
-1. Znaki tekstu w edytorze.
-1. Kafelki mapy w grze.
-1. Ikony na dashboardzie.
+1. Tworzymy **kilkadziesiąt flyweightów** (np. 52 litery + cyfry + znaki).
+1. Każdy flyweight trzyma tylko `intrinsic` (Symbol + FontFamily + Metrics).
+1. Klient przekazuje `extrinsic` w wywołaniu `Draw(x, y, size, color)`.
 
-Jeśli każdy obiekt przechowuje cały stan, to:
+Wynik: **zamiast 120 MB — kilka kB** dla flyweightów + tablica pozycji dla kontekstu.
 
-1. Rośnie zużycie pamięci.
-1. Rośnie presja na GC.
-1. Spada przewidywalność wydajności.
+## Trzy reprezentatywne scenariusze
 
-## Intuicja wzorca Pyłek
+### Scenariusz A: renderowanie tekstu (edytor, PDF, gra)
 
-1. Oddzielamy część wspólną (intrinsic) od kontekstowej (extrinsic).
-1. Część wspólna jest tworzona raz i współdzielona.
-1. Część kontekstowa jest przekazywana przez klienta przy wywołaniu.
+Bez Flyweight: 1 000 000 obiektów `Glyph`, każdy z metrykamą czcionki.
+Z Flyweight: 96 flyweightów (ASCII) + 1 000 000 par `(flyweightRef, x, y, color)`.
+
+### Scenariusz B: kafelki mapy w grze (tile map)
+
+Mapa 1000×1000 = 1 mln komórek. Typy terenu: Trawa, Woda, Piasek, Skała — tylko 4.
+Bez Flyweight: 1 mln obiektów z teksturą, kolizją, animacją (duplikowane).
+Z Flyweight: 4 flyweighty + tablica 1 mln indeksów.
+
+### Scenariusz C: ikony UI w dashboardzie
+
+Dashboard wyświetla 10 000 przycisków. Typy ikon: Zatwierdź, Anuluj, Edytuj, Usuń — 4 warianty.
+Bez Flyweight: 10 000 obiektów z bitmapą (100 KB każda) = 1 GB.
+Z Flyweight: 4 flyweighty × 100 KB = 400 KB + 10 000 referencji.
+
+## Intuicja — analogia z życia
+
+Biblioteka miejska ma 200 000 egzemplarzy książek. Zamiast duplikować tytuł, autora i ISBN w każdym egzemplarzu, kartoteka biblioteczna trzyma jeden rekord (flyweight) na tytuł, a każdy egzemplarz (kontekst klienta) przechowuje tylko numer półki i status wypożyczenia.
 
 ## Diagramy
 
@@ -67,12 +81,11 @@ Opis:
 1. Factory zwraca współdzielony obiekt, jeśli już istnieje.
 1. `Client` przekazuje extrinsic state w czasie operacji (np. `Draw`).
 
-## Minimalny scenariusz
+### Diagram zysku pamięci
 
-Zamiast 1 000 000 obiektów `Glyph` z duplikatami czcionki i kształtu:
+![Zysk pamięci](diagrams/flyweight_memory_gain.png)
 
-1. Tworzymy małe repozytorium unikalnych flyweightów.
-1. Klient przekazuje pozycję, rozmiar i kolor jako extrinsic state.
+Źródło: [diagrams/03-memory-gain.puml](diagrams/03-memory-gain.puml)
 
 ## Przykładowy program
 
@@ -101,5 +114,5 @@ Jak interpretować wynik:
 ## Co student powinien zapamiętać
 
 1. Flyweight optymalizuje pamięć, nie semantykę domeny.
-1. Nie każdy projekt zyska na tym wzorcu.
-1. Najpierw analiza modelu i metryki, potem implementacja.
+1. Nie każdy projekt zyska na tym wzorcu — najpierw pomiar.
+1. Kluczowy jest prawidłowy podział na intrinsic (wspólne, niemutowalne) i extrinsic (kontekstowe).

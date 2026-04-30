@@ -1,18 +1,21 @@
 @startuml flyweight_problem_context
-title Flyweight - problem context
+title Flyweight - bez wzorca: 6 obiektow, dane wspolne zduplikowane
 
 skinparam monochrome true
 skinparam dpi 150
 
-rectangle "Naiwne podejscie" as Naive {
-  card "Glyph A\nfont=Arial\nshape=A\ncolor=black\nsize=12\nx=10 y=20" as N1
-  card "Glyph A\nfont=Arial\nshape=A\ncolor=red\nsize=16\nx=40 y=20" as N2
-  card "Glyph A\nfont=Arial\nshape=A\ncolor=blue\nsize=12\nx=70 y=20" as N3
+package "Bez Flyweight (6 obiektow Glyph)" {
+    card "Glyph #1\n---\nSymbol: 'A'\nFont: Arial\nMetrics: {...}\n---\nx=10, y=20\ncolor=black" as G1
+    card "Glyph #2\n---\nSymbol: 'A'\nFont: Arial\nMetrics: {...}\n---\nx=40, y=20\ncolor=red" as G2
+    card "Glyph #3\n---\nSymbol: 'A'\nFont: Arial\nMetrics: {...}\n---\nx=70, y=20\ncolor=blue" as G3
+    card "Glyph #4\n---\nSymbol: 'B'\nFont: Arial\nMetrics: {...}\n---\nx=100, y=20\ncolor=black" as G4
+    card "Glyph #5\n---\nSymbol: 'A'\nFont: Arial\nMetrics: {...}\n---\nx=130, y=20\ncolor=green" as G5
+    card "Glyph #6\n---\nSymbol: 'C'\nFont: Arial\nMetrics: {...}\n---\nx=160, y=20\ncolor=black" as G6
 }
 
-note bottom of Naive
-Duplikacja danych wspolnych
-powoduje duze zuzycie pamieci.
+note bottom
+Symbol + Font + Metrics sa identyczne dla 4 obiektow 'A'.
+Pamiec: 6 x ~70B = ~420B (z duplikatami danych wspolnych).
 end note
 
 @enduml

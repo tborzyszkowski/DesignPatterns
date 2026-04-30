@@ -1,0 +1,67 @@
+@startuml flyweight_decision_map
+title Flyweight - procedura decyzyjna
+
+skinparam monochrome true
+skinparam dpi 150
+
+start
+
+:Masz problem z pamiecią lub GC?;
+if (TAK) then (tak)
+else (nie)
+    :Brak problemu - nie optymalizuj;
+    stop
+endif
+
+:Obiekty tymczasowe, wypozyczane i zwracane?;
+if (TAK) then (tak)
+    :Object Pool;
+    stop
+else (nie)
+endif
+
+:Przechowujesz wyniki obliczen / zapytan?;
+if (TAK) then (tak)
+    :Prosty cache\n(IMemoryCache / ConcurrentDictionary);
+    stop
+else (nie)
+endif
+
+:Masz tysiace lub miliony podobnych obiektow?;
+if (TAK) then (tak)
+else (nie)
+    :Prosty model - brak potrzeby Flyweight;
+    stop
+endif
+
+:Spora czesc stanu jest identyczna\n(intrinsic >= 30% pol, wysoka powtarzalnosc)?;
+if (TAK) then (tak)
+else (nie)
+    :Flyweight nie da istotnego zysku\nRozwaz: struct, Span<T>, pooling;
+    stop
+endif
+
+:Intrinsic moze byc niemutowalny\n(readonly po utworzeniu)?;
+if (TAK) then (tak)
+else (nie)
+    :Mutowalny intrinsic to blad - Flyweight nie zadziala\nRozwaz refactoring lub inny wzorzec;
+    stop
+endif
+
+:FLYWEIGHT jest odpowiedni;
+if (Dostep wielowatkowy?) then (TAK)
+    :Factory + ConcurrentDictionary;
+else (NIE)
+    if (Cache moze rosnac bez ograniczen?) then (TAK)
+        :Factory + WeakReference;
+    else (NIE)
+        if (Zbior wartosci znany z gory?) then (TAK)
+            :Statyczna tablica flyweightow;
+        else (NIE)
+            :Factory + Dictionary<TKey, IFlyweight>;
+        endif
+    endif
+endif
+
+stop
+@enduml

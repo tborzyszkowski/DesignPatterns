@@ -1,20 +1,52 @@
 @startuml flyweight_vs_pool
-title Flyweight vs Object Pool
+title Flyweight vs Object Pool vs Cache - porownanie
 
 skinparam monochrome true
 skinparam dpi 150
 
 rectangle "Flyweight" {
-  usecase "Cel: zmniejszenie pamieci\nprzez wspoldzielenie\nreprezentacji" as F1
-  usecase "Stan: intrinsic + extrinsic" as F2
+    note as F1
+      Cel: zmniejszenie liczby obiektow
+      przez wspoldzielenie intrinsic state
+      ----
+      Stan: tylko intrinsic (read-only)
+      Zycie: caly czas w cache factory
+      Dostepp: wielu klientow jednoczesnie
+      ----
+      Przyklad: glify czcionki,
+      kafelki mapy, ikony UI
+    end note
 }
 
 rectangle "Object Pool" {
-  usecase "Cel: ograniczenie kosztu\ntworzenia/zwalniania\nobiektow" as P1
-  usecase "Stan: obiekt czasowo\nwypozyczany" as P2
+    note as P1
+      Cel: ograniczenie kosztu
+      tworzenia i niszczenia obiektow
+      ----
+      Stan: pelny, mutowalny
+      Zycie: wypozyczony/zwrocony
+      Dostep: tylko jeden klient na raz
+      ----
+      Przyklad: polaczenia DB,
+      watkii, parsery XML
+    end note
 }
 
-F1 -[hidden]- F2
-P1 -[hidden]- P2
+rectangle "Cache" {
+    note as C1
+      Cel: pamietanie wynikow
+      kosztownych obliczen / zapytan
+      ----
+      Stan: wartosc wyniku (nie obiekt modelu)
+      Zycie: do wyganiescia TTL lub ewikscji
+      Dostep: wielu klientow jednoczesnie
+      ----
+      Przyklad: kursy walut, tokeny JWT,
+      wyniki zapytan HTTP
+    end note
+}
+
+F1 -[hidden]- P1
+P1 -[hidden]- C1
 
 @enduml
