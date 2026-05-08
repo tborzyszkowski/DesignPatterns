@@ -91,6 +91,18 @@
         "/^type \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\10-proxy\\\\README\\.md\" \\| findstr /n \"\\.\"  2>&1 \\| Select-Object -First 20$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^Get-Command plantuml -ErrorAction SilentlyContinue; Get-ChildItem -Recurse -Filter \"plantuml\\*\\.jar\" \"c:\\\\home\\\\gitHub\\\\DesignPatterns\" -ErrorAction SilentlyContinue \\| Select-Object FullName; Get-ChildItem -Recurse -Filter \"plantuml\\*\\.jar\" \"C:\\\\Users\\\\tomek\\.WIN-PC414\" -ErrorAction SilentlyContinue \\| Select-Object FullName -First 5$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^\\$result = & java -jar \"C:\\\\home\\\\gitHub\\\\DesignPatterns\\\\plantuml\\.jar\" -version 2>&1; \\$result \\| ForEach-Object \\{ \\$_ \\}$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Start-Process java -ArgumentList '-jar \"C:\\\\home\\\\gitHub\\\\DesignPatterns\\\\plantuml\\.jar\" -version' -Wait -NoNewWindow 2>&1$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }
