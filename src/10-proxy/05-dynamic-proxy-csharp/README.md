@@ -51,6 +51,7 @@ Korzyści i koszty:
 Źródło: [diagrams/01-dispatch-proxy-flow.puml](diagrams/01-dispatch-proxy-flow.puml)
 
 ### Diagram klas
+![Diagram klas](diagrams/dynamic_proxy_csharp_class.png)
 
 Źródło: [diagrams/02-class.puml](diagrams/02-class.puml)
 
