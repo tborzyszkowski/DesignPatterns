@@ -1,4 +1,4 @@
-# Wzorzec Strategia (Strategy)
+﻿# Wzorzec Strategia (Strategy)
 
 ## Cel modułu
 
@@ -10,18 +10,18 @@ Wzorzec definiuje **rodzinę algorytmów**, hermetyzuje każdy z nich i sprawia,
 | # | Temat | Opis |
 |---|-------|------|
 | [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Rys historyczny, problem warunkowej logiki, koncepcja wzorca |
-| [02](02-kiedy-stosowac-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady, odmiany wzorca |
-| [03](03-struktura-i-dzialanie/README.md) | Struktura i działanie | Role GoF, diagramy klas i sekwencji, konsekwencje stosowania |
+| [02](02-kiedy-stosować-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady, odmiany wzorca |
+| [03](03-struktura-i-działanie/README.md) | Struktura i działanie | Rolę GoF, diagramy klas i sekwencji, konsekwencje stosowania |
 | [04](04-typy-implementacji/README.md) | Typy implementacji | Interfejs, klasa abstrakcyjna, delegaty, hybrydy i schemat wyboru |
 | [05](05-wady-i-zalety/README.md) | Wady i zalety | Analiza — OCP, SRP, testowalność, pułapki i alternatywy |
-| [06](06-duzy-przyklad-i-alternatywy/README.md) | Duży przykład | System zamówień e-commerce — pełny przykład z testami i alternatywami |
+| [06](06-duży-przykład-i-alternatywy/README.md) | Duży przykład | System zamówień e-commerce — pełny przykład z testami i alternatywami |
 
 ## Efekty uczenia
 
 Po przerobieniu modułu student:
 
 1. Rozumie problem eksplozji warunków `if/switch` przy wyborze algorytmu.
-1. Potrafi zaprojektować role `Context`, `IStrategy` i `ConcreteStrategy`.
+1. Potrafi zaprojektować rolę `Context`, `IStrategy` i `ConcreteStrategy`.
 1. Zna różnicę między strategią a metodą szablonową i wie kiedy wybrać każdą.
 1. Rozumie zastosowanie wzorca w bibliotece .NET (`IComparer<T>`, LINQ, `IEqualityComparer<T>`).
 1. Potrafi zaimplementować strategię jako interfejs, klasę abstrakcyjną oraz delegat (`Func<>`).
@@ -37,17 +37,17 @@ Po przerobieniu modułu student:
 
 ```bash
 cd src/17-strategia/01-idea-i-kontekst/Examples && dotnet run
-cd src/17-strategia/02-kiedy-stosowac-zalety-wady/Examples && dotnet run
-cd src/17-strategia/03-struktura-i-dzialanie/Examples && dotnet run
+cd src/17-strategia/02-kiedy-stosować-zalety-wady/Examples && dotnet run
+cd src/17-strategia/03-struktura-i-działanie/Examples && dotnet run
 cd src/17-strategia/04-typy-implementacji/Examples && dotnet run
 cd src/17-strategia/05-wady-i-zalety/Examples && dotnet run
-cd src/17-strategia/06-duzy-przyklad-i-alternatywy/Examples && dotnet run
+cd src/17-strategia/06-duży-przykład-i-alternatywy/Examples && dotnet run
 ```
 
 ## Uruchamianie testów
 
 ```bash
-cd src/17-strategia/06-duzy-przyklad-i-alternatywy/Tests && dotnet test --nologo
+cd src/17-strategia/06-duży-przykład-i-alternatywy/Tests && dotnet test --nologo
 ```
 
 ## Literatura i źródła

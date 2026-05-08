@@ -1,4 +1,4 @@
-# 05. Case study: czcionki i tiles
+﻿# 05. Case study: czcionki i tiles
 
 ## Cel rozdziału
 
@@ -50,7 +50,7 @@ Program zawiera dwa demo:
 1. **Case study B** – `TileFactory` renderuje mapę 4×4 (intrinsic: typ terenu).
 
 ```bash
-cd src/11-pylek/05-case-study-czcionki-i-tiles/Examples
+cd src/11-pyłek/05-case-study-czcionki-i-tiles/Examples
 dotnet run
 ```
 

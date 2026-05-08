@@ -1,4 +1,4 @@
-# 05. Duży przykład: system plików
+﻿# 05. Duży przykład: system plików
 
 ## Cel rozdziału
 
@@ -44,7 +44,7 @@ Co pokazuje przykład:
 Uruchom:
 
 ```bash
-cd src/12-kompozyt/05-duzy-przyklad-system-plikow/Examples
+cd src/12-kompozyt/05-duży-przykład-system-plikow/Examples
 dotnet run
 ```
 

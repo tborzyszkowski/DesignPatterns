@@ -1,4 +1,4 @@
-# 02. Kiedy stosować, zalety i wady
+﻿# 02. Kiedy stosować, zalety i wady
 
 ## Cel rozdziału
 
@@ -6,7 +6,7 @@ Nauczyć się podejmować decyzję, kiedy Kompozyt jest właściwym wyborem, a k
 
 ## Krok 1 — czy w ogóle masz problem dla Kompozytu?
 
-Odpowiedz na trzy pytania:
+Odpowiedź na trzy pytania:
 
 1. **Czy dane tworzą naturalną strukturę drzewiastą (relacja część-całość)?**
    Katalogi zawierają pliki i inne katalogi. Grupy zawierają elementy i inne grupy. Jeśli nie ma hierarchii — Kompozyt nie ma zastosowania.
@@ -35,7 +35,7 @@ Jeśli na wszystkie trzy odpowiedź brzmi TAK — przejdź do kroku 2.
 | **Dekorator** | Rozszerzanie zachowania pojedynczego obiektu w locie | Gdy nie ma hierarchii, tylko jeden obiekt do owinięcia |
 | **Visitor** | Nowe operacje na stabilnej strukturze bez zmiany klas | Gdy struktura drzewa jest ustalona, ale często dodajesz nowe operacje |
 | **Strategia** | Wymienne algorytmy dla jednego obiektu | Gdy zmieniasz zachowanie, nie strukturę |
-| **Prosta lista + serwis** | Płaskie kolekcje bez hierarchii | Gdy masz zawsze 1 poziom lub dane nie są naprawdę drzewiaste |
+| **Prosta lista + serwis** | Płaskie kolekcję bez hierarchii | Gdy masz zawsze 1 poziom lub dane nie są naprawdę drzewiaste |
 
 ![Porównanie wzorców](diagrams/composite_vs_patterns.png)
 
@@ -135,7 +135,7 @@ Program porównuje dwie ścieżki:
 1. Płaska lista komend bez Kompozytu.
 
 ```bash
-cd src/12-kompozyt/02-kiedy-stosowac-zalety-wady/Examples
+cd src/12-kompozyt/02-kiedy-stosować-zalety-wady/Examples
 dotnet run
 ```
 

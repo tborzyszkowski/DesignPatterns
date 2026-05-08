@@ -1,4 +1,4 @@
-# Materiały Prowadzącego — Wzorzec Metoda Szablonowa
+﻿# Materiały Prowadzącego — Wzorzec Metoda Szablonowa
 
 ## Ogólna koncepcja modułu
 
@@ -42,9 +42,9 @@ Prowadzący może wybrać pełną sekwencję lub skupić się na blokach 01, 03 
 
 ## Blok 03 — Struktura i działanie (20 min)
 
-**Cel:** Studenci znają role GoF i rozumieją przepływ sterowania.
+**Cel:** Studenci znają rolę GoF i rozumieją przepływ sterowania.
 
-**Role GoF:**
+**Rolę GoF:**
 
 | Rola | W C# | Opis |
 |------|------|------|
@@ -57,7 +57,7 @@ Prowadzący może wybrać pełną sekwencję lub skupić się na blokach 01, 03 
 **Zasada Hollywood Principle — wyjaśnienie (5 min):**  
 > "Nie dzwoń do nas — my zadzwonimy do ciebie"
 
-Klasa bazowa wywołuje metody podklas, a nie odwrotnie. IoC (Inversion of Control).
+Klasa bazowa wywołuje metody podklas, a nie odwrotnie. IoC (Inversion of Contról).
 
 **Diagram sekwencji — omów krok po kroku:**  
 Client → AbstractClass.Execute() → krok1() (konkretna klasa) → krok2() (konkretna klasa) → hook() (opcjonalny)
@@ -74,7 +74,7 @@ Client → AbstractClass.Execute() → krok1() (konkretna klasa) → krok2() (ko
 
 **Wariant 3 — z domyślnymi implementacjami:** domyślne implementacje wszystkich kroków, podklasy przesłaniają to co chcą.
 
-**Wariant 4 — hybrydowy z Delegatem/Strategią:** klasa bazowa przyjmuje `Func<>` lub interfejs jako parametr konstruktora — eliminuje konieczność tworzenia podklas.
+**Wariant 4 — hybrydowy z Delegatem/Strategią:** klasa bazowa przyjmuje `Func<>` lub interfejs jako parametr konstruktóra — eliminuje konieczność tworzenia podklas.
 
 **Ćwiczenie (5 min):** Który wariant wybrać dla:
 - systemu logowania (różne destynacje: plik, DB, sieć)?

@@ -1,4 +1,4 @@
-# Zadania — Wzorzec Obserwator
+﻿# Zadania — Wzorzec Obserwator
 
 ## Zadania podstawowe
 
@@ -42,7 +42,7 @@ Zaimplementuj system powiadamiania po rejestracji nowego użytkownika.
 Zaimplementuj `HeatIndexDisplay` obserwujący `WeatherStation` z Tematu 05.
 
 **Wymagania:**
-- Oblicz Heat Index według uproszczonej formuły NOAA (patrz [README Tematu 05](05-duzy-przyklad-i-alternatywy/README.md)).
+- Oblicz Heat Index według uproszczonej formuły NOAA (patrz [README Tematu 05](05-duży-przykład-i-alternatywy/README.md)).
 - Wyświetlaj wynik w Celsius.
 - Napisz test jednostkowy sprawdzający, że przy 35°C i 90% wilgotności Heat Index > 35°C.
 

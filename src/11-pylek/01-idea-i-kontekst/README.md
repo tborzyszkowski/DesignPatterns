@@ -1,4 +1,4 @@
-# 01. Idea i kontekst
+﻿# 01. Idea i kontekst
 
 ## Cel rozdziału
 
@@ -94,7 +94,7 @@ Kod: [Examples/Program.cs](Examples/Program.cs)
 Uruchom:
 
 ```bash
-cd src/11-pylek/01-idea-i-kontekst/Examples
+cd src/11-pyłek/01-idea-i-kontekst/Examples
 dotnet run
 ```
 

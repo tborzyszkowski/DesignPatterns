@@ -1,4 +1,4 @@
-# Zadania — Wzorzec Iterator
+﻿# Zadania — Wzorzec Iterator
 
 Poniższe zadania mają na celu utrwalenie wiedzy o wzorcu Iterator.  
 Rozwiązania są dołączone — spróbuj jednak rozwiązać zadania samodzielnie przed ich sprawdzeniem.
@@ -315,7 +315,7 @@ class BrowsingHistory<T> : IEnumerable<T>
 
 **Poziom:** ★☆☆
 
-Odpowiedz na poniższe pytania:
+Odpowiedź na poniższe pytania:
 
 1. Czym różni się iterator **zewnętrzny** (aktywny) od **wewnętrznego** (pasywnego)?
 1. Dlaczego wzorzec Iterator narusza zasadę **jednej odpowiedzialności** (SRP) gdy logika iteracji jest umieszczona w samej kolekcji?

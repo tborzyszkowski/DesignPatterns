@@ -1,32 +1,32 @@
-# 06. Dynamic Proxy w Javie
+﻿# 06. Dynamic Proxy w Javie
 
 ## Cel tematu
 
-Pokazac Java Dynamic Proxy przez InvocationHandler i Proxy.newProxyInstance.
+Pokazać Java Dynamic Proxy przez InvocationHandler i Proxy.newProxyInstance.
 
-## Szczegolowe wyjasnienie koncepcji w Javie
+## Szczegółowe wyjaśnienie koncepcji w Javie
 
-JDK Dynamic Proxy pozwala tworzyc implementacje interfejsu w runtime bez pisania recznej klasy proxy.
-Mechanizm opiera sie o `InvocationHandler`, ktory przechwytuje kazde wywolanie metody.
+JDK Dynamic Proxy pozwala tworzyć implementację interfejsu w runtime bez pisania ręcznej klasy proxy.
+Mechanizm opiera się o `InvocationHandler`, który przechwytuje każde wywołanie metody.
 
-Jak to dziala:
+Jak to działa:
 
 1. Klient pracuje na interfejsie, np. `PaymentService`.
-1. `Proxy.newProxyInstance(...)` tworzy obiekt implementujacy ten interfejs.
-1. Kazde wywolanie metody trafia do `invoke(proxy, method, args)` w handlerze.
-1. Handler wykonuje logike przekrojowa i deleguje przez `method.invoke(target, args)`.
-1. Ewentualne `InvocationTargetException` jest rozpakowywane do rzeczywistego wyjatku biznesowego.
+1. `Proxy.newProxyInstance(...)` tworzy obiekt implementujący ten interfejs.
+1. Każde wywołanie metody trafia do `invoke(proxy, method, args)` w handlerze.
+1. Handler wykonuje logikę przekrojową i deleguje przez `method.invoke(target, args)`.
+1. Ewentualne `InvocationTargetException` jest rozpakowywane do rzeczywistego wyjątku biznesowego.
 
-Wazne ograniczenie:
+Ważne ograniczenie:
 
-1. Standardowy JDK proxy dziala tylko dla interfejsow (nie dla klas).
+1. Standardowy JDK proxy działa tylko dla interfejsów (nie dla klas).
 
-## Role w przykladzie
+## Rolę w przykładzie
 
 1. `PaymentService` - kontrakt (`Subject`).
 1. `RealPaymentService` - implementacja docelowa (`RealSubject`).
 1. `TimingHandler` - interceptor (`InvocationHandler`).
-1. Obiekt z `Proxy.newProxyInstance` - dynamiczny proxy obslugujacy wywolania klienta.
+1. Obiekt z `Proxy.newProxyInstance` - dynamiczny proxy obsługujący wywołania klienta.
 
 ## Diagramy
 
@@ -34,11 +34,11 @@ Wazne ograniczenie:
 
 ![Diagram interakcji](diagrams/dynamic_proxy_java_flow.png)
 
-Zrodlo: [diagrams/01-jdk-proxy-flow.puml](diagrams/01-jdk-proxy-flow.puml)
+Źródło: [diagrams/01-jdk-proxy-flow.puml](diagrams/01-jdk-proxy-flow.puml)
 
 ### Diagram klas
 
-Zrodlo: [diagrams/02-class.puml](diagrams/02-class.puml)
+Źródło: [diagrams/02-class.puml](diagrams/02-class.puml)
 
 ## Program ilustrujacy (Java)
 
@@ -100,13 +100,13 @@ public class JavaDynamicProxyDemo {
 }
 ```
 
-## Wyjasnienie programu krok po kroku
+## Wyjaśnienie programu krok po kroku
 
-1. `RealPaymentService` realizuje logike biznesowa i waliduje `orderId`.
+1. `RealPaymentService` realizuje logikę biznesowa i waliduje `orderId`.
 1. `TimingHandler` dodaje logi `START/OK/ERROR` oraz pomiar czasu `ELAPSED_US`.
-1. Proxy JDK implementuje `PaymentService` i przekazuje kazde wywolanie do handlera.
+1. Proxy JDK implementuje `PaymentService` i przekazuje każde wywołanie do handlera.
 1. Dla poprawnego `orderId` zwracane jest `PAID:<id>`.
-1. Dla blednego argumentu handler rozpakowuje `InvocationTargetException` i rzuca oryginalny wyjatek.
+1. Dla błędnego argumentu handler rozpakowuje `InvocationTargetException` i rzuca oryginalny wyjątek.
 
 ## Uruchom
 
@@ -118,6 +118,6 @@ java JavaDynamicProxyDemo
 
 ## Wnioski
 
-1. Interceptor dziala dla wszystkich metod interfejsu.
+1. Interceptor działa dla wszystkich metod interfejsu.
 2. Dynamic Proxy wymaga pracy przez interfejs.
-3. Wyjatki z reflection trzeba obslugiwac jawnie.
+3. Wyjątki z reflection trzeba obsługiwać jawnie.

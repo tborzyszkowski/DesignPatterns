@@ -1,5 +1,5 @@
-@startuml smarthome_class_diagram
-title Smart Home - pelny diagram klas wzorca Polecenie
+﻿@startuml smarthome_class_diagram
+title Smart Home - pełny diagram klas wzorca Polecenie
 
 skinparam monochrome true
 skinparam dpi 150
@@ -14,7 +14,7 @@ interface ICommand {
 }
 
 ' ── Invoker ──────────────────────────────────────────────────────────────────
-class RemoteControl {
+class RemoteContról {
     - _slots: ICommand[7]
     - _history: CommandHistory
     + SetCommand(slot, ICommand)
@@ -108,8 +108,8 @@ ICommand <|.. MusicStopCommand
 ICommand <|.. GarageOpenCommand
 ICommand <|.. GarageCloseCommand
 
-RemoteControl o--> ICommand : slots[]
-RemoteControl --> CommandHistory
+RemoteContról o--> ICommand : slots[]
+RemoteContról --> CommandHistory
 CommandHistory o--> ICommand : stacks
 MacroCommand o--> ICommand : commands[]
 

@@ -1,4 +1,4 @@
-@startuml static_proxy_sequence
+﻿@startuml static_proxy_sequence
 title Static Proxy - sekwencja
 
 skinparam monochrome true
@@ -9,7 +9,7 @@ participant ReportServiceProxy
 participant RealReportService
 
 Client -> ReportServiceProxy : GetMonthlyReport(month)
-ReportServiceProxy -> ReportServiceProxy : check role + log
+ReportServiceProxy -> ReportServiceProxy : check rolę + log
 ReportServiceProxy -> RealReportService : GetMonthlyReport(month)
 RealReportService --> ReportServiceProxy : report
 ReportServiceProxy --> Client : report

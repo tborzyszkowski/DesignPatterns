@@ -1,4 +1,4 @@
-# Wzorzec Pyłek (Flyweight)
+﻿# Wzorzec Pyłek (Flyweight)
 
 ## Cel modułu
 
@@ -11,10 +11,10 @@ Nacisk położono na rozdzielenie stanu współdzielonego (`intrinsic`) i kontek
 | --- | --- | --- |
 | [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Problem redundancji danych i motywacja biznesowa |
 | [02](02-intrinsic-vs-extrinsic/README.md) | Intrinsic vs Extrinsic | Jak podzielić stan i uniknąć błędów modelowania |
-| [03](03-struktura-gof/README.md) | Struktura GoF | Role, relacje i przepływ wywołań |
+| [03](03-struktura-gof/README.md) | Struktura GoF | Rolę, relacje i przepływ wywołań |
 | [04](04-implementacja-csharp/README.md) | Implementacja C# | FlyweightFactory, cache i współbieżność |
 | [05](05-case-study-czcionki-i-tiles/README.md) | Case study | Czcionki i kafelki jako duża liczba obiektów |
-| [06](06-kiedy-stosowac-i-alternatywy/README.md) | Kiedy stosować | Decyzje architektoniczne i porównanie z alternatywami |
+| [06](06-kiedy-stosować-i-alternatywy/README.md) | Kiedy stosować | Decyzje architektoniczne i porównanie z alternatywami |
 
 ## Efekty uczenia
 
@@ -34,12 +34,12 @@ Po tym module student:
 ## Uruchamianie przykładów
 
 ```bash
-cd src/11-pylek/01-idea-i-kontekst/Examples && dotnet run
-cd src/11-pylek/02-intrinsic-vs-extrinsic/Examples && dotnet run
-cd src/11-pylek/03-struktura-gof/Examples && dotnet run
-cd src/11-pylek/04-implementacja-csharp/Examples && dotnet run
-cd src/11-pylek/05-case-study-czcionki-i-tiles/Examples && dotnet run
-cd src/11-pylek/06-kiedy-stosowac-i-alternatywy/Examples && dotnet run
+cd src/11-pyłek/01-idea-i-kontekst/Examples && dotnet run
+cd src/11-pyłek/02-intrinsic-vs-extrinsic/Examples && dotnet run
+cd src/11-pyłek/03-struktura-gof/Examples && dotnet run
+cd src/11-pyłek/04-implementacja-csharp/Examples && dotnet run
+cd src/11-pyłek/05-case-study-czcionki-i-tiles/Examples && dotnet run
+cd src/11-pyłek/06-kiedy-stosować-i-alternatywy/Examples && dotnet run
 ```
 
 ## Materiały prowadzącego

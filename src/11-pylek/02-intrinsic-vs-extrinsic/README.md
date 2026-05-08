@@ -1,4 +1,4 @@
-# 02. Intrinsic vs Extrinsic
+﻿# 02. Intrinsic vs Extrinsic
 
 ## Cel rozdziału
 
@@ -41,7 +41,7 @@ Program pokazuje podział stanu na intrinsic (`iconType`, `colorTheme`) i extrin
 Factory zwraca ten sam obiekt dla identycznego klucza intrinsic.
 
 ```bash
-cd src/11-pylek/02-intrinsic-vs-extrinsic/Examples
+cd src/11-pyłek/02-intrinsic-vs-extrinsic/Examples
 dotnet run
 ```
 

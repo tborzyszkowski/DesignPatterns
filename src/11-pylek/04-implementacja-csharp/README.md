@@ -1,4 +1,4 @@
-# 04. Implementacja C#
+﻿# 04. Implementacja C#
 
 ## Cel rozdziału
 
@@ -46,7 +46,7 @@ Program implementuje `TokenFactory` opartą o `ConcurrentDictionary` z silnie ty
 Wyświetla metryki: liczba unikalnych flyweightów, trafień i pudłów, hit ratio.
 
 ```bash
-cd src/11-pylek/04-implementacja-csharp/Examples
+cd src/11-pyłek/04-implementacja-csharp/Examples
 dotnet run
 ```
 

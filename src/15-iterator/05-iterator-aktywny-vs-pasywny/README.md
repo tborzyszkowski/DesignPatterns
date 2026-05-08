@@ -1,9 +1,9 @@
-# 05 — Iterator Aktywny vs Pasywny
+﻿# 05 — Iterator Aktywny vs Pasywny
 
 ## Spis treści
 
 1. [Definicje](#1-definicje)
-2. [Porównanie](#2-porownanie)
+2. [Porównanie](#2-porównanie)
 3. [Iterator aktywny — szczegóły](#3-aktywny)
 4. [Iterator pasywny — szczegóły](#4-pasywny)
 5. [Zastosowania w technologiach](#5-technologie)
@@ -25,7 +25,7 @@
 
 ---
 
-## 2. Porównanie <a name="2-porownanie"></a>
+## 2. Porównanie <a name="2-porównanie"></a>
 
 | Cecha | Aktywny | Pasywny |
 |-------|---------|---------|

@@ -1,4 +1,4 @@
-# 05. Duży przykład — System Smart Home i alternatywy dla wzorca Polecenie
+﻿# 05. Duży przykład — System Smart Home i alternatywy dla wzorca Polecenie
 
 ## Opis przykładu
 
@@ -22,7 +22,7 @@ Implementujemy system sterowania inteligentnym domem (Smart Home) za pomocą pil
 | --- | --- |
 | **Command** | `ICommand` |
 | **ConcreteCommand** | `LightOnCommand`, `ThermostatSetCommand`, ... |
-| **Invoker** | `RemoteControl` |
+| **Invoker** | `RemoteContról` |
 | **Receiver** | `SmartLight`, `Thermostat`, `SecuritySystem`, ... |
 | **Client** | `Program.cs` — konfiguracja pilota |
 | **Null Object** | `NoOpCommand` — pusty slot bez akcji |
@@ -35,10 +35,10 @@ Implementujemy system sterowania inteligentnym domem (Smart Home) za pomocą pil
 ### Co się dzieje:
 
 1. Użytkownik naciska przycisk ON na slocie 5.
-1. `RemoteControl.PressOn(5)` wywołuje `MacroCommand.Execute()`.
+1. `RemoteContról.PressOn(5)` wywołuje `MacroCommand.Execute()`.
 1. `MacroCommand` sekwencyjnie wywołuje `Execute()` na każdym podpoleceniu.
 1. Każde polecenie deleguje do swojego Receivera.
-1. `RemoteControl` zapamiętuje polecenie na stosie Undo.
+1. `RemoteContról` zapamiętuje polecenie na stosie Undo.
 1. Użytkownik naciska UNDO → `MacroCommand.Undo()` cofa w odwrotnej kolejności.
 
 ## Kluczowe fragmenty kodu
@@ -191,11 +191,11 @@ public class TurnOnLightHandler : IRequestHandler<TurnOnLightCommand>
 
 ```bash
 # Uruchom przykład
-cd src/14-polecenie/05-duzy-przyklad-i-alternatywy/Examples
+cd src/14-polecenie/05-duży-przykład-i-alternatywy/Examples
 dotnet run
 
 # Uruchom testy jednostkowe
-cd src/14-polecenie/05-duzy-przyklad-i-alternatywy/Tests
+cd src/14-polecenie/05-duży-przykład-i-alternatywy/Tests
 dotnet test --verbosity normal
 ```
 

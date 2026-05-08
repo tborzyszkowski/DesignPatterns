@@ -1,4 +1,4 @@
-# Materiały do wykładu — Wzorzec Obserwator
+﻿# Materiały do wykładu — Wzorzec Obserwator
 
 > **Czas wykładu:** ok. 90 minut (+ 15 minut pytania)
 > **Poziom:** intermediate (studenci znają dziedziczenie, interfejsy, delegaty)
@@ -30,7 +30,7 @@
 > **Jak byście to zaimplementowali bez żadnego wzorca?**"
 
 Czekaj na odpowiedzi. Typowe propozycje studentów:
-- "Wywołamy metody wyświetlaczy bezpośrednio z czujnika."
+- "Wywołamy metody wyświetłączy bezpośrednio z czujnika."
 - "Użyjemy statycznych metod."
 
 ### Pokaż problem (kod naiwny)
@@ -69,7 +69,7 @@ Odpowiedź: naruszenie OCP, ścisłe powiązanie (tight coupling), nieelastyczny
 
 ### Rozwiązanie: interfejs + lista
 
-Pokaż diagram klas GoF z [03-struktura-gof-i-jak-dziala/diagrams/01-class-gof.puml](03-struktura-gof-i-jak-dziala/diagrams/01-class-gof.puml).
+Pokaż diagram klas GoF z [03-struktura-gof-i-jak-działa/diagrams/01-class-gof.puml](03-struktura-gof-i-jak-działa/diagrams/01-class-gof.puml).
 
 ```csharp
 interface IWeatherObserver
@@ -93,7 +93,7 @@ class WeatherStation
 }
 ```
 
-**Podkreśl:** czujnik nie zna konkretnych klas wyświetlaczy — zna tylko interfejs `IWeatherObserver`.
+**Podkreśl:** czujnik nie zna konkretnych klas wyświetłączy — zna tylko interfejs `IWeatherObserver`.
 
 ### Pytanie sprawdzające
 
@@ -109,7 +109,7 @@ Odpowiedź: tylko Subject trzyma listę. Observer nie wie o innych observerach.
 
 > "W metodzie `Update()` — kto dostarcza dane do Observera?"
 
-Pokaż oba warianty z [03-struktura-gof-i-jak-dziala/Examples/Program.cs](03-struktura-gof-i-jak-dziala/Examples/Program.cs).
+Pokaż oba warianty z [03-struktura-gof-i-jak-działa/Examples/Program.cs](03-struktura-gof-i-jak-działa/Examples/Program.cs).
 
 **Push:** `void Update(float temp, float hum, float press)` — Subject decyduje co wysyła.
 
@@ -167,7 +167,7 @@ Pokaż kontrakt z BCL:
 
 ## Blok 5 — Demo: Stacja Pogodowa (50–65 min)
 
-Uruchom: `cd src/13-obserwator/05-duzy-przyklad-i-alternatywy/Examples && dotnet run`
+Uruchom: `cd src/13-obserwator/05-duży-przykład-i-alternatywy/Examples && dotnet run`
 
 Omów każdy wyświetlacz:
 - `CurrentConditionsDisplay` — bieżące warunki.
@@ -185,7 +185,7 @@ Omów test `Unsubscribe_DuringNotification_DoesNotThrow` — dlaczego kopiujemy 
 
 ## Blok 6 — Kiedy stosować, kiedy nie (65–75 min)
 
-Pokaż diagram z [02-kiedy-stosowac-zalety-wady/diagrams/01-decision-tree.puml](02-kiedy-stosowac-zalety-wady/diagrams/01-decision-tree.puml).
+Pokaż diagram z [02-kiedy-stosować-zalety-wady/diagrams/01-decision-tree.puml](02-kiedy-stosować-zalety-wady/diagrams/01-decision-tree.puml).
 
 ### Scenariusze do dyskusji (poproś studentów o decyzję)
 
@@ -205,7 +205,7 @@ Pokaż diagram z [02-kiedy-stosowac-zalety-wady/diagrams/01-decision-tree.puml](
 
 ## Blok 7 — Alternatywy (75–85 min)
 
-Pokaż diagram [05-duzy-przyklad-i-alternatywy/diagrams/03-alternatives.puml](05-duzy-przyklad-i-alternatywy/diagrams/03-alternatives.puml).
+Pokaż diagram [05-duży-przykład-i-alternatywy/diagrams/03-alternatives.puml](05-duży-przykład-i-alternatywy/diagrams/03-alternatives.puml).
 
 ### Mediator
 
@@ -236,7 +236,7 @@ Przykład: plik konfiguracyjny sprawdzany co minutę. Zmiana rzadka, polling tan
 ### Kluczowe punkty do zapamiętania
 
 1. Subject zarządza listą Observer przez **interfejs** — nigdy przez konkretne klasy.
-1. **Push** — Subject wysyła dane; **Pull** — Observer pobiera dane ze Subject.
+1. **Push** — Subject wysyła dane; **Pull** — Observer pobiera dane że Subject.
 1. Trzy warianty C#: ręczny interfejs / zdarzenia / `IObservable<T>`.
 1. Zawsze **kopiuj listę** obserwatorów przed iteracją.
 1. Przy `event` — zawsze **wypisuj** (`-=`) lub używaj `IDisposable`.
@@ -254,8 +254,8 @@ Przykład: plik konfiguracyjny sprawdzany co minutę. Zmiana rzadka, polling tan
 
 - Zadania: [ZADANIA.md](ZADANIA.md)
 - Kod 01: [01-idea-i-kontekst/Examples/Program.cs](01-idea-i-kontekst/Examples/Program.cs)
-- Kod 02: [02-kiedy-stosowac-zalety-wady/Examples/Program.cs](02-kiedy-stosowac-zalety-wady/Examples/Program.cs)
-- Kod 03: [03-struktura-gof-i-jak-dziala/Examples/Program.cs](03-struktura-gof-i-jak-dziala/Examples/Program.cs)
+- Kod 02: [02-kiedy-stosować-zalety-wady/Examples/Program.cs](02-kiedy-stosować-zalety-wady/Examples/Program.cs)
+- Kod 03: [03-struktura-gof-i-jak-działa/Examples/Program.cs](03-struktura-gof-i-jak-działa/Examples/Program.cs)
 - Kod 04: [04-typy-implementacji-i-wybor/Examples/Program.cs](04-typy-implementacji-i-wybor/Examples/Program.cs)
-- Kod 05: [05-duzy-przyklad-i-alternatywy/Examples/Program.cs](05-duzy-przyklad-i-alternatywy/Examples/Program.cs)
+- Kod 05: [05-duży-przykład-i-alternatywy/Examples/Program.cs](05-duży-przykład-i-alternatywy/Examples/Program.cs)
 - Literatura: GoF s. 293–313; Head First Design Patterns rozdz. 2; https://refactoring.guru/design-patterns/observer

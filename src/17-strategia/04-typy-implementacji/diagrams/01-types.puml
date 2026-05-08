@@ -1,4 +1,4 @@
-@startuml strategy_types
+﻿@startuml strategy_types
 skinparam backgroundColor #FAFAFA
 skinparam titleFontSize 13
 
@@ -30,7 +30,7 @@ package "Typ 3: Func delegat" #FFF9C4 {
   }
 }
 
-package "Typ 4: Enum + Slownik" #FFECB3 {
+package "Typ 4: Enum + Słownik" #FFECB3 {
   enum Format {
     Json
     Csv

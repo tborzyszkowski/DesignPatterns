@@ -1,4 +1,4 @@
-# 05. Duży przykład i alternatywy
+﻿# 05. Duży przykład i alternatywy
 
 ## Cel rozdziału
 
@@ -8,7 +8,7 @@ Zobaczyć kompletny projekt korzystający z wzorca Obserwator, oraz poznać alte
 
 ### Opis domeny
 
-System zbiera pomiary z czujników (temperatura, wilgotność, ciśnienie) i wysyła je do różnych wyświetlaczy. Wymagania:
+System zbiera pomiary z czujników (temperatura, wilgotność, ciśnienie) i wysyła je do różnych wyświetłączy. Wymagania:
 
 1. Wyświetlacze dołączają i odłączają się w runtime (np. aplikacja mobilna otwierana i zamykana).
 1. Każdy wyświetlacz przetwarza dane inaczej (bieżące, statystyki, prognoza, indeks ciepła).
@@ -76,10 +76,10 @@ Kod: [Examples/Program.cs](Examples/Program.cs)
 Testy: [Tests/WeatherStationTests.cs](Tests/WeatherStationTests.cs)
 
 ```bash
-cd src/13-obserwator/05-duzy-przyklad-i-alternatywy/Examples
+cd src/13-obserwator/05-duży-przykład-i-alternatywy/Examples
 dotnet run
 
-cd src/13-obserwator/05-duzy-przyklad-i-alternatywy/Tests
+cd src/13-obserwator/05-duży-przykład-i-alternatywy/Tests
 dotnet test
 ```
 
@@ -129,8 +129,8 @@ Polling:    Observer pyta Subject co określony czas
 
 Użyj **Pollingu** gdy:
 - Dane zmieniają się rzadko, ale pytania są tanie.
-- Nie możesz zmodyfikować Subjectu aby wspierał subskrypcje.
-- Dopuszczasz opóźnienie w odczycie danych.
+- Nie możesz zmodyfikować Subjectu aby wspierał subskrypcję.
+- Dopuszczasz opóźnienie w odcżycie danych.
 
 ### Diagram porównawczy
 

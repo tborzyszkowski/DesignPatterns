@@ -1,4 +1,4 @@
-# Wzorzec Obserwator (Observer)
+﻿# Wzorzec Obserwator (Observer)
 
 ## Cel modułu
 
@@ -9,18 +9,18 @@ Koncentruje się na modelowaniu relacji jeden-do-wielu między obiektami, gdzie 
 
 | # | Temat | Opis |
 | --- | --- | --- |
-| [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Rys historyczny, geneza wzorca, potrzeby które zaspokaja |
-| [02](02-kiedy-stosowac-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady i procedura decyzyjna |
-| [03](03-struktura-gof-i-jak-dziala/README.md) | Jak działa | Role GoF, diagramy klas i sekwencji, push vs pull model |
+| [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Rys historyczny, geneza wzorca, potrżeby które zaspokaja |
+| [02](02-kiedy-stosować-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady i procedura decyzyjna |
+| [03](03-struktura-gof-i-jak-działa/README.md) | Jak działa | Rolę GoF, diagramy klas i sekwencji, push vs pull model |
 | [04](04-typy-implementacji-i-wybor/README.md) | Typy implementacji | Warianty: klasyczny, zdarzenia C#, IObservable\<T\>, wybór |
-| [05](05-duzy-przyklad-i-alternatywy/README.md) | Duży przykład | Stacja pogodowa — pełny przykład z analizą i alternatywami |
+| [05](05-duży-przykład-i-alternatywy/README.md) | Duży przykład | Stacja pogodowa — pełny przykład z analizą i alternatywami |
 
 ## Efekty uczenia
 
 Po przerobieniu modułu student:
 
 1. Rozumie problem ścisłego powiązania (tight coupling) który rozwiązuje Obserwator.
-1. Potrafi zaprojektować role `Subject` (Observable), `Observer` i zarządzać subskrypcjami.
+1. Potrafi zaprojektować rolę `Subject` (Observable), `Observer` i zarządzać subskrypcjami.
 1. Zna trzy główne warianty implementacji w C#: ręczny interfejs, zdarzenia/delegaty, `IObservable<T>`.
 1. Umie wybrać odpowiedni wariant do kontekstu (prostota vs reaktywność vs interoperacyjność).
 1. Rozpoznaje kiedy Obserwator jest nadmiarowy i zna alternatywy (Mediator, Message Bus, Polling).
@@ -35,16 +35,16 @@ Po przerobieniu modułu student:
 
 ```bash
 cd src/13-obserwator/01-idea-i-kontekst/Examples && dotnet run
-cd src/13-obserwator/02-kiedy-stosowac-zalety-wady/Examples && dotnet run
-cd src/13-obserwator/03-struktura-gof-i-jak-dziala/Examples && dotnet run
+cd src/13-obserwator/02-kiedy-stosować-zalety-wady/Examples && dotnet run
+cd src/13-obserwator/03-struktura-gof-i-jak-działa/Examples && dotnet run
 cd src/13-obserwator/04-typy-implementacji-i-wybor/Examples && dotnet run
-cd src/13-obserwator/05-duzy-przyklad-i-alternatywy/Examples && dotnet run
+cd src/13-obserwator/05-duży-przykład-i-alternatywy/Examples && dotnet run
 ```
 
 ## Uruchamianie testów
 
 ```bash
-cd src/13-obserwator/05-duzy-przyklad-i-alternatywy/Tests && dotnet test
+cd src/13-obserwator/05-duży-przykład-i-alternatywy/Tests && dotnet test
 ```
 
 ## Materiały prowadzącego

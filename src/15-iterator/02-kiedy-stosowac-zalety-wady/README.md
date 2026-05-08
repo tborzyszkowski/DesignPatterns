@@ -1,4 +1,4 @@
-# 02 — Kiedy Stosować, Zalety i Wady
+﻿# 02 — Kiedy Stosować, Zalety i Wady
 
 ## Spis treści
 
@@ -149,7 +149,7 @@ Każde `GetEnumerator()` alokuje nowy obiekt na stercie (heap). W pętlach o wys
 | **Filtered** | Pomija elementy wg predykatu | `Enumerable.Where()` |
 | **Bidirectional** | MoveNext() + MovePrev() | `LinkedListNode<T>` |
 | **Lazy generator** | Elementy generowane na żądanie | `yield return` |
-| **Composite** | Scala wiele kolekcji w jedną | `Enumerable.Concat()` |
+| **Composite** | Scała wiele kolekcji w jedną | `Enumerable.Concat()` |
 
 ---
 
@@ -178,7 +178,7 @@ var result = employees
 ## 6. Uruchamianie przykładu <a name="6-uruchamianie"></a>
 
 ```bash
-cd src/15-iterator/02-kiedy-stosowac-zalety-wady/Examples
+cd src/15-iterator/02-kiedy-stosować-zalety-wady/Examples
 dotnet run
 ```
 

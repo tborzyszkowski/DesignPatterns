@@ -1,8 +1,8 @@
-# 03 — Struktura i Działanie (GoF)
+﻿# 03 — Struktura i Działanie (GoF)
 
 ## Spis treści
 
-1. [Role GoF](#1-role)
+1. [Rolę GoF](#1-rolę)
 2. [Diagram klas](#2-diagram-klas)
 3. [Diagram sekwencji](#3-diagram-sekwencji)
 4. [Mapowanie na C#](#4-mapowanie)
@@ -11,7 +11,7 @@
 
 ---
 
-## 1. Role GoF <a name="1-role"></a>
+## 1. Rolę GoF <a name="1-rolę"></a>
 
 | Rola GoF | Rola w C# | Opis |
 |----------|-----------|------|
@@ -101,7 +101,7 @@ GoF opisuje dwa podejścia:
 Jak opisuje GoF (s. 317-318):
 
 1. **Rodziny algorytmów** — definiuje rodzinę algorytmów z której Context może korzystać
-2. **Alternatywa dla podklas** — zamiast dziedziczenia Context ze specjalizowanymi wariantami
+2. **Alternatywa dla podklas** — zamiast dziedziczenia Context że specjalizowanymi wariantami
 3. **Eliminacja warunków** — `if/switch` znika, zastąpiony polimorfizmem
 4. **Wybór implementacji** — klient może wybierać implementacje o różnych tradeoffs (czas vs pamięć)
 5. **Komunikacja Context↔Strategy** — `Context` może przekazywać więcej danych niż strategia potrzebuje
@@ -112,6 +112,6 @@ Jak opisuje GoF (s. 317-318):
 ## 6. Uruchamianie <a name="6-uruchamianie"></a>
 
 ```bash
-cd src/17-strategia/03-struktura-i-dzialanie/Examples
+cd src/17-strategia/03-struktura-i-działanie/Examples
 dotnet run
 ```

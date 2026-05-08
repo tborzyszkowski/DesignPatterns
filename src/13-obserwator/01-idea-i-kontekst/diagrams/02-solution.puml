@@ -1,5 +1,5 @@
-@startuml observer_solution
-title Observer - rozwiazanie: luznie powiazan przez interfejs
+﻿@startuml observer_solution
+title Observer - rozwiązanie: luźnie powiązań przez interfejs
 
 skinparam monochrome true
 skinparam dpi 150

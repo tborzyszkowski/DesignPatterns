@@ -1,4 +1,4 @@
-@startuml observer_push_pull
+﻿@startuml observer_push_pull
 title Observer - Push Model vs Pull Model
 
 skinparam monochrome true
@@ -16,7 +16,7 @@ package "Push Model" {
     class PushObserver {
         + Update(temp, hum)
     }
-    PushSubject -> IPushObserver : Update(temp, hum)\nSubject wysyla dane
+    PushSubject -> IPushObserver : Update(temp, hum)\nSubject wysyła dane
     IPushObserver <|.. PushObserver
 }
 
@@ -49,7 +49,7 @@ package "Pull Model" {
 }
 
 note bottom of PushSubject
-Zalety: mniejsze powiazan
+Zalety: mniejsze powiązań
 Wady: sztywny interfejs Update
 end note
 

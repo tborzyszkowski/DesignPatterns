@@ -1,4 +1,4 @@
-@startuml observer_alternatives
+﻿@startuml observer_alternatives
 title Observer vs alternatywy
 
 skinparam monochrome true
@@ -13,7 +13,7 @@ package "Observer\n(jeden source, wiele targets)" {
     WeatherStation_obs --> StatsDisplay_obs : Update()
 }
 
-package "Mediator\n(wiele stron komunikuja sie wzajemnie)" {
+package "Mediator\n(wiele stron komunikują sie wzajemnie)" {
     class ChatRoom as "ChatRoom\n[Mediator]"
     class UserA as "User A"
     class UserB as "User B"
@@ -37,8 +37,8 @@ package "Pub/Sub\n(broker posredniczy)" {
     MessageBus --> Subscriber2 : Deliver()
 
     note right of MessageBus
-    Kolejkowanie, trwalosc,
-    retry, rozne procesy
+    Kolejkowanie, trwałość,
+    retry, różne procesy
     end note
 }
 

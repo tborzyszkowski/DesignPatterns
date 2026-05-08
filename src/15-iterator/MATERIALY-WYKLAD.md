@@ -1,4 +1,4 @@
-# Materiały prowadzącego — Wzorzec Iterator
+﻿# Materiały prowadzącego — Wzorzec Iterator
 
 ## Cel wykładu
 
@@ -32,7 +32,7 @@ Prowadzi to do „kruchości" kodu — zmiana struktury wewnętrznej wymaga zmia
 
 ### Blok 2 — Struktura GoF (20 min)
 
-Pokaż diagram klas. Omów role:
+Pokaż diagram klas. Omów rolę:
 - **Iterator** — interfejs z `MoveNext()`, `Current`, `Reset()`
 - **ConcreteIterator** — implementacja dla konkretnej kolekcji
 - **Aggregate** — interfejs `CreateIterator()`

@@ -1,4 +1,4 @@
-# Zadania — Wzorzec Metoda Szablonowa
+﻿# Zadania — Wzorzec Metoda Szablonowa
 
 ## Zadanie 1 — Przygotowywanie potraw
 

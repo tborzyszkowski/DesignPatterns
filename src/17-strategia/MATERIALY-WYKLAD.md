@@ -1,11 +1,11 @@
-# Materiały do wykładu — Wzorzec Strategia
+﻿# Materiały do wykładu — Wzorzec Strategia
 
 ## Plan wykładu (90 minut)
 
 | Blok | Czas | Temat | Powiązany temat |
 |------|------|-------|-----------------|
 | 1 | 15 min | Motywacja i historia — dlaczego Strategia | 01 |
-| 2 | 15 min | Struktura GoF, diagramy, role | 03 |
+| 2 | 15 min | Struktura GoF, diagramy, rolę | 03 |
 | 3 | 20 min | Typy implementacji i przegląd przykładów | 04 |
 | 4 | 15 min | Strategia w .NET (IComparer, LINQ, HTTP) | 04 |
 | 5 | 10 min | Wady, pułapki, kiedy NIE używać | 05 |
@@ -48,7 +48,7 @@ Problem: każda nowa opcja transportu = modyfikacja klasy + ryzyko regresji.
 
 ## Blok 2 — Struktura GoF (15 min)
 
-### Role wzorca
+### Rolę wzorca
 
 | Rola | Odpowiednik C# | Opis |
 |------|---------------|------|
@@ -56,7 +56,7 @@ Problem: każda nowa opcja transportu = modyfikacja klasy + ryzyko regresji.
 | `Strategy` | `interface IStrategy` | Wspólny kontrakt dla wszystkich wariantów algorytmu |
 | `ConcreteStrategy` | Klasa implementująca `IStrategy` | Konkretna realizacja algorytmu |
 
-Diagram do omówienia: `03-struktura-i-dzialanie/diagrams/strategy_class_diagram.png`
+Diagram do omówienia: `03-struktura-i-działanie/diagrams/strategy_class_diagram.png`
 
 ### Kluczowe obserwacje
 
@@ -124,7 +124,7 @@ sorter.Sort(myList);
 
 ## Blok 6 — Duży przykład (15 min)
 
-Diagram: `06-duzy-przyklad-i-alternatywy/diagrams/strategy_order_system.png`
+Diagram: `06-duży-przykład-i-alternatywy/diagrams/strategy_order_system.png`
 
 System zamówień e-commerce z wymiennymi strategiami:
 - Obliczanie rabatów (`IDiscountStrategy`)

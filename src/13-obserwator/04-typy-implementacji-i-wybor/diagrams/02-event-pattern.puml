@@ -1,4 +1,4 @@
-@startuml observer_event_pattern
+﻿@startuml observer_event_pattern
 title Observer - wzorzec zdarzen C# (konwencja .NET)
 
 skinparam monochrome true
@@ -21,7 +21,7 @@ class TemperatureSensor {
 }
 
 note right of TemperatureSensor
-Wywolanie:
+Wywołanie:
 TemperatureChanged?.Invoke(this, args)
 
 Subskrypcja:

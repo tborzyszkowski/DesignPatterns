@@ -87,6 +87,10 @@
         "/^\\$files = Get-ChildItem \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\15-metoda-szablonowa\" -Filter \"Program\\.cs\" -Recurse\nforeach \\(\\$f in \\$files\\) \\{\n    \\(Get-Content \\$f\\.FullName -Raw\\) -replace 'public sealed void ', 'public void ' \\| Set-Content \\$f\\.FullName\n    Write-Host \"Processed \\$\\(\\$f\\.Name\\) at \\$\\(\\$f\\.Directory\\)\"\n\\}$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^type \"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\10-proxy\\\\README\\.md\" \\| findstr /n \"\\.\"  2>&1 \\| Select-Object -First 20$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

@@ -1,11 +1,11 @@
-@startuml smarthome_sequence
+﻿@startuml smarthome_sequence
 title Smart Home - scenariusz "Wychodzę z domu"
 
 skinparam monochrome true
 skinparam dpi 150
 
-actor Uzytkownik
-participant RemoteControl
+actor Użytkownik
+participant RemoteContról
 participant MacroCommand
 participant LightOffCommand
 participant SecurityArmCommand
@@ -14,10 +14,10 @@ participant SmartLight
 participant SecuritySystem
 participant Thermostat
 
-Uzytkownik -> RemoteControl : PressButton(slot=0)
-activate RemoteControl
+Użytkownik -> RemoteContról : PressButton(slot=0)
+activate RemoteContról
 
-RemoteControl -> MacroCommand : Execute()
+RemoteContról -> MacroCommand : Execute()
 activate MacroCommand
 
     MacroCommand -> LightOffCommand : Execute()
@@ -38,22 +38,22 @@ activate MacroCommand
         Thermostat --> ThermostatSetCommand : done
     deactivate ThermostatSetCommand
 
-MacroCommand --> RemoteControl : done
+MacroCommand --> RemoteContról : done
 deactivate MacroCommand
-RemoteControl --> Uzytkownik : done
-deactivate RemoteControl
+RemoteContról --> Użytkownik : done
+deactivate RemoteContról
 
-note over Uzytkownik, Thermostat
+note over Użytkownik, Thermostat
   Jeden przycisk = 3 akcje.
-  RemoteControl nie wie, ile i jakich.
-  MacroCommand jest przezroczysty dla RemoteControl.
+  RemoteContról nie wie, ile i jakich.
+  MacroCommand jest przezroczysty dla RemoteContról.
 end note
 
 == Użytkownik wraca — UNDO ==
 
-Uzytkownik -> RemoteControl : PressUndo()
-activate RemoteControl
-    RemoteControl -> MacroCommand : Undo()
+Użytkownik -> RemoteContról : PressUndo()
+activate RemoteContról
+    RemoteContról -> MacroCommand : Undo()
     activate MacroCommand
         note right
           Cofamy w ODWROTNEJ kolejności:
@@ -65,7 +65,7 @@ activate RemoteControl
         MacroCommand -> SecurityArmCommand : Undo()
         MacroCommand -> LightOffCommand : Undo()
     deactivate MacroCommand
-RemoteControl --> Uzytkownik : done
-deactivate RemoteControl
+RemoteContról --> Użytkownik : done
+deactivate RemoteContról
 
 @enduml

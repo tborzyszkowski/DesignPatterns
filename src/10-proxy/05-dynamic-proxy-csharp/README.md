@@ -1,46 +1,46 @@
-# 05. Dynamic Proxy w C#
+﻿# 05. Dynamic Proxy w C#
 
 ## Cel tematu
 
-Pokazac interception runtime bez pisania osobnej klasy proxy dla kazdego interfejsu.
+Pokazać interception runtime bez pisania osobnej klasy proxy dla każdego interfejsu.
 
-## W kilku slowach: czym jest Dynamic Proxy
+## W kilku słowach: czym jest Dynamic Proxy
 
-Dynamic Proxy to obiekt proxy tworzony automatycznie w runtime, ktory przechwytuje wywolania metod i moze dodac logike techniczna (np. logowanie, pomiar czasu, autoryzacje), zanim deleguje do obiektu docelowego.
+Dynamic Proxy to obiekt proxy tworzony automatycznie w runtime, który przechwytuje wywołania metod i może dodać logikę techniczną (np. logowanie, pomiar czasu, autoryzację), zanim deleguje do obiektu docelowego.
 
-Roznica wzgledem zwyklego (statycznego) proxy:
+Różnica względem zwykłego (statycznego) proxy:
 
-1. Static Proxy piszesz recznie jako osobna klase dla interfejsu.
-1. Dynamic Proxy jest generowany w locie (w C# np. przez `DispatchProxy`), wiec mniej kodu powtarzalnego.
+1. Static Proxy piszesz ręcznie jako osobną klasę dla interfejsu.
+1. Dynamic Proxy jest generowany w locie (w C# np. przez `DispatchProxy`), więc mniej kodu powtarzalnego.
 1. Static Proxy jest prostszy w debugowaniu, Dynamic Proxy jest bardziej elastyczny przy wielu interfejsach.
 
-## Szczegolowe wyjasnienie koncepcji w C#
+## Szczegółowe wyjaśnienie koncepcji w C#
 
-W C# dynamic proxy mozna zbudowac przez `DispatchProxy`, ktory generuje implementacje interfejsu w runtime.
-Zamiast pisac recznie klase proxy dla kazdego kontraktu, definiujesz jedna klase interceptora i przechwytujesz wywolania metod.
+W C# dynamic proxy można zbudować przez `DispatchProxy`, który generuje implementację interfejsu w runtime.
+Zamiast pisać ręcznie klasę proxy dla każdego kontraktu, definiujesz jedną klasę interceptora i przechwytujesz wywołania metod.
 
-Jak to dziala:
+Jak to działa:
 
 1. Klient pracuje na interfejsie, np. `IOrderService`.
-1. `DispatchProxy.Create<T, TProxy>()` zwraca obiekt, ktory implementuje `T`.
-1. Kazde wywolanie metody trafia do `Invoke(MethodInfo, object?[]?)`.
-1. W `Invoke` mozna dodac logowanie, pomiar czasu, polityke retry, metryki, walidacje, itp.
-1. Ostatecznie interceptor deleguje wywolanie do prawdziwego obiektu (`Target`).
+1. `DispatchProxy.Create<T, TProxy>()` zwraca obiekt, który implementuje `T`.
+1. Każde wywołanie metody trafia do `Invoke(MethodInfo, object?[]?)`.
+1. W `Invoke` można dodać logowanie, pomiar czasu, politykę retry, metryki, walidacje, itp.
+1. Ostatecznie interceptor deleguje wywołanie do prawdziwego obiektu (`Target`).
 
-Korzysci i koszty:
+Korzyści i koszty:
 
-1. Plus: mocna redukcja boilerplate dla wielu interfejsow.
+1. Plus: mocna redukcja boilerplate dla wielu interfejsów.
 1. Plus: centralizacja logiki przekrojowej.
-1. Minus: trudniejszy debugging i mniejsza czytelnosc stack trace.
+1. Minus: trudniejszy debugging i mniejsza czytelność stack trace.
 1. Minus: narzut reflection i runtime dispatch.
 
-## Role w przykladzie
+## Rolę w przykładzie
 
 1. `IOrderService` - kontrakt (`Subject`).
 1. `RealOrderService` - implementacja docelowa (`RealSubject`).
 1. `MonitoringProxy<T>` - interceptor dynamicznego proxy.
 1. `ProxyFactory` - bezpieczne tworzenie proxy dla interfejsu.
-1. Kod kliencki - wywoluje metode jak zwykla implementacje interfejsu.
+1. Kod kliencki - wywołuje metodę jak zwykłą implementację interfejsu.
 
 ## Diagramy
 
@@ -48,20 +48,20 @@ Korzysci i koszty:
 
 ![Diagram interakcji](diagrams/dynamic_proxy_csharp_flow.png)
 
-Zrodlo: [diagrams/01-dispatch-proxy-flow.puml](diagrams/01-dispatch-proxy-flow.puml)
+Źródło: [diagrams/01-dispatch-proxy-flow.puml](diagrams/01-dispatch-proxy-flow.puml)
 
 ### Diagram klas
 
-Zrodlo: [diagrams/02-class.puml](diagrams/02-class.puml)
+Źródło: [diagrams/02-class.puml](diagrams/02-class.puml)
 
 ## Co pokazuje kod
 
 1. IOrderService i RealOrderService.
-2. DispatchProxy generujacy proxy runtime.
-3. Interceptor: log start/stop, pomiar czasu i obsluga wyjatkow.
-4. Rzucenie wyjatku z `RealOrderService` i ponowne rzucenie `InnerException` w interceptorze.
+2. DispatchProxy generujący proxy runtime.
+3. Interceptor: log start/stop, pomiar czasu i obsługa wyjątków.
+4. Rzucenie wyjątku z `RealOrderService` i ponowne rzucenie `InnerException` w interceptorze.
 
-## Program ilustrujacy
+## Program ilustrujący
 
 Kod: [Examples/Program.cs](Examples/Program.cs)
 
@@ -81,19 +81,19 @@ catch (ArgumentException ex)
 }
 ```
 
-## Wyjasnienie programu krok po kroku
+## Wyjaśnienie programu krok po kroku
 
 1. Tworzony jest obiekt docelowy `RealOrderService`.
-1. `ProxyFactory.Create` buduje dynamiczne proxy implementujace `IOrderService`.
+1. `ProxyFactory.Create` buduje dynamiczne proxy implementujące `IOrderService`.
 1. Dla poprawnego `orderId` metoda przechodzi przez interceptor: `START -> OK -> ELAPSED_US`.
 1. Dla pustego `orderId` `RealOrderService` rzuca `ArgumentException`.
-1. Interceptor loguje `ERROR ...` i rzuca ponownie wewnetrzny wyjatek, zachowujac semantyke bledu.
+1. Interceptor loguje `ERROR ...` i rzuca ponownie wewnętrzny wyjątek, zachowując semantykę błędu.
 
 ## Oczekiwany efekt uruchomienia
 
-1. Linia z zaakceptowanym zamowieniem `ORDER_ACCEPTED:ORD-100`.
-1. Logi `START`, `OK`, `ELAPSED_US` dla poprawnego wywolania.
-1. Log `ERROR PlaceOrder: orderId is required` i komunikat `Expected: ...` dla blednego wywolania.
+1. Linia z zaakceptowanym zamówieniem `ORDER_ACCEPTED:ORD-100`.
+1. Logi `START`, `OK`, `ELAPSED_US` dla poprawnego wywołania.
+1. Log `ERROR PlaceOrder: orderId is required` i komunikat `Expected: ...` dla błędnego wywołania.
 
 ## Uruchom
 

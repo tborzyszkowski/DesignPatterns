@@ -1,5 +1,5 @@
-@startuml composite_alternatives
-title Composite - alternatywy i kiedy co wybrac
+﻿@startuml composite_alternatives
+title Composite - alternatywy i kiedy co wybrać
 
 skinparam monochrome true
 skinparam dpi 150
@@ -7,14 +7,14 @@ skinparam dpi 150
 rectangle "Composite\n(ten wzorzec)" {
     note as C
       Cel: jednolite API dla
-      hierarchii czesc-calosc
+      hierarchii część-całość
       ----
       Jedno dziecko: NIE (lista dzieci)
       Rekurencja: TAK
       ----
-      Uzyj gdy: drzewo o dowolnej
-      glebokosci, ta sama operacja
-      na lisciu i galezia
+      Użyj gdy: drzewo o dowolnej
+      głębokości, ta sama operacja
+      na liściu i gałęzi
     end note
 }
 
@@ -26,7 +26,7 @@ rectangle "Dekorator" {
       Jedno dziecko: TAK (wrappee)
       Rekurencja: NIE
       ----
-      Uzyj gdy: chcesz owiac obiekt
+      Użyj gdy: chcesz owijać obiekt
       nowymi warstwami zachowania
       (kompresja, logowanie, cache)
     end note
@@ -37,11 +37,11 @@ rectangle "Visitor" {
       Cel: nowe operacje na
       stabilnej strukturze
       ----
-      Laczy sie z: Composite
-      Operacja: zewnetrzna klasa
+      Łączy się z: Composite
+      Operacja: zewnętrzna klasa
       ----
-      Uzyj gdy: struktura stabilna,
-      czesto nowe operacje
+      Użyj gdy: struktura stabilna,
+      często nowe operacje
       (eksport, analiza, walidacja)
     end note
 }
@@ -49,14 +49,14 @@ rectangle "Visitor" {
 rectangle "Prosta lista + serwis" {
     note as F
       Cel: plaska kolekcja,
-      stala glebokoscia
+      stała głębokością
       ----
       Hierarchia: 1-2 poziomy max
       Interfejs: inny per poziom
       ----
-      Uzyj gdy: brak potrzeby
+      Użyj gdy: brak potrzeby
       rekurencji ani jednolitego API
-      (lista zamowien, pozycje faktury)
+      (lista zamówień, pozycje faktury)
     end note
 }
 

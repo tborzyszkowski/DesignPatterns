@@ -1,5 +1,5 @@
-@startuml command_decision
-title Kiedy stosowac wzorzec Polecenie - drzewo decyzyjne
+﻿@startuml command_decision
+title Kiedy stosować wzorzec Polecenie - drzewo decyzyjne
 
 skinparam monochrome true
 skinparam dpi 150

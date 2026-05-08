@@ -1,5 +1,5 @@
-@startuml observer_problem
-title Observer - problem: scisle powiazan bez wzorca
+﻿@startuml observer_problem
+title Observer - problem: ściśle powiązań bez wzorca
 
 skinparam monochrome true
 skinparam dpi 150
@@ -25,9 +25,9 @@ class ForecastDisplay {
     + Update(t, h)
 }
 
-WeatherStation --> CurrentConditionsDisplay : bezposrednia zaleznosc
-WeatherStation --> StatisticsDisplay : bezposrednia zaleznosc
-WeatherStation --> ForecastDisplay : bezposrednia zaleznosc
+WeatherStation --> CurrentConditionsDisplay : bezpośrednia zależność
+WeatherStation --> StatisticsDisplay : bezpośrednia zależność
+WeatherStation --> ForecastDisplay : bezpośrednia zależność
 
 note bottom of WeatherStation
 Dodanie nowego wyswietlacza

@@ -1,8 +1,8 @@
-# 03 — Struktura i Działanie Wzorca (GoF)
+﻿# 03 — Struktura i Działanie Wzorca (GoF)
 
 ## Spis treści
 
-1. [Role w strukturze GoF](#1-role)
+1. [Rolę w strukturze GoF](#1-rolę)
 2. [Diagram klas](#2-diagram-klas)
 3. [Diagram sekwencji](#3-sekwencja)
 4. [Cykl życia wywołania](#4-cykl)
@@ -12,7 +12,7 @@
 
 ---
 
-## 1. Role w strukturze GoF <a name="1-role"></a>
+## 1. Rolę w strukturze GoF <a name="1-rolę"></a>
 
 | Rola GoF | Implementacja w C# | Opis |
 |----------|--------------------|------|
@@ -157,6 +157,6 @@ public class FileStream : Stream
 ## 7. Uruchamianie <a name="7-uruchamianie"></a>
 
 ```bash
-cd src/15-metoda-szablonowa/03-struktura-i-dzialanie/Examples
+cd src/15-metoda-szablonowa/03-struktura-i-działanie/Examples
 dotnet run
 ```

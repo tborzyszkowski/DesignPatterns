@@ -1,4 +1,4 @@
-# 06 — Duży Przykład i Alternatywy
+﻿# 06 — Duży Przykład i Alternatywy
 
 ## Spis treści
 
@@ -8,7 +8,7 @@
 4. [Implementacja Template Method](#4-template)
 5. [Alternatywa: Strategia](#5-strategia)
 6. [Alternatywa: Delegaty](#6-delegaty)
-7. [Porównanie podejść](#7-porownanie)
+7. [Porównanie podejść](#7-porównanie)
 8. [Testy jednostkowe](#8-testy)
 9. [Uruchamianie](#9-uruchamianie)
 
@@ -125,7 +125,7 @@ Szczególnie wygodne w testach jednostkowych — bez tworzenia podklas.
 
 ---
 
-## 7. Porównanie podejść <a name="7-porownanie"></a>
+## 7. Porównanie podejść <a name="7-porównanie"></a>
 
 | Cecha | Template Method | Strategia | Delegaty |
 |-------|----------------|-----------|---------|
@@ -148,7 +148,7 @@ Projekt `Tests/` zawiera testy xUnit sprawdzające:
 - Testowalność wersji z delegatami (bez podklas)
 
 ```bash
-cd src/15-metoda-szablonowa/06-duzy-przyklad-i-alternatywy/Tests
+cd src/15-metoda-szablonowa/06-duży-przykład-i-alternatywy/Tests
 dotnet test --nologo
 ```
 
@@ -158,10 +158,10 @@ dotnet test --nologo
 
 ```bash
 # Przykłady:
-cd src/15-metoda-szablonowa/06-duzy-przyklad-i-alternatywy/Examples
+cd src/15-metoda-szablonowa/06-duży-przykład-i-alternatywy/Examples
 dotnet run
 
 # Testy:
-cd src/15-metoda-szablonowa/06-duzy-przyklad-i-alternatywy/Tests
+cd src/15-metoda-szablonowa/06-duży-przykład-i-alternatywy/Tests
 dotnet test --nologo
 ```

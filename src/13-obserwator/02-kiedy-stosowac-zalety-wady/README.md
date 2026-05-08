@@ -1,4 +1,4 @@
-# 02. Kiedy stosować, zalety i wady
+﻿# 02. Kiedy stosować, zalety i wady
 
 ## Cel rozdziału
 
@@ -6,7 +6,7 @@ Nauczyć się podejmować świadomą decyzję: kiedy Obserwator jest właściwym
 
 ## Krok 1 — sygnały, że Obserwator jest potrzebny
 
-Odpowiedz na pytania:
+Odpowiedź na pytania:
 
 1. **Czy zmiana stanu jednego obiektu powinna powiadamiać inne obiekty?**
    Jeśli po `SetValue()` chcesz automatycznie odświeżyć UI, zapisać do logu, wysłać event — to jest klasyczny sygnał dla Obserwatora.
@@ -39,7 +39,7 @@ Odpowiedz na pytania:
 ### Scenariusz A: Stacja pomiarowa z dynamicznymi wyświetlaczami (Obserwator TAK)
 
 - Czujnik zbiera dane (temp., wilg., ciśnienie).
-- Liczba i typy wyświetlaczy zmieniają się w runtime (np. aplikacja mobilna włączona/wyłączona).
+- Liczba i typy wyświetłączy zmieniają się w runtime (np. aplikacja mobilna włączona/wyłączona).
 - Wyświetlacze są niezależne od siebie.
 
 Decyzja: **Obserwator** — Subject powiadamia dynamiczną listę obserwatorów przez interfejs.
@@ -78,7 +78,7 @@ Decyzja: **Aspektowe podejście** (AOP, Dekorator, Middleware) — Obserwator by
 ### Scenariusz F: Konfiguracja ładowana raz na start (Obserwator NIE)
 
 - Plik konfiguracyjny jest odczytany raz przy starcie, nie zmienia się w runtime.
-- Nie ma potrzeby powiadamiania.
+- Nie ma potrżeby powiadamiania.
 
 Decyzja: **Prosta zależność** lub DI — Obserwator dodałby zbędny narzut.
 
@@ -133,7 +133,7 @@ Program pokazuje:
 1. Demonstrację potencjalnego wycieku pamięci przy użyciu `event` bez wypisania.
 
 ```bash
-cd src/13-obserwator/02-kiedy-stosowac-zalety-wady/Examples
+cd src/13-obserwator/02-kiedy-stosować-zalety-wady/Examples
 dotnet run
 ```
 

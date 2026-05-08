@@ -1,4 +1,4 @@
-@startuml composite_vs_patterns
+﻿@startuml composite_vs_patterns
 title Composite vs alternatywy - kiedy co wybrac
 
 skinparam monochrome true
@@ -7,13 +7,13 @@ skinparam dpi 150
 rectangle "Composite" {
     note as C
       Problem: jednolite API
-      dla hierarchii czesc-calosc
+      dla hierarchii część-całość
       ----
       Struktura: drzewo (Leaf + Composite)
-      Klient: nie rozroznia typow wezlow
+      Klient: nie rozróżnia typów węzłów
       Operacja: delegowana rekurencyjnie
       ----
-      Przyklad: system plikow, menu,
+      Przykład: system plików, menu,
       BOM, AST, drzewo sceny GUI
     end note
 }
@@ -27,9 +27,9 @@ rectangle "Dekorator" {
       Klient: widzi jeden obiekt
       Operacja: delegowana do wrappee
       ----
-      Przyklad: Stream z kompresja,
+      Przykład: Stream z kompresja,
       logger z formatowaniem,
-      widget ze scrollbarem
+      widget że scrollbarem
     end note
 }
 
@@ -39,12 +39,12 @@ rectangle "Visitor" {
       na stabilnej strukturze
       ----
       Struktura: drzewo Composite
-      + zewnetrzny odwiedzajacy
+      + zewnętrzny odwiedzajacy
       Operacja: rozdzielona od struktury
       ----
-      Przyklad: eksport XML/PDF,
+      Przykład: eksport XML/PDF,
       analiza statyczna AST,
-      raportowanie dokumentow
+      raportowanie dokumentów
     end note
 }
 
@@ -54,10 +54,10 @@ rectangle "Prosta lista + serwis" {
       zawsze 1-2 poziomy
       ----
       Struktura: List<T> + klasy domenowe
-      Klient: uzywa serwisu domenowego
+      Klient: używa serwisu domenowego
       Operacja: metoda serwisu
       ----
-      Przyklad: lista zamowien,
+      Przykład: lista zamówień,
       produkty w kategorii (1 poziom),
       wiersze w raporcie
     end note

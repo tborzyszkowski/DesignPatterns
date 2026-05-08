@@ -1,4 +1,4 @@
-# 08 — Duży Przykład: Katalog Biblioteki i Alternatywy
+﻿# 08 — Duży Przykład: Katalog Biblioteki i Alternatywy
 
 ## Spis treści
 
@@ -154,7 +154,7 @@ Gdy masz różne typy w kolekcji (Book, Magazine, DVD) i każdy przetwarza inacz
 | Sortowanie | weryfikacja porządku alfabetycznego |
 | Wyszukiwanie | po tytule, autorze, ISBN, brak wyników |
 | Eksport CSV | nagłówek, ilość wierszy, lazy evaluation |
-| Kompozyt | suma kolekcji, kolejność, puste kolekcje |
+| Kompozyt | suma kolekcji, kolejność, puste kolekcję |
 | Niezależność kursorów | dwa iteratory jednocześnie |
 | Zgodność z LINQ | iterator = LINQ (GetByGenre, GetAvailable) |
 
@@ -164,10 +164,10 @@ Gdy masz różne typy w kolekcji (Book, Magazine, DVD) i każdy przetwarza inacz
 
 ```bash
 # Przykład
-cd src/15-iterator/08-duzy-przyklad-i-alternatywy/Examples
+cd src/15-iterator/08-duży-przykład-i-alternatywy/Examples
 dotnet run
 
 # Testy
-cd src/15-iterator/08-duzy-przyklad-i-alternatywy/Tests
+cd src/15-iterator/08-duży-przykład-i-alternatywy/Tests
 dotnet test --verbosity normal
 ```

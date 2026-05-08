@@ -1,4 +1,4 @@
-# Zadania — Wzorzec Polecenie
+﻿# Zadania — Wzorzec Polecenie
 
 ## Zadanie 1 — Podstawowy wzorzec (poziom: łatwy)
 
@@ -260,7 +260,7 @@ ICommand leaveHome = new MacroCommand([
     new SetTemperatureCommand(thermostat, 15)
 ]);
 
-remoteControl.SetCommand(0, leaveHome);
+remoteContról.SetCommand(0, leaveHome);
 ```
 
 ---
@@ -274,7 +274,7 @@ Zaimplementuj system kolejki zadań (`CommandQueue`) który:
 - Przyjmuje polecenia metodą `Enqueue(ICommand)`.
 - Przetwarza je w tle w osobnym wątku (`Thread` lub `Task`).
 - Umożliwia zatrzymanie przetwarzania (`Stop()`).
-- Loguje każde wykonane polecenie wraz ze znacznikiem czasu.
+- Loguje każde wykonane polecenie wraz że znacznikiem czasu.
 
 **Wskazówka:** użyj `BlockingCollection<ICommand>` z przestrzeni `System.Collections.Concurrent`.
 

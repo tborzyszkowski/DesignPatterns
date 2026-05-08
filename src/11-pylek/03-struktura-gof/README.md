@@ -1,10 +1,10 @@
-# 03. Struktura GoF Flyweight
+﻿# 03. Struktura GoF Flyweight
 
 ## Szczegółowy opis
 
 Wzorzec Pyłek definiuje mechanizm współdzielenia obiektów, aby zmniejszyć liczbę instancji i zużycie pamięci.
 
-## Role we wzorcu
+## Rolę we wzorcu
 
 1. `Flyweight` - interfejs operacji przyjmujący extrinsic state.
 1. `ConcreteFlyweight` - przechowuje intrinsic state.
@@ -40,7 +40,7 @@ Program demonstruje klasyczną strukturę GoF: `IFlyweight`, `ConcreteFlyweight`
 Factory loguje każde tworzenie nowego flyweight — widoczna jest różnica między miss a hit.
 
 ```bash
-cd src/11-pylek/03-struktura-gof/Examples
+cd src/11-pyłek/03-struktura-gof/Examples
 dotnet run
 ```
 

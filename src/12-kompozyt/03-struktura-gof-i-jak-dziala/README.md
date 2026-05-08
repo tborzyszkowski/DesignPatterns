@@ -1,10 +1,10 @@
-# 03. Jak działa Kompozyt (struktura GoF)
+﻿# 03. Jak działa Kompozyt (struktura GoF)
 
 ## Cel rozdziału
 
-Poznać role uczestników wzorca i zrozumieć przepływ wywołań między klientem, kompozytem i liściem.
+Poznać rolę uczestników wzorca i zrozumieć przepływ wywołań między klientem, kompozytem i liściem.
 
-## Role we wzorcu
+## Rolę we wzorcu
 
 1. `Component` - wspólny kontrakt operacji.
 1. `Leaf` - element końcowy, bez dzieci.
@@ -37,7 +37,7 @@ Kod: [Examples/Program.cs](Examples/Program.cs)
 Program pokazuje klasyczną strukturę GoF i uruchamia metodę `Operation()` na korzeniu.
 
 ```bash
-cd src/12-kompozyt/03-struktura-gof-i-jak-dziala/Examples
+cd src/12-kompozyt/03-struktura-gof-i-jak-działa/Examples
 dotnet run
 ```
 

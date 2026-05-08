@@ -1,4 +1,4 @@
-# 02 — Kiedy Stosować, Zalety, Wady i Odmiany
+﻿# 02 — Kiedy Stosować, Zalety, Wady i Odmiany
 
 ## Spis treści
 
@@ -7,7 +7,7 @@
 3. [Zalety szczegółowo](#3-zalety)
 4. [Wady i pułapki](#4-wady)
 5. [Odmiany wzorca](#5-odmiany)
-6. [Porównanie z innymi wzorcami](#6-porownanie)
+6. [Porównanie z innymi wzorcami](#6-porównanie)
 7. [Uruchamianie](#7-uruchamianie)
 
 ---
@@ -264,7 +264,7 @@ pipeline.Run();
 
 ---
 
-## 6. Porównanie z innymi wzorcami <a name="6-porownanie"></a>
+## 6. Porównanie z innymi wzorcami <a name="6-porównanie"></a>
 
 | Kryterium | Template Method | Strategia | Builder |
 |-----------|-----------------|-----------|---------|
@@ -280,6 +280,6 @@ pipeline.Run();
 ## 7. Uruchamianie <a name="7-uruchamianie"></a>
 
 ```bash
-cd src/15-metoda-szablonowa/02-kiedy-stosowac-zalety-wady/Examples
+cd src/15-metoda-szablonowa/02-kiedy-stosować-zalety-wady/Examples
 dotnet run
 ```

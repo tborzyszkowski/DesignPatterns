@@ -1,5 +1,5 @@
-@startuml command_lifecycle
-title Cykl zycia polecenia
+﻿@startuml command_lifecycle
+title Cykl życia polecenia
 
 skinparam monochrome true
 skinparam dpi 150

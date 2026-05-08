@@ -1,4 +1,4 @@
-# 06 — Iterator Wewnętrzny
+﻿# 06 — Iterator Wewnętrzny
 
 ## Spis treści
 
@@ -7,7 +7,7 @@
 3. [Operacje wyższego rzędu: Map, Fold, Filter](#3-funkcyjne)
 4. [Iterator wewnętrzny na drzewie](#4-drzewo)
 5. [Wady i zalety](#5-wadyzalety)
-6. [Porównanie z zewnętrznym](#6-porownanie)
+6. [Porównanie z zewnętrznym](#6-porównanie)
 7. [Uruchamianie przykładu](#7-uruchamianie)
 
 ---
@@ -162,7 +162,7 @@ TreeNode<int> lengths = wordTree.Map(w => w.Length);
 
 ---
 
-## 6. Porównanie z zewnętrznym <a name="6-porownanie"></a>
+## 6. Porównanie z zewnętrznym <a name="6-porównanie"></a>
 
 ```csharp
 // Iterator wewnętrzny — prosty
@@ -184,6 +184,6 @@ foreach ((string v, int depth) in tree.DfsWithDepth())
 ## 7. Uruchamianie przykładu <a name="7-uruchamianie"></a>
 
 ```bash
-cd src/15-iterator/06-iterator-wewnetrzny/Examples
+cd src/15-iterator/06-iterator-wewnętrzny/Examples
 dotnet run
 ```

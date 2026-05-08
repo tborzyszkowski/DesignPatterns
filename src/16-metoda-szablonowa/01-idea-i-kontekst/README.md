@@ -1,12 +1,12 @@
-# 01 — Idea i Kontekst Wzorca Metoda Szablonowa
+﻿# 01 — Idea i Kontekst Wzorca Metoda Szablonowa
 
 ## Spis treści
 
 1. [Rys historyczny](#1-historia)
 2. [Problem — duplikacja szkieletu algorytmu](#2-problem)
-3. [Rozwiązanie — koncepcja wzorca](#3-rozwiazanie)
+3. [Rozwiązanie — koncepcja wzorca](#3-rozwiązanie)
 4. [Zasada Hollywood Principle](#4-hollywood)
-5. [Potrzeby które wzorzec zaspokaja](#5-potrzeby)
+5. [Potrżeby które wzorzec zaspokaja](#5-potrżeby)
 6. [Uruchamianie przykładu](#6-uruchamianie)
 7. [Literatura](#7-literatura)
 
@@ -82,7 +82,7 @@ class JsonExporter
 
 ---
 
-## 3. Rozwiązanie — koncepcja wzorca <a name="3-rozwiazanie"></a>
+## 3. Rozwiązanie — koncepcja wzorca <a name="3-rozwiązanie"></a>
 
 ![Koncepcja rozwiązania](diagrams/template_method_concept.png)
 
@@ -144,7 +144,7 @@ step3()                       step2();  ← wywołuje podklasę
 
 ---
 
-## 5. Potrzeby które wzorzec zaspokaja <a name="5-potrzeby"></a>
+## 5. Potrżeby które wzorzec zaspokaja <a name="5-potrżeby"></a>
 
 | Potrzeba | Przykład | Rozwiązanie Template Method |
 |----------|----------|----------------------------|

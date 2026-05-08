@@ -1,4 +1,4 @@
-@startuml proxy_vs_patterns
+﻿@startuml proxy_vs_patterns
 title Proxy vs Adapter vs Dekorator vs Strategia
 
 skinparam monochrome true
@@ -8,9 +8,9 @@ skinparam noteFontSize 11
 rectangle "Proxy" as PX {
     note as N1
       Zachowuje kontrakt.
-      Cel: kontrola dostepu,
+      Cel: kontrola dostępu,
       lazy init, cache, remote.
-      Klient nie wie ze ma Proxy.
+      Klient nie wie że ma Proxy.
     end note
 }
 
@@ -18,16 +18,16 @@ rectangle "Adapter" as AD {
     note as N2
       Zmienia kontrakt.
       Cel: dopasowanie obcego API.
-      Transluje sygnature metod.
+      Tłumaczy sygnaturę metod.
     end note
 }
 
 rectangle "Dekorator" as DK {
     note as N3
       Zachowuje kontrakt.
-      Cel: addytywne nakladanie
-      nowych zachowan warstwowo.
-      Mozna skladac wiele Dekoratorow.
+      Cel: addytywne nakładanie
+      nowych zachowań warstwowo.
+      Można składać wiele Dekoratorow.
     end note
 }
 
@@ -52,19 +52,19 @@ note bottom of PX
 end note
 
 note bottom of AD
-  Przyklad: KurierXAdapter
+  Przykład: KurierXAdapter
   opakowuje KurierXApi
   pod IDeliveryService
 end note
 
 note bottom of DK
-  Przyklad: LoggingStream
+  Przykład: LoggingStream
   opakowuje FileStream
   i dodaje logowanie operacji
 end note
 
 note bottom of ST
-  Przyklad: StandardDiscount
+  Przykład: StandardDiscount
   vs PremiumDiscount
   podmieniane w OrderContext
 end note

@@ -1,4 +1,4 @@
-# 01. Idea i kontekst wzorca Obserwator
+﻿# 01. Idea i kontekst wzorca Obserwator
 
 ## Cel rozdziału
 
@@ -48,8 +48,8 @@ public class WeatherStation
 
 1. `WeatherStation` musi znać każdy wyświetlacz z góry → ścisłe powiązanie.
 1. Dodanie nowego wyświetlacza wymaga modyfikacji `WeatherStation` → naruszenie OCP.
-1. Nie można dynamicznie dodawać/usuwać wyświetlaczy w runtime.
-1. Testowanie `WeatherStation` wymaga stworzenia wszystkich wyświetlaczy.
+1. Nie można dynamicznie dodawać/usuwać wyświetłączy w runtime.
+1. Testowanie `WeatherStation` wymaga stworzenia wszystkich wyświetłączy.
 
 ## Rozwiązanie: wzorzec Obserwator
 
@@ -90,9 +90,9 @@ public class WeatherStation
 }
 ```
 
-Teraz `WeatherStation` nie zna konkretnych wyświetlaczy. Nowy wyświetlacz: tylko nowa klasa + `Subscribe()`. Zero zmian w `WeatherStation`.
+Teraz `WeatherStation` nie zna konkretnych wyświetłączy. Nowy wyświetlacz: tylko nowa klasa + `Subscribe()`. Zero zmian w `WeatherStation`.
 
-## Cztery potrzeby, które zaspokaja wzorzec Obserwator
+## Cztery potrżeby, które zaspokaja wzorzec Obserwator
 
 ### Potrzeba 1: Luźne powiązanie (Loose Coupling)
 
@@ -203,7 +203,7 @@ dotnet run
 
 Program demonstruje:
 
-1. Naiwne podejście ze ścisłym powiązaniem (tight coupling).
+1. Naiwne podejście że ścisłym powiązaniem (tight coupling).
 1. Refaktoring do wzorca Obserwator.
 1. Dynamiczne subskrybowanie i wypisywanie obserwatorów.
 

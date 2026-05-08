@@ -1,8 +1,8 @@
-# 03 — Struktura GoF i Jak Działa
+﻿# 03 — Struktura GoF i Jak Działa
 
 ## Spis treści
 
-1. [Role wzorca — GoF](#1-role)
+1. [Rolę wzorca — GoF](#1-rolę)
 2. [Diagram klas](#2-klasy)
 3. [Diagram sekwencji](#3-sekwencja)
 4. [Cykl życia iteratora](#4-cykl)
@@ -12,9 +12,9 @@
 
 ---
 
-## 1. Role wzorca — GoF <a name="1-role"></a>
+## 1. Rolę wzorca — GoF <a name="1-rolę"></a>
 
-Wzorzec Iterator definiuje cztery role:
+Wzorzec Iterator definiuje cztery rolę:
 
 | Rola | Odpowiednik w .NET | Opis |
 |------|-------------------|------|
@@ -108,7 +108,7 @@ while (iter.MoveNext())           // 3. Iterator przesuwa kursor
 
 ## 5. Struktura w .NET <a name="5-dotnet"></a>
 
-.NET mapuje role GoF na `IEnumerable<T>` i `IEnumerator<T>`:
+.NET mapuje rolę GoF na `IEnumerable<T>` i `IEnumerator<T>`:
 
 ```csharp
 // .NET: Aggregate = IEnumerable<T>
@@ -166,7 +166,7 @@ try {
 ## 7. Uruchamianie przykładu <a name="7-uruchamianie"></a>
 
 ```bash
-cd src/15-iterator/03-struktura-i-dzialanie/Examples
+cd src/15-iterator/03-struktura-i-działanie/Examples
 dotnet run
 ```
 

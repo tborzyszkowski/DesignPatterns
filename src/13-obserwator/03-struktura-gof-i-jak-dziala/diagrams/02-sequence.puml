@@ -1,5 +1,5 @@
-@startuml observer_sequence
-title Observer - pelny cykl zycia (diagram sekwencji)
+﻿@startuml observer_sequence
+title Observer - pełny cykl życia (diagram sekwencji)
 
 skinparam monochrome true
 skinparam dpi 150

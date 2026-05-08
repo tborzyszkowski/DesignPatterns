@@ -1,5 +1,5 @@
-@startuml command_problem
-title Polecenie - problem: scisle powiazan bez wzorca
+﻿@startuml command_problem
+title Polecenie - problem: ściśle powiązań bez wzorca
 
 skinparam monochrome true
 skinparam dpi 150
@@ -24,9 +24,9 @@ class GarageDoor {
     + Close()
 }
 
-Button --> Light : bezposrednia zaleznosc
-Button --> Fan : bezposrednia zaleznosc
-Button --> GarageDoor : bezposrednia zaleznosc
+Button --> Light : bezpośrednia zależność
+Button --> Fan : bezpośrednia zależność
+Button --> GarageDoor : bezpośrednia zależność
 
 note bottom of Button
   Przycisk musi znac WSZYSTKICH odbiornikow.

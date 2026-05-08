@@ -1,4 +1,4 @@
-# 06. Alternatywy i kiedy nie wybierać Kompozytu
+﻿# 06. Alternatywy i kiedy nie wybierać Kompozytu
 
 ## Cel rozdziału
 
@@ -27,7 +27,7 @@ public class Order
 }
 ```
 
-Scenariusz: lista zamówień w e-sklepie. Każde zamówienie zawiera pozycje — zawsze 2 poziomy, brak rekurencji, brak potrzeby jednolitego API.
+Scenariusz: lista zamówień w e-sklepie. Każde zamówienie zawiera pozycje — zawsze 2 poziomy, brak rekurencji, brak potrżeby jednolitego API.
 
 ### Dekorator
 
@@ -75,7 +75,7 @@ Scenariusz: wyszukiwarka w drzewie dokumentów z wymiennymi strategiami (BFS dla
 | **Dekorator** | Łańcuch owinieci | Rozszerza jedno dziecko | Jedno dziecko, nie lista |
 | **Visitor** | Drzewo Composite + zewnętrzny obiekt | Nowe operacje bez zmiany klas | Operacja zewnętrzna, nie w węźle |
 | **Strategia** | Drzewo jako dane + algorytm | Wymienny algorytm przetwarzania | Algorytm oddzielony od drzewa |
-| **Prosta lista** | `List<T>` | Płaskie kolekcje, stała głębokość | Brak rekurencji i wspólnego interfejsu |
+| **Prosta lista** | `List<T>` | Płaskie kolekcję, stała głębokość | Brak rekurencji i wspólnego interfejsu |
 
 ## Diagram porównawczy
 

@@ -1,4 +1,4 @@
-# 06. Kiedy stosować i alternatywy
+﻿# 06. Kiedy stosować i alternatywy
 
 ## Cel rozdziału
 
@@ -6,7 +6,7 @@ Podjąć świadomą decyzję, czy Flyweight jest najlepszym wyborem, wybrać odp
 
 ## Krok 1 — czy w ogóle jest problem?
 
-Zanim sięgniesz po Flyweight, odpowiedz na trzy pytania:
+Zanim sięgniesz po Flyweight, odpowiedź na trzy pytania:
 
 1. **Czy liczba obiektów jest naprawdę duża?**
    Flyweight ma sens przy tysiącach–milionach instancji. Dla setek obiektów narzut złożoności nie opłaca się.
@@ -43,7 +43,7 @@ Jeśli nie możesz wydzielić niemutowalnego intrinsic — Flyweight nie zadzia�
 
 Źródło: [diagrams/02-decision-map.puml](diagrams/02-decision-map.puml)
 
-## Scenariusze decyzyjne — przyklady z życia
+## Scenariusze decyzyjne — przykłady z życia
 
 ### Scenariusz A: edytor tekstu — znaki w dokumencie (Flyweight TAK)
 
@@ -150,6 +150,6 @@ Program zestawia trzy warianty dla systemu cząstek:
 1. **Płaski model** — gdy obiekty są unikalne, Flyweight nic nie wnosi.
 
 ```bash
-cd src/11-pylek/06-kiedy-stosowac-i-alternatywy/Examples
+cd src/11-pyłek/06-kiedy-stosować-i-alternatywy/Examples
 dotnet run
 ```

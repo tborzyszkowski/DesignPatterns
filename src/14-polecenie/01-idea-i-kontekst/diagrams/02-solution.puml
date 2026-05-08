@@ -1,5 +1,5 @@
-@startuml command_solution
-title Polecenie - rozwiazanie: enkapsulacja zadania
+﻿@startuml command_solution
+title Polecenie - rozwiązanie: enkapsulacja zadania
 
 skinparam monochrome true
 skinparam dpi 150

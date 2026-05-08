@@ -1,4 +1,4 @@
-# 02. Kiedy stosować wzorzec Polecenie — zalety, wady i odmiany
+﻿# 02. Kiedy stosować wzorzec Polecenie — zalety, wady i odmiany
 
 ## Sygnały, że potrzebujesz wzorca Polecenie
 
@@ -178,7 +178,7 @@ Cofanie operacji na strukturach bazodanowych lub operacjach nieodwracalnych (np.
 ## Uruchomienie przykładu
 
 ```bash
-cd src/14-polecenie/02-kiedy-stosowac-zalety-wady/Examples
+cd src/14-polecenie/02-kiedy-stosować-zalety-wady/Examples
 dotnet run
 ```
 

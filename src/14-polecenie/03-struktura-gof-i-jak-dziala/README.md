@@ -1,4 +1,4 @@
-# 03. Jak działa wzorzec Polecenie — struktura GoF, diagramy i mechanizm
+﻿# 03. Jak działa wzorzec Polecenie — struktura GoF, diagramy i mechanizm
 
 ## Pięć ról GoF
 
@@ -8,7 +8,7 @@ Wzorzec Polecenie definiuje pięć ról, które razem tworzą luźno powiązany 
 | --- | --- | --- |
 | **Command** | Interfejs z `Execute()` i `Undo()` | `ICommand` |
 | **ConcreteCommand** | Implementuje Command; wiąże Receiver z akcją | `LightOnCommand` |
-| **Invoker** | Inicjuje żądanie; zna tylko `ICommand` | `RemoteControl`, `Button` |
+| **Invoker** | Inicjuje żądanie; zna tylko `ICommand` | `RemoteContról`, `Button` |
 | **Receiver** | Zawiera faktyczną logikę biznesową | `Light`, `RobotArm` |
 | **Client** | Tworzy ConcreteCommand i konfiguruje Invoker | `Program`, fabryka |
 
@@ -132,7 +132,7 @@ controller.UndoLast();    // Cofnij ostatnią operację
 ## Uruchomienie przykładu
 
 ```bash
-cd src/14-polecenie/03-struktura-gof-i-jak-dziala/Examples
+cd src/14-polecenie/03-struktura-gof-i-jak-działa/Examples
 dotnet run
 ```
 

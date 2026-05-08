@@ -1,33 +1,33 @@
-@startuml composite_decision_tree
-title Composite - pelna procedura decyzyjna
+﻿@startuml composite_decision_tree
+title Composite - pełna procedura decyzyjna
 
 skinparam monochrome true
 skinparam dpi 150
 
 start
 
-:Dane tworza strukture drzewiasta\n(relacja czesc-calosc)?;
+:Dane tworzą strukturę drzewiastą\n(relacja część-całość)?;
 if (TAK) then (tak)
 else (nie)
-    :Brak hierarchii\nUzyj prostej listy lub slownika;
+    :Brak hierarchii\nUżyj prostej listy lub słownika;
     stop
 endif
 
-:Ta sama operacja ma dzialac\nna lisciu i galezia jednakowo?;
+:Ta sama operacja ma działać\nna liściu i gałęzi jednakowo?;
 if (TAK) then (tak)
 else (nie)
-    :Rozne API per poziom\nProsta klasa z lista dzieci;
+    :Różne API per poziom\nProsta klasa z listą dzieci;
     stop
 endif
 
-:Chcesz tylko rozszerzac zachowanie\npodatnego obiektu (owiniecie)?;
+:Chcesz tylko rozszerzać zachowanie\npodatnego obiektu (owiniecie)?;
 if (TAK) then (tak)
     :Dekorator\n(nie Composite);
     stop
 else (nie)
 endif
 
-:Struktura stabilna, czesto nowe operacje?;
+:Struktura stabilna, często nowe operacje?;
 if (TAK) then (tak)
     :Composite + Visitor\n(Composite dla struktury,\nVisitor dla nowych operacji);
     stop
@@ -36,14 +36,14 @@ endif
 
 :COMPOSITE jest odpowiedni;
 
-:Klient musi wywolywac Add/Remove\nprzez interfejs Component?;
+:Klient musi wywoływać Add/Remove\nprzez interfejs Component?;
 if (TAK) then (tak)
     :Transparent Composite\n(Add/Remove w interfejsie;\nlisc rzuca NotSupportedException);
 else (nie)
     :Safe Composite\n(Add/Remove tylko w klasie Composite;\nbezpieczniejsze API);
 endif
 
-:Glebokosci drzewa nieznana\nlub ryzyko przepelnienia stosu?;
+:Głębokość drzewa nieznana\nlub ryzyko przepełnienia stosu?;
 if (TAK) then (tak)
     :Dodaj Iterator (BFS/DFS)\nzamiast czystej rekurencji;
 else (nie)

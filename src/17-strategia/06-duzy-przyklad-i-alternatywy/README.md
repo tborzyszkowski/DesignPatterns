@@ -1,4 +1,4 @@
-# 06 — Duży Przykład: System Zamówień E-commerce
+﻿# 06 — Duży Przykład: System Zamówień E-commerce
 
 ## Spis treści
 
@@ -145,7 +145,7 @@ var processor = new FuncOrderProcessor(
 Projekt zawiera testy jednostkowe (xUnit) testujące każdą strategię niezależnie i kompozycje:
 
 ```bash
-cd src/17-strategia/06-duzy-przyklad-i-alternatywy/Tests
+cd src/17-strategia/06-duży-przykład-i-alternatywy/Tests
 dotnet test
 ```
 
@@ -164,10 +164,10 @@ Testowane scenariusze:
 
 ```bash
 # Przykłady
-cd src/17-strategia/06-duzy-przyklad-i-alternatywy/Examples
+cd src/17-strategia/06-duży-przykład-i-alternatywy/Examples
 dotnet run
 
 # Testy
-cd src/17-strategia/06-duzy-przyklad-i-alternatywy/Tests
+cd src/17-strategia/06-duży-przykład-i-alternatywy/Tests
 dotnet test --logger "console;verbosity=normal"
 ```

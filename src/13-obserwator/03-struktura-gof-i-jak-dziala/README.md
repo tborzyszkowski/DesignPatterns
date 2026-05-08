@@ -1,10 +1,10 @@
-# 03. Struktura GoF i jak działa
+﻿# 03. Struktura GoF i jak działa
 
 ## Cel rozdziału
 
-Poznać formalne role wzorca Obserwator według GoF, zobaczyć diagramy klas i sekwencji oraz zrozumieć różnicę między modelem Push i Pull.
+Poznać formalne rolę wzorca Obserwator według GoF, zobaczyć diagramy klas i sekwencji oraz zrozumieć różnicę między modelem Push i Pull.
 
-## Role wzorca według GoF
+## Rolę wzorca według GoF
 
 | Rola | Opis | Przykład |
 |---|---|---|
@@ -61,7 +61,7 @@ foreach (var obs in _observers)
 - Interfejs `Update()` jest sztywny — dodanie nowego pola wymaga zmiany wszystkich Observer.
 - Observer dostaje dane których może nie potrzebować.
 
-### Model Pull — Observer pobiera dane ze Subject
+### Model Pull — Observer pobiera dane że Subject
 
 Subject wysyła tylko powiadomienie "coś się zmieniło". Observer sam pobiera potrzebne dane.
 
@@ -196,7 +196,7 @@ Kod: [Examples/Program.cs](Examples/Program.cs)
 Program porównuje oba modele (Push i Pull) na tym samym scenariuszu (stacja pogodowa):
 
 ```bash
-cd src/13-obserwator/03-struktura-gof-i-jak-dziala/Examples
+cd src/13-obserwator/03-struktura-gof-i-jak-działa/Examples
 dotnet run
 ```
 
@@ -204,7 +204,7 @@ dotnet run
 
 1. Subject zarządza listą Observer przez interfejs — nigdy przez konkretne klasy.
 1. Push: Subject wysyła dane w parametrach `Update()` — prosto, ale mniej elastycznie.
-1. Pull: Observer pobiera dane ze Subject — bardziej rozszerzalne, ale wymaga zależności od Subject.
+1. Pull: Observer pobiera dane że Subject — bardziej rozszerzalne, ale wymaga zależności od Subject.
 1. Bezpieczna iteracja: kopiuj listę przed `foreach` gdy obserwator może się wypisać w `Update()`.
 
 ## Literatura

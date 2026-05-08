@@ -1,4 +1,4 @@
-# 02 — Kiedy Stosować, Zalety i Wady
+﻿# 02 — Kiedy Stosować, Zalety i Wady
 
 ## Spis treści
 
@@ -122,6 +122,6 @@ abstract class DataMiner
 ## 7. Uruchamianie <a name="7-uruchamianie"></a>
 
 ```bash
-cd src/17-strategia/02-kiedy-stosowac-zalety-wady/Examples
+cd src/17-strategia/02-kiedy-stosować-zalety-wady/Examples
 dotnet run
 ```

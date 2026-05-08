@@ -1,4 +1,4 @@
-@startuml observer_weather_sequence
+﻿@startuml observer_weather_sequence
 title Stacja Pogodowa - diagram sekwencji
 
 skinparam monochrome true
@@ -27,7 +27,7 @@ WS -> HI : Update(data)
 HI -> HI : ComputeHeatIndex(22.5, 65)
 HI -> HI : Render "HI: 22.8°C"
 
-== Odlaczenie wyswietlacza ==
+== Odłączenie wyswietlacza ==
 Client -> WS : Unsubscribe(heatIndexDisplay)
 
 == Pomiar 2 — HeatIndex nie dostaje ==

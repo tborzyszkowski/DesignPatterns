@@ -1,5 +1,5 @@
-@startuml proxy_types
-title Cztery typy Proxy - kiedy ktory stosowac
+﻿@startuml proxy_types
+title Cztery typy Proxy - kiedy który stosować
 
 skinparam monochrome true
 skinparam dpi 150
@@ -10,9 +10,9 @@ package "Protection Proxy" {
         + Operation()
     }
     note right of ProtectionProxy
-      Cel: kontrola uprawnien
+      Cel: kontrola uprawnień
       Kiedy: operacje krytyczne (Delete, Write)
-      Przyklad: sprawdzenie roli przed Delete()
+      Przykład: sprawdzenie roli przed Delete()
     end note
 }
 
@@ -23,8 +23,8 @@ package "Virtual Proxy" {
     }
     note right of VirtualProxy
       Cel: lazy initialization
-      Kiedy: ciezki obiekt, moze nie byc potrzebny
-      Przyklad: ImageProxy tworzy RealImage
+            Kiedy: ciężki obiekt, może nie być potrzebny
+      Przykład: ImageProxy tworzy RealImage
                dopiero przy Display()
     end note
 }
@@ -36,7 +36,7 @@ package "Remote Proxy" {
     note right of RemoteProxy
       Cel: ukrycie lokalizacji sieciowej
       Kiedy: RealSubject jest na innym hoście
-      Przyklad: gRPC stub, WCF proxy, HttpClient wrapper
+      Przykład: gRPC stub, WCF proxy, HttpClient wrapper
     end note
 }
 
@@ -46,9 +46,9 @@ package "Caching Proxy" {
         + Operation()
     }
     note right of CachingProxy
-      Cel: zapamietanie wynikow
+      Cel: zapamiętanie wyników
       Kiedy: drogie zapytania, wyniki stabilne w czasie
-      Przyklad: _cache[key] ?? Real.Fetch(key)
+      Przykład: _cache[key] ?? Real.Fetch(key)
     end note
 }
 

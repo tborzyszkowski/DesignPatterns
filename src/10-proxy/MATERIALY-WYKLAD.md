@@ -1,22 +1,22 @@
-# MATERIALY WYKLAD - Proxy
+﻿# MATERIALY WYKLAD - Proxy
 
 ## Cele uczenia
 
-1. Umiec odroznic Proxy od Adaptera, Dekoratora i Strategii.
+1. Umieć odróżnić Proxy od Adaptera, Dekoratora i Strategii.
 2. Rozpoznac typy Proxy i dobrac je do scenariusza.
-3. Zaimplementowac Static Proxy i Dynamic Proxy.
-4. Umiec wskazac ryzyka: overengineering, debugging, wydajnosc.
+3. Zaimplementować Static Proxy i Dynamic Proxy.
+4. Umieć wskazać ryzyka: overengineering, debugging, wydajność.
 
-## Proponowany zestaw slajdow
+## Proponowany zestaw slajdów
 
-1. Po co Proxy: kontrola dostepu, lazy loading, zdalne wywolania.
-2. Problem bez Proxy: klient zna za duzo szczegolow.
+1. Po co Proxy: kontrola dostępu, lazy loading, zdalne wywołania.
+2. Problem bez Proxy: klient zna za dużo szczegółów.
 3. Definicja i intencja wzorca.
 4. Diagram klas GoF.
-5. Diagram sekwencji wywolania przez Proxy.
+5. Diagram sekwencji wywołania przez Proxy.
 6. Typy Proxy i ich cele.
-7. Virtual Proxy (duzy obiekt, lazy init).
-8. Protection Proxy (role i uprawnienia).
+7. Virtual Proxy (duży obiekt, lazy init).
+8. Protection Proxy (rolę i uprawnienia).
 9. Remote Proxy (komunikacja sieciowa).
 10. Caching Proxy (cache + invalidacja).
 11. Static Proxy - plusy i minusy.
@@ -32,7 +32,7 @@
 
 ## Live coding
 
-1. Static Proxy: kontrola roli + logowanie wywolania.
+1. Static Proxy: kontrola roli + logowanie wywołania.
 2. Dynamic Proxy C#: intercept wszystkich metod interfejsu.
 3. Dynamic Proxy Java: to samo z InvocationHandler.
 
@@ -40,6 +40,6 @@
 
 1. Kiedy wybrac Dynamic Proxy zamiast Static Proxy?
 2. Dlaczego Proxy nie jest Adapterem?
-3. Co odroznia Proxy od Dekoratora?
-4. Ktory typ Proxy pasuje do lazy loading obrazu?
+3. Co odróżnią Proxy od Dekoratora?
+4. Który typ Proxy pasuje do lazy loading obrazu?
 5. Jaki koszt operacyjny wnosi Dynamic Proxy?

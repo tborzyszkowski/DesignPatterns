@@ -1,5 +1,5 @@
-@startuml proxy_motivation
-title Proxy - kontrolowany punkt wejscia
+﻿@startuml proxy_motivation
+title Proxy - kontrolowany punkt wejścia
 
 skinparam monochrome true
 skinparam dpi 150
@@ -7,16 +7,16 @@ skinparam dpi 150
 actor Client
 
 rectangle "Bez Proxy\n(brak kontroli)" as NP {
-    rectangle "RealSubject\n(pelen dostep)" as RS1
+    rectangle "RealSubject\n(pelen dostęp)" as RS1
 }
 
-rectangle "Z Proxy\n(kontrolowany dostep)" as WP {
+rectangle "Z Proxy\n(kontrolowany dostęp)" as WP {
     rectangle "Proxy\n(pre-check + post-check)" as P
     rectangle "RealSubject" as RS2
 }
 
-Client --> RS1 : bezposrednie wywolanie\n(brak autoryzacji, logowania, cache)
-Client --> P   : wywolanie przez Proxy
+Client --> RS1 : bezpośrednie wywołanie\n(brak autoryzacji, logowania, cache)
+Client --> P   : wywołanie przez Proxy
 P --> RS2      : delegacja (po walidacji)
 
 note right of P

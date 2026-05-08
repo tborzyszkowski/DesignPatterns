@@ -1,11 +1,11 @@
-# 07 — Wady i Zalety Stosowania Wzorca Iterator
+﻿# 07 — Wady i Zalety Stosowania Wzorca Iterator
 
 ## Spis treści
 
 1. [Podsumowanie](#1-podsumowanie)
 2. [Zalety szczegółowo](#2-zalety)
 3. [Wady i pułapki szczegółowo](#3-wady)
-4. [Analiza wydajności](#4-wydajnosc)
+4. [Analiza wydajności](#4-wydajność)
 5. [Kiedy użyć, kiedy zrezygnować](#5-kiedy)
 6. [Uruchamianie przykładu](#6-uruchamianie)
 
@@ -143,7 +143,7 @@ Console.WriteLine(seq.First()); // 1 — OK
 
 ---
 
-## 4. Analiza wydajności <a name="4-wydajnosc"></a>
+## 4. Analiza wydajności <a name="4-wydajność"></a>
 
 ### Alokacje enumeratora
 

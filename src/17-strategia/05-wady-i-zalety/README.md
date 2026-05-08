@@ -1,4 +1,4 @@
-# 05 — Wady i Zalety Wzorca Strategia
+﻿# 05 — Wady i Zalety Wzorca Strategia
 
 ## Spis treści
 
@@ -136,7 +136,7 @@ string Greet(string name, bool formal)
 | **if/else** | ≤2 warianty, nigdy nie zmieniane |
 | **Metoda Szablonowa** | Wspólny szkielet, podklasy wypełniają kroki |
 | **Polecenie (Command)** | Potrzebujesz historii, undo/redo, kolejkowania |
-| **Stan (State)** | Algorytm zmienia się automatycznie ze stanem wewnętrznym |
+| **Stan (State)** | Algorytm zmienia się automatycznie że stanem wewnętrznym |
 | **Func<>** | Algorytm 1-5 linii, nie potrzebujesz nazwanego kontraktu |
 
 ---

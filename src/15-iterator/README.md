@@ -1,4 +1,4 @@
-# Wzorzec Iterator (Iterator)
+﻿# Wzorzec Iterator (Iterator)
 
 ## Cel modułu
 
@@ -10,20 +10,20 @@ Iterator umożliwia sekwencyjny dostęp do elementów kolekcji **bez ujawniania 
 | # | Temat | Opis |
 |---|-------|------|
 | [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Rys historyczny, problem enkapsulacji kolekcji, koncepcja wzorca |
-| [02](02-kiedy-stosowac-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady, odmiany wzorca |
-| [03](03-struktura-i-dzialanie/README.md) | Struktura i działanie | Role GoF, diagramy klas i sekwencji, konsekwencje stosowania |
+| [02](02-kiedy-stosować-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady, odmiany wzorca |
+| [03](03-struktura-i-działanie/README.md) | Struktura i działanie | Rolę GoF, diagramy klas i sekwencji, konsekwencje stosowania |
 | [04](04-typy-implementacji/README.md) | Typy implementacji | Pull, push, lazy (yield), LINQ, kursor — jak wybrać |
 | [05](05-iterator-aktywny-vs-pasywny/README.md) | Aktywny vs pasywny | Porównanie modeli, technologie, `IObservable` |
-| [06](06-iterator-wewnetrzny/README.md) | Iterator wewnętrzny | Koncepcja, implementacja, wady i zalety |
+| [06](06-iterator-wewnętrzny/README.md) | Iterator wewnętrzny | Koncepcja, implementacja, wady i zalety |
 | [07](07-wady-i-zalety/README.md) | Wady i zalety | Analiza stosowania w różnych sytuacjach |
-| [08](08-duzy-przyklad-i-alternatywy/README.md) | Duży przykład | Katalog biblioteki — pełny przykład z testami i alternatywami |
+| [08](08-duży-przykład-i-alternatywy/README.md) | Duży przykład | Katalog biblioteki — pełny przykład z testami i alternatywami |
 
 ## Efekty uczenia
 
 Po przerobieniu modułu student:
 
-1. Rozumie problem ścisłego powiązania klienta ze strukturą kolekcji.
-1. Potrafi zaprojektować role `Iterator`, `ConcreteIterator`, `Aggregate`, `ConcreteAggregate`.
+1. Rozumie problem ścisłego powiązania klienta że strukturą kolekcji.
+1. Potrafi zaprojektować rolę `Iterator`, `ConcreteIterator`, `Aggregate`, `ConcreteAggregate`.
 1. Zna różnicę między iteratorem aktywnym (zewnętrznym) a pasywnym (wewnętrznym).
 1. Potrafi implementować `IEnumerable<T>` / `IEnumerator<T>` oraz generator `yield return`.
 1. Rozumie związek wzorca Iterator z LINQ, `foreach` i `IObservable<T>`.
@@ -39,19 +39,19 @@ Po przerobieniu modułu student:
 
 ```bash
 cd src/15-iterator/01-idea-i-kontekst/Examples && dotnet run
-cd src/15-iterator/02-kiedy-stosowac-zalety-wady/Examples && dotnet run
-cd src/15-iterator/03-struktura-i-dzialanie/Examples && dotnet run
+cd src/15-iterator/02-kiedy-stosować-zalety-wady/Examples && dotnet run
+cd src/15-iterator/03-struktura-i-działanie/Examples && dotnet run
 cd src/15-iterator/04-typy-implementacji/Examples && dotnet run
 cd src/15-iterator/05-iterator-aktywny-vs-pasywny/Examples && dotnet run
-cd src/15-iterator/06-iterator-wewnetrzny/Examples && dotnet run
+cd src/15-iterator/06-iterator-wewnętrzny/Examples && dotnet run
 cd src/15-iterator/07-wady-i-zalety/Examples && dotnet run
-cd src/15-iterator/08-duzy-przyklad-i-alternatywy/Examples && dotnet run
+cd src/15-iterator/08-duży-przykład-i-alternatywy/Examples && dotnet run
 ```
 
 ## Uruchamianie testów
 
 ```bash
-cd src/15-iterator/08-duzy-przyklad-i-alternatywy/Tests && dotnet test
+cd src/15-iterator/08-duży-przykład-i-alternatywy/Tests && dotnet test
 ```
 
 ## Materiały prowadzącego

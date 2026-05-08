@@ -1,4 +1,4 @@
-@startuml iterator_variants
+﻿@startuml iterator_variants
 skinparam backgroundColor #FAFAFA
 skinparam classBackgroundColor #E3F2FD
 skinparam classBorderColor #1565C0
@@ -39,7 +39,7 @@ class "LazyGenerator\n(yield return)" as Lazy {
 }
 
 class "CompositeIterator" as Composite {
-  Scala iteratory
+  Scała iteratory
   z wielu kolekcji
   w jedną sekwencję
 }

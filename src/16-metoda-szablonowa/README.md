@@ -1,4 +1,4 @@
-# Wzorzec Metoda Szablonowa (Template Method)
+﻿# Wzorzec Metoda Szablonowa (Template Method)
 
 ## Cel modułu
 
@@ -10,18 +10,18 @@ Wzorzec definiuje **szkielet algorytmu** w klasie bazowej i pozwala podklasom na
 | # | Temat | Opis |
 |---|-------|------|
 | [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Rys historyczny, problem duplikacji kodu, koncepcja wzorca |
-| [02](02-kiedy-stosowac-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady, odmiany wzorca |
-| [03](03-struktura-i-dzialanie/README.md) | Struktura i działanie | Role GoF, diagramy klas i sekwencji, konsekwencje stosowania |
+| [02](02-kiedy-stosować-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady, odmiany wzorca |
+| [03](03-struktura-i-działanie/README.md) | Struktura i działanie | Rolę GoF, diagramy klas i sekwencji, konsekwencje stosowania |
 | [04](04-typy-implementacji/README.md) | Typy implementacji | Abstrakcyjne kroki, hooki, implementacje domyślne, hybrydy |
 | [05](05-wady-i-zalety/README.md) | Wady i zalety | Analiza stosowania — Hollywood Principle, LSP, Fragile Base Class |
-| [06](06-duzy-przyklad-i-alternatywy/README.md) | Duży przykład | System raportowania — pełny przykład z testami i alternatywami |
+| [06](06-duży-przykład-i-alternatywy/README.md) | Duży przykład | System raportowania — pełny przykład z testami i alternatywami |
 
 ## Efekty uczenia
 
 Po przerobieniu modułu student:
 
 1. Rozumie problem duplikacji szkieletu algorytmu w pokrewnych klasach.
-1. Potrafi zaprojektować role `AbstractClass` (z metodą szablonową) i `ConcreteClass` (z krokami algorytmu).
+1. Potrafi zaprojektować rolę `AbstractClass` (z metodą szablonową) i `ConcreteClass` (z krokami algorytmu).
 1. Zna różnicę między krokami abstrakcyjnymi (*primitive operations*) a haczykami (*hooks*).
 1. Rozumie zasadę Hollywood Principle i jej związek ze wzorcem.
 1. Potrafi ocenić kiedy Template Method jest lepszy od Strategii i odwrotnie.
@@ -37,17 +37,17 @@ Po przerobieniu modułu student:
 
 ```bash
 cd src/15-metoda-szablonowa/01-idea-i-kontekst/Examples && dotnet run
-cd src/15-metoda-szablonowa/02-kiedy-stosowac-zalety-wady/Examples && dotnet run
-cd src/15-metoda-szablonowa/03-struktura-i-dzialanie/Examples && dotnet run
+cd src/15-metoda-szablonowa/02-kiedy-stosować-zalety-wady/Examples && dotnet run
+cd src/15-metoda-szablonowa/03-struktura-i-działanie/Examples && dotnet run
 cd src/15-metoda-szablonowa/04-typy-implementacji/Examples && dotnet run
 cd src/15-metoda-szablonowa/05-wady-i-zalety/Examples && dotnet run
-cd src/15-metoda-szablonowa/06-duzy-przyklad-i-alternatywy/Examples && dotnet run
+cd src/15-metoda-szablonowa/06-duży-przykład-i-alternatywy/Examples && dotnet run
 ```
 
 ## Uruchamianie testów
 
 ```bash
-cd src/15-metoda-szablonowa/06-duzy-przyklad-i-alternatywy/Tests && dotnet test
+cd src/15-metoda-szablonowa/06-duży-przykład-i-alternatywy/Tests && dotnet test
 ```
 
 ## Materiały prowadzącego

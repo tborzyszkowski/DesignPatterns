@@ -1,10 +1,10 @@
-@startuml flyweight_problem_context
-title Flyweight - bez wzorca: 6 obiektow, dane wspolne zduplikowane
+﻿@startuml flyweight_problem_context
+title Flyweight - bez wzorca: 6 obiektów, dane wspólne zduplikowane
 
 skinparam monochrome true
 skinparam dpi 150
 
-package "Bez Flyweight (6 obiektow Glyph)" {
+package "Bez Flyweight (6 obiektów Glyph)" {
     card "Glyph #1\n---\nSymbol: 'A'\nFont: Arial\nMetrics: {...}\n---\nx=10, y=20\ncolor=black" as G1
     card "Glyph #2\n---\nSymbol: 'A'\nFont: Arial\nMetrics: {...}\n---\nx=40, y=20\ncolor=red" as G2
     card "Glyph #3\n---\nSymbol: 'A'\nFont: Arial\nMetrics: {...}\n---\nx=70, y=20\ncolor=blue" as G3
@@ -14,8 +14,8 @@ package "Bez Flyweight (6 obiektow Glyph)" {
 }
 
 note bottom
-Symbol + Font + Metrics sa identyczne dla 4 obiektow 'A'.
-Pamiec: 6 x ~70B = ~420B (z duplikatami danych wspolnych).
+Symbol + Font + Metrics są identyczne dla 4 obiektów 'A'.
+Pamięć: 6 x ~70B = ~420B (z duplikatami danych wspólnych).
 end note
 
 @enduml

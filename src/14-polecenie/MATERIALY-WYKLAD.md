@@ -1,4 +1,4 @@
-# Materiały prowadzącego — Wzorzec Polecenie
+﻿# Materiały prowadzącego — Wzorzec Polecenie
 
 Szczegółowy scenariusz wykładu z podziałem na sekcje i wskazówkami dla prowadzącego.
 
@@ -9,10 +9,10 @@ Szczegółowy scenariusz wykładu z podziałem na sekcje i wskazówkami dla prow
 | Czas | Temat | Materiały |
 | --- | --- | --- |
 | 0–10 min | Motywacja — problem pilota | Demo `01-idea-i-kontekst` |
-| 10–25 min | Struktura GoF — diagram klas | `03-struktura-gof-i-jak-dziala/diagrams/` |
+| 10–25 min | Struktura GoF — diagram klas | `03-struktura-gof-i-jak-działa/diagrams/` |
 | 25–40 min | Undo/Redo — kalkulator | Demo `04-typy-implementacji` |
 | 40–55 min | Makropolecenia | Demo `04-typy-implementacji` |
-| 55–75 min | Duży przykład: Smart Home | Demo `05-duzy-przyklad` |
+| 55–75 min | Duży przykład: Smart Home | Demo `05-duży-przykład` |
 | 75–85 min | Alternatywy i kiedy NIE używać | Slajdy + dyskusja |
 | 85–90 min | Q&A i zadania | `ZADANIA.md` |
 
