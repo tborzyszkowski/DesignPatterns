@@ -10,7 +10,7 @@ Każdy temat ma osobny katalog z README oraz (tam gdzie ma sens) kodem uruchamia
 | # | Temat | Opis |
 | --- | --- | --- |
 | [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Po co Proxy i jakie problemy rozwiązuje |
-| [02](02-kiedy-stosować-zalety-wady/README.md) | Kiedy stosować | Checklisty decyzyjne i porównanie z innymi wzorcami |
+| [02](02-kiedy-stosowac-zalety-wady/README.md) | Kiedy stosować | Checklisty decyzyjne i porównanie z innymi wzorcami |
 | [03](03-struktura-gof/README.md) | Struktura GoF | Klasy, rolę i przepływ wywołań |
 | [04](04-static-proxy/README.md) | Static Proxy | Ochrona dostępu i logowanie na klasach proxy |
 | [05](05-dynamic-proxy-csharp/README.md) | Dynamic Proxy C# | Interceptory z DispatchProxy |
