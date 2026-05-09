@@ -19,7 +19,7 @@ Pokazać mostopodobne rozwiązania w praktyce i granice klasyfikacji.
 `Microsoft.Extensions.Logging` to klasyczny Most zawarty w .NET runtime.
 
 - **Abstrakcja** — `ILogger` / `ILogger<T>` — interfejs, z którego korzysta kod aplikacji.
-- **Implementor** — `ILoggerProvider` — fabryka sinkow; każdy provider tworzy `ILogger` piszący do konkretnego celu.
+- **Implementor** — `ILoggerProvider` — fabryka sinków; każdy provider tworzy `ILogger` piszący do konkretnego celu.
 
 Kod aplikacji nigdy nie importuje `Serilog`, `NLog`, `ApplicationInsights` itd. wprost — zależy tylko od `ILogger`. Provider jest podpinany przez DI w kompozycji aplikacji (`Program.cs`/`Startup.cs`).
 
