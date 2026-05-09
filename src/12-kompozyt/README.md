@@ -13,7 +13,7 @@ Koncentruje się na modelowaniu relacji część-całość w strukturach drzewia
 | [02](02-kiedy-stosowac-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety i wady |
 | [03](03-struktura-gof-i-jak-dziala/README.md) | Jak działa | Rolę, diagram klas i sekwencji, przepływ wywołań |
 | [04](04-typy-implementacji-i-wybor/README.md) | Typy implementacji | Warianty Composite i schemat wyboru |
-| [05](05-duży-przyklad-system-plikow/README.md) | Duży przykład | Rozbudowany system plików z analizą decyzji |
+| [05](05-duzy-przyklad-system-plikow/README.md) | Duży przykład | Rozbudowany system plików z analizą decyzji |
 | [06](06-alternatywy-i-kiedy-nie/README.md) | Alternatywy | Kiedy użyć innego wzorca i dlaczego |
 
 ## Efekty uczenia
