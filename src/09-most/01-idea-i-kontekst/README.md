@@ -40,7 +40,7 @@ Abstraction przechowuje referencje do Implementora przez interfejs i deleguje do
 
 ## Niezależny rozwój dwóch osi — scenariusz zespołowy
 
-Klucza zaleta Mostu jest to, że oba wymiary moga byc rozwijane bez wiedzy o sobie nawzajem:
+Kluczową zaletą Mostu jest to, że oba wymiary mogą być rozwijane bez wiedzy o sobie nawzajem:
 
 ```
 Sprint 1 — Team A (Piloty):
