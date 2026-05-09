@@ -2,11 +2,11 @@
 
 ## Cel tematu
 
-Zrozumiec dlaczego Most powstal i jakie problemy rozwiazuje w projektowaniu klas.
+Zrozumieć dlaczego Most powstał i jakie problemy rozwiązuje w projektowaniu klas.
 
 ## Problem: eksplozja klas przez dziedziczenie
 
-Mamy dwie niezalezne osie zmiennosci:
+Mamy dwie niezalezne osie zmienności:
 
 - Os A (abstrakcja/zachowanie): BasicRemote, AdvancedRemote, VoiceRemote
 - Os B (implementacja/technologia): TvDevice, RadioDevice, ProjectorDevice, SmartSpeakerDevice
@@ -23,9 +23,9 @@ Przy podejsciu czystego dziedziczenia kazda kombinacja to osobna klasa:
 
 ![Bridge history](diagrams/bridge_history.png)
 
-Zrodlo: [diagrams/01-history.puml](diagrams/01-history.puml)
+Źródło: [diagrams/01-history.puml](diagrams/01-history.puml)
 
-## Rozwiazanie: Most rozdziela osie
+## Rozwiązanie: Most rozdziela osie
 
 Most rozdziela:
 
@@ -36,11 +36,11 @@ Abstraction przechowuje referencje do Implementora przez interfejs i deleguje do
 
 ![Bridge idea](diagrams/bridge_idea.png)
 
-Zrodlo: [diagrams/02-idea.puml](diagrams/02-idea.puml)
+Źródło: [diagrams/02-idea.puml](diagrams/02-idea.puml)
 
-## Niezalezny rozwoj dwoch osi — scenariusz zespolowy
+## Niezależny rozwój dwóch osi — scenariusz zespołowy
 
-Klucza zaleta Mostu jest to, ze oba wymiary moga byc rozwijane bez wiedzy o sobie nawzajem:
+Klucza zaleta Mostu jest to, że oba wymiary moga byc rozwijane bez wiedzy o sobie nawzajem:
 
 ```
 Sprint 1 — Team A (Piloty):
@@ -64,13 +64,13 @@ Dodanie `VoiceRemote` i `ProjectorDevice` to **2 nowe klasy**, a nie 2*N lub M*2
 
 ![Bridge independent evolution](diagrams/bridge_independent_evolution.png)
 
-Zrodlo: [diagrams/04-independent-evolution.puml](diagrams/04-independent-evolution.puml)
+Źródło: [diagrams/04-independent-evolution.puml](diagrams/04-independent-evolution.puml)
 
 ## Cykl zycia
 
 ![Bridge lifecycle](diagrams/bridge_lifecycle_topic01.png)
 
-Zrodlo: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
+Źródło: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
 
 ## Kod C#
 
@@ -81,7 +81,7 @@ Program pokazuje:
 1. BasicRemote i AdvancedRemote jako dwie abstrakcje,
 2. TvDevice, RadioDevice, ProjectorDevice jako implementory,
 3. runtime switching implementora (podmiana urzadzenia bez zmiany pilota),
-4. rozszerzenie abstrakcji (Mute tylko w AdvancedRemote) bez zmian implementorow,
+4. rozszerzenie abstrakcji (Mute tylko w AdvancedRemote) bez zmian implementorów,
 5. rozszerzenie implementacji (ProjectorDevice) bez zmian pilotow.
 
 ## Uruchom
@@ -91,16 +91,16 @@ cd src/09-most/01-idea-i-kontekst/Examples
 dotnet run
 ```
 
-## Zadania z rozwiazaniami
+## Zadania z rozwiązaniami
 
-1. Dodaj `SmartSpeakerDevice` (os implementacji).
-   Rozwiazanie: nowy implementor `IDevice`, bez zmian w `BasicRemote` ani `AdvancedRemote`.
+1. Dodaj `SmartSpeakerDevice` (oś implementacji).
+   Rozwiązanie: nowy implementor `IDevice`, bez zmian w `BasicRemote` ani `AdvancedRemote`.
 
-1. Dodaj `Mute` tylko po stronie `AdvancedRemote` (os abstrakcji).
-   Rozwiazanie: `RefinedAbstraction` rozszerza API bez naruszania implementorow.
+1. Dodaj `Mute` tylko po stronie `AdvancedRemote` (oś abstrakcji).
+   Rozwiązanie: `RefinedAbstraction` rozszerza API bez naruszania implementorów.
 
 1. Policz, ile klas trzeba by napisac bez Mostu dla 4 pilotow i 5 urzadzen.
-   Rozwiazanie: 4×5 = 20 klas vs 4 + 5 = 9 klas z Mostem.
+   Rozwiązanie: 4×5 = 20 klas vs 4 + 5 = 9 klas z Mostem.
 
 ## Literatura
 

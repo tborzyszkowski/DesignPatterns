@@ -15,19 +15,19 @@ Poznac formalna strukture GoF i przeplyw wywolan.
 
 ![Bridge class](diagrams/bridge_class.png)
 
-Zrodlo: [diagrams/01-class.puml](diagrams/01-class.puml)
+Źródło: [diagrams/01-class.puml](diagrams/01-class.puml)
 
 ## Diagram sekwencji
 
 ![Bridge sequence](diagrams/bridge_sequence.png)
 
-Zrodlo: [diagrams/02-sequence.puml](diagrams/02-sequence.puml)
+Źródło: [diagrams/02-sequence.puml](diagrams/02-sequence.puml)
 
 ## Cykl zycia obiektow
 
 ![Bridge lifecycle](diagrams/bridge_lifecycle_topic03.png)
 
-Zrodlo: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
+Źródło: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
 
 ## Kod C#
 
@@ -42,10 +42,10 @@ cd src/09-most/03-struktura-gof/Examples
 dotnet run
 ```
 
-## Zadania z rozwiazaniami
+## Zadania z rozwiązaniami
 
 1. Dodaj RefinedAbstraction PremiumReport.
-Rozwiazanie: nowa klasa po stronie abstrakcji, bez zmian implementorow.
+Rozwiązanie: nowa klasa po stronie abstrakcji, bez zmian implementorów.
 
 2. Dodaj CsvReportImplementor.
-Rozwiazanie: nowa klasa implementora, bez zmian Abstraction.
+Rozwiązanie: nowa klasa implementora, bez zmian Abstraction.

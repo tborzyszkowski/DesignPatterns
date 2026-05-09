@@ -2,27 +2,27 @@
 
 ## Cel tematu
 
-Pokazac praktyczne style implementacji Mostu i kryteria wyboru.
+Pokazać praktyczne style implementacji Mostu i kryteria wyboru.
 
 ## Warianty
 
 1. Statyczny (klasyczny) - implementor podawany raz.
 2. Dynamiczny - mozliwa podmiana runtime.
-3. Factory + Bridge - wybor implementora przez fabryke.
+3. Factory + Bridge - wybor implementora przez fabrykę.
 
 ![Implementation variants](diagrams/bridge_variants.png)
 
-Zrodlo: [diagrams/01-variants.puml](diagrams/01-variants.puml)
+Źródło: [diagrams/01-variants.puml](diagrams/01-variants.puml)
 
 ![Factory bridge](diagrams/bridge_factory.png)
 
-Zrodlo: [diagrams/02-factory.puml](diagrams/02-factory.puml)
+Źródło: [diagrams/02-factory.puml](diagrams/02-factory.puml)
 
 ## Cykl implementacji
 
 ![Implementation lifecycle](diagrams/bridge_lifecycle_topic04.png)
 
-Zrodlo: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
+Źródło: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
 
 ## Jak wybrac wariant
 
@@ -34,7 +34,7 @@ Zrodlo: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
 
 Kod: [Examples/Program.cs](Examples/Program.cs)
 
-Program porownuje trzy warianty na tym samym use-case.
+Program porównuje trzy warianty na tym samym use-case.
 
 ## Uruchom
 
@@ -43,10 +43,10 @@ cd src/09-most/04-implementacje-i-warianty/Examples
 dotnet run
 ```
 
-## Zadania z rozwiazaniami
+## Zadania z rozwiązaniami
 
 1. Dodaj variant RegistryBridge.
-Rozwiazanie: slownik string -> implementor tworzony lazily.
+Rozwiązanie: slownik string -> implementor tworzony lazily.
 
 2. Dodaj walidacje konfiguracji fabryki.
-Rozwiazanie: fallback + jasny blad domenowy.
+Rozwiązanie: fallback + jasny blad domenowy.

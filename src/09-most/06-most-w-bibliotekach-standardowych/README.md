@@ -2,9 +2,9 @@
 
 ## Cel tematu
 
-Pokazac mostopodobne rozwiazania w praktyce i granice klasyfikacji.
+Pokazać mostopodobne rozwiązania w praktyce i granice klasyfikacji.
 
-## Przyklady
+## Przykłady
 
 1. ILogger (abstrakcja logowania) + provider.
 2. Stream abstractions + konkretne backendy.
@@ -12,17 +12,17 @@ Pokazac mostopodobne rozwiazania w praktyce i granice klasyfikacji.
 
 ![Bridge in libraries](diagrams/bridge_libs_class.png)
 
-Zrodlo: [diagrams/01-libs-class.puml](diagrams/01-libs-class.puml)
+Źródło: [diagrams/01-libs-class.puml](diagrams/01-libs-class.puml)
 
 ![Logger sequence](diagrams/bridge_libs_sequence.png)
 
-Zrodlo: [diagrams/02-libs-sequence.puml](diagrams/02-libs-sequence.puml)
+Źródło: [diagrams/02-libs-sequence.puml](diagrams/02-libs-sequence.puml)
 
 ## Cykl wywolania
 
 ![Lib lifecycle](diagrams/bridge_lifecycle_topic06.png)
 
-Zrodlo: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
+Źródło: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
 
 ## Kod C#
 
@@ -37,13 +37,13 @@ cd src/09-most/06-most-w-bibliotekach-standardowych/Examples
 dotnet run
 ```
 
-## Zadania z rozwiazaniami
+## Zadania z rozwiązaniami
 
 1. Dodaj FileSink obok ConsoleSink.
-Rozwiazanie: nowy implementor sink.
+Rozwiązanie: nowy implementor sink.
 
 2. Dodaj AuditLogger (RefinedAbstraction).
-Rozwiazanie: nowa abstrakcja po stronie domeny.
+Rozwiązanie: nowa abstrakcja po stronie domeny.
 
 ## Literatura
 

@@ -1,4 +1,4 @@
-# 05. Wiekszy przyklad i alternatywy
+# 05. Większy przykład i alternatywy
 
 ## Cel tematu
 
@@ -6,10 +6,10 @@ Przepracowac pelny scenariusz, zobaczyc jak rosnie system bez Mostu i jak Most g
 
 ## Scenariusz: system notyfikacji
 
-Firma rozbudowuje system powiadamian. Mamy dwie niezalezne osie zmiennosci:
+Firma rozbudowuje system powiadomień. Mamy dwie niezalezne osie zmienności:
 
 - **Os abstrakcji** (typ alertu / reguly biznesowe): Alert marketingowy, alert o incydencie, alert o incydencie bezpieczenstwa.
-- **Os implementacji** (kanal dostarczenia): EmailProvider, SmsProvider, PushProvider.
+- **Os implementacji** (kanał dostarczenia): EmailProvider, SmsProvider, PushProvider.
 
 ### Bez Mostu: eksplozja kombinacji
 
@@ -23,11 +23,11 @@ Firma rozbudowuje system powiadamian. Mamy dwie niezalezne osie zmiennosci:
 
 ![Big case class](diagrams/bridge_big_case_class.png)
 
-Zrodlo: [diagrams/01-big-class.puml](diagrams/01-big-class.puml)
+Źródło: [diagrams/01-big-class.puml](diagrams/01-big-class.puml)
 
 ### Z Mostem: niezalezne osie
 
-Alert trzyma referencje do `INotificationProvider` i deleguje wysylke. Obie osie rozwijaja sie oddzielnie:
+Alert trzyma referencje do `INotificationProvider` i deleguje wysylke. Obie osie rozwijaja się oddzielnie:
 
 ```
 Sprint 1 — Team Alert (abstrakcja):
@@ -51,26 +51,26 @@ Sprint 3 — Team Channel:
   Dotkniety 1 plik. Wszystkie istniejace alerty dzialaja bez zmian.
 ```
 
-**Koszt rozszerzenia: zawsze 1 nowa klasa**, niezaleznie od liczby elementow na drugiej osi.
+**Koszt rozszerzenia: zawsze 1 nowa klasa**, niezależnie od liczby elementow na drugiej osi.
 
 ![Big case sequence](diagrams/bridge_big_case_sequence.png)
 
-Zrodlo: [diagrams/02-big-sequence.puml](diagrams/02-big-sequence.puml)
+Źródło: [diagrams/02-big-sequence.puml](diagrams/02-big-sequence.puml)
 
 ![Big case without bridge](diagrams/bridge_without_bridge.png)
 
-Zrodlo: [diagrams/04-without-bridge.puml](diagrams/04-without-bridge.puml)
+Źródło: [diagrams/04-without-bridge.puml](diagrams/04-without-bridge.puml)
 
 ## Cykl zycia use-case
 
 ![Big lifecycle](diagrams/bridge_lifecycle_topic05.png)
 
-Zrodlo: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
+Źródło: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
 
 ## Alternatywy
 
 1. **Adapter** — gdy laczysz niekompatybilne API zewnetrzne, model domenowy zostaje bez zmian.
-1. **Strategia** — gdy zmienia sie glownie algorytm w jednej osi.
+1. **Strategia** — gdy zmienia się głównie algorytm w jednej osi.
 1. **Fasada** — gdy upraszczasz wejscie do subsystemu.
 
 ### Krotka checklista decyzyjna
@@ -78,23 +78,23 @@ Zrodlo: [diagrams/03-lifecycle.puml](diagrams/03-lifecycle.puml)
 Scenariusz integracji obcego API:
 
 1. Model domenowy bez zmian? [tak]
-1. Problemem jest roznica interfejsow? [tak]
+1. Problemem jest różnica interfejsów? [tak]
 1. Brak nowej osi biznesowej? [tak]
 
 Decyzja: **Adapter**.
 
 Scenariusz podmiany algorytmu:
 
-1. Zmienia sie glownie sposob liczenia/decyzji? [tak]
-1. Jedna os zmiennosci? [tak]
+1. Zmienia się głównie sposob liczenia/decyzji? [tak]
+1. Jedna oś zmienności? [tak]
 1. Kontekst tylko deleguje? [tak]
 
 Decyzja: **Strategia**.
 
-Scenariusz dwoch osi rozwoju:
+Scenariusz dwóch osi rozwoju:
 
-1. Co najmniej 2 osie zmiennosci? [tak]
-1. Osie rozwijane niezaleznie (oddzielne zespoly / release'y)? [tak]
+1. Co najmniej 2 osie zmienności? [tak]
+1. Osie rozwijane niezależnie (oddzielne zespoły / release'y)? [tak]
 1. Rosnie liczba klas typu XViaY? [tak]
 
 Decyzja: **Most**.
@@ -116,13 +116,13 @@ cd src/09-most/05-wiekszy-przyklad-i-alternatywy/Examples
 dotnet run
 ```
 
-## Zadania z rozwiazaniami
+## Zadania z rozwiązaniami
 
-1. Dodaj `WhatsAppProvider` (os implementacji).
-   Rozwiazanie: nowy implementor, bez zmian klas `Alert`/`Incident`.
+1. Dodaj `WhatsAppProvider` (oś implementacji).
+   Rozwiązanie: nowy implementor, bez zmian klas `Alert`/`Incident`.
 
-1. Dodaj `SlaBreachAlert` (os abstrakcji).
-   Rozwiazanie: nowa abstrakcja, bez zmian providerow.
+1. Dodaj `SlaBreachAlert` (oś abstrakcji).
+   Rozwiązanie: nowa abstrakcja, bez zmian providerow.
 
 1. Policz: ile klas byloby potrzebnych bez Mostu dla 5 alertow i 6 kanalow?
-   Rozwiazanie: 5×6 = 30 klas vs 5+6 = 11 klas z Mostem.
+   Rozwiązanie: 5×6 = 30 klas vs 5+6 = 11 klas z Mostem.
