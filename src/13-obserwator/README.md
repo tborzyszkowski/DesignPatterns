@@ -10,10 +10,10 @@ Koncentruje się na modelowaniu relacji jeden-do-wielu między obiektami, gdzie 
 | # | Temat | Opis |
 | --- | --- | --- |
 | [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Rys historyczny, geneza wzorca, potrżeby które zaspokaja |
-| [02](02-kiedy-stosować-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady i procedura decyzyjna |
-| [03](03-struktura-gof-i-jak-działa/README.md) | Jak działa | Rolę GoF, diagramy klas i sekwencji, push vs pull model |
+| [02](02-kiedy-stosowac-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady i procedura decyzyjna |
+| [03](03-struktura-gof-i-jak-dziala/README.md) | Jak działa | Rolę GoF, diagramy klas i sekwencji, push vs pull model |
 | [04](04-typy-implementacji-i-wybor/README.md) | Typy implementacji | Warianty: klasyczny, zdarzenia C#, IObservable\<T\>, wybór |
-| [05](05-duży-przykład-i-alternatywy/README.md) | Duży przykład | Stacja pogodowa — pełny przykład z analizą i alternatywami |
+| [05](05-duzy-przyklad-i-alternatywy/README.md) | Duży przykład | Stacja pogodowa — pełny przykład z analizą i alternatywami |
 
 ## Efekty uczenia
 
