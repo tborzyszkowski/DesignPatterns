@@ -240,11 +240,174 @@ foreach (IterNode node in BfsIterator.Traverse(root))
 
 Kod: [Examples/Program.cs](Examples/Program.cs)
 
-Program porównuje wszystkie trzy warianty na tym samym zestawie węzłów:
+Program uruchamia wszystkie trzy warianty **na tym samym zestawie węzłów**, żeby pokazać różnicę w sposobie budowania drzewa, w możliwych błędach i w kolejności wypisywania wyników.
 
-1. Transparent Composite — `Add/Remove` w bazowej klasie `TransparentComponent`, liść rzuca `NotSupportedException`.
-1. Safe Composite — `Add` tylko w `SafeComposite`, liść `SafeLeaf` nie wie nic o dzieciach.
-1. Composite + Iterator (BFS) — `IterNode` udostępnia `Children`, a statyczna klasa `BfsIterator` przechodzi drzewo kolejką zamiast czystą rekurencją.
+---
+
+### Część 1 — Transparent Composite
+
+**Budowane drzewo:**
+
+```
++ root
+  - item-1
+```
+
+**Co robi program:**
+
+```csharp
+TransparentComponent transparent = new TransparentComposite("root");
+transparent.Add(new TransparentLeaf("item-1"));
+transparent.Operation();
+```
+
+1. `transparent` jest zadeklarowany jako `TransparentComponent` (typ bazowy) — klient nie widzi `TransparentComposite`.
+2. `Add` jest wywołane na typie bazowym — kompilator nie protestuje, bo `Add` jest zadeklarowane w klasie bazowej (z domyślnym wyjątkiem dla liścia).
+3. `Operation()` rekurencyjnie wypisuje drzewo z wcięciami: `+` dla kompozytu, `-` dla liścia.
+
+**Gdyby dodać liść do liścia:**
+
+```csharp
+TransparentComponent leaf = new TransparentLeaf("orphan");
+leaf.Add(new TransparentLeaf("child"));  // kompiluje się, ale rzuca NotSupportedException w runtime
+```
+
+Kompilator przepuszcza ten kod — błąd pojawia się dopiero podczas wykonania.
+
+---
+
+### Część 2 — Safe Composite
+
+**Budowane drzewo:**
+
+```
++ root
+  - item-1
+```
+
+**Co robi program:**
+
+```csharp
+var safeRoot = new SafeComposite("root");
+safeRoot.Add(new SafeLeaf("item-1"));
+safeRoot.Operation();
+```
+
+1. `safeRoot` jest zadeklarowany jako `SafeComposite` (typ konkretny) — tylko dlatego `Add` jest dostępne. Gdyby typ był `ISafeComponent`, kompilator odmówiłby kompilacji linii z `Add`.
+2. `SafeLeaf` nie ma metody `Add` w ogóle — nie ma czego wywołać.
+3. `Operation()` działa identycznie jak w wariancie Transparent — wypisuje to samo drzewo.
+
+**Kluczowa różnica wobec Transparent:**
+
+```csharp
+ISafeComponent component = safeRoot;
+// component.Add(new SafeLeaf("x"));   // błąd KOMPILACJI, nie runtime
+```
+
+Bezpieczeństwo typów jest gwarantowane przez kompilator, a nie przez wyjątek w runtime.
+
+---
+
+### Część 3 — Composite + Iterator (BFS)
+
+**Budowane drzewo:**
+
+```
+root
+├── branch-A
+│   ├── leaf-A1
+│   └── leaf-A2
+└── leaf-B
+```
+
+**Co robi program:**
+
+```csharp
+var iterRoot   = new IterNode("root");
+var iterBranch = new IterNode("branch-A");
+iterBranch.Add(new IterNode("leaf-A1"));
+iterBranch.Add(new IterNode("leaf-A2"));
+iterRoot.Add(iterBranch);
+iterRoot.Add(new IterNode("leaf-B"));
+
+foreach (IterNode node in BfsIterator.Traverse(iterRoot))
+    Console.WriteLine($"  {node.Name}");
+```
+
+**Jak działa `BfsIterator.Traverse`:**
+
+BFS (Breadth-First Search) przechodzi drzewo **poziom po poziomie** używając kolejki (`Queue`):
+
+```
+Krok 1: kolejka = [root]
+         → dequeue root,   yield root,    enqueue branch-A, leaf-B
+Krok 2: kolejka = [branch-A, leaf-B]
+         → dequeue branch-A, yield branch-A, enqueue leaf-A1, leaf-A2
+Krok 3: kolejka = [leaf-B, leaf-A1, leaf-A2]
+         → dequeue leaf-B,   yield leaf-B   (brak dzieci)
+Krok 4: kolejka = [leaf-A1, leaf-A2]
+         → dequeue leaf-A1,  yield leaf-A1  (brak dzieci)
+Krok 5: kolejka = [leaf-A2]
+         → dequeue leaf-A2,  yield leaf-A2  (brak dzieci)
+```
+
+**Wynik na konsoli (kolejność BFS):**
+
+```
+  root
+  branch-A
+  leaf-B
+  leaf-A1
+  leaf-A2
+```
+
+Zwróć uwagę: `leaf-B` pojawia się **przed** `leaf-A1` i `leaf-A2`, bo BFS przetwarza cały poziom zanim zejdzie głębiej. Przy czystej rekurencji DFS kolejność byłaby: `root → branch-A → leaf-A1 → leaf-A2 → leaf-B`.
+
+**Dlaczego `yield return` a nie `List<IterNode>`:**
+
+`BfsIterator.Traverse` jest metodą iteratorową (`yield return`). Oznacza to, że węzły są produkowane **leniwie** — `foreach` pobiera kolejny węzeł dopiero kiedy go potrzebuje. Jeśli przerwiesz pętlę po znalezieniu węzła (`break`), reszta drzewa nie zostanie przetworzona w ogóle. Dla dużych drzew to istotna oszczędność.
+
+**Integracja z LINQ:**
+
+Ponieważ `Traverse` zwraca `IEnumerable<IterNode>`, można bezpośrednio używać LINQ:
+
+```csharp
+// Znajdź pierwszy węzeł zaczynający się na "leaf"
+IterNode? first = BfsIterator.Traverse(iterRoot)
+    .FirstOrDefault(n => n.Name.StartsWith("leaf"));
+
+// Policz wszystkie węzły
+int count = BfsIterator.Traverse(iterRoot).Count();
+
+// Wypisz tylko liście (węzły bez dzieci)
+var leaves = BfsIterator.Traverse(iterRoot)
+    .Where(n => !n.Children.Any());
+```
+
+Żaden z powyższych przykładów nie wymaga żadnej zmiany w `IterNode`.
+
+---
+
+### Oczekiwane wyjście programu
+
+```
+=== Transparent Composite ===
++ root
+  - item-1
+
+=== Safe Composite ===
++ root
+  - item-1
+
+=== Composite + Iterator (BFS) ===
+  root
+  branch-A
+  leaf-B
+  leaf-A1
+  leaf-A2
+```
+
+Pierwsze dwa warianty dają identyczny wynik — różnią się **gdzie** i **kiedy** wykrywane są błędy użycia, nie wyjściem operacji. Trzeci wariant ma inne drzewo i inną kolejność przejścia.
 
 ```bash
 cd src/12-kompozyt/04-typy-implementacji-i-wybor/Examples
