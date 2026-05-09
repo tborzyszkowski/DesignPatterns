@@ -37,6 +37,7 @@ Ważne ograniczenie:
 Źródło: [diagrams/01-jdk-proxy-flow.puml](diagrams/01-jdk-proxy-flow.puml)
 
 ### Diagram klas
+![Diagram interakcji](diagrams/dynamic_proxy_java_class.png)
 
 Źródło: [diagrams/02-class.puml](diagrams/02-class.puml)
 
