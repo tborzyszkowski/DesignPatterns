@@ -34,64 +34,15 @@ Kod aplikacji nigdy nie importuje `Serilog`, `NLog`, `ApplicationInsights` itd. 
 
 ### Diagram klas
 
-```plantuml
-@startuml ilogger_bridge
-skinparam classAttributeIconSize 0
+![ILogger class diagram](diagrams/bridge_ilogger_class.png)
 
-interface ILogger {
-  + Log(level, eventId, state, exception, formatter)
-  + IsEnabled(level) : bool
-  + BeginScope<TState>(state) : IDisposable
-}
-
-interface ILoggerProvider {
-  + CreateLogger(categoryName) : ILogger
-  + Dispose()
-}
-
-class LoggerFactory {
-  - _providers : ILoggerProvider[]
-  + CreateLogger(categoryName) : ILogger
-  + AddProvider(provider)
-}
-
-class Logger {
-  - _providers : ILoggerProvider[]
-  + Log(...)
-}
-
-class ConsoleLoggerProvider implements ILoggerProvider {
-  + CreateLogger(categoryName) : ILogger
-}
-
-class SerilogLoggerProvider implements ILoggerProvider {
-  + CreateLogger(categoryName) : ILogger
-}
-
-ILogger <|.. Logger
-LoggerFactory --> Logger : tworzy
-LoggerFactory o--> ILoggerProvider
-@enduml
-```
+Źródło: [diagrams/04-ilogger-class.puml](diagrams/04-ilogger-class.puml)
 
 ### Diagram sekwencji
 
-```plantuml
-@startuml ilogger_sequence
-actor Aplikacja
-participant "ILogger<T>" as L
-participant "LoggerFactory" as LF
-participant "ConsoleLoggerProvider" as CP
-participant "SerilogLoggerProvider" as SP
+![ILogger sequence diagram](diagrams/bridge_ilogger_sequence.png)
 
-Aplikacja -> L : Log(Info, "Zamówienie złożone")
-L -> LF : przekaż do wszystkich providerów
-LF -> CP : Log(...)
-CP --> LF : ok
-LF -> SP : Log(...)
-SP --> LF : ok
-@enduml
-```
+Źródło: [diagrams/05-ilogger-sequence.puml](diagrams/05-ilogger-sequence.puml)
 
 ### Przykładowy kod C#
 
@@ -139,6 +90,8 @@ class InMemoryLogger(string category, List<string> entries) : ILogger
 
 > **Wniosek**: dodanie nowego celu logowania (Splunk, Seq, własna baza) to **1 nowa klasa** `ILoggerProvider` — bez żadnej zmiany w `ILogger` ani w kodzie aplikacji.
 
+Uruchomialny projekt: [Examples-ILogger/Program.cs](Examples-ILogger/Program.cs)
+
 ---
 
 ## 2. Stream abstractions + konkretne backendy
@@ -160,53 +113,9 @@ class InMemoryLogger(string category, List<string> entries) : ILogger
 
 ### Diagram klas
 
-```plantuml
-@startuml stream_bridge
-skinparam classAttributeIconSize 0
+![Stream class diagram](diagrams/bridge_stream_class.png)
 
-abstract class Stream {
-  + Read(buffer, offset, count) : int
-  + Write(buffer, offset, count)
-  + Seek(offset, origin) : long
-  + Flush()
-  + Close()
-}
-
-class FileStream extends Stream {
-  - _handle : SafeFileHandle
-  + Read(...) : int
-  + Write(...)
-}
-
-class MemoryStream extends Stream {
-  - _buffer : byte[]
-  + Read(...) : int
-  + Write(...)
-}
-
-class NetworkStream extends Stream {
-  - _socket : Socket
-  + Read(...) : int
-  + Write(...)
-}
-
-class GZipStream extends Stream {
-  - _innerStream : Stream
-  + Read(...) : int
-  + Write(...)
-}
-
-class BufferedStream extends Stream {
-  - _innerStream : Stream
-  - _buffer : byte[]
-  + Read(...) : int
-  + Write(...)
-}
-
-GZipStream o--> Stream : deleguje do
-BufferedStream o--> Stream : deleguje do
-@enduml
-```
+Źródło: [diagrams/06-stream-class.puml](diagrams/06-stream-class.puml)
 
 ### Przykładowy kod C#
 
@@ -259,6 +168,8 @@ await SaveJsonAsync(cloud, new { Id = 4, Name = "CloudItem" });
 
 > **Wniosek**: `SaveJsonAsync` działa z **dowolnym backendem** bez żadnych zmian — wystarczy przekazać inny `Stream`.
 
+Uruchomialny projekt: [Examples-Stream/Program.cs](Examples-Stream/Program.cs)
+
 ---
 
 ## 3. ADO.NET + provider bazodanowy
@@ -279,49 +190,9 @@ ADO.NET definiuje zestaw abstrakcyjnych klas bazowych (od .NET 2.0) i interfejs�
 
 ### Diagram klas
 
-```plantuml
-@startuml adonet_bridge
-skinparam classAttributeIconSize 0
+![ADO.NET class diagram](diagrams/bridge_adonet_class.png)
 
-abstract class DbConnection {
-  + ConnectionString : string
-  + Open()
-  + Close()
-  + CreateCommand() : DbCommand
-  + BeginTransaction() : DbTransaction
-}
-
-abstract class DbCommand {
-  + CommandText : string
-  + Connection : DbConnection
-  + ExecuteReader() : DbDataReader
-  + ExecuteNonQuery() : int
-  + ExecuteScalar() : object
-}
-
-abstract class DbProviderFactory {
-  + CreateConnection() : DbConnection
-  + CreateCommand() : DbCommand
-  + CreateDataAdapter() : DbDataAdapter
-}
-
-class SqlConnection extends DbConnection
-class SqlCommand extends DbCommand
-class SqlClientFactory extends DbProviderFactory
-
-class NpgsqlConnection extends DbConnection
-class NpgsqlCommand extends DbCommand
-class NpgsqlFactory extends DbProviderFactory
-
-class SqliteConnection extends DbConnection
-class SqliteCommand extends DbCommand
-class SqliteFactory extends DbProviderFactory
-
-DbConnection --> DbCommand : tworzy
-DbProviderFactory --> DbConnection : tworzy
-DbProviderFactory --> DbCommand : tworzy
-@enduml
-```
+Źródło: [diagrams/07-adonet-class.puml](diagrams/07-adonet-class.puml)
 
 ### Przykładowy kod C#
 
@@ -392,6 +263,8 @@ class ProductRepository(DbConnection connection)
 
 > **Wniosek**: `ProductRepository` i `GetProductNamesAsync` działają z **SQL Server, PostgreSQL i SQLite** bez żadnej zmiany — wystarczy wstrzyknąć inną implementację `DbConnection`.
 
+Uruchomialny projekt (SQLite in-memory, bez serwera): [Examples-AdoNet/Program.cs](Examples-AdoNet/Program.cs)
+
 ---
 
 ## Porównanie trzech przykładów
@@ -420,14 +293,30 @@ class ProductRepository(DbConnection connection)
 
 ## Kod C#
 
-Kod: [Examples/Program.cs](Examples/Program.cs)
-
-Program tworzy mini logger bridge: AppLogger + ILogSink.
+| Projekt | Opis |
+|---|---|
+| [Examples/Program.cs](Examples/Program.cs) | Mini logger bridge: AppLogger + ILogSink |
+| [Examples-ILogger/Program.cs](Examples-ILogger/Program.cs) | ILogger + ILoggerProvider (MEL) |
+| [Examples-Stream/Program.cs](Examples-Stream/Program.cs) | Stream + FileStream, MemoryStream, GZipStream, CloudStream |
+| [Examples-AdoNet/Program.cs](Examples-AdoNet/Program.cs) | DbConnection + SQLite in-memory |
 
 ## Uruchom
 
 ```bash
+# Mini logger bridge (oryginalny)
 cd src/09-most/06-most-w-bibliotekach-standardowych/Examples
+dotnet run
+
+# ILogger + ILoggerProvider
+cd src/09-most/06-most-w-bibliotekach-standardowych/Examples-ILogger
+dotnet run
+
+# Stream abstractions
+cd src/09-most/06-most-w-bibliotekach-standardowych/Examples-Stream
+dotnet run
+
+# ADO.NET + SQLite in-memory
+cd src/09-most/06-most-w-bibliotekach-standardowych/Examples-AdoNet
 dotnet run
 ```
 

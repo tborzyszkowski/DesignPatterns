@@ -1,0 +1,63 @@
+@startuml bridge_ilogger_class
+title ILogger + ILoggerProvider — Most w MEL
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+
+interface ILogger {
+  + Log(level, eventId, state, ex, formatter)
+  + IsEnabled(level) : bool
+  + BeginScope(state) : IDisposable
+}
+
+interface ILoggerProvider {
+  + CreateLogger(categoryName) : ILogger
+  + Dispose()
+}
+
+class LoggerFactory {
+  - _providers : ILoggerProvider[]
+  + CreateLogger(categoryName) : ILogger
+  + AddProvider(provider)
+}
+
+class Logger {
+  - _providers : ILoggerProvider[]
+  + Log(...)
+}
+
+class ConsoleLoggerProvider {
+  + CreateLogger(categoryName) : ILogger
+}
+
+class SerilogLoggerProvider {
+  + CreateLogger(categoryName) : ILogger
+}
+
+class InMemoryLoggerProvider {
+  + Entries : List<string>
+  + CreateLogger(categoryName) : ILogger
+}
+
+ILogger <|.. Logger
+ILoggerProvider <|.. ConsoleLoggerProvider
+ILoggerProvider <|.. SerilogLoggerProvider
+ILoggerProvider <|.. InMemoryLoggerProvider
+
+LoggerFactory --> Logger : tworzy
+LoggerFactory o--> ILoggerProvider : agreguje
+
+note right of ILogger
+  Abstrakcja (Most)
+  Kod aplikacji zalezy
+  tylko od ILogger
+end note
+
+note right of ILoggerProvider
+  Implementor (Most)
+  Kazdy provider pisze
+  do innego celu
+end note
+
+@enduml

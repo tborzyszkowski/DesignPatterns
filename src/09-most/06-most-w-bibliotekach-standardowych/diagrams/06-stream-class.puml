@@ -1,0 +1,55 @@
+@startuml bridge_stream_class
+title Stream abstractions + konkretne backendy
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+
+abstract class Stream {
+  + Read(buffer, offset, count) : int
+  + Write(buffer, offset, count)
+  + Seek(offset, origin) : long
+  + Flush()
+  + Close()
+  + CanRead : bool
+  + CanWrite : bool
+  + CanSeek : bool
+}
+
+class FileStream {
+  - _handle : SafeFileHandle
+}
+
+class MemoryStream {
+  - _buffer : byte[]
+}
+
+class NetworkStream {
+  - _socket : Socket
+}
+
+class GZipStream {
+  - _innerStream : Stream
+}
+
+class BufferedStream {
+  - _innerStream : Stream
+  - _buffer : byte[]
+}
+
+Stream <|-- FileStream
+Stream <|-- MemoryStream
+Stream <|-- NetworkStream
+Stream <|-- GZipStream
+Stream <|-- BufferedStream
+
+GZipStream o--> Stream : deleguje do
+BufferedStream o--> Stream : deleguje do
+
+note bottom of GZipStream
+  Most + Dekorator:
+  owijanie dowolnego backendu
+  kompresja przezroczysta
+end note
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml bridge_ilogger_sequence
+title ILogger — sekwencja wywolania przez providery
+
+skinparam monochrome true
+skinparam dpi 150
+
+actor Aplikacja
+participant "ILogger<T>" as L
+participant "LoggerFactory" as LF
+participant "ConsoleLoggerProvider" as CP
+participant "SerilogLoggerProvider" as SP
+
+Aplikacja -> L : LogInformation("Zamówienie złożone")
+L -> LF : przekaz do wszystkich providerow
+LF -> CP : Log(Info, ...)
+CP --> LF
+LF -> SP : Log(Info, ...)
+SP --> LF
+LF --> L
+L --> Aplikacja
+
+@enduml

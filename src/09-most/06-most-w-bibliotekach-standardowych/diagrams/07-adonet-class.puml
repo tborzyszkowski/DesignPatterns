@@ -1,0 +1,58 @@
+@startuml bridge_adonet_class
+title ADO.NET abstractions + provider bazodanowy
+
+skinparam monochrome true
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+
+abstract class DbConnection {
+  + ConnectionString : string
+  + Open()
+  + Close()
+  + CreateCommand() : DbCommand
+  + BeginTransaction() : DbTransaction
+}
+
+abstract class DbCommand {
+  + CommandText : string
+  + Connection : DbConnection
+  + ExecuteReader() : DbDataReader
+  + ExecuteNonQuery() : int
+  + ExecuteScalar() : object
+  + CreateParameter() : DbParameter
+}
+
+abstract class DbProviderFactory {
+  + CreateConnection() : DbConnection
+  + CreateCommand() : DbCommand
+}
+
+class SqlConnection
+class SqlCommand
+class SqlClientFactory
+
+class NpgsqlConnection
+class NpgsqlCommand
+class NpgsqlFactory
+
+class SqliteConnection
+class SqliteCommand
+class SqliteFactory
+
+DbConnection <|-- SqlConnection
+DbConnection <|-- NpgsqlConnection
+DbConnection <|-- SqliteConnection
+
+DbCommand <|-- SqlCommand
+DbCommand <|-- NpgsqlCommand
+DbCommand <|-- SqliteCommand
+
+DbProviderFactory <|-- SqlClientFactory
+DbProviderFactory <|-- NpgsqlFactory
+DbProviderFactory <|-- SqliteFactory
+
+DbConnection --> DbCommand : tworzy >
+DbProviderFactory --> DbConnection : tworzy >
+DbProviderFactory --> DbCommand : tworzy >
+
+@enduml
