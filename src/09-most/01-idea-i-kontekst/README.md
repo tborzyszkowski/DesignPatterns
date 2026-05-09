@@ -62,6 +62,19 @@ Sprint 2 — Team B (nowe urzadzenie, bez zmian w Team A):
 
 Dodanie `VoiceRemote` i `ProjectorDevice` to **2 nowe klasy**, a nie 2*N lub M*2.
 
+> **Dlaczego 2*N lub M*2 bez Mostu?**
+>
+> Przy czystym dziedziczeniu każda kombinacja pilota i urządzenia to osobna klasa (N × M łącznie).
+> Dodanie **1 nowego pilota** wymaga dopisania całego wiersza w tabeli — po jednej klasie dla każdego urządzenia, czyli **M nowych klas**.
+> Dodanie **1 nowego urządzenia** to nowa kolumna — **N nowych klas**.
+>
+> | Podejście | Dodanie VoiceRemote | Dodanie ProjectorDevice | Razem |
+> |---|---|---|---|
+> | Dziedziczenie | M = 4 klasy | N = 3 klasy | **7 klas** |
+> | Most (Bridge) | 1 klasa | 1 klasa | **2 klasy** |
+>
+> Wzorzec Most rozdziela obie osie, więc każda nowa klasa istnieje samodzielnie po swojej stronie i łączy się z drugą stroną w runtime przez referencję/interfejs — bez żadnych kombinacji.
+
 ![Bridge independent evolution](diagrams/bridge_independent_evolution.png)
 
 Źródło: [diagrams/04-independent-evolution.puml](diagrams/04-independent-evolution.puml)
