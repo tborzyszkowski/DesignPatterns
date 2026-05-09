@@ -2,14 +2,14 @@
 
 ## Cel tematu
 
-Przepracowac pelny scenariusz, zobaczyc jak rosnie system bez Mostu i jak Most go kontroluje.
+Przepracować pełny scenariusz, zobaczyć jak rośnie system bez Mostu i jak Most go kontroluje.
 
 ## Scenariusz: system notyfikacji
 
 Firma rozbudowuje system powiadomień. Mamy dwie niezalezne osie zmienności:
 
-- **Os abstrakcji** (typ alertu / reguly biznesowe): Alert marketingowy, alert o incydencie, alert o incydencie bezpieczenstwa.
-- **Os implementacji** (kanał dostarczenia): EmailProvider, SmsProvider, PushProvider.
+- **Oś abstrakcji** (typ alertu / reguly biznesowe): Alert marketingowy, alert o incydencie, alert o incydencie bezpieczenstwa.
+- **Oś implementacji** (kanał dostarczenia): EmailProvider, SmsProvider, PushProvider.
 
 ### Bez Mostu: eksplozja kombinacji
 
@@ -19,15 +19,15 @@ Firma rozbudowuje system powiadomień. Mamy dwie niezalezne osie zmienności:
 | IncidentAlert | IncidentAlertViaEmail | IncidentAlertViaSms | IncidentAlertViaPush |
 | SecurityIncidentAlert | SecurityAlertViaEmail | SecurityAlertViaSms | SecurityAlertViaPush |
 
-**3 alerty x 3 kanalki = 9 klas.** Dodanie `WhatsAppProvider` wymaga 3 nowych klas. Dodanie `SlaBreachAlert` wymaga 3 nowych klas. Po kilku sprintach mamy kilkadziesiat klas z powielanym kodem.
+**3 alerty x 3 kanalki = 9 klas.** Dodanie `WhatsAppProvider` wymaga 3 nowych klas. Dodanie `SlaBreachAlert` wymaga 3 nowych klas. Po kilku sprintach mamy kilkadziesiąt klas z powielanym kodem.
 
 ![Big case class](diagrams/bridge_big_case_class.png)
 
 Źródło: [diagrams/01-big-class.puml](diagrams/01-big-class.puml)
 
-### Z Mostem: niezalezne osie
+### Z Mostem: niezależne osie
 
-Alert trzyma referencje do `INotificationProvider` i deleguje wysylke. Obie osie rozwijaja się oddzielnie:
+Alert trzyma referencje do `INotificationProvider` i deleguje wysyłkę. Obie osie rozwijają się oddzielnie:
 
 ```
 Sprint 1 — Team Alert (abstrakcja):
@@ -61,7 +61,7 @@ Sprint 3 — Team Channel:
 
 Źródło: [diagrams/04-without-bridge.puml](diagrams/04-without-bridge.puml)
 
-## Cykl zycia use-case
+## Cykl życia use-case
 
 ![Big lifecycle](diagrams/bridge_lifecycle_topic05.png)
 
@@ -69,11 +69,11 @@ Sprint 3 — Team Channel:
 
 ## Alternatywy
 
-1. **Adapter** — gdy laczysz niekompatybilne API zewnetrzne, model domenowy zostaje bez zmian.
+1. **Adapter** — gdy łączysz niekompatybilne API zewnętrzne, model domenowy zostaje bez zmian.
 1. **Strategia** — gdy zmienia się głównie algorytm w jednej osi.
-1. **Fasada** — gdy upraszczasz wejscie do subsystemu.
+1. **Fasada** — gdy upraszczasz wejście do subsystemu.
 
-### Krotka checklista decyzyjna
+### Krótka checklista decyzyjna
 
 Scenariusz integracji obcego API:
 
@@ -105,7 +105,7 @@ Kod: [Examples/Program.cs](Examples/Program.cs)
 
 Program pokazuje:
 
-1. Wyslanie alertow 3 typow przez 3 kanaly — 9 kombinacji, 6 klas.
+1. Wysłanie alertow 3 typów przez 3 kanały — 9 kombinacji, 6 klas.
 1. Dodanie `WhatsAppProvider` — 1 nowa klasa, zero zmian w alertach.
 1. Dodanie `SlaBreachAlert` — 1 nowa klasa, zero zmian w providerach.
 
@@ -126,3 +126,4 @@ dotnet run
 
 1. Policz: ile klas byloby potrzebnych bez Mostu dla 5 alertow i 6 kanalow?
    Rozwiązanie: 5×6 = 30 klas vs 5+6 = 11 klas z Mostem.
+s

@@ -7,7 +7,7 @@ Pokazać praktyczne style implementacji Mostu i kryteria wyboru.
 ## Warianty
 
 1. Statyczny (klasyczny) - implementor podawany raz.
-2. Dynamiczny - mozliwa podmiana runtime.
+2. Dynamiczny - możliwa podmiana runtime.
 3. Factory + Bridge - wybor implementora przez fabrykę.
 
 ![Implementation variants](diagrams/bridge_variants.png)
