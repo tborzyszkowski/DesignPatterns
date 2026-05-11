@@ -6,9 +6,9 @@ Przepracować pełny scenariusz, zobaczyć jak rośnie system bez Mostu i jak Mo
 
 ## Scenariusz: system notyfikacji
 
-Firma rozbudowuje system powiadomień. Mamy dwie niezalezne osie zmienności:
+Firma rozbudowuje system powiadomień. Mamy dwie niezależne osie zmienności:
 
-- **Oś abstrakcji** (typ alertu / reguly biznesowe): Alert marketingowy, alert o incydencie, alert o incydencie bezpieczenstwa.
+- **Oś abstrakcji** (typ alertu / reguły biznesowe): Alert marketingowy, alert o incydencie, alert o incydencie bezpieczeństwa.
 - **Oś implementacji** (kanał dostarczenia): EmailProvider, SmsProvider, PushProvider.
 
 ### Bez Mostu: eksplozja kombinacji
@@ -19,7 +19,7 @@ Firma rozbudowuje system powiadomień. Mamy dwie niezalezne osie zmienności:
 | IncidentAlert | IncidentAlertViaEmail | IncidentAlertViaSms | IncidentAlertViaPush |
 | SecurityIncidentAlert | SecurityAlertViaEmail | SecurityAlertViaSms | SecurityAlertViaPush |
 
-**3 alerty x 3 kanalki = 9 klas.** Dodanie `WhatsAppProvider` wymaga 3 nowych klas. Dodanie `SlaBreachAlert` wymaga 3 nowych klas. Po kilku sprintach mamy kilkadziesiąt klas z powielanym kodem.
+**3 alerty x 3 kanały = 9 klas.** Dodanie `WhatsAppProvider` wymaga 3 nowych klas. Dodanie `SlaBreachAlert` wymaga 3 nowych klas. Po kilku sprintach mamy kilkadziesiąt klas z powielanym kodem.
 
 ![Big case class](diagrams/bridge_big_case_class.png)
 
@@ -105,7 +105,7 @@ Kod: [Examples/Program.cs](Examples/Program.cs)
 
 Program pokazuje:
 
-1. Wysłanie alertow 3 typów przez 3 kanały — 9 kombinacji, 6 klas.
+1. Wysłanie alertów 3 typów przez 3 kanały — 9 kombinacji, 6 klas.
 1. Dodanie `WhatsAppProvider` — 1 nowa klasa, zero zmian w alertach.
 1. Dodanie `SlaBreachAlert` — 1 nowa klasa, zero zmian w providerach.
 
@@ -122,8 +122,8 @@ dotnet run
    Rozwiązanie: nowy implementor, bez zmian klas `Alert`/`Incident`.
 
 1. Dodaj `SlaBreachAlert` (oś abstrakcji).
-   Rozwiązanie: nowa abstrakcja, bez zmian providerow.
+   Rozwiązanie: nowa abstrakcja, bez zmian providerów.
 
-1. Policz: ile klas byloby potrzebnych bez Mostu dla 5 alertow i 6 kanalow?
+1. Policz: ile klas byloby potrzebnych bez Mostu dla 5 alertów i 6 kanałów?
    Rozwiązanie: 5×6 = 30 klas vs 5+6 = 11 klas z Mostem.
 s

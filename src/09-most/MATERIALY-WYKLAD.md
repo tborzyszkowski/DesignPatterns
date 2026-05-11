@@ -2,7 +2,7 @@
 
 ## Cel wykładu
 
-Przekazac wiedze o wzorcu Most: motywacje, strukture GoF, kryteria decyzji i
+Przekazac wiedze o wzorcu Most: motywacje, strukturę GoF, kryteria decyzji i
 najczestsze pulapki implementacyjne.
 
 ## Plan wykładu (90 minut)
@@ -22,7 +22,7 @@ Bez Mostu (dziedziczenie):
 
 1. BasicRemoteTv, BasicRemoteRadio, BasicRemoteProjector
 2. AdvancedRemoteTv, AdvancedRemoteRadio, AdvancedRemoteProjector
-3. n pilotow * m urzadzen = n*m klas
+3. n pilotów * m urządzeń = n*m klas
 
 Z Mostem:
 
@@ -58,20 +58,20 @@ Pytanie klucz:
 
 1. Integrujesz obce API? -> Adapter.
 2. Podmiana algorytmu w jednej osi? -> Strategią.
-3. Dwie niezalezne osie zmienności? -> Most.
+3. Dwie niezależne osie zmienności? -> Most.
 
 ### Slajd 5 — Najczestsze pulapki
 
 1. Leakage: if (implementor is ConcreteX) wewnatrz Abstraction — przenieс branch do implementora.
 2. Przedwczesne Most: jesli klient nigdy nie podmienia implementora, wystarczy Strategia lub DI.
-3. Mylenie z Adaptera: Adapter laczy niekompatybilne API, Most projektuje nowe niezalezne osie.
+3. Mylenie z Adaptera: Adapter laczy niekompatybilne API, Most projektuje nowe niezależne osie.
 4. Hard-coded implementor: new Concrete() w Abstraction — zawsze wstrzykuj przez konstruktor lub fabrykę.
 
 ## FAQ
 
 ### Czy Most to tylko "zdublowany polimorfizm"?
 
-Nie. Most rozdziela dwie niezalezne osie zmienności tak, że kazda może się rozwijac
+Nie. Most rozdziela dwie niezależne osie zmienności tak, że każda może się rozwijac
 bez wiedzy o drugiej. Polimorfizm jest mechanizmem, Most jest architektoniczna decyzja
 projektowa dotyczaca podzialu odpowiedzialnosci.
 
@@ -97,7 +97,7 @@ Dekorator jest jednoosiowy, Most jest dwojosiowy.
 
 Oba wzorce umozliwiaja podmiane zachowania w runtime.
 Roznica jest semantyczna: Strategia podmienia algorytm w jednej osi.
-Most rozdziela dwa calkowicie niezalezne wymiary, gdzie każdy może miec wiele wariantow.
+Most rozdziela dwa calkowicie niezależne wymiary, gdzie każdy może miec wiele wariantow.
 
 ## Literatura
 

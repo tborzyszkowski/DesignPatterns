@@ -2,15 +2,15 @@
 
 ## Cel wykladu
 
-Przekazac wiedze o wzorcu Fasada: motywacje, role, typy implementacji, kryteria decyzji
-i zwiazek z ACL, bezpieczenstwem oraz bibliotekami standardowymi.
+Przekazać wiedzę o wzorcu Fasada: motywacje, role, typy implementacji, kryteria decyzji
+i zwiazek z ACL, bezpieczeństwem oraz bibliotekami standardowymi.
 
-## Plan wykladu (90 minut)
+## Plan wykładu (90 minut)
 
 1. Motywacja: problem zlozonosci klienta i eksplozja zaleznosci (15 min).
 2. Idea Fasady: uproszczenie, ukrywanie, jeden punkt wejscia (10 min).
-3. Formalna struktura GoF: role i przeplyw wywolan (20 min).
-4. Typy implementacji: prosta, aplikacyjna, bezpieczenstwa, ACL, async (20 min).
+3. Formalna struktura GoF: role i przeplyw wywołań (20 min).
+4. Typy implementacji: prosta, aplikacyjna, bezpieczeństwa, ACL, async (20 min).
 5. Wiekszy przyklad end-to-end i alternatywy (15 min).
 6. Fasady w bibliotekach standardowych (.NET) (10 min).
 
@@ -57,7 +57,7 @@ Zasada: fasada nie staje sie pielgrzymem subsystemu, deleguje i koordynuje.
 2. Aplikacyjna (use-case) — mapowanie DTO, walidacja, polityki bledow domenowych.
    Kiedy: warstwa aplikacji w DDD, CQRS.
 
-3. Bezpieczenstwa (secure facade) — autoryzacja, audyt, maskowanie danych.
+3. Bezpieczeństwa (secure facade) — autoryzacja, audyt, maskowanie danych.
    Kiedy: operacje administracyjne, dane wrazliwe.
 
 4. Integracyjna z ACL — tlumaczenie kontraktow systemu zewnetrznego.

@@ -2,7 +2,7 @@
 
 ## Cel tematu
 
-Poznac formalna strukture GoF i przeplyw wywolan.
+Poznać formalną strukturę GoF i przepływ wywołań.
 
 ## Role
 
@@ -23,7 +23,7 @@ Poznac formalna strukture GoF i przeplyw wywolan.
 
 Źródło: [diagrams/02-sequence.puml](diagrams/02-sequence.puml)
 
-## Cykl zycia obiektow
+## Cykl życia obiektów
 
 ![Bridge lifecycle](diagrams/bridge_lifecycle_topic03.png)
 
@@ -33,7 +33,7 @@ Poznac formalna strukture GoF i przeplyw wywolan.
 
 Kod: [Examples/Program.cs](Examples/Program.cs)
 
-Program pokazuje klasyczna strukture GoF na prostym API raportowym.
+Program pokazuje klasyczną strukturę GoF na prostym API raportowym.
 
 ## Uruchom
 
