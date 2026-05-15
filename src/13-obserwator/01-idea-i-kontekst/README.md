@@ -92,7 +92,7 @@ public class WeatherStation
 
 Teraz `WeatherStation` nie zna konkretnych wyświetłączy. Nowy wyświetlacz: tylko nowa klasa + `Subscribe()`. Zero zmian w `WeatherStation`.
 
-## Cztery potrżeby, które zaspokaja wzorzec Obserwator
+## Cztery potrzeby, które zaspokaja wzorzec Obserwator
 
 ### Potrzeba 1: Luźne powiązanie (Loose Coupling)
 
