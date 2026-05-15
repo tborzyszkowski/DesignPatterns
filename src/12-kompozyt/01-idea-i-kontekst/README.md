@@ -2,7 +2,7 @@
 
 ## Cel rozdziału
 
-Zrozumieć skąd wziął się wzorzec Kompozyt, jakie potrżeby adresuje i dlaczego jest tak często stosowany w strukturach drzewiastych.
+Zrozumieć skąd wziął się wzorzec Kompozyt, jakie potrzeby adresuje i dlaczego jest tak często stosowany w strukturach drzewiastych.
 
 ## Rys historyczny
 
