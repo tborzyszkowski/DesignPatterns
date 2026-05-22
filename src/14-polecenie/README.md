@@ -10,10 +10,10 @@ Koncentruje się na enkapsulacji żądań jako obiektów, co umożliwia kolejkow
 | # | Temat | Opis |
 | --- | --- | --- |
 | [01](01-idea-i-kontekst/README.md) | Idea i kontekst | Rys historyczny, geneza wzorca, problem który rozwiązuje |
-| [02](02-kiedy-stosować-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady, odmiany wzorca |
-| [03](03-struktura-gof-i-jak-działa/README.md) | Jak działa | Rolę GoF, diagramy klas i sekwencji, struktura wzorca |
+| [02](02-kiedy-stosowac-zalety-wady/README.md) | Kiedy stosować | Sygnały decyzyjne, zalety, wady, odmiany wzorca |
+| [03](03-struktura-gof-i-jak-dziala/README.md) | Jak działa | Rolę GoF, diagramy klas i sekwencji, struktura wzorca |
 | [04](04-typy-implementacji-i-wybor/README.md) | Typy implementacji | Warianty: prosty, undo/redo, makro, asynchroniczny, delegat |
-| [05](05-duży-przykład-i-alternatywy/README.md) | Duży przykład | Inteligentny dom — pełny przykład z testami i alternatywami |
+| [05](05-duzy-przyklad-i-alternatywy/README.md) | Duży przykład | Inteligentny dom — pełny przykład z testami i alternatywami |
 
 ## Efekty uczenia
 
