@@ -1,0 +1,51 @@
+@startuml cor_concept
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #1565C0
+skinparam classBackgroundColor #E3F2FD
+skinparam arrowColor #1565C0
+skinparam titleFontSize 14
+
+title Koncepcja wzorca Łańcuch Zobowiązań
+
+interface IHandler {
+  + SetNext(handler: IHandler) : IHandler
+  + Handle(request: Request) : object?
+}
+
+abstract class BaseHandler {
+  - _next : IHandler
+  + SetNext(handler) : IHandler
+  + Handle(request) : object?
+}
+
+class ConcreteHandlerA {
+  + Handle(request) : object?
+}
+
+class ConcreteHandlerB {
+  + Handle(request) : object?
+}
+
+class ConcreteHandlerC {
+  + Handle(request) : object?
+}
+
+IHandler <|.. BaseHandler
+BaseHandler <|-- ConcreteHandlerA
+BaseHandler <|-- ConcreteHandlerB
+BaseHandler <|-- ConcreteHandlerC
+
+ConcreteHandlerA -right-> ConcreteHandlerB : next
+ConcreteHandlerB -right-> ConcreteHandlerC : next
+
+note bottom of ConcreteHandlerA
+  Obsłuż żądanie
+  LUB przekaż dalej
+end note
+
+note top of ConcreteHandlerC
+  Ostatni ogniwo —
+  obsługuje lub odrzuca
+end note
+
+@enduml

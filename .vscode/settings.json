@@ -132,6 +132,8 @@
             "approve": true,
             "matchCommandLine": true
         },
-        "&": true
+        "&": true,
+        "Set-Content": true,
+        "Get-Command": true
     }
 }

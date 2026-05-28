@@ -1,0 +1,35 @@
+@startuml cor_impl_choice
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Schemat wyboru implementacji CoR
+
+start
+:Czy używasz ASP.NET Core?;
+if (Tak) then (tak)
+  #90EE90:Użyj wbudowanego\nMiddleware Pipeline\n(app.Use / IMiddleware);
+  stop
+else (nie)
+endif
+
+:Czy używasz MediatR / CQRS?;
+if (Tak) then (tak)
+  #90EE90:Użyj IPipelineBehavior<TReq,TRes>;
+  stop
+else (nie)
+endif
+
+:Czy potrzebujesz testować\npośrednie ogniwa izolowane?;
+if (Tak) then (tak)
+  #90EE90:Użyj klasycznego OOP\n(interface + BaseHandler);
+else (nie)
+  :Czy handlery są proste\ni jednorazowe (lambda)?;
+  if (Tak) then (tak)
+    #FFD700:Delegatowy pipeline\n(Func<> / Action<>);
+  else (nie)
+    #90EE90:Klasyczny OOP\n(bezpieczniejszy długoterminowo);
+  endif
+endif
+
+stop
+@enduml

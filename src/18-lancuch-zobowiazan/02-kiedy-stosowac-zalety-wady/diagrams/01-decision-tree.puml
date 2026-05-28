@@ -1,0 +1,33 @@
+@startuml cor_decision_tree
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+skinparam defaultFontSize 12
+
+title Drzewo decyzyjne — kiedy użyć Łańcucha Zobowiązań?
+
+|Czy więcej niż jeden obiekt może obsłużyć żądanie?|
+start
+:Czy masz złożoną logikę warunkową\ndo obsługi żądania?;
+if (Tak) then (tak)
+  :Czy chcesz móc dynamicznie\nzmieniać kolejność/skład handlerów?;
+  if (Tak) then (tak)
+    #90EE90:Łańcuch Zobowiązań\nto dobry wybór;
+  else (nie)
+    :Czy kolejność jest zawsze stała\ni handlerów jest mało (<5)?;
+    if (Tak) then (tak)
+      #FFD700:Rozważ prostą sekwencję\nmetod lub Template Method;
+    else (nie)
+      #90EE90:Łańcuch Zobowiązań\nz ustaloną kolejnością;
+    endif
+  endif
+else (nie)
+  :Czy jest wiele obiektów mogących\nobsłużyć i tylko jeden powinien?;
+  if (Tak) then (tak)
+    #90EE90:Łańcuch Zobowiązań\n(wariant exclusive);
+  else (nie)
+    #FFB6C1:Możliwe inne wzorce:\nObserwator, Polecenie;
+  endif
+endif
+stop
+
+@enduml

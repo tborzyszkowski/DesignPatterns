@@ -1,0 +1,46 @@
+@startuml cor_lifecycle
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Cykl życia obiektu — budowanie i używanie łańcucha
+
+|Client|
+start
+:Utwórz handler1, handler2, handler3;
+:handler1.SetNext(handler2)\n.SetNext(handler3);
+note right: Łańcuch zbudowany
+:Wyślij request do handler1.Handle(req);
+
+|ConcreteHandler1|
+:Czy mogę obsłużyć?;
+if (Tak) then (tak)
+  :Przetwórz request;
+  :Zwróć wynik do klienta;
+  |Client|
+  :Odbierz wynik;
+  stop
+else (nie)
+  :PassToNext(request);
+endif
+
+|ConcreteHandler2|
+:Czy mogę obsłużyć?;
+if (Tak) then (tak)
+  :Przetwórz request;
+  :Zwróć wynik;
+  |Client|
+  :Odbierz wynik;
+  stop
+else (nie)
+  :PassToNext(request);
+endif
+
+|ConcreteHandler3|
+:Obsłuż (ostatnie ogniwo);
+:Zwróć wynik lub null;
+
+|Client|
+:Odbierz wynik / obsłuż null;
+stop
+
+@enduml

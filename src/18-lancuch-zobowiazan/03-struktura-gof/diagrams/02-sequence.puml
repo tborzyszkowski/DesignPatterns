@@ -1,0 +1,42 @@
+@startuml cor_sequence
+skinparam backgroundColor #FAFAFA
+skinparam sequenceArrowColor #1565C0
+skinparam sequenceBoxBorderColor #1565C0
+skinparam titleFontSize 14
+
+title Diagram sekwencji — Łańcuch Zobowiązań
+
+participant Client
+participant Handler1 as "ConcreteHandler1"
+participant Handler2 as "ConcreteHandler2"
+participant Handler3 as "ConcreteHandler3"
+
+Client -> Handler1 : Handle(request)
+activate Handler1
+
+alt Handler1 może obsłużyć żądanie
+    Handler1 --> Client : result
+    note right : Zatrzymanie łańcucha
+else Handler1 nie może obsłużyć
+    Handler1 -> Handler2 : PassToNext(request)
+    activate Handler2
+
+    alt Handler2 może obsłużyć żądanie
+        Handler2 --> Handler1 : result
+        Handler1 --> Client : result
+        note right : Zatrzymanie łańcucha
+    else Handler2 nie może obsłużyć
+        Handler2 -> Handler3 : PassToNext(request)
+        activate Handler3
+        Handler3 --> Handler2 : result
+        deactivate Handler3
+        Handler2 --> Handler1 : result
+        deactivate Handler2
+        Handler1 --> Client : result
+        note right : Obsługa przez Handler3
+    end
+end
+
+deactivate Handler1
+
+@enduml

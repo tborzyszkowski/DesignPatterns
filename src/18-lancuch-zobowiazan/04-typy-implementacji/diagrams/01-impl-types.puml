@@ -1,0 +1,47 @@
+@startuml cor_impl_types
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #4527A0
+skinparam classBackgroundColor #EDE7F6
+skinparam titleFontSize 14
+
+title Typy implementacji Łańcucha Zobowiązań
+
+package "Typ 1: Klasyczny OOP\n(klasy + dziedziczenie)" #E3F2FD {
+  interface IHandler1 {
+    + Handle(req) : object?
+    + SetNext(h) : IHandler1
+  }
+  abstract class BaseHandler1 {
+    # PassToNext(req) : object?
+  }
+  class ConcreteHandler1A
+  class ConcreteHandler1B
+  IHandler1 <|.. BaseHandler1
+  BaseHandler1 <|-- ConcreteHandler1A
+  BaseHandler1 <|-- ConcreteHandler1B
+}
+
+package "Typ 2: Delegatowy (Func<>)\n(nowoczesny C#)" #E8F5E9 {
+  class DelegateChain {
+    + Use(handler: Func<Req,Func<Res>,Res>)
+    + Execute(req: Req) : Res
+  }
+}
+
+package "Typ 3: Middleware (ASP.NET Core)\n(RequestDelegate)" #FFF9C4 {
+  interface IMiddleware2 {
+    + InvokeAsync(ctx, next) : Task
+  }
+  class CustomMiddleware
+  IMiddleware2 <|.. CustomMiddleware
+}
+
+package "Typ 4: IPipelineBehavior\n(MediatR CQRS)" #FCE4EC {
+  interface IPipelineBehavior {
+    + Handle(req, next, ct) : Task<Res>
+  }
+  class ValidationBehavior
+  IPipelineBehavior <|.. ValidationBehavior
+}
+
+@enduml

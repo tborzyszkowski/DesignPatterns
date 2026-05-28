@@ -1,0 +1,63 @@
+@startuml cor_class_diagram
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #1565C0
+skinparam classBackgroundColor #E3F2FD
+skinparam interfaceBackgroundColor #FFF9C4
+skinparam arrowColor #1565C0
+skinparam titleFontSize 14
+
+title Diagram klas — wzorzec Łańcuch Zobowiązań (GoF)
+
+interface IHandler {
+  + SetNext(handler : IHandler) : IHandler
+  + Handle(request : Request) : object?
+}
+
+abstract class BaseHandler {
+  - _next : IHandler?
+  --
+  + SetNext(handler : IHandler) : IHandler
+  + Handle(request : Request) : object?
+  # PassToNext(request : Request) : object?
+}
+
+class ConcreteHandler1 {
+  + Handle(request : Request) : object?
+}
+
+class ConcreteHandler2 {
+  + Handle(request : Request) : object?
+}
+
+class ConcreteHandlerN {
+  + Handle(request : Request) : object?
+}
+
+class Client {
+  + BuildChain() : void
+  + SendRequest(request) : void
+}
+
+IHandler <|.. BaseHandler
+BaseHandler <|-- ConcreteHandler1
+BaseHandler <|-- ConcreteHandler2
+BaseHandler <|-- ConcreteHandlerN
+
+BaseHandler o-right-> IHandler : _next
+
+Client -right-> IHandler : «uses»
+
+note right of BaseHandler
+  PassToNext():
+  _next?.Handle(request)
+end note
+
+note bottom of ConcreteHandler1
+  Obsłuż żądanie
+  jeśli pasuje do
+  odpowiedzialności,
+  w przeciwnym razie
+  wywołaj PassToNext()
+end note
+
+@enduml

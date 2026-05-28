@@ -1,0 +1,41 @@
+@startuml cor_alternatives
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #1565C0
+skinparam classBackgroundColor #E3F2FD
+skinparam titleFontSize 14
+
+title Wzorce alternatywne dla CoR
+
+package "Chain of Responsibility" #E3F2FD {
+  class CoRHandler {
+    + Handle(request)
+    - next: IHandler
+  }
+  note bottom of CoRHandler : Jeden handler\nprzetwarza żądanie.\nŁańcuch sekwencyjny.
+}
+
+package "Observer" #F3E5F5 {
+  class EventBus {
+    + Subscribe(handler)
+    + Publish(event)
+  }
+  note bottom of EventBus : WSZYSCY subskrybenci\notrzymują zdarzenie.
+}
+
+package "Strategy" #E8F5E9 {
+  class StrategyContext {
+    - strategy: IStrategy
+    + Execute()
+  }
+  note bottom of StrategyContext : Jeden algorytm.\nBrak łańcucha.
+}
+
+package "Decorator" #FFF9C4 {
+  class DecoratorBase {
+    - inner: IComponent
+    + Operation()
+  }
+  note bottom of DecoratorBase : Wszystkie dekoratory\nprzetwarzają żądanie.\nStrukturalny.
+}
+
+@enduml

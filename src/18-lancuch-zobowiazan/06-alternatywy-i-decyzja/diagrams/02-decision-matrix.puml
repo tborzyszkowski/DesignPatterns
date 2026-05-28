@@ -1,0 +1,34 @@
+@startuml cor_decision_matrix
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Schemat decyzji — wybór wzorca
+
+start
+
+:Masz żądanie do obsługi;
+
+if (Tylko jeden handler\nma obsłużyć?) then (tak)
+  if (Zbiór handlerów\njest dynamiczny?) then (tak)
+    :**Chain of Responsibility**\nŁańcuch sekwencyjny;
+    stop
+  else (nie)
+    if (Jeden konkretny\nalgortym?) then (tak)
+      :**Strategy**\nWymiana algorytmu;
+      stop
+    else (nie)
+      :**Template Method**\nSzkielet algorytmu;
+      stop
+    endif
+  endif
+else (nie — wszyscy)
+  if (Handlery wzbogacają\nbez wiedzy nadawcy?) then (tak)
+    :**Decorator**\nOpakowanie strukturalne;
+    stop
+  else (nie)
+    :**Observer / Event**\nRozgłoszenie do wielu;
+    stop
+  endif
+endif
+
+@enduml

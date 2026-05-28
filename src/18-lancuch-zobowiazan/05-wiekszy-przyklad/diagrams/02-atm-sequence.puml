@@ -1,0 +1,41 @@
+@startuml cor_atm_sequence
+skinparam backgroundColor #FAFAFA
+skinparam sequenceArrowColor #1565C0
+skinparam titleFontSize 14
+
+title Wypłata 380 zł z bankomatu — diagram sekwencji
+
+participant ATM
+participant "Note200\nDispenser" as D200
+participant "Note100\nDispenser" as D100
+participant "Note50\nDispenser" as D50
+participant "Note20\nDispenser" as D20
+participant "Note10\nDispenser" as D10
+
+ATM -> D200 : Dispense(380)
+note right of D200 : 380 / 200 = 1 banknot\nreszta = 180
+D200 --> D200 : result(200→1) + PassToNext(180)
+
+D200 -> D100 : Dispense(180)
+note right of D100 : 180 / 100 = 1 banknot\nreszta = 80
+D100 --> D100 : result(100→1) + PassToNext(80)
+
+D100 -> D50 : Dispense(80)
+note right of D50 : 80 / 50 = 1 banknot\nreszta = 30
+D50 --> D50 : result(50→1) + PassToNext(30)
+
+D50 -> D20 : Dispense(30)
+note right of D20 : 30 / 20 = 1 banknot\nreszta = 10
+D20 --> D20 : result(20→1) + PassToNext(10)
+
+D20 -> D10 : Dispense(10)
+note right of D10 : 10 / 10 = 1 banknot\nreszta = 0
+D10 --> D10 : result(10→1) Remaining=0
+
+D10 --> D20 : DispenseResult(10→1)
+D20 --> D50 : Merge(20→1, 10→1)
+D50 --> D100 : Merge(50→1, 20→1, 10→1)
+D100 --> D200 : Merge(100→1, 50→1, 20→1, 10→1)
+D200 --> ATM : DispenseResult(200→1,100→1,50→1,20→1,10→1)
+
+@enduml

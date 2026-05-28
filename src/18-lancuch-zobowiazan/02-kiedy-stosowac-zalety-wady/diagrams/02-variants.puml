@@ -1,0 +1,44 @@
+@startuml cor_variants
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #2E7D32
+skinparam classBackgroundColor #E8F5E9
+skinparam titleFontSize 14
+
+title Odmiany wzorca Łańcuch Zobowiązań
+
+package "Wariant 1: Pure CoR\n(tylko jeden handler obsługuje)" {
+  class PureChain {
+    Handler1 → Handler2 → Handler3
+    Jeśli obsługuje — STOP
+    Jeśli nie — przekaż
+  }
+}
+
+package "Wariant 2: Pipeline\n(każdy handler przetwarza)" {
+  class Pipeline {
+    Handler1 → Handler2 → Handler3
+    Każdy może modyfikować request/response
+    Każdy woła next()
+  }
+}
+
+package "Wariant 3: Interceptor/Decorator\n(otoczenie — pre + post)" {
+  class Interceptor {
+    Handler.Handle(req) {
+      before()
+      next(req)
+      after()
+    }
+  }
+}
+
+package "Wariant 4: Event Bubbling\n(rodzic może zatrzymać)" {
+  class EventBubbling {
+    Child.Handle(evt)
+    → Parent.Handle(evt)
+    → Window.Handle(evt)
+    Każdy może wywołać evt.StopPropagation()
+  }
+}
+
+@enduml

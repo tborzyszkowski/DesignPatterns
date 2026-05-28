@@ -1,0 +1,79 @@
+@startuml cor_atm_class
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #1565C0
+skinparam classBackgroundColor #E3F2FD
+skinparam interfaceBackgroundColor #FFF9C4
+skinparam arrowColor #1565C0
+skinparam titleFontSize 14
+
+title System wypłat bankomatu — diagram klas (CoR)
+
+interface IDispenser {
+  + SetNext(d: IDispenser): IDispenser
+  + Dispense(amount: int): DispenseResult
+}
+
+abstract class BaseDispenser {
+  - _next: IDispenser?
+  + SetNext(d): IDispenser
+  # PassToNext(amount): DispenseResult
+}
+
+class Note200Dispenser {
+  - denomination: 200
+  + Dispense(amount): DispenseResult
+}
+
+class Note100Dispenser {
+  - denomination: 100
+  + Dispense(amount): DispenseResult
+}
+
+class Note50Dispenser {
+  - denomination: 50
+  + Dispense(amount): DispenseResult
+}
+
+class Note20Dispenser {
+  - denomination: 20
+  + Dispense(amount): DispenseResult
+}
+
+class Note10Dispenser {
+  - denomination: 10
+  + Dispense(amount): DispenseResult
+}
+
+class InsufficientFundsDispenser {
+  + Dispense(amount): DispenseResult
+}
+
+class DispenseResult {
+  + Notes: Dictionary<int,int>
+  + Remaining: int
+  + Success: bool
+  + Merge(other): DispenseResult
+}
+
+class ATM {
+  - _firstDispenser: IDispenser
+  + Withdraw(amount: int): DispenseResult
+  + Replenish(denomination: int, count: int): void
+}
+
+IDispenser <|.. BaseDispenser
+BaseDispenser <|-- Note200Dispenser
+BaseDispenser <|-- Note100Dispenser
+BaseDispenser <|-- Note50Dispenser
+BaseDispenser <|-- Note20Dispenser
+BaseDispenser <|-- Note10Dispenser
+BaseDispenser <|-- InsufficientFundsDispenser
+ATM *-- IDispenser
+
+Note200Dispenser --> Note100Dispenser : next
+Note100Dispenser --> Note50Dispenser : next
+Note50Dispenser --> Note20Dispenser : next
+Note20Dispenser --> Note10Dispenser : next
+Note10Dispenser --> InsufficientFundsDispenser : next
+
+@enduml

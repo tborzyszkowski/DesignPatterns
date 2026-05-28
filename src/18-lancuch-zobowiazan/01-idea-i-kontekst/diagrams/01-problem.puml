@@ -1,0 +1,36 @@
+@startuml cor_problem
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #4527A0
+skinparam classBackgroundColor #EDE7F6
+skinparam titleFontSize 14
+
+title Problem: jeden obiekt obsługuje wszystkie żądania
+
+class GodHandler #FFCDD2 {
+  - _user : User
+  --
+  + HandleRequest(request) : void
+  --
+  if request.Type == "Password"
+    validatePassword()
+  else if request.Type == "Roles"
+    checkRoles()
+  else if request.Type == "IpBlock"
+    checkIpAddress()
+  else if request.Type == "MFA"
+    verifyMfa()
+  else if request.Type == "License"
+    checkLicense()
+}
+
+note bottom of GodHandler
+  ❌ Naruszenie OCP: każda nowa reguła
+     = modyfikacja klasy
+  ❌ Nie można pominąć ani podmienić
+     jednego kroku bez modyfikacji klasy
+  ❌ Trudne testowanie izolowanych kroków
+  ❌ Brak możliwości zatrzymania łańcucha
+     w połowie
+end note
+
+@enduml
