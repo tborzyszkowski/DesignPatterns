@@ -108,7 +108,7 @@ btn1.SetCommand(new LightOffCommand(light));
 btn1.Click();   // → "Światło w [Salon] WYŁĄCZONE"
 ```
 
-## Cztery potrżeby, które zaspokaja wzorzec Polecenie
+## Cztery potrzeby, które zaspokaja wzorzec Polecenie
 
 ### Potrzeba 1: Luźne powiązanie (Loose Coupling)
 
@@ -116,7 +116,7 @@ Invoker i Receiver znają się tylko przez `ICommand`. Można je rozwijać nieza
 
 ### Potrzeba 2: Parametryzacja akcji
 
-Akcję (polecenie) można przekazywać jak wartość: do konstruktóra, przez settera, do kolekcji. Przyciski, menu i skróty klawiszowe mogą być konfigurowane w runtime.
+Akcję (polecenie) można przekazywać jak wartość: do konstruktora, przez settera, do kolekcji. Przyciski, menu i skróty klawiszowe mogą być konfigurowane w runtime.
 
 ### Potrzeba 3: Kolejkowanie i harmonogramowanie
 
