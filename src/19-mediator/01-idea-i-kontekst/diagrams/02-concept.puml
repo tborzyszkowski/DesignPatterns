@@ -1,0 +1,56 @@
+@startuml mediator_concept
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #1565C0
+skinparam classBackgroundColor #E3F2FD
+skinparam interfaceBackgroundColor #FFF9C4
+skinparam arrowColor #1565C0
+skinparam titleFontSize 14
+
+title Rozwiązanie: Mediator jako centrum komunikacji
+
+interface IMediator {
+  + Notify(sender: object, event: string): void
+}
+
+class ConcreteMediator {
+  - componentA: ComponentA
+  - componentB: ComponentB
+  - componentC: ComponentC
+  + Notify(sender, event): void
+}
+
+abstract class BaseComponent {
+  # mediator: IMediator
+  + BaseComponent(mediator)
+}
+
+class ComponentA {
+  + DoActionA()
+}
+class ComponentB {
+  + DoActionB()
+}
+class ComponentC {
+  + DoActionC()
+}
+
+IMediator <|.. ConcreteMediator
+BaseComponent <|-- ComponentA
+BaseComponent <|-- ComponentB
+BaseComponent <|-- ComponentC
+
+ConcreteMediator o-- ComponentA
+ConcreteMediator o-- ComponentB
+ConcreteMediator o-- ComponentC
+
+ComponentA ..> IMediator : notify()
+ComponentB ..> IMediator : notify()
+ComponentC ..> IMediator : notify()
+
+note right of ConcreteMediator
+  Mediator zna wszystkich uczestników
+  i koordynuje ich współpracę.
+  Uczestnicy znają TYLKO Mediatora.
+end note
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml mediator_lifecycle
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Cykl życia Mediatora
+
+(*) --> "Tworzenie uczestników\n(Colleagues)"
+--> "Tworzenie mediatora\nz referencjami"
+--> "Rejestracja uczestników\nu mediatora"
+--> "Uczestnik wywołuje akcję"
+--> "Uczestnik notyfikuje\nmediatora (Notify)"
+--> [Mediator analizuje\nzdarzenie i nadawcę] "Mediator wywołuje\nreakcje innych uczestników"
+--> "Uczestnicy reagują\nbez wiedzy o źródle"
+--> "Uczestnik wywołuje akcję"
+note right : Cykl się powtarza
+
+@enduml

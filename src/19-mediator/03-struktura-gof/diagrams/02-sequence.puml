@@ -1,0 +1,42 @@
+@startuml mediator_sequence
+skinparam backgroundColor #FAFAFA
+skinparam sequenceArrowColor #1565C0
+skinparam titleFontSize 14
+
+title Wzorzec Mediator — diagram sekwencji
+
+participant Client
+participant "ColleagueA" as A
+participant "Mediator" as M
+participant "ColleagueB" as B
+participant "ColleagueC" as C
+
+Client -> A : DoA()
+activate A
+
+A -> M : Notify(this, "doA")
+activate M
+note right of M : Mediator decyduje\nco zrobić z "doA"
+
+M -> B : ReactToA()
+activate B
+B --> M : ok
+deactivate B
+
+M -> C : ReactToA()
+activate C
+C --> M : ok
+deactivate C
+
+M --> A : (reakcja mediatora)
+deactivate M
+
+A --> Client : wynik
+deactivate A
+
+note over A, C
+  ColleagueA nie zna B ani C.
+  Mediator zarządza przepływem.
+end note
+
+@enduml

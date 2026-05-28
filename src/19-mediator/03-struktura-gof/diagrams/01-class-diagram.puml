@@ -1,0 +1,59 @@
+@startuml mediator_class_diagram
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #1565C0
+skinparam classBackgroundColor #E3F2FD
+skinparam interfaceBackgroundColor #FFF9C4
+skinparam arrowColor #1565C0
+skinparam titleFontSize 14
+
+title Wzorzec Mediator — diagram klas GoF
+
+interface IMediator {
+  + Notify(sender: object, event: string): void
+}
+
+abstract class BaseColleague {
+  # mediator: IMediator
+  + SetMediator(mediator: IMediator): void
+  # Notify(event: string): void
+}
+
+class ConcreteMediator {
+  - colleagueA: ConcreteColleagueA
+  - colleagueB: ConcreteColleagueB
+  + Notify(sender: object, event: string): void
+}
+
+class ConcreteColleagueA {
+  + DoA(): void
+  + ReactOnB(): void
+}
+
+class ConcreteColleagueB {
+  + DoB(): void
+  + ReactOnA(): void
+}
+
+IMediator <|.. ConcreteMediator
+BaseColleague <|-- ConcreteColleagueA
+BaseColleague <|-- ConcreteColleagueB
+
+ConcreteMediator o-right- ConcreteColleagueA : "colleagueA"
+ConcreteMediator o-right- ConcreteColleagueB : "colleagueB"
+
+ConcreteColleagueA -up-> IMediator : "mediator"
+ConcreteColleagueB -up-> IMediator : "mediator"
+
+note right of ConcreteMediator
+  Koordynuje odpowiedź:
+  gdy A wywoła DoA() → 
+  reaguje B (ReactOnB)
+end note
+
+note left of BaseColleague
+  Uczestnik zna tylko
+  interfejs IMediator,
+  nie zna innych uczestników
+end note
+
+@enduml

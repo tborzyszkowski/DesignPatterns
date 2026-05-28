@@ -1,0 +1,35 @@
+@startuml mediator_problem
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #B71C1C
+skinparam classBackgroundColor #FFEBEE
+skinparam arrowColor #B71C1C
+skinparam titleFontSize 14
+
+title Problem: siatka powiązań (bez Mediatora)
+
+class KomponentUI_A {
+  + aktualizuj()
+}
+class KomponentUI_B {
+  + aktualizuj()
+}
+class KomponentUI_C {
+  + aktualizuj()
+}
+class KomponentUI_D {
+  + aktualizuj()
+}
+
+KomponentUI_A --> KomponentUI_B : zna
+KomponentUI_A --> KomponentUI_C : zna
+KomponentUI_A --> KomponentUI_D : zna
+KomponentUI_B --> KomponentUI_A : zna
+KomponentUI_B --> KomponentUI_C : zna
+KomponentUI_C --> KomponentUI_A : zna
+KomponentUI_C --> KomponentUI_D : zna
+KomponentUI_D --> KomponentUI_B : zna
+KomponentUI_D --> KomponentUI_C : zna
+
+note bottom : N*(N-1)/2 powiązań = spaghetti zależności\nModyfikacja jednej klasy wpływa na wszystkie inne
+
+@enduml

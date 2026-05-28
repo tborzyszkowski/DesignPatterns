@@ -1,0 +1,29 @@
+@startuml mediator_impl_choice
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Wybór implementacji Mediatora
+
+(*) --> "Obiekty muszą\nsię koordynować?"
+
+if "Znane z góry,\nsilne sprzężenie" then
+  --> [TAK] "Typ 1: Klasyczny GoF\n(IMediator + Colleague)"
+  --> (*)
+else
+  --> [NIE] "Komunikacja przez\nzdarzenia/eventy?"
+  if "Proste, synchroniczne" then
+    --> [TAK] "Typ 2: Delegaty\n(Dictionary<event,Action>)"
+    --> (*)
+  else
+    --> [NIE] "Request/Response +\nPipeline behaviors?"
+    if "CQRS, Clean Architecture" then
+      --> [TAK] "Typ 3: MediatR\n(IRequest + IRequestHandler)"
+      --> (*)
+    else
+      --> [NIE] "Typ 4: Hub/SignalR\n(real-time, WebSocket)"
+      --> (*)
+    endif
+  endif
+endif
+
+@enduml

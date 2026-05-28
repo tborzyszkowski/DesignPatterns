@@ -1,0 +1,45 @@
+@startuml mediator_atc_sequence
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Kontrola Ruchu Lotniczego — sekwencja lądowania i kolejka
+
+participant "LOT101\n:CommercialFlight" as LOT
+participant "RYR202\n:PrivatePlane" as RYR
+participant "WZZ303\n:CommercialFlight" as WZZ
+participant "ControlTower\n:IAirTrafficControl" as Tower
+participant "Runway 01\n:Runway" as RW1
+participant "Runway 02\n:Runway" as RW2
+
+== Jednoczesne prośby o lądowanie ==
+
+LOT -> Tower : RequestLanding(LOT101)
+activate Tower
+Tower -> RW1 : Occupy("LOT101")
+Tower --> LOT : ReceiveClearance("Pas 01", "LAND")
+deactivate Tower
+
+RYR -> Tower : RequestLanding(RYR202)
+activate Tower
+Tower -> RW2 : Occupy("RYR202")
+Tower --> RYR : ReceiveClearance("Pas 02", "LAND")
+deactivate Tower
+
+WZZ -> Tower : RequestLanding(WZZ303)
+activate Tower
+note right of Tower : Oba pasy zajęte!\nDodaję do kolejki
+Tower --> WZZ : HoldPosition("Czekam na wolny pas")
+deactivate Tower
+
+== LOT101 kończy lądowanie — pas wolnieje ==
+
+LOT -> Tower : ReportLanded("LOT101")
+activate Tower
+Tower -> RW1 : Clear()
+
+note right of Tower : WZZ303 czeka w kolejce
+Tower -> RW1 : Occupy("WZZ303")
+Tower --> WZZ : ReceiveClearance("Pas 01", "LAND")
+deactivate Tower
+
+@enduml

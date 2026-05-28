@@ -1,0 +1,53 @@
+@startuml mediator_impl_types
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+skinparam packageBorderColor #1565C0
+skinparam packageBackgroundColor #E3F2FD
+
+title Typy implementacji Mediatora
+
+package "Typ 1: Klasyczny GoF" {
+  interface IMediator1 {
+    + Notify(sender, event): void
+  }
+  class ConcreteMediator1
+  abstract class Colleague1 {
+    # mediator: IMediator1
+  }
+  IMediator1 <|.. ConcreteMediator1
+  Colleague1 --> IMediator1
+}
+
+package "Typ 2: Delegaty / Zdarzenia" {
+  class EventMediator {
+    + Subscribe(event, handler): void
+    + Publish(event, data): void
+    - handlers: Dictionary
+  }
+}
+
+package "Typ 3: MediatR (CQRS)" {
+  interface IRequest3
+  interface IRequestHandler3 {
+    + Handle(request): Task
+  }
+  class Mediator3 {
+    + Send(request): Task
+    + Publish(notification): Task
+  }
+  IRequest3 ..> Mediator3 : wysyła
+  Mediator3 ..> IRequestHandler3 : wywołuje
+}
+
+package "Typ 4: Hub (SignalR)" {
+  class Hub4 {
+    + JoinGroup(name): Task
+    + SendToGroup(name, msg): Task
+  }
+  class Client4 {
+    + ReceiveMessage(msg): void
+  }
+  Hub4 -right-> Client4 : emituje
+}
+
+@enduml

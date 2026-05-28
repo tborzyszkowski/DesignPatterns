@@ -1,0 +1,28 @@
+@startuml mediator_decision_matrix
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Macierz decyzyjna — Mediator vs. alternatywy
+
+skinparam noteBackgroundColor #FFF9C4
+
+note as N1
+  <b>Zadaj sobie pytania:</b>
+  
+  1. Czy obiekty muszą wiedzieć o sobie nawzajem?
+     TAK → Mediator / NIE → Observer lub Event
+  
+  2. Czy komunikacja jest dwukierunkowa (koordynacja)?
+     TAK → Mediator / NIE → Facade (jednostronny)
+  
+  3. Czy każdy uczestnik może być "senderem"?
+     TAK → Mediator / NIE → Command (jeden inicjator)
+  
+  4. Czy przetwarzanie jest sekwencyjne z fallbackiem?
+     TAK → CoR / NIE → Mediator (centralny hub)
+  
+  5. Czy to broadcast do wszystkich subskrybentów?
+     TAK → Observer / NIE → Mediator (selektywny)
+end note
+
+@enduml

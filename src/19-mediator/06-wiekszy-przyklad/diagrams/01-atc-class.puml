@@ -1,0 +1,86 @@
+@startuml mediator_atc_class
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #1565C0
+skinparam classBackgroundColor #E3F2FD
+skinparam interfaceBackgroundColor #FFF9C4
+skinparam titleFontSize 14
+
+title Kontrola Ruchu Lotniczego — diagram klas
+
+interface IAirTrafficControl {
+  + Register(aircraft: Aircraft): void
+  + RequestLanding(aircraft: Aircraft): void
+  + RequestTakeoff(aircraft: Aircraft): void
+  + ReportConflict(a1: Aircraft, a2: Aircraft): void
+  + GetRunwayStatus(): IReadOnlyList<RunwayStatus>
+}
+
+abstract class Aircraft {
+  + CallSign: string
+  + Status: FlightStatus
+  + AssignedRunway: string?
+  # Tower: IAirTrafficControl
+  + SetTower(tower: IAirTrafficControl): void
+  + RequestLanding(): void
+  + RequestTakeoff(): void
+  + ReceiveClearance(runway: string, clearanceType: string): void
+  + HoldPosition(reason: string): void
+  + Alert(message: string): void
+}
+
+class CommercialFlight {
+  + Capacity: int
+  + RequiresPriority: bool
+  + RequestLanding(): void
+}
+
+class PrivatePlane {
+  + RequestLanding(): void
+}
+
+class ControlTower {
+  - runways: List<Runway>
+  - registered: List<Aircraft>
+  - landingQueue: Queue<Aircraft>
+  - takeoffQueue: Queue<Aircraft>
+  + Register(aircraft): void
+  + RequestLanding(aircraft): void
+  + RequestTakeoff(aircraft): void
+  + ReportConflict(a1, a2): void
+  + GetRunwayStatus(): IReadOnlyList<RunwayStatus>
+  - AssignRunway(aircraft, type): bool
+  - TryProcessQueue(): void
+}
+
+class Runway {
+  + Name: string
+  + IsOccupied: bool
+  + CurrentAircraft: string?
+  + Clear(): void
+  + Occupy(callSign: string): void
+}
+
+enum FlightStatus {
+  Airborne
+  WaitingForLanding
+  Landing
+  OnGround
+  WaitingForTakeoff
+  TakingOff
+}
+
+record RunwayStatus {
+  + RunwayName: string
+  + IsOccupied: bool
+  + CurrentAircraft: string?
+}
+
+IAirTrafficControl <|.. ControlTower
+Aircraft <|-- CommercialFlight
+Aircraft <|-- PrivatePlane
+Aircraft --> IAirTrafficControl : tower
+ControlTower o--> "1..*" Runway
+ControlTower o--> "0..*" Aircraft
+Aircraft --> FlightStatus : status
+
+@enduml

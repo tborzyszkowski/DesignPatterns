@@ -1,0 +1,45 @@
+@startuml mediator_variants
+skinparam backgroundColor #FAFAFA
+skinparam classBorderColor #1565C0
+skinparam classBackgroundColor #E3F2FD
+skinparam titleFontSize 14
+
+title Odmiany wzorca Mediator
+
+package "Klasyczny GoF" #E3F2FD {
+  interface IMediator {
+    + Notify(sender, event)
+  }
+  class ConcreteMediator
+  IMediator <|.. ConcreteMediator
+  note bottom of ConcreteMediator : Mediator zna\nkonkretnych uczestników
+}
+
+package "Event Bus / Message Bus" #E8F5E9 {
+  class EventBus {
+    + Subscribe<T>(handler)
+    + Publish<T>(event)
+  }
+  note bottom of EventBus : Luźna rejestracja,\nbrak bezpośrednich referencji
+}
+
+package "MediatR (CQRS)" #FFF9C4 {
+  interface IMediator2 {
+    + Send<TResponse>(request)
+    + Publish(notification)
+  }
+  class MediatRMediator
+  IMediator2 <|.. MediatRMediator
+  note bottom of MediatRMediator : Request/Response\n+ Notyfikacje (1:N)
+}
+
+package "Hub (SignalR)" #F3E5F5 {
+  class Hub {
+    + Clients.All
+    + Clients.Group()
+    + Clients.Caller
+  }
+  note bottom of Hub : Mediator czasu rzeczywistego\ndla połączeń WebSocket
+}
+
+@enduml

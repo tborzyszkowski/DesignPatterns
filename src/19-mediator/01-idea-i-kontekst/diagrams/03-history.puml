@@ -1,0 +1,27 @@
+@startuml mediator_history
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Rys historyczny wzorca Mediator
+
+robust "Wzorzec Mediator" as M
+
+@1994
+M is "GoF publikują\n'Design Patterns'\nMediator opisany"
+
+@2000
+M is "J2EE Session Façade\npodobna rola"
+
+@2003
+M is "MVC popularyzuje\nController jako mediator"
+
+@2010
+M is "CQRS / Event Bus\nnowoczesna forma"
+
+@2016
+M is "MediatR (Jimmy Bogard)\nbibioteka .NET"
+
+@2020
+M is "Blazor, SignalR\nHub jako mediator"
+
+@enduml

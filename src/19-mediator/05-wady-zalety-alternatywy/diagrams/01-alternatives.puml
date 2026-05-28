@@ -1,0 +1,57 @@
+@startuml mediator_alternatives
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Mediator vs. inne wzorce — porównanie
+
+left to right direction
+
+class Mediator {
+  + Notify(sender, event)
+  ---
+  Centralizuje komunikację
+  WIELU uczestników
+  Dwukierunkowa koordynacja
+}
+
+class Observer {
+  + Subscribe(handler)
+  + Notify(data)
+  ---
+  Broadcast do wszystkich
+  Jeden temat/strumień
+  Luźne sprzężenie
+}
+
+class Facade {
+  + SimplifiedOperation()
+  ---
+  Upraszcza podsystem
+  Jednokierunkowy
+  Brak koordynacji
+}
+
+class ChainOfResponsibility {
+  + Handle(request)
+  + SetNext(handler)
+  ---
+  Sekwencja handlerów
+  Jeden przetwarza
+  Dynamiczny łańcuch
+}
+
+class Command {
+  + Execute()
+  + Undo()
+  ---
+  Enkapsuluje żądanie
+  Historia/cofanie
+  Kolejkowanie
+}
+
+Mediator .. Observer : vs.
+Mediator .. Facade : vs.
+Mediator .. ChainOfResponsibility : vs.
+Mediator .. Command : vs.
+
+@enduml

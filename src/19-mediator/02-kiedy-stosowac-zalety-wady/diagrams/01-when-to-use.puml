@@ -1,0 +1,34 @@
+@startuml mediator_when_to_use
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Kiedy stosować Mediator — drzewo decyzyjne
+
+start
+
+:Masz zbiór obiektów\nwzajemnie się komunikujących;
+
+if (Zależności tworzą\nsieć (wiele-do-wielu)?) then (tak)
+  if (Logika koordynacji\npowinna być izolowana?) then (tak)
+    :**Mediator**\nCentralna logika koordynacji;
+    stop
+  else (nie)
+    :Rozważ uproszczenie\narchitektury;
+    stop
+  endif
+else (nie)
+  if (Jeden obiekt\nodpowiada na żądania?) then (tak)
+    :Facade / Strategy;
+    stop
+  else (nie)
+    if (Powiadamianie\nwszystkich?) then (tak)
+      :Observer / Event;
+      stop
+    else (nie)
+      :Bezpośrednia\nkomunikacja;
+      stop
+    endif
+  endif
+endif
+
+@enduml
