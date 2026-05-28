@@ -7,27 +7,27 @@ title Schemat wyboru implementacji CoR
 start
 :Czy używasz ASP.NET Core?;
 if (Tak) then (tak)
-  #90EE90:Użyj wbudowanego\nMiddleware Pipeline\n(app.Use / IMiddleware);
+  :Użyj wbudowanego\nMiddleware Pipeline\n(app.Use / IMiddleware); <<#90EE90>>
   stop
 else (nie)
 endif
 
 :Czy używasz MediatR / CQRS?;
 if (Tak) then (tak)
-  #90EE90:Użyj IPipelineBehavior<TReq,TRes>;
+  :Użyj IPipelineBehavior<TReq,TRes>; <<#90EE90>>
   stop
 else (nie)
 endif
 
 :Czy potrzebujesz testować\npośrednie ogniwa izolowane?;
 if (Tak) then (tak)
-  #90EE90:Użyj klasycznego OOP\n(interface + BaseHandler);
+  :Użyj klasycznego OOP\n(interface + BaseHandler); <<#90EE90>>
 else (nie)
   :Czy handlery są proste\ni jednorazowe (lambda)?;
   if (Tak) then (tak)
-    #FFD700:Delegatowy pipeline\n(Func<> / Action<>);
+    :Delegatowy pipeline\n(Func<> / Action<>); <<#FFD700>>
   else (nie)
-    #90EE90:Klasyczny OOP\n(bezpieczniejszy długoterminowo);
+    :Klasyczny OOP\n(bezpieczniejszy długoterminowo); <<#90EE90>>
   endif
 endif
 
