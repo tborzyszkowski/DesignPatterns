@@ -1,17 +1,24 @@
 @startuml cor_history
 skinparam backgroundColor #FAFAFA
 skinparam titleFontSize 14
-skinparam noteFontSize 11
+skinparam rectangleBorderColor #4527A0
+skinparam rectangleFontSize 12
+skinparam arrowColor #4527A0
 
-title Rys historyczny wzorca Łańcuch Zobowiązań
+title Rys historyczny — Łańcuch Zobowiązań
 
-timeline
-  title Ewolucja wzorca Łańcuch Zobowiązań
-  1994 : GoF (Gamma, Helm, Johnson, Vlissides)\nPublikacja 23 wzorców projektowych\n"Chain of Responsibility" — jeden z wzorców behawioralnych
-  1995 : Zastosowanie w systemach GUI\n(event bubbling w Smalltalk / MFC)
-  2000 : Middleware w aplikacjach webowych\n(Servlet Filters w Java EE)
-  2004 : ASP.NET HttpModules / HttpHandlers\n(pipeline żądań HTTP — CoR w praktyce)
-  2014 : OWIN Middleware (Open Web Interface for .NET)\nApp.Use() — łańcuch middleware
-  2016 : ASP.NET Core Middleware Pipeline\nApp.UseRouting().UseAuthentication().UseAuthorization()
-  2020 : MediatR Pipeline Behaviors\nłańcuch zachowań dla CQRS
+rectangle "**1994** — GoF (Gamma, Helm, Johnson, Vlissides)\nPublikacja 23 wzorców projektowych\n\"Chain of Responsibility\" — wzorzec behawioralny" as Y1994 #EDE7F6
+rectangle "**1995** — Zastosowanie w systemach GUI\nEvent bubbling w Smalltalk / MFC" as Y1995 #E3F2FD
+rectangle "**2000** — Middleware w aplikacjach webowych\nServlet Filters w Java EE" as Y2000 #E8F5E9
+rectangle "**2004** — ASP.NET HttpModules / HttpHandlers\nPipeline żądań HTTP — CoR w praktyce" as Y2004 #FFF9C4
+rectangle "**2014** — OWIN Middleware (.NET)\nApp.Use() — łańcuch middleware" as Y2014 #E3F2FD
+rectangle "**2016** — ASP.NET Core Middleware Pipeline\nApp.UseRouting().UseAuthentication().UseAuthorization()" as Y2016 #EDE7F6
+rectangle "**2020** — MediatR Pipeline Behaviors\nŁańcuch zachowań dla CQRS" as Y2020 #E8F5E9
+
+Y1994 --> Y1995
+Y1995 --> Y2000
+Y2000 --> Y2004
+Y2004 --> Y2014
+Y2014 --> Y2016
+Y2016 --> Y2020
 @enduml
