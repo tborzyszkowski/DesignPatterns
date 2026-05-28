@@ -1,0 +1,25 @@
+@startuml cqrs_projections
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #444
+
+title Projekcje — transformacja Write Model na Read Model
+
+rectangle "Write Model\n(Zamówienie)" as WM #BDE3FF
+rectangle "Projektor\n(Synchronizer)" as P #FFE4A0
+rectangle "Read Model 1\nWidok listy\n(ZamowienieListaDto)" as RM1 #B5EFB5
+rectangle "Read Model 2\nWidok detali\n(ZamowienieDetailsDto)" as RM2 #B5EFB5
+rectangle "Read Model 3\nRaport sprzedaży\n(SprzedazRaportDto)" as RM3 #B5EFB5
+
+WM -right-> P : zdarzenie\n(ZamowieniePotwierdzoneEvent)
+P -right-> RM1 : aktualizuje
+P -down-> RM2 : aktualizuje
+P -right-> RM3 : aktualizuje
+
+note bottom of P
+  Projektor może działać:
+  - Synchronicznie (po każdym zapisie)
+  - Asynchronicznie (message queue)
+  - Przy każdym zapytaniu (on-demand)
+end note
+
+@enduml

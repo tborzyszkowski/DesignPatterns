@@ -1,0 +1,26 @@
+@startuml cqrs_historia
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #555
+skinparam rectangleBorderColor #888
+
+title Historia i ewolucja CQRS
+
+rectangle "1988\nBertrand Meyer\nzasada CQS\n(metody)" <<#BDE3FF>>
+rectangle " " <<transparent>> #transparent
+rectangle "2003\nMartin Fowler\nCQRS jako\nwzorzec arch." <<#BDE3FF>>
+rectangle "  " <<transparent>> #transparent
+rectangle "2010\nGreg Young\nCQRS + DDD +\nEvent Sourcing" <<#BDE3FF>>
+rectangle "   " <<transparent>> #transparent
+rectangle "2014+\nMicroSvc\nMediatR\nnowe narzędzia" <<#BDE3FF>>
+
+"1988\nBertrand Meyer\nzasada CQS\n(metody)" -right-> "2003\nMartin Fowler\nCQRS jako\nwzorzec arch."
+"2003\nMartin Fowler\nCQRS jako\nwzorzec arch." -right-> "2010\nGreg Young\nCQRS + DDD +\nEvent Sourcing"
+"2010\nGreg Young\nCQRS + DDD +\nEvent Sourcing" -right-> "2014+\nMicroSvc\nMediatR\nnowe narzędzia"
+
+note bottom
+  CQS (1988) — zasada na poziomie metody
+  CQRS (2010) — zasada na poziomie całego systemu:
+  osobne stosy, osobne modele, osobne bazy danych
+end note
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml cqs_zasada
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #444
+
+title Zasada CQS — Bertrand Meyer, 1988
+
+package "Naruszenie CQS" #FFE4E1 {
+    class StosBledny {
+        +{method} PopAndReturn() : int
+        note as n1
+          Zmienia stan I zwraca wartość
+          — naruszenie CQS!
+        end note
+    }
+}
+
+package "Poprawna separacja CQS" #E1FFE4 {
+    class StosPoprawny {
+        +{method} Push(value : int) : void
+        +{method} Pop() : void
+        +{method} Peek() : int
+        +{method} IsEmpty() : bool
+        note as n2
+          Push/Pop — Command (zmienia stan)
+          Peek/IsEmpty — Query (tylko odczyt)
+        end note
+    }
+}
+
+note bottom
+  CQS (Command Query Separation):
+  "Każda metoda albo coś zmienia (Command),
+   albo coś zwraca (Query) — nie robi obu naraz."
+  — Bertrand Meyer, Object Oriented Software Construction, 1988
+end note
+
+@enduml

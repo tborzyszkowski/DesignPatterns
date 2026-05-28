@@ -1,0 +1,54 @@
+@startuml cqrs_comparison
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #444
+skinparam packageStyle rectangle
+
+title Porównanie podejść — CRUD vs CQRS vs MediatR
+
+package "CRUD (Repository)" #FFE4E1 {
+    class "ProduktRepository" as CRUD {
+        +Dodaj(dto) : Guid
+        +Aktualizuj(dto) : void
+        +Usun(id) : void
+        +Pobierz(id) : ProduktDto
+        +PobierzWszystkie() : IList
+    }
+    note right of CRUD
+      Kiedy: Prosta aplikacja,
+      jeden model pasuje do wszystkiego,
+      mały zespół, mały ruch
+    end note
+}
+
+package "CQRS (ręczna implementacja)" #E8F4FD {
+    class "Command Handlers" as CH {
+        +DodajProduktHandler
+        +ZmienCeneHandler
+        +UsunHandler
+    }
+    class "Query Handlers" as QH {
+        +PobierzProduktHandler
+        +WyszukajHandler
+        +RaportHandler
+    }
+    note right of CH
+      Kiedy: Różne wymagania
+      dla reads i writes,
+      duży ruch, różne DTO
+    end note
+}
+
+package "MediatR (biblioteka)" #E8FDE8 {
+    class "MediatR IRequest<T>" as MR {
+        +Send(request) : T
+        +Publish(notification)
+    }
+    note right of MR
+      Kiedy: Chcemy CQRS
+      bez pisania Dispatchera,
+      DI container dostępny,
+      ASP.NET Core projekt
+    end note
+}
+
+@enduml

@@ -1,0 +1,48 @@
+@startuml cqrs_sequence_borrow
+skinparam backgroundColor #FEFEFE
+skinparam sequenceArrowThickness 2
+
+title Sekwencja — Wypożyczenie książki
+
+actor Uzytkownik as U
+participant "Dispatcher" as D
+participant "WypozyczKsiazkeHandler" as H
+participant "KsiazkaRepository\n(Write)" as WR
+participant "Ksiazka\n(Aggregate)" as AG
+participant "KsiazkaReadRepo\n(Read)" as RR
+
+== Komenda: WypozyczKsiazke ==
+
+U -> D : SendCommandAsync(WypozyczKsiazkeCommand)
+D -> H : HandleAsync(command)
+H -> WR : PobierzDoEdycji(ksiazkaId)
+WR -> AG : new Ksiazka() + Replay
+WR --> H : Ksiazka (aktualny stan)
+
+H -> AG : Wypozycz(uzytkownikId, DateTime.UtcNow)
+note right of AG
+  Walidacja:
+  - Czy dostępna?
+  - Czy użytkownik nie przekroczył limitu?
+end note
+
+AG --> H : OK
+
+H -> WR : Zapisz(ksiazka)
+WR --> H : OK
+
+== Aktualizacja Read Model ==
+
+H -> RR : AktualizujWidok(ksiazkaId)
+RR --> H : OK
+H --> D : Task.Completed
+D --> U : void (204 No Content)
+
+== Query: Sprawdź dostępność ==
+
+U -> D : SendQueryAsync(PobierzDostepneKsiazki)
+D -> RR : Handle(query)
+RR --> D : List<KsiazkaListaDto>
+D --> U : [{ "Tytul": "...", "Dostepna": false }]
+
+@enduml

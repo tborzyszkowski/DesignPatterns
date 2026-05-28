@@ -1,0 +1,46 @@
+@startuml cqrs_event_flow
+skinparam backgroundColor #FEFEFE
+skinparam sequenceArrowThickness 2
+
+title Przepływ zdarzeń — CQRS + Event Sourcing
+
+actor Uzytkownik as U
+participant "CommandHandler" as CH
+participant "KontoBankowe\n(Aggregate)" as AG
+participant "EventStore" as ES
+participant "Projektor" as P
+participant "SaldoProjection\n(Read Model)" as RM
+
+== Komenda: WplacSrodki ==
+
+U -> CH : WplacSrodkiCommand(kontoId, 500)
+CH -> ES : GetEvents(kontoId)
+ES --> CH : [KontoOtwarteEvent, SrodkiWplaconeEvent...]
+CH -> AG : new KontoBankowe()
+CH -> AG : Replay(events)
+note right of AG : Odbudowanie stanu\nze wszystkich zdarzeń
+AG --> CH : konto z aktualnym stanem
+
+CH -> AG : WplacSrodki(500)
+AG -> AG : Walidacja (kwota > 0)
+AG --> CH : [SrodkiWplaconeEvent(500)]
+
+CH -> ES : Save([SrodkiWplaconeEvent(500)])
+
+== Projektor aktualizuje Read Model ==
+
+ES -> P : Notify(SrodkiWplaconeEvent)
+P -> RM : Apply(SrodkiWplaconeEvent)
+RM --> P : OK
+
+== Query: PobierzSaldo ==
+
+U -> RM : PobierzSaldo(kontoId)
+RM --> U : SaldoDto(kontoId, "1500 zł")
+
+note right of RM
+  Read Model jest zawsze gotowy do odczytu.
+  Może być w pamięci, Redis lub bazie odczytu.
+end note
+
+@enduml

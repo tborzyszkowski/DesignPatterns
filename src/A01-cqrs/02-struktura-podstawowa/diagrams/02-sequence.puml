@@ -1,0 +1,43 @@
+@startuml cqrs_sequence
+skinparam backgroundColor #FEFEFE
+skinparam sequenceArrowThickness 2
+
+title Diagram sekwencji — przepływ Command i Query
+
+actor Uzytkownik as U
+participant "Controller\n/ Program" as C
+participant "Dispatcher" as D
+participant "CommandHandler" as CH
+participant "QueryHandler" as QH
+participant "WriteRepo" as WR
+participant "ReadRepo" as RR
+
+== Command (zapis) ==
+
+U -> C : ZlozZamowienie(dane)
+C -> D : SendCommandAsync(ZlozZamowienieCommand)
+D -> CH : HandleAsync(command)
+CH -> WR : Zapisz(zamowienie)
+WR --> CH : OK
+CH --> D : Task.Completed
+D --> C : void
+C --> U : 201 Created
+
+== Query (odczyt) ==
+
+U -> C : PobierzZamowienia()
+C -> D : SendQueryAsync(PobierzZamowieniaQuery)
+D -> QH : HandleAsync(query)
+QH -> RR : PobierzListe()
+RR --> QH : List<ZamowienieDto>
+QH --> D : List<ZamowienieDto>
+D --> C : List<ZamowienieDto>
+C --> U : 200 OK + JSON
+
+note right of D
+  Dispatcher odnajduje właściwy
+  Handler po typie komendy/zapytania
+  (słownik lub DI container)
+end note
+
+@enduml

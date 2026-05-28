@@ -1,0 +1,58 @@
+@startuml cqrs_architecture
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #444
+skinparam packageStyle rectangle
+
+title Architektura — Wypożyczalnia Książek (CQRS)
+
+package "Write Side — Komendy" #E8F4FD {
+    interface "ICommandHandler<T>" as ICH
+    class DodajKsiazkeHandler
+    class WypozyczKsiazkeHandler
+    class ZwrocKsiazkeHandler
+    DodajKsiazkeHandler .up.|> ICH
+    WypozyczKsiazkeHandler .up.|> ICH
+    ZwrocKsiazkeHandler .up.|> ICH
+}
+
+package "Domena" #FFF9C4 {
+    class "Ksiazka\n(Aggregate)" as Ksiazka {
+        +Id : Guid
+        +Tytul : string
+        +Autor : string
+        -_wypozyczenia : List
+        +Wypozycz(userId, data) : void
+        +Zwroc(userId, data) : void
+        +CzyDostepna : bool
+    }
+    class KsiazkaRepository {
+        +Zapisz(ksiazka) : void
+        +PobierzDoEdycji(id) : Ksiazka
+    }
+}
+
+package "Read Side — Zapytania" #E8FDE8 {
+    interface "IQueryHandler<Q,R>" as IQH
+    class PobierzDostepneKsiazki
+    class PobierzWypozyczeniaUzytkownika
+    class PobierzHistorieKsiazki
+    PobierzDostepneKsiazki .up.|> IQH
+    PobierzWypozyczeniaUzytkownika .up.|> IQH
+    PobierzHistorieKsiazki .up.|> IQH
+}
+
+package "Read Models (DTO)" #F0F0F0 {
+    class KsiazkaListaDto
+    class WypozyczenieDto
+    class KsiazkaHistoriaDto
+}
+
+DodajKsiazkeHandler --> Ksiazka
+WypozyczKsiazkeHandler --> Ksiazka
+ZwrocKsiazkeHandler --> Ksiazka
+Ksiazka --> KsiazkaRepository
+PobierzDostepneKsiazki --> KsiazkaListaDto
+PobierzWypozyczeniaUzytkownika --> WypozyczenieDto
+PobierzHistorieKsiazki --> KsiazkaHistoriaDto
+
+@enduml

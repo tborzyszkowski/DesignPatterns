@@ -1,0 +1,35 @@
+@startuml cqrs_decision
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #444
+
+title Kiedy stosować CQRS — drzewo decyzji
+
+start
+:Aplikacja wymaga\nróżnych modeli\ndla odczytu i zapisu?;
+if (TAK) then (TAK)
+    :Oblicz koszt złożoności CQRS;
+    if (Skala / złożoność > próg?) then (TAK)
+        :Stosuj CQRS;
+        if (Potrzebujesz historii audytu?) then (TAK)
+            :Dodaj Event Sourcing;
+        else (NIE)
+            :Osobne Read/Write\nbez Event Sourcing;
+        endif
+    else (NIE)
+        :CRUD lub Repository\n(prościej = lepiej);
+    endif
+else (NIE)
+    :CRUD wystarczy;
+endif
+stop
+
+note right
+  Sygnały wskazujące CQRS:
+  - Reads >> Writes (lub odwrotnie)
+  - Złożone raporty vs prosta edycja
+  - Różne wymagania skalowania
+  - Mikrousługi z własną bazą
+  - Potrzeba audit logu
+end note
+
+@enduml

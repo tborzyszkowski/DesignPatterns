@@ -1,0 +1,45 @@
+@startuml cqrs_problem
+skinparam packageStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #444
+
+title Problem z CRUD — jeden model do wszystkiego
+
+package "CRUD — jeden model" {
+    class ProduktRepository {
+        +DodajProdukt(ProduktDto dto) : Guid
+        +AktualizujProdukt(ProduktDto dto) : void
+        +UsunProdukt(Guid id) : void
+        +PobierzProdukt(Guid id) : ProduktDto
+        +PobierzWszystkie() : IList<ProduktDto>
+        +PobierzPoKategorii(string kat) : IList<ProduktDto>
+        +PobierzTop10() : IList<ProduktDto>
+        +WyszukajPelnotekstowo(string fraza) : IList<ProduktDto>
+    }
+
+    class ProduktDto {
+        +Id : Guid
+        +Nazwa : string
+        +Opis : string
+        +Cena : decimal
+        +Kategoria : string
+        +StanMagazynowy : int
+        +DataDodania : DateTime
+        +ObrazekUrl : string
+        +Tagi : List<string>
+        +OcenaAvg : double
+        +LiczbaOcen : int
+    }
+}
+
+note right of ProduktRepository
+  Problemy:
+  - Jedna klasa = 8 metod = coraz więcej
+  - Ten sam model do odczytu i zapisu
+  - Zapis potrzebuje 3 pól, odczyt 11
+  - Baza zoptymalizowana pod zapisy
+    — nie pasuje do złożonych zapytań
+  - Nie można skalować osobno
+end note
+
+@enduml

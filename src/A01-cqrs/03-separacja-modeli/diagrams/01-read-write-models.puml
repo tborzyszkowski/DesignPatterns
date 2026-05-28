@@ -1,0 +1,57 @@
+@startuml cqrs_models
+allowmixing
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #444
+skinparam packageStyle rectangle
+
+title Separacja modeli - Write Model vs Read Model
+
+package "Write Side" #E8F4FD {
+    class Zamowienie {
+        -Id : Guid
+        -_status : Status
+        +ZlozZamowienie() : void
+        +DodajPozycje() : void
+        +Potwierdz() : void
+        +Anuluj() : void
+    }
+    class Pozycja {
+        +ProduktId : Guid
+        +Ilosc : int
+        +CenaJednostkowa : decimal
+    }
+    class ZamowienieRepository {
+        +Zapisz(z) : void
+        +PobierzDoEdycji(id) : Zamowienie
+    }
+    Zamowienie o-- Pozycja
+}
+
+package "Read Side" #E8FDE8 {
+    class ZamowienieListaDto {
+        +Id : Guid
+        +NumerZamowienia : string
+        +Wartosc : string
+        +Status : string
+    }
+    class ZamowienieDetailsDto {
+        +Id : Guid
+        +Pozycje : string
+        +Wartosc : string
+        +Status : string
+    }
+    class ZamowienieReadRepo {
+        +PobierzListe(filtr) : ZamowienieListaDto
+        +PobierzSzczegoly(id) : ZamowienieDetailsDto
+    }
+}
+
+rectangle "Baza zapisu (SQL)" as WriteDb
+rectangle "Baza odczytu (NoSQL)" as ReadDb
+
+Zamowienie --> ZamowienieRepository
+ZamowienieRepository --> WriteDb
+ZamowienieReadRepo --> ReadDb
+WriteDb ..> ReadDb : synchronizacja
+
+@enduml

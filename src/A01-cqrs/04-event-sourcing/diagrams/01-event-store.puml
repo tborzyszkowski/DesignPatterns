@@ -1,0 +1,70 @@
+@startuml cqrs_event_store
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #444
+skinparam packageStyle rectangle
+
+title CQRS + Event Sourcing — Event Store i projekcje
+
+package "Write Side" #E8F4FD {
+    class "KontoBankowe\n(Aggregate)" as KontoBankowe {
+        +Id : Guid
+        +Saldo : decimal
+        +WlascicielNazwa : string
+        +WplacSrodki(kwota) : void
+        +WyplacSrodki(kwota) : void
+        -RaiseDomainEvent(event) : void
+    }
+    class EventStore {
+        -_events : List<DomainEvent>
+        +Save(events) : void
+        +GetEvents(aggregateId) : IList<DomainEvent>
+        +GetAllEvents() : IList<DomainEvent>
+    }
+}
+
+package "Zdarzenia domenowe" #FFF9C4 {
+    abstract class DomainEvent {
+        +AggregateId : Guid
+        +OccurredAt : DateTime
+        +Version : int
+    }
+    class KontoOtwarteEvent {
+        +Wlasciciel : string
+        +SaldoPoczatkowe : decimal
+    }
+    class SrodkiWplaconeEvent {
+        +Kwota : decimal
+    }
+    class SrodkiWyploconeEvent {
+        +Kwota : decimal
+    }
+    DomainEvent <|-- KontoOtwarteEvent
+    DomainEvent <|-- SrodkiWplaconeEvent
+    DomainEvent <|-- SrodkiWyploconeEvent
+}
+
+package "Read Side (projekcje)" #E8FDE8 {
+    class SaldoProjection {
+        +KontoId : Guid
+        +Wlasciciel : string
+        +Saldo : decimal
+        +Apply(event) : void
+    }
+    class HistoriaTransakcjiProjection {
+        +KontoId : Guid
+        +Transakcje : List<TransakcjaDto>
+        +Apply(event) : void
+    }
+}
+
+KontoBankowe --> EventStore : zapisuje zdarzenia
+EventStore --> SaldoProjection : odbudowuje
+EventStore --> HistoriaTransakcjiProjection : odbudowuje
+
+note right of EventStore
+  Event Store — tylko append (dodawanie)
+  Nigdy nie modyfikujemy ani nie usuwamy
+  zdarzeń. Historia jest niezmutowalna.
+end note
+
+@enduml

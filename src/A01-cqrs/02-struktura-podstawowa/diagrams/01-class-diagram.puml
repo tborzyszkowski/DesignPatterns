@@ -1,0 +1,59 @@
+@startuml cqrs_class
+skinparam backgroundColor #FEFEFE
+skinparam ArrowColor #444
+skinparam packageStyle rectangle
+
+title Struktura podstawowa CQRS — diagram klas
+
+package "Kontrakty" {
+    interface ICommand {
+    }
+    interface "IQuery<TResult>" as IQuery {
+    }
+    interface "ICommandHandler<TCommand>" as ICommandHandler {
+        +HandleAsync(command : TCommand) : Task
+    }
+    interface "IQueryHandler<TQuery, TResult>" as IQueryHandler {
+        +HandleAsync(query : TQuery) : Task<TResult>
+    }
+    interface IDispatcher {
+        +SendCommandAsync(command : ICommand) : Task
+        +SendQueryAsync(query : IQuery<TResult>) : Task<TResult>
+    }
+}
+
+package "Komendy (przykład)" {
+    class "DodajProdukCommand\n: ICommand" as DodajCmd {
+        +Nazwa : string
+        +Cena : decimal
+        +Kategoria : string
+    }
+    class "DodajProduktHandler\n: ICommandHandler<DodajProdukCommand>" as DodajHandler {
+        +HandleAsync(cmd) : Task
+    }
+}
+
+package "Zapytania (przykład)" {
+    class "PobierzProduktyQuery\n: IQuery<IList<ProduktDto>>" as PobierzQuery {
+        +Kategoria : string?
+    }
+    class "PobierzProduktyHandler\n: IQueryHandler<PobierzProduktyQuery, IList<ProduktDto>>" as PobierzHandler {
+        +HandleAsync(query) : Task<IList<ProduktDto>>
+    }
+}
+
+class Dispatcher {
+    -_handlers : Dictionary
+    +SendCommandAsync(command) : Task
+    +SendQueryAsync(query) : Task<TResult>
+}
+
+DodajCmd .up.|> ICommand
+PobierzQuery .up.|> IQuery
+DodajHandler .up.|> ICommandHandler
+PobierzHandler .up.|> IQueryHandler
+Dispatcher .up.|> IDispatcher
+Dispatcher --> ICommandHandler : kieruje do
+Dispatcher --> IQueryHandler : kieruje do
+
+@enduml
