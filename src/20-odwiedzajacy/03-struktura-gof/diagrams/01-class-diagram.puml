@@ -1,0 +1,76 @@
+@startuml visitor_class
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam interfaceBackgroundColor #E3F2FD
+skinparam interfaceBorderColor #1565C0
+skinparam titleFontSize 14
+skinparam noteFontSize 11
+skinparam arrowColor #333333
+
+title Struktura GoF — wzorzec Odwiedzający
+
+interface IVisitor {
+  + Visit(a: ConcreteElementA): void
+  + Visit(b: ConcreteElementB): void
+}
+
+interface IElement {
+  + Accept(visitor: IVisitor): void
+}
+
+class ConcreteVisitor1 {
+  - _state: ...
+  + Visit(a: ConcreteElementA): void
+  + Visit(b: ConcreteElementB): void
+}
+
+class ConcreteVisitor2 {
+  - _result: ...
+  + Visit(a: ConcreteElementA): void
+  + Visit(b: ConcreteElementB): void
+}
+
+class ConcreteElementA {
+  + OperationA(): void
+  + Accept(v: IVisitor): void
+}
+
+class ConcreteElementB {
+  + OperationB(): void
+  + Accept(v: IVisitor): void
+}
+
+class ObjectStructure {
+  - elements: List<IElement>
+  + Add(e: IElement): void
+  + Accept(v: IVisitor): void
+}
+
+IVisitor <|.. ConcreteVisitor1
+IVisitor <|.. ConcreteVisitor2
+IElement <|.. ConcreteElementA
+IElement <|.. ConcreteElementB
+ObjectStructure o-- IElement : contains
+
+ConcreteElementA --> IVisitor : visitor.Visit(this)
+ConcreteElementB --> IVisitor : visitor.Visit(this)
+
+note right of ConcreteElementA
+  Accept(v):
+    v.Visit(this)
+  "this" to ConcreteElementA
+  → wywołuje Visit(ConcreteElementA)
+end note
+
+note left of ObjectStructure
+  for each element in elements:
+    element.Accept(visitor)
+end note
+
+note bottom of ConcreteVisitor1
+  Gromadzi stan podczas
+  przejścia po strukturze
+end note
+
+@enduml

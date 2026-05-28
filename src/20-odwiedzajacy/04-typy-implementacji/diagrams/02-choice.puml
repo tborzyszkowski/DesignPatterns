@@ -1,0 +1,37 @@
+@startuml visitor_impl_choice
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Schemat wyboru typu implementacji Visitor
+
+start
+:Masz hierarchię z metodą Accept?;
+if (Tak — lub możesz ją dodać) then (tak)
+  if (Operacja zwraca wartość\n(bez efektów ubocznych)?) then (tak)
+    :Generyczny Visitor\nIVisitor<TResult>; <<#90EE90>>
+    stop
+  else (nie)
+    if (Potrzebujesz gromadzić\nstan między elementami?) then (tak)
+      :Klasyczny GoF Visitor\n(void + pole stanu); <<#90EE90>>
+      stop
+    else (nie)
+      :Klasyczny GoF Visitor\nlub Generyczny; <<#90EE90>>
+      stop
+    endif
+  endif
+else (nie — brak Accept)
+  if (Typy elementów są znane\nat compile time?) then (tak)
+    if (Prosta logika,\nmała hierarchia (<5 typów)?) then (tak)
+      :C# switch z\npattern matching; <<#FFD700>>
+      stop
+    else (nie)
+      :Funkcyjny Visitor\n(Dictionary<Type, Func>); <<#FFD700>>
+      stop
+    endif
+  else (nie — typy runtime)
+    :Funkcyjny Visitor\n(refleksja lub dynamic); <<#FFB6C1>>
+    stop
+  endif
+endif
+
+@enduml

@@ -1,0 +1,91 @@
+@startuml visitor_concept
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam interfaceBackgroundColor #E3F2FD
+skinparam interfaceBorderColor #1565C0
+skinparam titleFontSize 14
+skinparam noteFontSize 11
+skinparam arrowColor #333333
+
+title Koncepcja wzorca Odwiedzający — double dispatch
+
+interface IShape {
+  + Accept(visitor: IShapeVisitor) : void
+}
+
+interface IShapeVisitor {
+  + Visit(circle: Circle) : void
+  + Visit(rect: Rectangle) : void
+  + Visit(tri: Triangle) : void
+}
+
+class Circle {
+  + Radius : double
+  + Accept(v: IShapeVisitor) : void
+}
+
+class Rectangle {
+  + Width : double
+  + Height : double
+  + Accept(v: IShapeVisitor) : void
+}
+
+class Triangle {
+  + A : double
+  + B : double
+  + C : double
+  + Accept(v: IShapeVisitor) : void
+}
+
+class AreaVisitor {
+  + TotalArea : double
+  + Visit(c: Circle) : void
+  + Visit(r: Rectangle) : void
+  + Visit(t: Triangle) : void
+}
+
+class PerimeterVisitor {
+  + TotalPerimeter : double
+  + Visit(c: Circle) : void
+  + Visit(r: Rectangle) : void
+  + Visit(t: Triangle) : void
+}
+
+class SvgExportVisitor {
+  + Svg : string
+  + Visit(c: Circle) : void
+  + Visit(r: Rectangle) : void
+  + Visit(t: Triangle) : void
+}
+
+IShape <|.. Circle
+IShape <|.. Rectangle
+IShape <|.. Triangle
+
+IShapeVisitor <|.. AreaVisitor
+IShapeVisitor <|.. PerimeterVisitor
+IShapeVisitor <|.. SvgExportVisitor
+
+IShape --> IShapeVisitor : Accept(visitor)
+
+note right of IShape
+  Krok 1:
+  shape.Accept(visitor)
+  — wybiera typ elementu
+end note
+
+note right of AreaVisitor
+  Krok 2:
+  visitor.Visit(this)
+  — wybiera typ odwiedzającego
+  na podstawie "this"
+end note
+
+note bottom of SvgExportVisitor
+  Nowe operacje dodajemy
+  BEZ modyfikacji Circle,
+  Rectangle, Triangle!
+end note
+
+@enduml

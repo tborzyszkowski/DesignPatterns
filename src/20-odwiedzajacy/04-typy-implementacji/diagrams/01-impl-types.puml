@@ -1,0 +1,56 @@
+@startuml visitor_impl_types
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam interfaceBackgroundColor #E3F2FD
+skinparam interfaceBorderColor #1565C0
+skinparam packageStyle rectangle
+skinparam titleFontSize 14
+
+title Cztery typy implementacji wzorca Odwiedzający
+
+package "Typ 1: Klasyczny GoF (void)" #E8F5E9 {
+  interface IVisitorVoid {
+    + Visit(a: ElementA): void
+    + Visit(b: ElementB): void
+  }
+  class ConcreteVisitorVoid {
+    - _accumulator: TState
+    + Visit(a: ElementA): void
+    + Visit(b: ElementB): void
+    + GetResult(): TState
+  }
+  IVisitorVoid <|.. ConcreteVisitorVoid
+}
+
+package "Typ 2: Generyczny (z wynikiem)" #E3F2FD {
+  interface IVisitorResult<TResult> {
+    + Visit(a: ElementA): TResult
+    + Visit(b: ElementB): TResult
+  }
+  class ConcreteVisitorResult {
+    + Visit(a: ElementA): double
+    + Visit(b: ElementB): double
+  }
+  IVisitorResult <|.. ConcreteVisitorResult
+}
+
+package "Typ 3: Funkcyjny (delegaty)" #FFF9C4 {
+  class FuncVisitor<TResult> {
+    - handlers: Dictionary<Type, Func>
+    + Register<T>(Func<T,TResult>): void
+    + Visit(element: object): TResult
+  }
+}
+
+package "Typ 4: Pattern Matching (C# switch)" #EDE7F6 {
+  class PatternMatchHelper {
+    + static Calculate(shape: IShape): double
+    ..
+    shape switch
+    Circle c => Math.PI * c.R * c.R
+    Rect r => r.W * r.H
+  }
+}
+
+@enduml

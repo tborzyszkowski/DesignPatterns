@@ -1,0 +1,24 @@
+@startuml visitor_history
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+skinparam rectangleBorderColor #4527A0
+skinparam rectangleFontSize 12
+skinparam arrowColor #4527A0
+
+title Rys historyczny — wzorzec Odwiedzający
+
+rectangle "**1989** — Pierwsza wzmianka\nKristopher Johnson opisuje\nmechanizm double dispatch\nw Smalltalk" as Y1989 #EDE7F6
+rectangle "**1994** — GoF (Gamma, Helm, Johnson, Vlissides)\nPublikacja 23 wzorców projektowych\n\"Visitor\" — jeden z wzorców behawioralnych" as Y1994 #D1C4E9
+rectangle "**1995–2000** — Popularyzacja\nJava: hierarchie AST w kompilatorach\nJavaCC, ANTLR — visitor jako interfejs parsera" as Y2000 #E8EAF6
+rectangle "**2000–2010** — XML / DOM processing\nDocument Object Model + SAX/StAX Visitor\nJava javax.xml.transform — wzorzec Transformer" as Y2010 #E3F2FD
+rectangle "**2010** — Kompilatory C# / Roslyn\nSyntaxVisitor<T> — odwiedzający drzewo składniowe\nRoslyn API używa Visitor intensywnie" as Y2010b #E8F5E9
+rectangle "**2012** — F# / Scala discriminated unions\nPattern matching jako alternatywa dla Visitor\nfunkcyjne podejście do problemu" as Y2012 #FFF9C4
+rectangle "**2017+** — C# 7+ pattern matching\nswitch z typami, C# 8 switch expression\nC# 9 records — nowe idiomy bez klasycznego Visitor" as Y2017 #F3E5F5
+
+Y1989 --> Y1994
+Y1994 --> Y2000
+Y2000 --> Y2010
+Y2010 --> Y2010b
+Y2010b --> Y2012
+Y2012 --> Y2017
+@enduml

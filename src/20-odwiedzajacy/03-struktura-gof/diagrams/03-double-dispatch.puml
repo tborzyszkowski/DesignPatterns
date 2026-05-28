@@ -1,0 +1,21 @@
+@startuml visitor_dispatch
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+skinparam rectangleBorderColor #4527A0
+skinparam rectangleFontSize 12
+skinparam arrowColor #4527A0
+
+title Double dispatch — krok po kroku
+
+rectangle "**Pojedynczy dispatch (single dispatch)**\n\nshape.Draw()\n→ wywołanie zależy od JEDNEGO obiektu (shape)\n→ Circle.Draw() lub Rectangle.Draw()" as SD #FFF9C4
+
+rectangle "**Problem bez Visitor**\n\nC# nie obsługuje natywnie podwójnego dispatchu:\n\nstatic void Process(IShape shape, IVisitor visitor)\n{\n   // Jak wybrać metodę na podstawie\n   // OBU typów jednocześnie?\n}" as PB #FFEBEE
+
+rectangle "**Rozwiązanie: double dispatch przez Accept/Visit**\n\n// KROK 1: dispatch na typie elementu\nshape.Accept(visitor)\n→ Circle.Accept(visitor)   [wybór: Circle]\n\n// KROK 2: dispatch na typie odwiedzającego\nvisitor.Visit(this)  // this = Circle\n→ AreaVisitor.Visit(Circle c)  [wybór: Circle]\n\nDwa niezależne wywołania wirtualne!" as DD #E8F5E9
+
+rectangle "**Wynik**\n\nWywołanie ostateczne zależy od:\n  - typu elementu (Circle / Rectangle / Triangle)\n  - typu odwiedzającego (AreaVisitor / SvgVisitor / ...)\nBez if/switch, bez rzutowań, bez refleksji!" as R #E3F2FD
+
+SD --> PB
+PB --> DD
+DD --> R
+@enduml

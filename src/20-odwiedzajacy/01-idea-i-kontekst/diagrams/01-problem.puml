@@ -1,0 +1,56 @@
+@startuml visitor_problem
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #FFEBEE
+skinparam classBorderColor #C62828
+skinparam titleFontSize 14
+skinparam noteFontSize 11
+
+title Problem: operacje "wciśnięte" w klasy elementów
+
+package "BEZ wzorca Odwiedzający" {
+
+  class Circle {
+    + Radius : double
+    --
+    + CalculateArea() : double
+    + CalculatePerimeter() : double
+    + ExportToSvg() : string
+    + ExportToJson() : string
+    + Draw(ctx) : void
+    + Validate() : bool
+  }
+
+  class Rectangle {
+    + Width : double
+    + Height : double
+    --
+    + CalculateArea() : double
+    + CalculatePerimeter() : double
+    + ExportToSvg() : string
+    + ExportToJson() : string
+    + Draw(ctx) : void
+    + Validate() : bool
+  }
+
+  class Triangle {
+    + A : double
+    + B : double
+    + C : double
+    --
+    + CalculateArea() : double
+    + CalculatePerimeter() : double
+    + ExportToSvg() : string
+    + ExportToJson() : string
+    + Draw(ctx) : void
+    + Validate() : bool
+  }
+
+  note bottom of Circle
+    Dodanie nowej operacji
+    (np. ExportToPdf)
+    wymaga modyfikacji
+    WSZYSTKICH klas!
+  end note
+}
+
+@enduml

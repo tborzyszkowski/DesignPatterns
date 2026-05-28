@@ -1,0 +1,58 @@
+@startuml visitor_ast_sequence
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+skinparam sequenceArrowThickness 2
+skinparam sequenceParticipantBorderColor #2E7D32
+skinparam sequenceParticipantBackgroundColor #E8F5E9
+
+title Ewaluacja wyrażenia (2 + 3) * 4
+
+participant "Client" as C
+participant "BinOp(*)" as MUL
+participant "BinOp(+)" as ADD
+participant "Num(2)" as N2
+participant "Num(3)" as N3
+participant "Num(4)" as N4
+participant "EvalVisitor" as EV
+
+C -> MUL : Accept(evalVisitor)
+
+activate MUL
+MUL -> EV : Visit(this: BinOp(*))
+activate EV
+
+  note right of EV: rekurencja Left
+  EV -> ADD : Accept(evalVisitor)
+  activate ADD
+  ADD -> EV : Visit(this: BinOp(+))
+    EV -> N2 : Accept(evalVisitor)
+    activate N2
+    N2 -> EV : Visit(this: Num(2))
+    EV --> N2 : push(2)
+    deactivate N2
+
+    EV -> N3 : Accept(evalVisitor)
+    activate N3
+    N3 -> EV : Visit(this: Num(3))
+    EV --> N3 : push(3)
+    deactivate N3
+
+    note right of EV: pop 3, pop 2\nresult = 2+3 = 5\npush(5)
+  deactivate ADD
+
+  note right of EV: rekurencja Right
+  EV -> N4 : Accept(evalVisitor)
+  activate N4
+  N4 -> EV : Visit(this: Num(4))
+  EV --> N4 : push(4)
+  deactivate N4
+
+  note right of EV: pop 4, pop 5\nresult = 5*4 = 20\npush(20)
+
+deactivate EV
+deactivate MUL
+
+C -> EV : Result
+EV --> C : 20
+
+@enduml

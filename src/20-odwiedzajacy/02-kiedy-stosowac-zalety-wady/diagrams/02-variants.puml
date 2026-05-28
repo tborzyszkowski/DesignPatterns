@@ -1,0 +1,66 @@
+@startuml visitor_variants
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam titleFontSize 14
+skinparam packageStyle rectangle
+
+title Cztery odmiany wzorca Odwiedzający
+
+package "Wariant 1: Klasyczny GoF\n(interface + Accept + Visit)" {
+  class GoFVisitor {
+    + Visit(ConcreteElementA): void
+    + Visit(ConcreteElementB): void
+  }
+  class GoFElement {
+    + Accept(IVisitor): void
+  }
+  note right of GoFVisitor
+    Najsilniejsza enkapsulacja
+    Wymaga interfejsu
+    Idealne dla duzych hierarchii
+  end note
+}
+
+package "Wariant 2: Funkcyjny\n(Func<T, TResult> + słownik)" {
+  class FuncVisitor {
+    - handlers: Dictionary<Type, Func<..>>
+    + Register<T>(Func<T,R>)
+    + Visit(element): R
+  }
+  note right of FuncVisitor
+    Brak interfejsu elementow
+    Dynamiczny — typy w runtime
+    Latwy w rozbudowie
+  end note
+}
+
+package "Wariant 3: C# pattern matching\n(switch expression)" {
+  class PatternVisitor {
+    + Calculate(shape): double
+    ..
+    shape switch
+    Circle c => pi*r*r
+    Rectangle r => w*h
+    _ => throw
+  }
+  note right of PatternVisitor
+    Bez interfejsu Visitor
+    Kod skondensowany
+    Idealne dla prostych operacji
+  end note
+}
+
+package "Wariant 4: Generyczny\n(IVisitor<T> zwraca wynik)" {
+  class GenericVisitor {
+    + Visit(Circle): TResult
+    + Visit(Rectangle): TResult
+  }
+  note right of GenericVisitor
+    Odwiedzajacy zwraca wartosc
+    Brak efektow ubocznych
+    Lepsza testowalnosc
+  end note
+}
+
+@enduml

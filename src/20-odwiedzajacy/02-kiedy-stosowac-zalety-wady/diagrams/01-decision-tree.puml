@@ -1,0 +1,39 @@
+@startuml visitor_decision
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+
+title Kiedy stosować wzorzec Odwiedzający — drzewo decyzyjne
+
+start
+:Masz hierarchię klas elementów\n(np. figury, węzły AST, dokumenty);
+
+if (Hierarchia jest stabilna?\n(rzadko dodawane nowe typy elementów)) then (TAK)
+  if (Potrzebujesz wielu niezależnych\noperacji na tej hierarchii?) then (TAK)
+    if (Operacje muszą mieć\ndostęp do prywatnych/chronionych\npól elementów?) then (TAK)
+      :Klasyczny Visitor GoF\n(interfejs + Accept); <<#90EE90>>
+      stop
+    else (NIE)
+      if (Operacje są proste\ni jednorazowe?) then (TAK)
+        :C# switch expression\nz pattern matching; <<#FFD700>>
+        stop
+      else (NIE)
+        :Klasyczny Visitor GoF\nlub funkcyjny Visitor; <<#90EE90>>
+        stop
+      endif
+    endif
+  else (NIE)
+    :Rozważ zwykły polimorfizm\n(metoda wirtualna w elementach); <<#FFD700>>
+    stop
+  endif
+else (NIE)
+  :UWAGA: dodanie nowego elementu\nwymaga zmiany WSZYSTKICH\nodwiedzajacych!;
+  if (Operacje dodawane rzadko?\nElementy czesto?) then (TAK)
+    :Polimorfizm, Strategy,\nalbo oddzielne metody; <<#FFB6C1>>
+    stop
+  else (NIE)
+    :Visitor z abstract class\n(domyslne implementacje Visit); <<#FFD700>>
+    stop
+  endif
+endif
+
+@enduml

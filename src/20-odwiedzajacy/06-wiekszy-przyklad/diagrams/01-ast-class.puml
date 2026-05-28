@@ -1,0 +1,97 @@
+@startuml visitor_ast_class
+skinparam backgroundColor #FAFAFA
+skinparam classBackgroundColor #E8F5E9
+skinparam classBorderColor #2E7D32
+skinparam interfaceBackgroundColor #E3F2FD
+skinparam interfaceBorderColor #1565C0
+skinparam titleFontSize 14
+skinparam noteFontSize 11
+skinparam arrowColor #333333
+
+title Drzewo wyrażeń (AST) — diagram klas
+
+interface IExprVisitor {
+  + Visit(n: Num): void
+  + Visit(b: BinOp): void
+  + Visit(n: Neg): void
+  + Visit(v: Var): void
+}
+
+abstract class Expr {
+  + Accept(visitor: IExprVisitor): void
+}
+
+class Num {
+  + Value : double
+  + Accept(v): void
+}
+
+class BinOp {
+  + Left : Expr
+  + Op : string
+  + Right : Expr
+  + Accept(v): void
+}
+
+class Neg {
+  + Operand : Expr
+  + Accept(v): void
+}
+
+class Var {
+  + Name : string
+  + Accept(v): void
+}
+
+class EvalVisitor {
+  - _stack: Stack<double>
+  - _vars: Dictionary<string, double>
+  + Result : double
+  + Visit(n: Num): void
+  + Visit(b: BinOp): void
+  + Visit(n: Neg): void
+  + Visit(v: Var): void
+}
+
+class PrintVisitor {
+  - _sb: StringBuilder
+  + Result : string
+  + Visit(n: Num): void
+  + Visit(b: BinOp): void
+  + Visit(n: Neg): void
+  + Visit(v: Var): void
+}
+
+class OptimizeVisitor {
+  - _stack: Stack<Expr>
+  + Result : Expr
+  + Visit(n: Num): void
+  + Visit(b: BinOp): void
+  + Visit(n: Neg): void
+  + Visit(v: Var): void
+}
+
+Expr <|-- Num
+Expr <|-- BinOp
+Expr <|-- Neg
+Expr <|-- Var
+
+BinOp o-- Expr : Left
+BinOp o-- Expr : Right
+Neg o-- Expr : Operand
+
+IExprVisitor <|.. EvalVisitor
+IExprVisitor <|.. PrintVisitor
+IExprVisitor <|.. OptimizeVisitor
+
+Expr --> IExprVisitor : Accept(visitor)
+
+note right of OptimizeVisitor
+  Optymalizacje:
+  - constant folding (2+3 → 5)
+  - neg(neg(x)) → x
+  - x * 0 → 0
+  - x + 0 → x
+end note
+
+@enduml

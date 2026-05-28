@@ -1,0 +1,69 @@
+@startuml visitor_decision_matrix
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #2E7D32
+
+title Macierz decyzyjna: Visitor vs. alternatywy
+
+class "Kryterium" as K {
+  Hierarchia stabilna (rzadko nowe typy)
+  Operacji wiele (i przybywa)
+  Potrzebujesz gromadzic stan
+  Brak kontroli nad klasami elementow
+  Mala hierarchia (< 4 typy)
+  Prosta jednorazowa operacja
+  Testowalnosc / izolacja operacji
+  Wydajnosc krytyczna
+}
+
+class "Visitor GoF" as VG {
+  TAK
+  TAK
+  TAK
+  NIE
+  mozliwe
+  przerost
+  TAK
+  srednia
+}
+
+class "switch/match" as SM {
+  mozliwe
+  NIE (rozproszony kod)
+  NIE
+  TAK
+  TAK
+  TAK
+  srednia
+  wysoka
+}
+
+class "Polimorfizm" as PL {
+  NIE
+  NIE
+  NIE
+  NIE
+  TAK
+  TAK
+  srednia
+  wysoka
+}
+
+class "Func Visitor" as FV {
+  mozliwe
+  TAK
+  TAK
+  TAK
+  TAK
+  TAK
+  srednia
+  srednia
+}
+
+K .. VG
+K .. SM
+K .. PL
+K .. FV
+
+@enduml

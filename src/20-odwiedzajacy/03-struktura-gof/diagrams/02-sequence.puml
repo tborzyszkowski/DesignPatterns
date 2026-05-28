@@ -1,0 +1,51 @@
+@startuml visitor_sequence
+skinparam backgroundColor #FAFAFA
+skinparam titleFontSize 14
+skinparam sequenceArrowThickness 2
+skinparam sequenceParticipantBorderColor #2E7D32
+skinparam sequenceParticipantBackgroundColor #E8F5E9
+skinparam sequenceLifeLineBorderColor #888888
+
+title Diagram sekwencji — double dispatch w wzorcu Odwiedzający
+
+participant "Client" as C
+participant "ObjectStructure" as OS
+participant "ConcreteVisitor1" as V
+participant "ConcreteElementA" as EA
+participant "ConcreteElementB" as EB
+
+C -> V : new ConcreteVisitor1()
+C -> OS : Accept(visitor)
+
+activate OS
+
+OS -> EA : Accept(visitor)
+activate EA
+note right of EA: Krok 1: wybór\nna podstawie\ntypu elementu\n(ElementA)
+EA -> V : Visit(this: ConcreteElementA)
+activate V
+note right of V: Krok 2: wybór\nna podstawie\ntypu "this"\n(ConcreteElementA)
+V --> EA : (operacja wykonana)
+deactivate V
+EA --> OS : done
+deactivate EA
+
+OS -> EB : Accept(visitor)
+activate EB
+note right of EB: Krok 1: wybór\nna podstawie\ntypu elementu\n(ElementB)
+EB -> V : Visit(this: ConcreteElementB)
+activate V
+note right of V: Krok 2: wybór\nna podstawie\ntypu "this"\n(ConcreteElementB)
+V --> EB : (operacja wykonana)
+deactivate V
+EB --> OS : done
+deactivate EB
+
+OS --> C : done
+deactivate OS
+
+C -> V : GetResult()
+
+note over C, V: ConcreteVisitor1 może zwrócić\nzagregowany wynik\n(np. suma pól, wygenerowany HTML)
+
+@enduml

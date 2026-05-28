@@ -1,0 +1,25 @@
+@startuml visitor_alternatives
+skinparam backgroundColor #FAFAFA
+skinparam rectangleBorderColor #4527A0
+skinparam rectangleFontSize 12
+skinparam arrowColor #666666
+skinparam titleFontSize 14
+
+title Alternatywy dla wzorca Odwiedzający
+
+rectangle "**Wzorzec Odwiedzający (Visitor)**\n+ Nowe operacje bez zmian w elementach\n+ Grupuje logikę operacji\n- Zamknięta hierarchia elementów\n- Wymaga interfejsów Accept/Visit\n\nKiedy: stabilna hierarchia, wiele operacji" as VISITOR #E8F5E9
+
+rectangle "**Polimorfizm (metoda wirtualna)**\n+ Prosty, naturalny OOP\n+ Dodanie elementu to tylko nowa klasa\n- Dodanie operacji = zmiana wszystkich klas\n\nKiedy: operacji mało, elementów przybywa czesto" as POLY #E3F2FD
+
+rectangle "**C# pattern matching (switch)**\n+ Zwięzły kod\n+ Bez dodatkowych interfejsów\n- Rozproszone przy wielu operacjach\n- Brak enkapsulacji\n\nKiedy: prosta/jednorazowa operacja" as SWITCH #FFF9C4
+
+rectangle "**Strategy**\n+ Wymienialny algorytm\n+ Prosta struktura\n- Jeden typ elementu\n- Brak przejscia po strukturze\n\nKiedy: jedna klasa, wiele algorytmow" as STRAT #EDE7F6
+
+rectangle "**Iterator + metody zewnętrzne**\n+ Bez modyfikacji klas\n+ Działa na IEnumerable\n- Nie radzi sobie z heterogeniczną strukturą\n\nKiedy: jednorodna kolekcja, LINQ wystarczy" as ITER #F3E5F5
+
+VISITOR --> POLY : jesli hierarchia\nniestabilna
+VISITOR --> SWITCH : jesli prosta operacja\nlub mala hierarchia
+POLY --> STRAT : jesli algorytm\nwymieniany w runtime
+VISITOR --> ITER : jesli jednorodna\nkolekcja
+
+@enduml
