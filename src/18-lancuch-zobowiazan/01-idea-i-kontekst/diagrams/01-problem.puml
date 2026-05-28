@@ -24,12 +24,12 @@ class GodHandler #FFCDD2 {
 }
 
 note bottom of GodHandler
-  ❌ Naruszenie OCP: każda nowa reguła
+  <color:#CC0000><b>[!]</b></color> Naruszenie OCP: każda nowa reguła
      = modyfikacja klasy
-  ❌ Nie można pominąć ani podmienić
+  <color:#CC0000><b>[!]</b></color> Nie można pominąć ani podmienić
      jednego kroku bez modyfikacji klasy
-  ❌ Trudne testowanie izolowanych kroków
-  ❌ Brak możliwości zatrzymania łańcucha
+  <color:#CC0000><b>[!]</b></color> Trudne testowanie izolowanych kroków
+  <color:#CC0000><b>[!]</b></color> Brak możliwości zatrzymania łańcucha
      w połowie
 end note
 
