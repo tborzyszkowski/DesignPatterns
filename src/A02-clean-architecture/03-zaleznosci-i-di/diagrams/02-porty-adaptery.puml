@@ -1,0 +1,49 @@
+@startuml ca_porty
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+left to right direction
+
+title Porty i Adaptery (Hexagonal Architecture / Clean Architecture)
+
+rectangle "Zewnetrzne systemy" #E0E0E0 {
+  component "Przeglądarka\n(HTTP)" as browser #FFB0B0
+  component "CLI" as cli #FFB0B0
+  component "SQL Server" as sql #FFB0B0
+  component "SMTP" as smtp #FFB0B0
+  component "Kafka" as kafka #FFB0B0
+}
+
+rectangle "Adaptery wejsciowe\n(Driving Adapters)" #FFD0A0 {
+  component "OrderController\n(HTTP Adapter)" as httpCtrl
+  component "OrderCliAdapter\n(CLI Adapter)" as cliAdapt
+}
+
+rectangle "Heksagon\n(Application Core)" #FFFFAA {
+  interface "PlaceOrderPort\n(Use Case Interface)" as placePort
+  interface "GetOrderPort\n(Query Interface)" as getPort
+  component "PlaceOrderUseCase" as placeUC
+  component "GetOrderUseCase" as getUC
+  interface "IOrderRepo\n(port wyjsciowy)" as iRepo
+  interface "IEmailService\n(port wyjsciowy)" as iEmail
+  placeUC -down-> iRepo
+  placeUC -down-> iEmail
+}
+
+rectangle "Adaptery wyjsciowe\n(Driven Adapters)" #FFD0A0 {
+  component "EfOrderRepo\n(DB Adapter)" as dbAdapter
+  component "SmtpService\n(Email Adapter)" as emailAdapter
+  component "KafkaEventBus\n(Event Adapter)" as eventAdapter
+}
+
+browser --> httpCtrl
+cli --> cliAdapt
+httpCtrl --> placePort
+cliAdapt --> placePort
+placePort <|.. placeUC
+getPort <|.. getUC
+dbAdapter ..|> iRepo
+emailAdapter ..|> iEmail
+dbAdapter --> sql
+emailAdapter --> smtp
+eventAdapter --> kafka
+@enduml

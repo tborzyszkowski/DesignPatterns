@@ -1,0 +1,35 @@
+@startuml ca_sekwencja
+skinparam backgroundColor #FEFEFE
+title Sekwencja: Tworzenie zadania i zmiana statusu
+
+actor "Program.cs\n(Composition Root)" as prog
+participant "CreateWorkItemUseCase\n(Application)" as ucCreate
+participant "CompleteWorkItemUseCase\n(Application)" as ucComplete
+participant "IProjectRepository\n(Port)" as iRepo
+participant "Project\n(Domain Aggregate)" as project
+participant "WorkItem\n(Domain Entity)" as workitem
+participant "INotificationService\n(Port)" as iNotify
+
+prog -> ucCreate : ExecuteAsync(CreateWorkItemCommand)
+ucCreate -> iRepo : FindByIdAsync(projectId)
+iRepo --> ucCreate : project (lub null)
+ucCreate -> project : AddItem(title, desc, priority, dueDate)
+project -> workitem ** : new WorkItem(id, ...)
+note right of workitem : Status = Todo
+project --> ucCreate : (workItem dodany)
+ucCreate -> iRepo : SaveAsync(project)
+ucCreate --> prog : WorkItemDto
+
+prog -> ucComplete : ExecuteAsync(CompleteWorkItemCommand)
+ucComplete -> iRepo : FindByIdAsync(projectId)
+iRepo --> ucComplete : project
+ucComplete -> project : FindItem(workItemId)
+project --> ucComplete : workItem
+ucComplete -> workitem : Complete()
+note right of workitem : Todo->InProgress->Done\n(lub bezposrednio)
+workitem --> ucComplete : (status = Done)
+ucComplete -> iRepo : SaveAsync(project)
+ucComplete -> iNotify : SendAsync("Zadanie ukonczone!")
+iNotify --> ucComplete : OK
+ucComplete --> prog : (sukces)
+@enduml

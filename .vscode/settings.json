@@ -138,6 +138,7 @@
         "/^New-Item -Path \"C:\\\\Temp\" -ItemType Directory -Force \\| Out-Null; \\$proc = Start-Process -FilePath \"java\" -ArgumentList \"-jar\",\"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\plantuml\\.jar\",\"c:\\\\home\\\\gitHub\\\\DesignPatterns\\\\src\\\\18-lancuch-zobowiazan\\\\01-idea-i-kontekst\\\\diagrams\\\\01-problem\\.puml\" -NoNewWindow -PassThru -RedirectStandardError \"C:\\\\Temp\\\\puml_err\\.txt\" -Wait; Get-Content \"C:\\\\Temp\\\\puml_err\\.txt\"$/": {
             "approve": true,
             "matchCommandLine": true
-        }
+        },
+        "Select": true
     }
 }

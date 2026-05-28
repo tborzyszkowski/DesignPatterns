@@ -1,0 +1,30 @@
+@startuml ca_usecases
+skinparam backgroundColor #FEFEFE
+skinparam sequenceArrowColor #444
+skinparam sequenceParticipantBackgroundColor #FFFFEE
+
+title Use Case: PlaceOrder - przeplyw danych
+
+actor "Klient\n(HTTP POST)" as client
+participant "OrderController\n(Interface Adapter)" as ctrl #FFD0A0
+participant "PlaceOrderUseCase\n(Application)" as uc #FFFFAA
+participant "Order\n(Domain Entity)" as order #AAFFAA
+participant "IOrderRepository\n(port)" as iRepo #FFFFAA
+participant "InMemoryOrderRepo\n(Infrastructure)" as repo #FFD0A0
+
+client -> ctrl : POST /orders\n{customerId, items}
+ctrl -> uc : Execute(PlaceOrderCommand)
+uc -> order ** : new Order(id, customerId)
+loop dla kazdej pozycji
+  uc -> order : AddLine(product, qty)
+  order -> order : sprawdza reguły biznesowe\n(czy qty > 0, itp.)
+end
+uc -> iRepo : SaveAsync(order)
+note over iRepo, repo : repo implementuje IOrderRepository\n(Infrastructure Adapter)
+iRepo -> repo : SaveAsync(order)
+repo -> repo : _db[order.Id] = order
+repo --> iRepo : OK
+iRepo --> uc : OK
+uc --> ctrl : PlaceOrderResult(orderId, total)
+ctrl --> client : 201 Created\n{orderId, totalAmount}
+@enduml

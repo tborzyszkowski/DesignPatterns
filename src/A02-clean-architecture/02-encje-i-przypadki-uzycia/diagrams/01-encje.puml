@@ -1,0 +1,53 @@
+@startuml ca_encje
+skinparam backgroundColor #FEFEFE
+skinparam classBorderColor #555
+skinparam classBackgroundColor #FFFFEE
+
+title Encje i Value Objects w warstwie Domain
+
+package "Domain Layer" #EEFFEE {
+
+  class "Order\n(Aggregate Root)" as Order {
+    +Id : OrderId
+    +CustomerId : CustomerId
+    +Status : OrderStatus
+    -_lines : List~OrderLine~
+    +AddLine(product, qty) : void
+    +Confirm() : void
+    +Cancel() : void
+    +TotalAmount : decimal
+  }
+
+  class "OrderLine\n(Entity)" as OrderLine {
+    +ProductId : Guid
+    +Quantity : int
+    +UnitPrice : decimal
+    +Subtotal : decimal
+  }
+
+  class "OrderId\n(Value Object)" as OrderId {
+    +Value : Guid
+    +New() : OrderId
+  }
+
+  class "Money\n(Value Object)" as Money {
+    +Amount : decimal
+    +Currency : string
+    +Add(other) : Money
+    +Subtract(other) : Money
+  }
+
+  enum OrderStatus {
+    Draft
+    Confirmed
+    Shipped
+    Cancelled
+  }
+
+  Order "1" o-- "many" OrderLine : zawiera
+  Order --> OrderId
+  Order --> OrderStatus
+  OrderLine --> Money : cena
+
+}
+@enduml

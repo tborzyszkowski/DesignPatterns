@@ -1,0 +1,63 @@
+@startuml ca_arch
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+left to right direction
+
+title Architektura systemu zarzadzania zadaniami (Work Items)
+
+rectangle "Zewnetrzne" #E0E0E0 {
+  component "dotnet run\n(uzytkownik)" as user #FFB0B0
+  component "xUnit Tests" as tests #FFB0B0
+}
+
+rectangle "Examples\n(Interface Adapters)" #FFD0A0 {
+  component "Program.cs\n(Composition Root)" as prog
+}
+
+rectangle "Infrastructure" #FFD0A0 {
+  component "InMemoryProjectRepository\nimpl. IProjectRepository" as memRepo
+  component "ConsoleNotificationService\nimpl. INotificationService" as notify
+}
+
+rectangle "Application\n(Use Cases + Ports)" #FFFFAA {
+  component "CreateProjectUseCase" as uc1
+  component "CreateWorkItemUseCase" as uc2
+  component "CompleteWorkItemUseCase" as uc3
+  component "AssignWorkItemUseCase" as uc4
+  component "GetProjectSummaryUseCase" as uc5
+  interface "IProjectRepository" as iRepo
+  interface "INotificationService" as iNotify
+}
+
+rectangle "Domain\n(Entities + Value Objects)" #AAFFAA {
+  component "Project\n(Aggregate Root)" as proj
+  component "WorkItem\n(Entity)" as wi
+  component "WorkItemId\n(Value Object)" as wid
+}
+
+user --> prog
+tests --> memRepo
+prog --> uc1
+prog --> uc2
+prog --> uc3
+prog --> uc5
+uc1 --> iRepo
+uc2 --> iRepo
+uc3 --> iRepo
+uc3 --> iNotify
+uc4 --> iRepo
+uc5 --> iRepo
+memRepo ..|> iRepo
+notify ..|> iNotify
+uc1 --> proj
+uc2 --> proj
+proj --> wi
+wi --> wid
+
+note bottom of iRepo
+  Interfejsy (Porty) sa w
+  warstwie Application.
+  Implementacje w Infrastructure.
+  Zasada Zaleznosci jest zachowana.
+end note
+@enduml

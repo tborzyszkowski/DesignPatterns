@@ -1,0 +1,41 @@
+@startuml ca_testy
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+left to right direction
+
+title Co testowac w kazdej warstwie Clean Architecture
+
+rectangle "Domain\n(czysta logika)" #AAFFAA {
+  component "Reguly biznesowe encji\n(niezmienniki)" as dom1
+  component "Value Objects\n(rownsc, operacje)" as dom2
+  component "Domain Services\n(zlozona logika)" as dom3
+}
+
+rectangle "Application\n(Use Cases)" #FFFFAA {
+  component "Scenariusze Use Case\n(happy path)" as app1
+  component "Bledy biznesowe\n(not found, duplicate)" as app2
+  component "Komunikacja przez porty\n(Fake/Stub)" as app3
+}
+
+rectangle "Infrastructure\n(adaptery)" #FFD0A0 {
+  component "Repozytoria (DB)\n(testy integracyjne)" as inf1
+  component "Zewnetrzne API\n(testy kontraktowe)" as inf2
+}
+
+rectangle "Presentation\n(HTTP/CLI/UI)" #FFB0B0 {
+  component "Endpointy HTTP\n(WebApplicationFactory)" as pres1
+  component "Testy E2E\n(Playwright/Selenium)" as pres2
+}
+
+note bottom of dom1
+  SZYBKIE, IZOLOWANE
+  Nie wymagaja DB ani HTTP
+  Uruchamialne w < 1ms
+end note
+
+note bottom of inf1
+  WOLNIEJSZE, KOSZTOWNIEJSZE
+  Wymagaja prawdziwej DB
+  lub kontenera Docker
+end note
+@enduml

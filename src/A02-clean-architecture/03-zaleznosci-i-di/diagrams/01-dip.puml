@@ -1,0 +1,44 @@
+@startuml ca_dip
+skinparam backgroundColor #FEFEFE
+
+title Zasada Odwrocenia Zaleznosci (DIP)\nBez DIP vs Z DIP
+
+package "BEZ DIP (naruszenie)" #FFEEEE {
+  class ServiceA_bad #FFB0B0 {
+    +Execute()
+  }
+  class SqlRepository_bad #FFB0B0 {
+    +Save()
+  }
+  ServiceA_bad -down-> SqlRepository_bad : zalezy bezposrednio\n(ścisłe sprzężenie)
+}
+
+package "Z DIP (poprawnie)" #EEFFEE {
+  class ServiceA_good #AAFFAA {
+    +Execute()
+  }
+  interface IRepository #FFFFAA {
+    +Save()
+    +FindById()
+  }
+  class SqlRepository_good #FFD0A0 {
+    +Save()
+    +FindById()
+  }
+  class MongoRepository #FFD0A0 {
+    +Save()
+    +FindById()
+  }
+  ServiceA_good -down-> IRepository : zalezy od abstrakcji
+  SqlRepository_good .up.|> IRepository : implementuje
+  MongoRepository .up.|> IRepository : implementuje
+}
+
+note right of IRepository
+  Interfejs zdefiniowany
+  w warstwie wewnetrznej
+  (Application/Domain)
+  Implementacje w warstwie
+  zewnetrznej (Infrastructure)
+end note
+@enduml

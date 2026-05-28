@@ -1,0 +1,25 @@
+@startuml ca_warstwy
+skinparam backgroundColor #FEFEFE
+skinparam rectangleBorderColor #888888
+skinparam rectangleFontSize 12
+skinparam defaultFontName Arial
+
+title Clean Architecture - Warstwy (Robert C. Martin, 2012)
+
+rectangle "4. Frameworki i Sterowniki\n   Web, Bazy danych, UI, Zewnetrzne API\n   (ASP.NET Core, EF Core, RabbitMQ)" #FFB0B0 {
+  rectangle "3. Adaptery Interfejsow\n   Kontrolery, Prezentory, Bramki danych\n   (Controllers, Gateways, Presenters)" #FFD0A0 {
+    rectangle "2. Przypadki Uzycia\n   Logika aplikacji, interakcje encji\n   (Use Cases / Interactors)" #FFFFAA {
+      rectangle "1. Encje\n   Reguly biznesowe\n   (Entities, Value Objects)" #AAFFAA {
+        rectangle "Rdzen\nbiznesu" as core #55EE55
+      }
+    }
+  }
+}
+
+legend right
+  Regula Zaleznosci (Dependency Rule):
+  zaleznosci wskazuja TYLKO do wewnatrz
+  warstwa zewnetrzna ZNNA warstwa wewnetrzna
+  warstwa wewnetrzna NIE ZNA warstwy zewnetrznej
+endlegend
+@enduml

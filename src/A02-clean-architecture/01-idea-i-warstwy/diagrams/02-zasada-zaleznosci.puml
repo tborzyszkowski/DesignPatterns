@@ -1,0 +1,32 @@
+@startuml ca_zasada
+skinparam backgroundColor #FEFEFE
+left to right direction
+skinparam componentStyle rectangle
+
+title Zasada Zaleznosci - przeplyw kodu i danych
+
+component "Kontroler\nHTTP" as ctrl #FFB0B0
+component "CreateOrderUseCase" as uc #FFFFAA
+interface "IOrderRepository" as iRepo
+interface "IEmailService" as iEmail
+component "Zamowienie\n(Entity)" as ent #AAFFAA
+component "EfCoreOrderRepo" as repo #FFD0A0
+component "SmtpEmailService" as smtp #FFD0A0
+component "[SQL Server]" as db #E0E0E0
+component "[SMTP Server]" as smtpSrv #E0E0E0
+
+ctrl -right-> uc : wywoluje
+uc -right-> ent : tworzy/modyfikuje
+uc -down-> iRepo : uzywa (port)
+uc -down-> iEmail : uzywa (port)
+repo .up.|> iRepo : implementuje (adapter)
+smtp .up.|> iEmail : implementuje (adapter)
+repo -right-> db : zapisuje
+smtp -right-> smtpSrv : wysyla
+
+note bottom of iRepo
+  Interface w warstwie Application
+  Implementacja w Infrastructure
+end note
+
+@enduml

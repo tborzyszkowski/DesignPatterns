@@ -1,0 +1,44 @@
+@startuml ca_kiedy
+<style>
+root {
+  BackgroundColor #FEFEFE
+}
+</style>
+title Kiedy stosowac Clean Architecture?
+
+start
+
+:Projekt nowy lub istniejacy?;
+
+if (Nowy projekt) then (tak)
+  :Czy logika biznesowa\njest zlozona?;
+  if (tak) then
+    :Czy zespol > 2 osoby\nlub projekt > 6 mies.?;
+    if (tak) then
+      :Uzyj Clean Architecture; <<#AAFFAA>>
+      stop
+    else (nie)
+      :Rozważ uproszczona wersje\n(Onion lub Hexagonal); <<#FFFFAA>>
+      stop
+    endif
+  else (nie, CRUD/prosty)
+    :Prosty N-Tier lub\nMinimal API wystarczy; <<#FFD0A0>>
+    stop
+  endif
+else (istniejacy / legacy)
+  :Czy masz problemy\nz testowalnoscią?;
+  if (tak) then
+    :Czy mozna refaktoryzowac\nstopniowo?;
+    if (tak) then
+      :Refaktoryzuj iteracyjnie\n(Strangler Fig Pattern); <<#FFFFAA>>
+      stop
+    else (nie)
+      :Rozważ przepisanie\nmoduł po module; <<#FFB0B0>>
+      stop
+    endif
+  else (nie)
+    :Zostan przy obecnej architekturze\n(nie reformuj dla zasady); <<#E0E0E0>>
+    stop
+  endif
+endif
+@enduml

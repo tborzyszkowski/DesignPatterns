@@ -1,0 +1,53 @@
+@startuml ca_porownanie
+skinparam backgroundColor #FEFEFE
+skinparam classBorderColor #555
+
+title Porownanie architektur warstwowych
+
+class "N-Tier\n(tradycyjny)" as ntier #FFB0B0 {
+  Presentation Layer
+  Business Logic Layer
+  Data Access Layer
+  ..
+  Zalety: prostota
+  Wady: sprzezenie z DB,
+  trudne testowanie
+}
+
+class "Onion Architecture\n(2008, Palermo)" as onion #FFD0A0 {
+  UI / Infrastructure (zewn.)
+  Application Services
+  Domain Services
+  Domain Model (centrum)
+  ..
+  Zalety: Domain w centrum
+  Wady: brak wytycznych
+  dla Use Cases
+}
+
+class "Hexagonal\n(2005, Cockburn)" as hexagonal #FFFFAA {
+  Adapters (Driving)
+  Application Core
+  Adapters (Driven)
+  Ports (interfejsy)
+  ..
+  Zalety: porty i adaptery
+  Wady: brak layeringu
+  wewnątrz hexagonu
+}
+
+class "Clean Architecture\n(2012, Martin)" as clean #AAFFAA {
+  Frameworks & Drivers
+  Interface Adapters
+  Application (Use Cases)
+  Entities (Domain)
+  ..
+  Zalety: precyzyjny podzial,
+  testowalnsc, elastycznosc
+  Wady: wiecej klas i plików
+}
+
+ntier -right-> onion : ewolucja
+onion -right-> hexagonal : synteza
+hexagonal -right-> clean : ujednolicenie
+@enduml

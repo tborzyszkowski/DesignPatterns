@@ -1,0 +1,30 @@
+@startuml ca_piramida
+skinparam backgroundColor #FEFEFE
+title Piramida testow w Clean Architecture
+
+skinparam rectangle {
+  BorderColor #555
+}
+
+rectangle "  Testy E2E / integracyjne UI  \n(Selenium, Playwright)" #FFB0B0 {
+}
+
+rectangle "      Testy Integracyjne       \n(baza danych, HTTP, zewn. systemy)" #FFD0A0 {
+}
+
+rectangle "         Testy Jednostkowe     \n(Domain + Application — bez infrastruktury)" #AAFFAA {
+}
+
+note right
+  Testy jednostkowe:
+  - Najwolniejsze w pisaniu? NIE!
+  - Najtansze w utrzymaniu
+  - Najszybciej wykrywaja bledy
+  - Najwiecej ich bedziemy pisac
+
+  Testy E2E:
+  - Najbardziej kruche
+  - Najwolniejsze w wykonaniu
+  - Pisac tylko dla kluczowych sciezek
+end note
+@enduml
